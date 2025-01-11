@@ -21,9 +21,13 @@
     <Description>Shimmering.Analyzers simplifies your C# code by making the most of modern syntaxes.</Description>
     <Authors>Jihoon Park</Authors>
     <PackageTags>roslyn;analyzers;linq</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/Bartleby2718/Shimmering.Analyzers</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <PropertyGroup>
     <EnforceCodeStyleOnBuild>true</EnforceCodeStyleOnBuild>
