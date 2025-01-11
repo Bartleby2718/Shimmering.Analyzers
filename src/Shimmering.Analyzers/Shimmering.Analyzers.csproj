@@ -10,9 +10,6 @@
       Note: multi-targeting netstandard2.0 and net8.0 breaks builds in certain apps.
     -->
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <LangVersion>12.0</LangVersion>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
   <!-- https://learn.microsoft.com/en-us/dotnet/standard/library-guidance/nuget#important-nuget-package-metadata -->
   <PropertyGroup>
@@ -32,10 +29,8 @@
   <PropertyGroup>
     <EnforceCodeStyleOnBuild>true</EnforceCodeStyleOnBuild>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DebugType>embedded</DebugType>
     <EmbedAllSources>true</EmbedAllSources>
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <DevelopmentDependency>true</DevelopmentDependency>
   </PropertyGroup>
 

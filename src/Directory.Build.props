@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>13</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+		<NoWarn>
+      <!-- Missing XML comment for publicly visible type or member -->
+      CS1591
+    </NoWarn>
+  </PropertyGroup>
+</Project>
