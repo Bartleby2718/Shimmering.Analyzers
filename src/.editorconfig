@@ -377,3 +377,27 @@ dotnet_naming_style.s_camelcase.required_suffix =
 dotnet_naming_style.s_camelcase.word_separator = 
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
+# Customization
+[*.{cs}]
+# https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs1591
+dotnet_diagnostic.CS1591.severity = none
+# ParameterMustNotSpanMultipleLines
+dotnet_diagnostic.SA1118.severity = none
+# DoNotCombineAttributes
+dotnet_diagnostic.SA1133.severity = none
+# UsingDirectivesMustBeQualified
+dotnet_diagnostic.SA1135.severity = none
+# UsingDirectivesMustBePlacedCorrectly
+dotnet_diagnostic.SA1200.severity = none
+# StatementMustNotBeOnSingleLine
+dotnet_diagnostic.SA1501.severity = none
+# BracesMustNotBeOmitted
+dotnet_diagnostic.SA1503.severity = none
+# SingleLineCommentMustBePrecededByBlankLine
+dotnet_diagnostic.SA1515.severity = none
+# ElementsMustBeSeparatedByBlankLine
+dotnet_diagnostic.SA1516.severity = none
+# ElementsMustBeDocumented
+dotnet_diagnostic.SA1600.severity = none
+# FileMustHaveHeader
+dotnet_diagnostic.SA1633.severity = none

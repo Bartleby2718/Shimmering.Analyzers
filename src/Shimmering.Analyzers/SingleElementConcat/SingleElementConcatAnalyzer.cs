@@ -1,0 +1,68 @@
+﻿namespace Shimmering.Analyzers.SingleElementConcat;
+
+/// <summary>
+/// Reports instances of calling <see cref="Enumerable.Concat"/> against a single-element collection that can be replaced with <see cref="Enumerable.Append"/>.
+/// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class SingleElementConcatAnalyzer : DiagnosticAnalyzer
+{
+	private const string Title = "Simplify .Concat()";
+	private const string Message = "Replace .Concat([e]) with .Append(e)";
+	private const string Category = "Refactoring";
+
+	private static readonly DiagnosticDescriptor Rule = new(
+		DiagnosticIds.SingleElementConcat,
+		Title,
+		Message,
+		Category,
+		DiagnosticSeverity.Info,
+		isEnabledByDefault: true);
+
+	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
+
+	public override void Initialize(AnalysisContext context)
+	{
+		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
+		context.EnableConcurrentExecution();
+		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
+	}
+
+	private static void AnalyzeInvocation(SyntaxNodeAnalysisContext context)
+	{
+		if (context.Node is not InvocationExpressionSyntax invocation) { return; }
+
+		if (!IsConcat(context.SemanticModel, invocation)) { return; }
+
+		var csharpVersion = ((CSharpParseOptions)context.Node.SyntaxTree.Options).LanguageVersion;
+		if (SingleElementConcatHelpers.TryGetSingleElement(csharpVersion, invocation, out _))
+		{
+			context.ReportDiagnostic(Diagnostic.Create(Rule, invocation.GetLocation()));
+		}
+	}
+
+	private static bool IsConcat(SemanticModel semanticModel, InvocationExpressionSyntax invocation)
+	{
+		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess)
+			return false;
+
+		// validate name
+		if (memberAccess.Name.Identifier.Text != nameof(Enumerable.Concat))
+			return false;
+
+		// validate that it's an extension method
+		if (semanticModel.GetSymbolInfo(memberAccess).Symbol is not IMethodSymbol methodSymbol)
+			return false;
+		if (methodSymbol.MethodKind != MethodKind.ReducedExtension)
+			return false;
+
+		// validate the containing class
+		var containingClass = methodSymbol.ContainingType;
+		if (containingClass.Name != nameof(Enumerable))
+			return false;
+
+		// validate the containing namespace
+		return containingClass.ContainingNamespace.Name == nameof(System.Linq)
+			&& containingClass.ContainingNamespace.ContainingNamespace.Name == nameof(System)
+			&& containingClass.ContainingNamespace.ContainingNamespace.ContainingNamespace.IsGlobalNamespace;
+	}
+}
