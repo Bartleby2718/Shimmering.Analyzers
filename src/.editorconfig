@@ -399,5 +399,7 @@ dotnet_diagnostic.SA1515.severity = none
 dotnet_diagnostic.SA1516.severity = none
 # ElementsMustBeDocumented
 dotnet_diagnostic.SA1600.severity = none
+# ElementReturnValueMustBeDocumented
+dotnet_diagnostic.SA1615.severity = none
 # FileMustHaveHeader
 dotnet_diagnostic.SA1633.severity = none
