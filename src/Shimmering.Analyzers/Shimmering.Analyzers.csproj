@@ -28,6 +28,7 @@
 
   <PropertyGroup>
     <EnforceCodeStyleOnBuild>true</EnforceCodeStyleOnBuild>
+		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <DebugType>embedded</DebugType>
     <EmbedAllSources>true</EmbedAllSources>
