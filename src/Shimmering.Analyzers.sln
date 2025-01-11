@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shimmering.Analyzers", "Shimmering.Analyzers\Shimmering.Analyzers.csproj", "{4091F1B5-C5D0-4C9D-981B-F818B7BD1285}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shimmering.Analyzers.Tests", "Shimmering.Analyzers.Tests\Shimmering.Analyzers.Tests.csproj", "{480B20FE-6BAF-4388-B122-5F9B4384126B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +14,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4091F1B5-C5D0-4C9D-981B-F818B7BD1285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4091F1B5-C5D0-4C9D-981B-F818B7BD1285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4091F1B5-C5D0-4C9D-981B-F818B7BD1285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4091F1B5-C5D0-4C9D-981B-F818B7BD1285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{480B20FE-6BAF-4388-B122-5F9B4384126B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{480B20FE-6BAF-4388-B122-5F9B4384126B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{480B20FE-6BAF-4388-B122-5F9B4384126B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{480B20FE-6BAF-4388-B122-5F9B4384126B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
