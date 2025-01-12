@@ -381,6 +381,8 @@ dotnet_naming_style.s_camelcase.capitalization = camel_case
 [*.{cs}]
 # https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs1591
 dotnet_diagnostic.CS1591.severity = none
+# SingleLineCommentsMustBeginWithSingleSpace
+dotnet_diagnostic.SA1005.severity = none
 # ParameterMustNotSpanMultipleLines
 dotnet_diagnostic.SA1118.severity = none
 # DoNotCombineAttributes
@@ -389,16 +391,22 @@ dotnet_diagnostic.SA1133.severity = none
 dotnet_diagnostic.SA1135.severity = none
 # UsingDirectivesMustBePlacedCorrectly
 dotnet_diagnostic.SA1200.severity = none
+# FileMayOnlyContainASingleType
+dotnet_diagnostic.SA1402.severity = none
 # StatementMustNotBeOnSingleLine
 dotnet_diagnostic.SA1501.severity = none
 # BracesMustNotBeOmitted
 dotnet_diagnostic.SA1503.severity = none
+# SingleLineCommentsMustNotBeFollowedByBlankLine
+dotnet_diagnostic.SA1512.severity = none
 # SingleLineCommentMustBePrecededByBlankLine
 dotnet_diagnostic.SA1515.severity = none
 # ElementsMustBeSeparatedByBlankLine
 dotnet_diagnostic.SA1516.severity = none
 # ElementsMustBeDocumented
 dotnet_diagnostic.SA1600.severity = none
+# ElementParametersMustBeDocumented
+dotnet_diagnostic.SA1611.severity = none
 # ElementReturnValueMustBeDocumented
 dotnet_diagnostic.SA1615.severity = none
 # FileMustHaveHeader
