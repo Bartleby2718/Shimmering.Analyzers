@@ -27,11 +27,20 @@ internal static class RedundantSpreadElementHelpers
 			CastExpressionSyntax { Type: ArrayTypeSyntax, Expression: CollectionExpressionSyntax collectionExpression } =>
 				collectionExpression.Elements,
 
-			// case 4: new List<int>() { 1, 2 }
+			// case 4: new List<int>() { 1, 2 }, but also edge cases like new List<int> { } or new List<int>() { }
 			ObjectCreationExpressionSyntax { Initializer: InitializerExpressionSyntax initializer }
 				// rule out initializers that assign properties
 				when initializer.Expressions.All(e => e is not AssignmentExpressionSyntax) =>
 				initializer.Expressions.Select(e => SyntaxFactory.ExpressionElement(e).WithoutTrivia()),
+
+			// case 5: ImmutableArray<T>.Empty, ImmutableList<T>.Empty, etc
+			MemberAccessExpressionSyntax { Name.Identifier.Text: "Empty" } =>
+				[],
+
+			// case 6: Array.Empty<T>(), Enumerable.Empty<T>(), etc
+			InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax memberAccess }
+				when memberAccess.Name.Identifier.Text == "Empty" =>
+				[],
 
 			// default
 			_ => null,
