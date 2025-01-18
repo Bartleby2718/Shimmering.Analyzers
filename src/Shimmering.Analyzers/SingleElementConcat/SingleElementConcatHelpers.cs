@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.SingleElementConcat;
 
 internal static class SingleElementConcatHelpers
 {
-	public static bool TryGetSingleElement(LanguageVersion? csharpVersion, InvocationExpressionSyntax invocation, [NotNullWhen(true)] out ExpressionSyntax? expression)
+	public static bool TryGetSingleElement(InvocationExpressionSyntax invocation, bool supportsCollectionExpressions, [NotNullWhen(returnValue: true)] out ExpressionSyntax? expression)
 	{
 		expression = null;
 
@@ -32,8 +32,7 @@ internal static class SingleElementConcatHelpers
 			}
 		}
 
-		// collection expresion is supported in C# 12+
-		if (csharpVersion >= LanguageVersion.CSharp12)
+		if (supportsCollectionExpressions)
 		{
 			// Case 3: cast epxression, as in (int[])[1, 2]
 			var collectionExpressionCandidate = argument is CastExpressionSyntax castExpression

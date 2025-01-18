@@ -1,4 +1,6 @@
-﻿namespace Shimmering.Analyzers.SingleElementConcat;
+﻿using Shimmering.Analyzers.Utilities;
+
+namespace Shimmering.Analyzers.SingleElementConcat;
 
 /// <summary>
 /// Reports instances of calling <see cref="Enumerable.Concat"/> against a single-element collection that can be replaced with <see cref="Enumerable.Append"/>.
@@ -33,8 +35,8 @@ public sealed class SingleElementConcatAnalyzer : DiagnosticAnalyzer
 
 		if (!IsConcat(context.SemanticModel, invocation)) { return; }
 
-		var csharpVersion = ((CSharpParseOptions)context.Node.SyntaxTree.Options).LanguageVersion;
-		if (SingleElementConcatHelpers.TryGetSingleElement(csharpVersion, invocation, out _))
+		var supportsCollectionExpressions = CsharpVersionHelpers.SupportsCollectionExpressions(context);
+		if (SingleElementConcatHelpers.TryGetSingleElement(invocation, supportsCollectionExpressions, out _))
 		{
 			context.ReportDiagnostic(Diagnostic.Create(Rule, invocation.GetLocation()));
 		}

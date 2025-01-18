@@ -8,3 +8,4 @@ Rule ID | Category | Severity | Notes
 SHMRA1001 | Refactoring | Info | SingleElementConcatAnalyzer
 SHMRA1002 | Style | Disabled | TrailingBinaryOperatorAnalyzer
 SHMRA1003 | Refactoring | Info | UniqueNonSetCollectionAnalyzer
+SHMRA1004 | Style | Info | RedundantSpreadElementAnalyzer

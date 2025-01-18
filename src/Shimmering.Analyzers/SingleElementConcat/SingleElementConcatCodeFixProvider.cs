@@ -1,3 +1,5 @@
+using Shimmering.Analyzers.Utilities;
+
 namespace Shimmering.Analyzers.SingleElementConcat;
 
 /// <summary>
@@ -42,8 +44,8 @@ public sealed class SingleElementConcatCodeFixProvider : CodeFixProvider
 		var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
 		if (semanticModel == null) { return document; }
 
-		var csharpVersion = ((CSharpParseOptions?)document.Project.ParseOptions)?.LanguageVersion;
-		if (!SingleElementConcatHelpers.TryGetSingleElement(csharpVersion, invocation, out var expression)) { return document; }
+		var supportsCollectionExpressions = document.Project.ParseOptions is CSharpParseOptions { LanguageVersion: >= LanguageVersion.CSharp12 };
+		if (!SingleElementConcatHelpers.TryGetSingleElement(invocation, supportsCollectionExpressions, out var expression)) { return document; }
 
 		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
 		var newMemberAccess = memberAccess.WithName(SyntaxFactory.IdentifierName(nameof(Enumerable.Append)));
