@@ -6,7 +6,7 @@ namespace Shimmering.Analyzers.VerboseLinqChain;
 /// Converts a chain of LINQ calls with a collection expression.if reported by <see cref="VerboseLinqChainAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(VerboseLinqChainCodeFixProvider)), Shared]
-public sealed class VerboseLinqChainCodeFixProvider : CodeFixProvider
+internal sealed class VerboseLinqChainCodeFixProvider : CodeFixProvider
 {
 	private const string Title = "Replace a verbose LINQ chain with a collection expression";
 

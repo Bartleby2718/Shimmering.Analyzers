@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <!-- https://learn.microsoft.com/en-us/dotnet/standard/library-guidance/nuget#important-nuget-package-metadata -->
+  <metadata>
+    <id>Shimmering.Analyzers</id>
+    <version>$version$</version>
+    <title>Shimmering Analyzers</title>
+    <authors>Bartleby</authors>
+    <license type="expression">MIT</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <developmentDependency>true</developmentDependency>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>icon.png</icon>
+    <!-- https://devblogs.microsoft.com/nuget/add-a-readme-to-your-nuget-package/#add-a-readme-in-your-project-file-(recommended) -->
+    <readme>README.md</readme>
+    <description>Package Description</description>
+    <tags></tags>
+    <releaseNotes>
+      alpha03 fixes a bug in 01 and 02 where analyzer was not added to <files>
+      alpha02 changes internal sealed classes to public sealed classes, thinking that was why
+      alpha01 adds SHMRA1001-SHMRA1005
+    </releaseNotes>
+    <repository type="git" url="https://github.com/Bartleby2718/Shimmering.Analyzers" />
+    <!-- https://learn.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices -->
+    <copyright>Copyright (C) Bartleby</copyright>
+  </metadata>
+  <files>
+    <file src="bin\Release\netstandard2.0\Shimmering.Analyzers.dll" target="analyzers\dotnet\cs\" />
+    <file src="bin\Release\netstandard2.0\Shimmering.Analyzers.xml" target="analyzers\dotnet\cs\" />
+    <file src="icon.png" target="icon.png" />
+    <file src="README.md" target="README.md" />
+  </files>
+</package>

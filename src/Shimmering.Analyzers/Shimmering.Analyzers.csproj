@@ -10,26 +10,8 @@
       Note: multi-targeting netstandard2.0 and net8.0 breaks builds in certain apps.
     -->
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <PackageVersion>0.1.0-alpha03</PackageVersion>
   </PropertyGroup>
-  <!-- https://learn.microsoft.com/en-us/dotnet/standard/library-guidance/nuget#important-nuget-package-metadata -->
-  <PropertyGroup>
-    <PackageId>Shimmering.Analyzers</PackageId>
-    <PackageVersion>0.1.0-alpha02</PackageVersion>
-    <!-- <Description>Shimmering.Analyzers simplifies your C# code by making the most of modern syntaxes.</Description> -->
-    <Authors>Bartleby</Authors>
-    <!-- <PackageTags>roslyn;analyzers;linq</PackageTags> -->
-    <PackageIcon>icon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/Bartleby2718/Shimmering.Analyzers</RepositoryUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <!-- https://devblogs.microsoft.com/nuget/add-a-readme-to-your-nuget-package/#add-a-readme-in-your-project-file-(recommended) -->
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <!-- https://learn.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices -->
-    <AssemblyCopyright>Copyright (c) Bartleby 2025</AssemblyCopyright>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Include="icon.png" Pack="true" PackagePath="" />
-    <None Include="README.md" Pack="true" PackagePath="" />
-  </ItemGroup>
 
   <PropertyGroup>
     <EnforceCodeStyleOnBuild>true</EnforceCodeStyleOnBuild>
@@ -37,7 +19,6 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <DebugType>embedded</DebugType>
     <EmbedAllSources>true</EmbedAllSources>
-    <DevelopmentDependency>true</DevelopmentDependency>
   </PropertyGroup>
 
   <ItemGroup>

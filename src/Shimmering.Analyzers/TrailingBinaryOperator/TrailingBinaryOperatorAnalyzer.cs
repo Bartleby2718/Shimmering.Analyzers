@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.TrailingBinaryOperator;
 /// Reports instances of trailing binary operators.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class TrailingBinaryOperatorAnalyzer : DiagnosticAnalyzer
+internal sealed class TrailingBinaryOperatorAnalyzer : DiagnosticAnalyzer
 {
 	private const string Title = "Binary operators should be leading, not trailing";
 	private const string Message = "Move binary operator to the beginning of the line";

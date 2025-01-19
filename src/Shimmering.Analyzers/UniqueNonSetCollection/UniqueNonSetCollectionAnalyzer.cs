@@ -6,7 +6,7 @@ namespace Shimmering.Analyzers.UniqueNonSetCollection;
 /// Reports instances of .Distinct().ToList() and .Distinct().ToArray() that can be replaced with .ToHashSet().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UniqueNonSetCollectionAnalyzer : DiagnosticAnalyzer
+internal sealed class UniqueNonSetCollectionAnalyzer : DiagnosticAnalyzer
 {
 	private const string Title = "Use a set instead";
 	private const string Message = "Prefer sets when uniqueness is required";
