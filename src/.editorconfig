@@ -399,6 +399,8 @@ dotnet_diagnostic.SA1501.severity = none
 dotnet_diagnostic.SA1503.severity = none
 # SingleLineCommentsMustNotBeFollowedByBlankLine
 dotnet_diagnostic.SA1512.severity = none
+# ClosingBraceMustBeFollowedByBlankLine
+dotnet_diagnostic.SA1513.severity = none
 # SingleLineCommentMustBePrecededByBlankLine
 dotnet_diagnostic.SA1515.severity = none
 # ElementsMustBeSeparatedByBlankLine
