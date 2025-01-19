@@ -8,8 +8,6 @@ public sealed class TrailingBinaryOperatorCodeFixProvider : CodeFixProvider
 {
 	private const string Title = "Make trailing binary operators leading";
 
-	private static readonly SyntaxTrivia SingleWhitespaceTrivia = SyntaxFactory.Whitespace(" ");
-
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.TrailingBinaryOperator];
 
@@ -57,7 +55,7 @@ public sealed class TrailingBinaryOperatorCodeFixProvider : CodeFixProvider
 		var newRightOperandLeadingTrivia = rightOperandLeadingTrivia.SkipWhile(t => t.IsKind(SyntaxKind.WhitespaceTrivia));
 		if (!newRightOperandLeadingTrivia.Any())
 		{
-			newRightOperandLeadingTrivia = [SingleWhitespaceTrivia];
+			newRightOperandLeadingTrivia = [SyntaxFactory.Space];
 		}
 
 		// From the leading trivia of the right operand, copy over leading whitespaces to the new operator token
