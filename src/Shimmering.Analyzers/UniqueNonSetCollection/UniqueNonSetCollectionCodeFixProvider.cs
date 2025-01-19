@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.UniqueNonSetCollection;
 /// Converts .Distinct().ToList() or .Distinct().ToArray() with .ToHashSet() if reported by <see cref="UniqueNonSetCollectionAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(UniqueNonSetCollectionCodeFixProvider)), Shared]
-internal sealed class UniqueNonSetCollectionCodeFixProvider : CodeFixProvider
+public sealed class UniqueNonSetCollectionCodeFixProvider : CodeFixProvider
 {
 	private static readonly string Title = "Replace .Distinct().ToList() or .Distinct().ToArray() with .ToHashSet()";
 
