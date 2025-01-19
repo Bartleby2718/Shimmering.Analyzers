@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.TrailingBinaryOperator;
 /// Moves trailing binary operators to the beginning of the line.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(TrailingBinaryOperatorCodeFixProvider)), Shared]
-public sealed class TrailingBinaryOperatorCodeFixProvider : CodeFixProvider
+internal sealed class TrailingBinaryOperatorCodeFixProvider : CodeFixProvider
 {
 	private const string Title = "Make trailing binary operators leading";
 

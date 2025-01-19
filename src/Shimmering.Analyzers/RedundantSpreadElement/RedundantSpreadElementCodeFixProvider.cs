@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.RedundantSpreadElement;
 /// Flattens a spread element (e.g. [1, .. new[] { 2, 3 }, 4] to [1, 2, 3, 4]) if reported by <see cref="RedundantSpreadElementAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(RedundantSpreadElementCodeFixProvider)), Shared]
-public sealed class RedundantSpreadElementCodeFixProvider : CodeFixProvider
+internal sealed class RedundantSpreadElementCodeFixProvider : CodeFixProvider
 {
 	private static readonly string Title = "Replace Enumerate() with collection expression";
 

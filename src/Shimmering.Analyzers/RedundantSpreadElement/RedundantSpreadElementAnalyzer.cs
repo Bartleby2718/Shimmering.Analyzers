@@ -9,7 +9,7 @@ namespace Shimmering.Analyzers.RedundantSpreadElement;
 // This explicitly rules out empty spread elements, because it has a wider array of things to consider, such as
 // new List<int>(), Array.Empty<int>() or ImmutableArray<int>.Empty
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class RedundantSpreadElementAnalyzer : DiagnosticAnalyzer
+internal sealed class RedundantSpreadElementAnalyzer : DiagnosticAnalyzer
 {
 	private const string Title = "Inline spread element";
 	private const string Message = "Inline nonempty spread element";
