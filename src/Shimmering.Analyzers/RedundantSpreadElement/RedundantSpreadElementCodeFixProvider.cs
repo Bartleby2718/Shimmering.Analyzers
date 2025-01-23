@@ -1,12 +1,12 @@
 namespace Shimmering.Analyzers.RedundantSpreadElement;
 
 /// <summary>
-/// Flattens a spread element (e.g. [1, .. new[] { 2, 3 }, 4] to [1, 2, 3, 4]) if reported by <see cref="RedundantSpreadElementAnalyzer"/>.
+/// Flattens a spread element (e.g. [1, .. new[] { 2, 3 }, 4] to [1, 2, 3, 4]) in a collection, if reported by <see cref="RedundantSpreadElementAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(RedundantSpreadElementCodeFixProvider)), Shared]
 internal sealed class RedundantSpreadElementCodeFixProvider : CodeFixProvider
 {
-	private static readonly string Title = "Replace Enumerate() with collection expression";
+	private static readonly string Title = "Flatten spread element";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.RedundantSpreadElement];
@@ -26,7 +26,7 @@ internal sealed class RedundantSpreadElementCodeFixProvider : CodeFixProvider
 			.DescendantNodesAndSelf()
 			.OfType<SpreadElementSyntax>()
 			.FirstOrDefault();
-		if (spreadElement is null) { return; }
+		if (spreadElement == null) { return; }
 
 		context.RegisterCodeFix(
 			CodeAction.Create(
