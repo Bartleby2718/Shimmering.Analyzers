@@ -10,3 +10,4 @@ SHMRA1002 | Style | Disabled | TrailingBinaryOperatorAnalyzer
 SHMRA1003 | Refactoring | Info | UniqueNonSetCollectionAnalyzer
 SHMRA1004 | Style | Info | RedundantSpreadElementAnalyzer
 SHMRA1005 | Refactoring | Info | VerboseLinqChainAnalyzer
+SHMRA1006 | CodeQuality | Info | NullableCancellationTokenAnalyzer
