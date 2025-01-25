@@ -8,4 +8,5 @@ internal static class DiagnosticIds
 	public const string RedundantSpreadElement = "SHMRA1004";
 	public const string VerboseLinqChain = "SHMRA1005";
 	public const string NullableCancellationToken = "SHMRA1006";
+	public const string MissingCancellationToken = "SHMRA1007";
 }
