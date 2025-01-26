@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.RedundantSpreadElement;
 
 internal static class RedundantSpreadElementHelpers
 {
-	public static bool TryGetInnerElementsOfNonemptySpreadElement(
+	public static bool TryGetInnerElementsOfSpreadElement(
 		SpreadElementSyntax spreadElement,
 		[NotNullWhen(returnValue: true)] out IEnumerable<CollectionElementSyntax>? innerElements)
 	{

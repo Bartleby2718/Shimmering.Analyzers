@@ -6,8 +6,6 @@ namespace Shimmering.Analyzers.RedundantSpreadElement;
 /// Reports instances of redundant nonempty spread elements in a collection expression, like [1, .. new[] { 2, 3 }, 4].
 /// </summary>
 // See also: https://github.com/dotnet/roslyn/blob/main/src/Analyzers/CSharp/Analyzers/UseCollectionExpression/CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.cs
-// This explicitly rules out empty spread elements, because it has a wider array of things to consider, such as
-// new List<int>(), Array.Empty<int>() or ImmutableArray<int>.Empty
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class RedundantSpreadElementAnalyzer : DiagnosticAnalyzer
 {
@@ -41,7 +39,7 @@ internal sealed class RedundantSpreadElementAnalyzer : DiagnosticAnalyzer
 		{
 			if (collectionElement is not SpreadElementSyntax spreadElement) { continue; }
 
-			if (RedundantSpreadElementHelpers.TryGetInnerElementsOfNonemptySpreadElement(spreadElement, out _))
+			if (RedundantSpreadElementHelpers.TryGetInnerElementsOfSpreadElement(spreadElement, out _))
 			{
 				context.ReportDiagnostic(Diagnostic.Create(Rule, spreadElement.GetLocation()));
 			}

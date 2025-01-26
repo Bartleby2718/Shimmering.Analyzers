@@ -41,7 +41,7 @@ internal sealed class RedundantSpreadElementCodeFixProvider : CodeFixProvider
 	{
 		var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 		if (root != null
-			&& RedundantSpreadElementHelpers.TryGetInnerElementsOfNonemptySpreadElement(spreadElement, out var innerElements))
+			&& RedundantSpreadElementHelpers.TryGetInnerElementsOfSpreadElement(spreadElement, out var innerElements))
 		{
 			var newRoot = root.ReplaceNode(spreadElement, innerElements);
 			return document.WithSyntaxRoot(newRoot);
