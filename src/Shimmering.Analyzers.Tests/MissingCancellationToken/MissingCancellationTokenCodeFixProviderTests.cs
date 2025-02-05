@@ -35,6 +35,66 @@ public class MissingCancellationTokenCodeFixProviderTests
 		""");
 
 	[Test]
+	public Task TestExplicitInterfaceImplementation() => Verifier.VerifyAnalyzerAsync(
+		"""
+		using System.Threading;
+		using System.Threading.Tasks;
+
+		namespace Tests
+		{
+			class Test : ITest
+			{
+				Task ITest.DoAsync() => Task.CompletedTask;
+			}
+
+			interface ITest
+			{
+				Task [|DoAsync|]();
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestImplicitInterfaceImplementation() => Verifier.VerifyAnalyzerAsync(
+		"""
+		using System.Threading;
+		using System.Threading.Tasks;
+
+		namespace Tests
+		{
+			class Test : ITest
+			{
+				public Task DoAsync() => Task.CompletedTask;
+			}
+
+			interface ITest
+			{
+				Task [|DoAsync|]();
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestOverride() => Verifier.VerifyAnalyzerAsync(
+		"""
+		using System.Threading;
+		using System.Threading.Tasks;
+
+		namespace Tests
+		{
+			class Test : Parent
+			{
+				public override Task DoAsync() => Task.CompletedTask;
+			}
+
+			class Parent
+			{
+				public virtual Task [|DoAsync|]() => Task.CompletedTask;
+			}
+		}
+		""");
+
+	[Test]
 	public Task TestMethodWithoutParameters() => Verifier.VerifyCodeFixAsync(
 		"""
 		using System.Threading.Tasks;

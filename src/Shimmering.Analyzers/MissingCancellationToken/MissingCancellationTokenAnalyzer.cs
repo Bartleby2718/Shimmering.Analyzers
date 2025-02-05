@@ -32,7 +32,8 @@ internal sealed class MissingCancellationTokenAnalyzer : DiagnosticAnalyzer
 	{
 		if (context.Symbol is not IMethodSymbol methodSymbol
 			|| methodSymbol.ReturnType is not INamedTypeSymbol returnType
-			|| !IsTaskType(returnType, context.Compilation))
+			|| !IsTaskType(returnType, context.Compilation)
+			|| IsInterfaceOrOverrideImplementation(methodSymbol))
 		{
 			return;
 		}
@@ -59,5 +60,38 @@ internal sealed class MissingCancellationTokenAnalyzer : DiagnosticAnalyzer
 		var cancellationTokenType = compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.CancellationToken);
 		return type is INamedTypeSymbol namedType
 			&& SymbolEqualityComparer.Default.Equals(namedType.OriginalDefinition, cancellationTokenType);
+	}
+
+	/// <summary>
+	/// Returns true if and only if the method symbol represents either:
+	/// - An interface implementation (explicit or implicit), or
+	/// - An overridden implementation of a base class member.
+	/// </summary>
+	private static bool IsInterfaceOrOverrideImplementation(IMethodSymbol methodSymbol)
+	{
+		// Check if the method is an override of a base class member.
+		if (methodSymbol.IsOverride) { return true; }
+
+		// Check for explicit interface implementations.
+		if (methodSymbol.ExplicitInterfaceImplementations.Length > 0) { return true; }
+
+		// Check for implicit interface implementations.
+		var containingType = methodSymbol.ContainingType;
+		if (containingType != null)
+		{
+			foreach (var @interface in containingType.AllInterfaces)
+			{
+				foreach (var interfaceMember in @interface.GetMembers())
+				{
+					var implementation = containingType.FindImplementationForInterfaceMember(interfaceMember);
+					if (SymbolEqualityComparer.Default.Equals(implementation, methodSymbol))
+					{
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 }
