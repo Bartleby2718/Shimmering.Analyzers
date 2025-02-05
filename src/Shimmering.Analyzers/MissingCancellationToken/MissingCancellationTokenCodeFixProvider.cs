@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.MissingCancellationToken;
