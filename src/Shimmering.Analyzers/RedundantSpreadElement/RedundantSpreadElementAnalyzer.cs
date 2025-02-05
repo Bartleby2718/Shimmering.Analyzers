@@ -3,14 +3,14 @@ using Shimmering.Analyzers.Utilities;
 namespace Shimmering.Analyzers.RedundantSpreadElement;
 
 /// <summary>
-/// Reports instances of redundant nonempty spread elements in a collection expression, like [1, .. new[] { 2, 3 }, 4].
+/// Reports instances of redundant spread elements in a collection expression, like [1, .. new[] { 2, 3 }, 4].
 /// </summary>
 // See also: https://github.com/dotnet/roslyn/blob/main/src/Analyzers/CSharp/Analyzers/UseCollectionExpression/CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.cs
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class RedundantSpreadElementAnalyzer : DiagnosticAnalyzer
 {
 	private const string Title = "Inline spread element";
-	private const string Message = "Inline nonempty spread element";
+	private const string Message = "Inline spread element";
 	private const string Category = "Style";
 
 	private static readonly DiagnosticDescriptor Rule = new(

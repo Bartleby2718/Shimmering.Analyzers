@@ -9,7 +9,7 @@ namespace Shimmering.Analyzers.MissingCancellationToken;
 internal sealed class MissingCancellationTokenAnalyzer : DiagnosticAnalyzer
 {
 	private const string Title = $"Include a {nameof(CancellationToken)} parameter";
-	private const string Message = $"Missing a {nameof(CancellationToken)} parameter";
+	private const string Message = $"An asynchronous method is missing a {nameof(CancellationToken)} parameter";
 	private const string Category = "CodeQuality";
 
 	private static readonly DiagnosticDescriptor Rule = new(
