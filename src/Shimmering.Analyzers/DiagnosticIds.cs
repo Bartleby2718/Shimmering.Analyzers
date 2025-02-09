@@ -9,4 +9,5 @@ internal static class DiagnosticIds
 	public const string VerboseLinqChain = "SHMRA1005";
 	public const string NullableCancellationToken = "SHMRA1006";
 	public const string MissingCancellationToken = "SHMRA1007";
+	public const string SingleUseIEnumerableMaterialization = "SHMRA1008";
 }
