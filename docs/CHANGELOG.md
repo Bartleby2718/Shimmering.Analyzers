@@ -1,3 +1,3 @@
 # V0
 ## 0.1.x
-- 0.1.0 adds SHMRA1001 - SHMRA1007
+- 0.1.0 adds SHMRA1001 - SHMRA1008
