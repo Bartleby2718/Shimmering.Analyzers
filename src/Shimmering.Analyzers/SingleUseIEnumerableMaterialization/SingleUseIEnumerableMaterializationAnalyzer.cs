@@ -87,7 +87,7 @@ internal sealed class SingleUseIEnumerableMaterializationAnalyzer : DiagnosticAn
 	private static bool IsFollowedByLinqMethod(IdentifierNameSyntax identifier, SemanticModel semanticModel)
 	{
 		return identifier.Parent is MemberAccessExpressionSyntax memberAccess
-			&& memberAccess.Parent is InvocationExpressionSyntax
-			&& EnumerableHelpers.IsEnumerableMethodInSystemLinq(semanticModel, memberAccess, out _);
+			&& memberAccess.Parent is InvocationExpressionSyntax invocation
+			&& EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, invocation, out _);
 	}
 }

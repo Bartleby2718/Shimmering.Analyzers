@@ -44,14 +44,13 @@ internal sealed class UniqueNonSetCollectionAnalyzer : DiagnosticAnalyzer
 		}
 
 		// the invocation must be .ToArray() or .ToList()
-		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
-		if (!EnumerableHelpers.IsEnumerableMethodInSystemLinq(semanticModel, memberAccess, out var methodName)) { return; }
+		if (!EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, invocation, out var methodName)) { return; }
 		if (methodName is not (nameof(Enumerable.ToArray) or nameof(Enumerable.ToList))) { return; }
+		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
 
 		// the previous invocation must be .Distinct()
 		if (memberAccess.Expression is not InvocationExpressionSyntax innerInvocation) { return; }
-		if (innerInvocation.Expression is not MemberAccessExpressionSyntax innerMemberAccess) { return; }
-		if (!EnumerableHelpers.IsEnumerableMethodInSystemLinq(semanticModel, innerMemberAccess, out var innerMethodName)) { return; }
+		if (!EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, innerInvocation, out var innerMethodName)) { return; }
 		if (innerMethodName is not nameof(Enumerable.Distinct)) { return; }
 
 		// Technically, we shouldn't flag when ToHashSet() can cause a compilation failure.
