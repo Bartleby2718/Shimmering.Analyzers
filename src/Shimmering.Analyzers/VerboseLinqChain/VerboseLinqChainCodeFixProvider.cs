@@ -1,4 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
+using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.VerboseLinqChain;
 
@@ -73,19 +73,17 @@ internal sealed class VerboseLinqChainCodeFixProvider : CodeFixProvider
 
 	private static CompilationUnitSyntax EnsureNecessaryUsingDirectivesExist(CompilationUnitSyntax compilationUnit, ITypeSymbol? typeSymbol)
 	{
-		const string systemCollectionsGeneric = "System.Collections.Generic";
-
 		var containingNamespace = typeSymbol?.ContainingNamespace?.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat);
 		// No need to add the using directive if the type is not System.Collections.Generic (e.g. array)
-		if (containingNamespace != systemCollectionsGeneric
+		if (containingNamespace != FullyQualifiedNamespaces.SystemCollectionsGeneric
 			// or if the using directive already exists
-			|| compilationUnit.Usings.Any(u => u.Name?.ToString() == systemCollectionsGeneric))
+			|| compilationUnit.Usings.Any(u => u.Name?.ToString() == FullyQualifiedNamespaces.SystemCollectionsGeneric))
 		{
 			return compilationUnit;
 		}
 
 		var newUsing = SyntaxFactory.UsingDirective(
-			SyntaxFactory.ParseName(systemCollectionsGeneric)
+			SyntaxFactory.ParseName(FullyQualifiedNamespaces.SystemCollectionsGeneric)
 				.WithLeadingTrivia(SyntaxFactory.Space))
 				.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
 		return compilationUnit.AddUsings(newUsing);

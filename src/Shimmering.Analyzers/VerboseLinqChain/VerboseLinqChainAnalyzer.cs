@@ -1,5 +1,3 @@
-using Shimmering.Analyzers.Utilities;
-
 namespace Shimmering.Analyzers.VerboseLinqChain;
 
 /// <summary>

@@ -16,7 +16,7 @@ internal static class EnumerableHelpers
 		if (containingClass.Name != nameof(Enumerable)) { return false; }
 
 		var containingNamespace = methodSymbol.ContainingNamespace?.ToDisplayString();
-		if (containingNamespace != "System.Linq") { return false; }
+		if (containingNamespace != FullyQualifiedNamespaces.SystemLinq) { return false; }
 
 		var assemblyName = methodSymbol.ContainingAssembly?.Name;
 		if (assemblyName != "System.Linq") { return false; }

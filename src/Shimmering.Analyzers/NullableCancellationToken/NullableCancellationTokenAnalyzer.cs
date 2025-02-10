@@ -1,4 +1,6 @@
-﻿namespace Shimmering.Analyzers.NullableCancellationToken;
+﻿using Shimmering.Analyzers.Utilities;
+
+namespace Shimmering.Analyzers.NullableCancellationToken;
 
 /// <summary>
 /// Reports instances of nullable <see cref="CancellationToken"/>s in method signatures.
@@ -33,7 +35,7 @@ internal sealed class NullableCancellationTokenAnalyzer : DiagnosticAnalyzer
 		var parameter = (ParameterSyntax)context.Node;
 		if (parameter.Type is not NullableTypeSyntax nullableType) { return; }
 		if (context.SemanticModel.GetSymbolInfo(nullableType.ElementType).Symbol is not INamedTypeSymbol typeSymbol) { return; }
-		var cancellationTokenSymbol = context.Compilation.GetTypeByMetadataName("System.Threading.CancellationToken");
+		var cancellationTokenSymbol = context.Compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.CancellationToken);
 		if (SymbolEqualityComparer.Default.Equals(typeSymbol, cancellationTokenSymbol))
 		{
 			// Technically, this can break consumers of the method, but still flagging to promote a best practice.
