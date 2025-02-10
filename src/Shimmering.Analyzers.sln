@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shimmering.Analyzers", "Shi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shimmering.Analyzers.Tests", "Shimmering.Analyzers.Tests\Shimmering.Analyzers.Tests.csproj", "{480B20FE-6BAF-4388-B122-5F9B4384126B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shimmering.Analyzers.Scaffolding", "Shimmering.Analyzers.Scaffolding\Shimmering.Analyzers.Scaffolding.csproj", "{F12CBC1C-D72C-456C-AFA5-06D82F80186A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{480B20FE-6BAF-4388-B122-5F9B4384126B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{480B20FE-6BAF-4388-B122-5F9B4384126B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{480B20FE-6BAF-4388-B122-5F9B4384126B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F12CBC1C-D72C-456C-AFA5-06D82F80186A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F12CBC1C-D72C-456C-AFA5-06D82F80186A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F12CBC1C-D72C-456C-AFA5-06D82F80186A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F12CBC1C-D72C-456C-AFA5-06D82F80186A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
