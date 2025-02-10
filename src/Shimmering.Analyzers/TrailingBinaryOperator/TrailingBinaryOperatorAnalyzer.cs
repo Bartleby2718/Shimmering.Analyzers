@@ -16,8 +16,8 @@ internal sealed class TrailingBinaryOperatorAnalyzer : DiagnosticAnalyzer
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		// this is a matter of taste
-		isEnabledByDefault: false);
+		isEnabledByDefault: false, // this is a matter of taste
+		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.TrailingBinaryOperator}.md");
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
