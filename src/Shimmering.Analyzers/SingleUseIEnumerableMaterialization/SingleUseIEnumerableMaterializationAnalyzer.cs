@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using Shimmering.Analyzers.Utilities;
+﻿using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.SingleUseIEnumerableMaterialization;
 
@@ -56,6 +54,16 @@ internal sealed class SingleUseIEnumerableMaterializationAnalyzer : DiagnosticAn
 		var methodName = memberAccess.Name.Identifier.Text;
 		if (methodName is not (nameof(Enumerable.ToList) or nameof(Enumerable.ToArray))) { return; }
 
+		// Bail out if the receiver is an IQueryable<T> because removing materialization affects business logic
+		var semanticModel = context.SemanticModel;
+		var receiverType = semanticModel.GetTypeInfo(memberAccess.Expression).Type;
+		if (receiverType is null) { return; }
+		var implementsIQueryable = AnalyzerHelpers.IsOrImplementsInterface(
+			semanticModel.Compilation,
+			receiverType,
+			FullyQualifiedTypeNames.IQueryableOfT);
+		if (implementsIQueryable) { return; }
+
 		// Get the symbol for the variable.
 		var variableSymbol = context.SemanticModel.GetDeclaredSymbol(variableDeclarator);
 		if (variableSymbol == null) { return; }
@@ -72,12 +80,23 @@ internal sealed class SingleUseIEnumerableMaterializationAnalyzer : DiagnosticAn
 
 		if (identifierUsages.Count != 1) { return; }
 		var identifierUsage = identifierUsages.Single();
-		if (IsUsedInForeach(identifierUsage) || IsFollowedByLinqMethod(identifierUsage, context.SemanticModel))
+		// The identifier should not be in a lambda, as it's actually "used" multiple times
+		// in a lambda like .Where(x => identifier.Contains(x))
+		if (!IsInLambda(identifierUsage)
+			&& IsSafeToUseIEnumerableWithoutMaterializing(identifierUsage, context.SemanticModel))
 		{
 			var diagnostic = Diagnostic.Create(Rule, invocation.GetLocation(), variableSymbol.Name);
 			context.ReportDiagnostic(diagnostic);
 		}
 	}
+
+	private static bool IsInLambda(IdentifierNameSyntax identifier)
+	{
+		return identifier.Ancestors().Any(a => a is LambdaExpressionSyntax);
+	}
+
+	private static bool IsSafeToUseIEnumerableWithoutMaterializing(IdentifierNameSyntax identifier, SemanticModel semanticModel) =>
+		IsUsedInForeach(identifier) || IsFollowedByLinqMethod(identifier, semanticModel);
 
 	private static bool IsUsedInForeach(IdentifierNameSyntax identifier)
 	{
