@@ -379,8 +379,15 @@ dotnet_naming_style.s_camelcase.capitalization = camel_case
 
 # Customization
 [*.{cs}]
+#### Compiler warning (CS) ####
 # https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs1591
 dotnet_diagnostic.CS1591.severity = none
+
+#### Built-in code style rules (IDE) ####
+# Namespace does not match folder structure
+dotnet_diagnostic.IDE0130.severity = error
+
+#### StyleCop.Analyzers (SA) ####
 # SingleLineCommentsMustBeginWithSingleSpace
 dotnet_diagnostic.SA1005.severity = none
 # ParameterMustNotSpanMultipleLines
