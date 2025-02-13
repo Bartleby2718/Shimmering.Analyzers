@@ -58,8 +58,9 @@ internal sealed class VerboseLinqChainCodeFixProvider : CodeFixProvider
 		var declaredTypeSymbol = semanticModel.GetTypeInfo(variableDeclaration.Type, cancellationToken).Type;
 		if (declaredTypeSymbol == null) { return document; }
 
-		var resolvedTypeSyntax = SyntaxFactory
-			.ParseTypeName(declaredTypeSymbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat))
+		var resolvedTypeSyntax = SyntaxFactory.ParseTypeName(
+			declaredTypeSymbol.WithNullableAnnotation(NullableAnnotation.NotAnnotated)
+				.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat))
 			.WithTriviaFrom(variableDeclaration.Type);
 		var newVariableDeclaration = variableDeclaration
 			.WithType(resolvedTypeSyntax)
