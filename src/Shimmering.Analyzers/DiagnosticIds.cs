@@ -10,4 +10,5 @@ internal static class DiagnosticIds
 	public const string NullableCancellationToken = "SHMRA1006";
 	public const string MissingCancellationToken = "SHMRA1007";
 	public const string SingleUseIEnumerableMaterialization = "SHMRA1008";
+	public const string NegatedTernaryCondition = "SHMRA1009";
 }

@@ -13,3 +13,4 @@ SHMRA1005 | Refactoring | Info | VerboseLinqChainAnalyzer, [Documentation](https
 SHMRA1006 | CodeQuality | Info | NullableCancellationTokenAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1006.md)
 SHMRA1007 | CodeQuality | Info | MissingCancellationTokenAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1007.md)
 SHMRA1008 | CodeQuality | Info | SingleUseIEnumerableMaterializationAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1008.md)
+SHMRA1009 | Style | Info | NegatedTernaryConditionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1009.md)
