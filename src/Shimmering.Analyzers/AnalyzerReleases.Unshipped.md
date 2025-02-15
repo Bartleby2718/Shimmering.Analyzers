@@ -14,3 +14,4 @@ SHMRA1006 | CodeQuality | Info | NullableCancellationTokenAnalyzer, [Documentati
 SHMRA1007 | CodeQuality | Info | MissingCancellationTokenAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1007.md)
 SHMRA1008 | CodeQuality | Info | SingleUseIEnumerableMaterializationAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1008.md)
 SHMRA1009 | Style | Info | NegatedTernaryConditionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1009.md)
+SHMRA1010 | Usage | Info | MisusedOrDefaultAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1010.md)
