@@ -16,7 +16,8 @@ internal sealed class NegatedTernaryConditionAnalyzer : DiagnosticAnalyzer
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		isEnabledByDefault: true);
+		isEnabledByDefault: true,
+		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.NegatedTernaryCondition}.md");
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
