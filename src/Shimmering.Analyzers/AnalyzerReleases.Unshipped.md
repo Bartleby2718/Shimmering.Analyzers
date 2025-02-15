@@ -5,13 +5,13 @@
 
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
-SHMRA1001 | Refactoring | Info | SingleElementConcatAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1001.md)
-SHMRA1002 | Style | Disabled | TrailingBinaryOperatorAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1002.md)
-SHMRA1003 | Refactoring | Info | UniqueNonSetCollectionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1003.md)
-SHMRA1004 | Style | Info | RedundantSpreadElementAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1004.md)
-SHMRA1005 | Refactoring | Info | VerboseLinqChainAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1005.md)
-SHMRA1006 | CodeQuality | Info | NullableCancellationTokenAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1006.md)
-SHMRA1007 | CodeQuality | Info | MissingCancellationTokenAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1007.md)
-SHMRA1008 | CodeQuality | Info | SingleUseIEnumerableMaterializationAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1008.md)
-SHMRA1009 | Style | Info | NegatedTernaryConditionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1009.md)
-SHMRA1010 | Usage | Info | MisusedOrDefaultAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHMRA1010.md)
+SHIMMER1001 | Refactoring | Info | SingleElementConcatAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1001.md)
+SHIMMER1002 | Style | Disabled | TrailingBinaryOperatorAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1002.md)
+SHIMMER1003 | Refactoring | Info | UniqueNonSetCollectionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1003.md)
+SHIMMER1004 | Style | Info | RedundantSpreadElementAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1004.md)
+SHIMMER1005 | Refactoring | Info | VerboseLinqChainAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1005.md)
+SHIMMER1006 | CodeQuality | Info | NullableCancellationTokenAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1006.md)
+SHIMMER1007 | CodeQuality | Info | MissingCancellationTokenAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1007.md)
+SHIMMER1008 | CodeQuality | Info | SingleUseIEnumerableMaterializationAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1008.md)
+SHIMMER1009 | Style | Info | NegatedTernaryConditionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1009.md)
+SHIMMER1010 | Usage | Info | MisusedOrDefaultAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1010.md)
