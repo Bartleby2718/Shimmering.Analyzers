@@ -6,12 +6,10 @@ internal static class VerboseLinqChainHelpers
 {
 	/// <summary>
 	/// Checks if a collection expression can be built from <paramref name="lastInvocation"/>.
-	/// However, if you don't need the actual collection expression, set <paramref name="doConstructCollectionExpression"/> to false to avoid unnecessary work.
 	/// </summary>
 	public static bool TryConstructCollectionExpression(
 		SemanticModel semanticModel,
 		InvocationExpressionSyntax lastInvocation,
-		bool doConstructCollectionExpression,
 		out CollectionExpressionSyntax? collectionElements)
 	{
 		if (!EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, lastInvocation, out var lastMethodName)
@@ -41,29 +39,25 @@ internal static class VerboseLinqChainHelpers
 				nameof(Enumerable.Concat) => (false, SyntaxFactory.SpreadElement(invocation.ArgumentList.Arguments[0].Expression)),
 				_ => null,
 			};
+			var isInnermostExpressionInvocation = true;
 			if (result.HasValue)
 			{
 				foundRelevantLinqCalls = true;
-				if (doConstructCollectionExpression)
-				{
-					elements.Push(result.Value);
-				}
+				elements.Push(result.Value);
 
 				if (memberAccess.Expression is InvocationExpressionSyntax previousInvocation)
 				{
 					invocation = previousInvocation;
 					continue;
 				}
+				isInnermostExpressionInvocation = false;
 			}
 
 			// although this one was not a relevant LINQ call, we have already found some
 			if (foundRelevantLinqCalls)
 			{
-				if (doConstructCollectionExpression)
-				{
-					var spreadElement = SyntaxFactory.SpreadElement(memberAccess.Expression);
-					elements.Push((IsPrepend: false, spreadElement));
-				}
+				var spreadElement = SyntaxFactory.SpreadElement(isInnermostExpressionInvocation ? invocation : memberAccess.Expression);
+				elements.Push((IsPrepend: false, spreadElement));
 				break;
 			}
 			// we have found no relevant LINQ calls, so we cannot construct a collection expression
@@ -72,12 +66,6 @@ internal static class VerboseLinqChainHelpers
 				collectionElements = null;
 				return false;
 			}
-		}
-
-		if (!doConstructCollectionExpression)
-		{
-			collectionElements = null;
-			return true;
 		}
 
 		List<CollectionElementSyntax> finalElements = [];

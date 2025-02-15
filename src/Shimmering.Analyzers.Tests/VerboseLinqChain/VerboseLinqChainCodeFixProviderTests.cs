@@ -163,4 +163,35 @@ public class VerboseLinqChainCodeFixProviderTests
 			}
 		}
 		""");
+
+	[Test]
+	public Task TestInvocationAsFirstElement() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Method()
+				{
+					var x = [|Enumerable.Empty<int>().Append(123).ToArray()|];
+				}
+			}
+		}
+		""",
+		"""
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Method()
+				{
+					int[] x = [.. Enumerable.Empty<int>(), 123];
+				}
+			}
+		}
+		""");
 }

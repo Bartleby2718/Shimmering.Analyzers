@@ -44,7 +44,7 @@ internal sealed class VerboseLinqChainCodeFixProvider : CodeFixProvider
 		var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
 		if (semanticModel == null) { return document; }
 
-		if (!VerboseLinqChainHelpers.TryConstructCollectionExpression(semanticModel, lastInvocation, doConstructCollectionExpression: true, out var collectionExpression)
+		if (!VerboseLinqChainHelpers.TryConstructCollectionExpression(semanticModel, lastInvocation, out var collectionExpression)
 			|| collectionExpression == null)
 		{
 			return document;

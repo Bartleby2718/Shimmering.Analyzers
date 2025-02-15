@@ -37,7 +37,7 @@ internal sealed class VerboseLinqChainAnalyzer : DiagnosticAnalyzer
 		//    var x = <chain of Concats and Appends and Prepends).ToArray(); (or ToList() or ToHashSet())
 		if (!IsVariableDeclaration(invocation)) { return; }
 
-		if (!VerboseLinqChainHelpers.TryConstructCollectionExpression(semanticModel, invocation, doConstructCollectionExpression: false, out _)) { return; }
+		if (!VerboseLinqChainHelpers.TryConstructCollectionExpression(semanticModel, invocation, out _)) { return; }
 
 		var diagnostic = Diagnostic.Create(Rule, invocation.GetLocation());
 		context.ReportDiagnostic(diagnostic);
