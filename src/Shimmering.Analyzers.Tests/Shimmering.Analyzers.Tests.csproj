@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <!-- net462 until January 12, 2027 per https://learn.microsoft.com/en-us/lifecycle/products/microsoft-net-framework -->
+    <!-- net8.0 until November 10, 2026 per https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core -->
+    <TargetFrameworks>net462;net8.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
