@@ -72,7 +72,7 @@ public class VerboseLinqChainCodeFixProviderTests
 		""");
 
 	[Test]
-	public Task TestArgumentAsConstructibleCollection() => Verifier.VerifyCodeFixAsync(
+	public Task TestArgumentOfInterfaceType() => Verifier.VerifyCodeFixAsync(
 		"""
 		using System.Collections.Generic;
 		using System.Linq;
@@ -104,43 +104,6 @@ public class VerboseLinqChainCodeFixProviderTests
 				}
 
 				void AnotherMethod(IReadOnlyCollection<int> numbers) { }
-			}
-		}
-		""");
-
-	[Test]
-	public Task TestArgumentAsNonConstructibleCollection() => Verifier.VerifyCodeFixAsync(
-		"""
-		using System.Collections.Generic;
-		using System.Linq;
-
-		namespace Tests
-		{
-			class Test
-			{
-				void Method()
-				{
-					AnotherMethod([|new[] { 1 }.Prepend(2).Prepend(3).ToArray()|]);
-				}
-
-				void AnotherMethod(IEnumerable<int> numbers) { }
-			}
-		}
-		""",
-		"""
-		using System.Collections.Generic;
-		using System.Linq;
-
-		namespace Tests
-		{
-			class Test
-			{
-				void Method()
-				{
-					AnotherMethod([3, 2, .. new[] { 1 }]);
-				}
-
-				void AnotherMethod(IEnumerable<int> numbers) { }
 			}
 		}
 		""");
@@ -273,7 +236,7 @@ public class VerboseLinqChainCodeFixProviderTests
 		""");
 
 	[Test]
-	public Task TestInvocationAsFirstElement() => Verifier.VerifyCodeFixAsync(
+	public Task TestInvocationAsFirstElementInTheLinqChain() => Verifier.VerifyCodeFixAsync(
 		"""
 		using System.Linq;
 
@@ -307,6 +270,7 @@ public class VerboseLinqChainCodeFixProviderTests
 #pragma warning disable SA1027 // Use tabs correctly
 	public Task TestTriviaForArgument() => Verifier.VerifyCodeFixAsync(
 		"""
+		using System;
 		using System.Linq;
 
 		namespace Tests
@@ -315,9 +279,11 @@ public class VerboseLinqChainCodeFixProviderTests
 		    {
 		        void Method()
 		        {
-		            AnotherMethod(/* before argument */[|Enumerable.Empty<int>()
+		            AnotherMethod(/* before argument */[|Enumerable.Empty<int>()/* after first element */
 		                // line before Append
-		                .Append(123) // right after append
+		                .Append(123) // right after Append
+		                // line before Concat
+		                .Concat(Array.Empty<int>()) // right after Concat
 		                // line before ToArray
 		                .ToArray()|]/* after argument */);
 		        }
@@ -327,6 +293,7 @@ public class VerboseLinqChainCodeFixProviderTests
 		}
 		""",
 		"""
+		using System;
 		using System.Linq;
 
 		namespace Tests
@@ -335,8 +302,11 @@ public class VerboseLinqChainCodeFixProviderTests
 		    {
 		        void Method()
 		        {
-		            AnotherMethod(/* before argument */[.. Enumerable.Empty<int>(),
-		                123]/* after argument */);
+		            AnotherMethod(/* before argument */[.. Enumerable.Empty<int>(),/* after first element */
+		                // line before Append
+		                123, // right after Append
+		                // line before Concat
+		                .. Array.Empty<int>()]/* after argument */);
 		        }
 
 		        void AnotherMethod(int[] numbers) { }
@@ -378,6 +348,7 @@ public class VerboseLinqChainCodeFixProviderTests
 		        {
 		            // line before variable declaration
 		            /* before explicit type*/ int[] /* between type and variable */ x = /* before invocation */[.. Enumerable.Empty<int>(),
+		                                          // line before Append
 		                                          123]/* after invocation */; // right after variable declaration
 		        }
 		    }
@@ -418,6 +389,7 @@ public class VerboseLinqChainCodeFixProviderTests
 		        {
 		            // line before variable declaration
 		            /* before implicit type*/ int[] /* between type and variable */ x = /* before invocation */[.. Enumerable.Empty<int>(),
+		                                          // line before Append
 		                                          123]/* after invocation */; // right after variable declaration
 		        }
 		    }

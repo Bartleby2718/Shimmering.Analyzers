@@ -1,5 +1,4 @@
-using System.Diagnostics;
-
+using Microsoft.CodeAnalysis.Formatting;
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.VerboseLinqChain;
@@ -34,14 +33,21 @@ internal static class VerboseLinqChainHelpers
 				return false;
 			}
 
+			// Handling trivia is tricky; for now, settle with this.
 			(bool IsPrepend, CollectionElementSyntax CollectionElement)? result = memberAccess.Name.Identifier.Text switch
 			{
 				nameof(Enumerable.Append) =>
-					(false, SyntaxFactory.ExpressionElement(invocation.ArgumentList.Arguments[0].Expression).WithTriviaFrom(invocation)),
+					(false, SyntaxFactory.ExpressionElement(invocation.ArgumentList.Arguments[0].Expression)
+						.WithLeadingTrivia(memberAccess.OperatorToken.LeadingTrivia)
+						.WithTrailingTrivia(invocation.GetTrailingTrivia())),
 				nameof(Enumerable.Prepend) =>
-					(true, SyntaxFactory.ExpressionElement(invocation.ArgumentList.Arguments[0].Expression).WithTriviaFrom(invocation)),
+					(true, SyntaxFactory.ExpressionElement(invocation.ArgumentList.Arguments[0].Expression)
+						.WithLeadingTrivia(memberAccess.OperatorToken.LeadingTrivia)
+						.WithTrailingTrivia(invocation.GetTrailingTrivia())),
 				nameof(Enumerable.Concat) =>
-					(false, SyntaxFactory.SpreadElement(invocation.ArgumentList.Arguments[0].Expression).WithTriviaFrom(invocation)),
+					(false, SyntaxFactory.SpreadElement(invocation.ArgumentList.Arguments[0].Expression)
+						.WithLeadingTrivia(memberAccess.OperatorToken.LeadingTrivia)
+						.WithTrailingTrivia(invocation.GetTrailingTrivia())),
 				_ => null,
 			};
 			var isInnermostExpressionInvocation = true;
@@ -97,39 +103,5 @@ internal static class VerboseLinqChainHelpers
 		var elementsWithProperTrivia = SyntaxFactory.SeparatedList(elementsWithoutTrailingTrivia, commasWithTrailingTrivia);
 		collectionElements = SyntaxFactory.CollectionExpression(elementsWithProperTrivia);
 		return true;
-	}
-
-	internal static bool TryParseToCollectionElement(
-		MemberAccessExpressionSyntax memberAccess,
-		ArgumentListSyntax argumentList,
-		out (bool IsPrepend, CollectionElementSyntax CollectionElement)? result)
-	{
-		var methodName = memberAccess.Name.Identifier.Text;
-		if (methodName is not (nameof(Enumerable.Append) or nameof(Enumerable.Prepend) or nameof(Enumerable.Concat)))
-		{
-			result = null;
-			return false;
-		}
-
-		var invocationArgument = argumentList.Arguments[0].Expression;
-
-		if (methodName is nameof(Enumerable.Append))
-		{
-			result = (false, SyntaxFactory.ExpressionElement(invocationArgument).WithTriviaFrom(invocationArgument));
-			return true;
-		}
-
-		if (methodName is nameof(Enumerable.Prepend))
-		{
-			result = (true, SyntaxFactory.ExpressionElement(invocationArgument).WithTriviaFrom(invocationArgument));
-			return true;
-		}
-
-		if (methodName is nameof(Enumerable.Concat))
-		{
-			result = (false, SyntaxFactory.SpreadElement(invocationArgument).WithTriviaFrom(invocationArgument));
-			return true;
-		}
-		throw new UnreachableException();
 	}
 }
