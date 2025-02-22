@@ -32,7 +32,115 @@ public class VerboseLinqChainCodeFixProviderTests
 					var x5 = new[] { 1 }.Append(2).Intersect(new[] { 2 }).ToArray();
 					var x6 = new[] { 1 }.Concat(new[] { 2 }).OfType<int>().ToArray();
 					var x7 = new[] { 1 }.Prepend(2).Take(1).ToArray();
+
+					// tuple declaration is not supported
+					var (x8, x9) = (new[] { 1 }.Append(2).ToArray(), new[] { 1 }.Append(2).ToArray());
 				}
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestVariableDeclarationWithExplicitType() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Method()
+				{
+					int[] array = [|new[] { 1 }.Prepend(2).Prepend(3).ToArray()|];
+				}
+			}
+		}
+		""",
+		"""
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Method()
+				{
+					int[] array = [3, 2, .. new[] { 1 }];
+				}
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestArgumentAsConstructibleCollection() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System.Collections.Generic;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Method()
+				{
+					AnotherMethod([|new[] { 1 }.Prepend(2).Prepend(3).ToArray()|]);
+				}
+
+				void AnotherMethod(IReadOnlyCollection<int> numbers) { }
+			}
+		}
+		""",
+		"""
+		using System.Collections.Generic;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Method()
+				{
+					AnotherMethod([3, 2, .. new[] { 1 }]);
+				}
+
+				void AnotherMethod(IReadOnlyCollection<int> numbers) { }
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestArgumentAsNonConstructibleCollection() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System.Collections.Generic;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Method()
+				{
+					AnotherMethod([|new[] { 1 }.Prepend(2).Prepend(3).ToArray()|]);
+				}
+
+				void AnotherMethod(IEnumerable<int> numbers) { }
+			}
+		}
+		""",
+		"""
+		using System.Collections.Generic;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Method()
+				{
+					AnotherMethod([3, 2, .. new[] { 1 }]);
+				}
+
+				void AnotherMethod(IEnumerable<int> numbers) { }
 			}
 		}
 		""");

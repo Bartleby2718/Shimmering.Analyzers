@@ -33,20 +33,19 @@ internal sealed class VerboseLinqChainAnalyzer : DiagnosticAnalyzer
 		var semanticModel = context.SemanticModel;
 		var invocation = (InvocationExpressionSyntax)context.Node;
 
-		// look for declarations of the form:
-		//    var x = <chain of Concats and Appends and Prepends).ToArray(); (or ToList() or ToHashSet())
-		if (!IsVariableDeclaration(invocation)) { return; }
+		var parent = invocation.Parent;
+		var isArgumentToInvocation = parent is ArgumentSyntax argument
+			&& argument.Parent is ArgumentListSyntax argumentList
+			&& argumentList.Parent is InvocationExpressionSyntax;
+		var isVariableDeclaration = parent is EqualsValueClauseSyntax equalsValueClause
+			&& equalsValueClause.Parent is VariableDeclaratorSyntax variableDeclarator
+			&& variableDeclarator.Parent is VariableDeclarationSyntax;
+		// Only argument and variable declaration are supported. (e.g. tuple expression is not touched)
+		if (!isArgumentToInvocation && !isVariableDeclaration) { return; }
 
 		if (!VerboseLinqChainHelpers.TryConstructCollectionExpression(semanticModel, invocation, out _)) { return; }
 
 		var diagnostic = Diagnostic.Create(Rule, invocation.GetLocation());
 		context.ReportDiagnostic(diagnostic);
-	}
-
-	private static bool IsVariableDeclaration(InvocationExpressionSyntax invocation)
-	{
-		return invocation.Parent is EqualsValueClauseSyntax equalsValueClause
-			&& equalsValueClause.Parent is VariableDeclaratorSyntax variableDeclarator
-			&& variableDeclarator.Parent is VariableDeclarationSyntax;
 	}
 }

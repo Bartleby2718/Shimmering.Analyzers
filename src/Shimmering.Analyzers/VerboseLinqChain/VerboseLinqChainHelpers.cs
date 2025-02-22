@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.VerboseLinqChain;
@@ -56,7 +58,9 @@ internal static class VerboseLinqChainHelpers
 			// although this one was not a relevant LINQ call, we have already found some
 			if (foundRelevantLinqCalls)
 			{
-				var spreadElement = SyntaxFactory.SpreadElement(isInnermostExpressionInvocation ? invocation : memberAccess.Expression);
+				var baseExpression = isInnermostExpressionInvocation ? invocation : memberAccess.Expression;
+				var spreadElement = SyntaxFactory.SpreadElement(baseExpression)
+					.WithTriviaFrom(baseExpression);
 				elements.Push((IsPrepend: false, spreadElement));
 				break;
 			}
@@ -84,5 +88,39 @@ internal static class VerboseLinqChainHelpers
 
 		collectionElements = SyntaxFactory.CollectionExpression([.. finalElements]);
 		return true;
+	}
+
+	internal static bool TryParseToCollectionElement(
+		MemberAccessExpressionSyntax memberAccess,
+		ArgumentListSyntax argumentList,
+		out (bool IsPrepend, CollectionElementSyntax CollectionElement)? result)
+	{
+		var methodName = memberAccess.Name.Identifier.Text;
+		if (methodName is not (nameof(Enumerable.Append) or nameof(Enumerable.Prepend) or nameof(Enumerable.Concat)))
+		{
+			result = null;
+			return false;
+		}
+
+		var invocationArgument = argumentList.Arguments[0].Expression;
+
+		if (methodName is nameof(Enumerable.Append))
+		{
+			result = (false, SyntaxFactory.ExpressionElement(invocationArgument).WithTriviaFrom(invocationArgument));
+			return true;
+		}
+
+		if (methodName is nameof(Enumerable.Prepend))
+		{
+			result = (true, SyntaxFactory.ExpressionElement(invocationArgument).WithTriviaFrom(invocationArgument));
+			return true;
+		}
+
+		if (methodName is nameof(Enumerable.Concat))
+		{
+			result = (false, SyntaxFactory.SpreadElement(invocationArgument).WithTriviaFrom(invocationArgument));
+			return true;
+		}
+		throw new UnreachableException();
 	}
 }
