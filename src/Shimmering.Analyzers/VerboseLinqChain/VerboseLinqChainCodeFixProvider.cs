@@ -60,7 +60,8 @@ internal sealed class VerboseLinqChainCodeFixProvider : CodeFixProvider
 			&& argument.Parent is ArgumentListSyntax argumentList
 			&& argumentList.Parent is InvocationExpressionSyntax)
 		{
-			var newArgument = argument.WithExpression(collectionExpression);
+			var newArgument = argument.WithExpression(collectionExpression)
+				.WithTriviaFrom(argument);
 			var newRoot = root.ReplaceNode(argument, newArgument);
 			return document.WithSyntaxRoot(newRoot);
 		}
@@ -69,7 +70,8 @@ internal sealed class VerboseLinqChainCodeFixProvider : CodeFixProvider
 			&& equalsValueClause.Parent is VariableDeclaratorSyntax variableDeclarator
 			&& variableDeclarator.Parent is VariableDeclarationSyntax variableDeclaration)
 		{
-			var newEqualsValueClause = equalsValueClause.WithValue(collectionExpression);
+			var newEqualsValueClause = equalsValueClause.WithValue(collectionExpression)
+				 .WithTriviaFrom(equalsValueClause);
 
 			// Case 2: If the variable declaration uses an explicit type, no special treatment is needed.
 			if (!variableDeclaration.Type.IsVar)

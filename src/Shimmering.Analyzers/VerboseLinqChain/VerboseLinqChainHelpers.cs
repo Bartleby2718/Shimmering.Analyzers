@@ -36,9 +36,12 @@ internal static class VerboseLinqChainHelpers
 
 			(bool IsPrepend, CollectionElementSyntax CollectionElement)? result = memberAccess.Name.Identifier.Text switch
 			{
-				nameof(Enumerable.Append) => (false, SyntaxFactory.ExpressionElement(invocation.ArgumentList.Arguments[0].Expression)),
-				nameof(Enumerable.Prepend) => (true, SyntaxFactory.ExpressionElement(invocation.ArgumentList.Arguments[0].Expression)),
-				nameof(Enumerable.Concat) => (false, SyntaxFactory.SpreadElement(invocation.ArgumentList.Arguments[0].Expression)),
+				nameof(Enumerable.Append) =>
+					(false, SyntaxFactory.ExpressionElement(invocation.ArgumentList.Arguments[0].Expression).WithTriviaFrom(invocation)),
+				nameof(Enumerable.Prepend) =>
+					(true, SyntaxFactory.ExpressionElement(invocation.ArgumentList.Arguments[0].Expression).WithTriviaFrom(invocation)),
+				nameof(Enumerable.Concat) =>
+					(false, SyntaxFactory.SpreadElement(invocation.ArgumentList.Arguments[0].Expression).WithTriviaFrom(invocation)),
 				_ => null,
 			};
 			var isInnermostExpressionInvocation = true;
@@ -72,21 +75,27 @@ internal static class VerboseLinqChainHelpers
 			}
 		}
 
-		List<CollectionElementSyntax> finalElements = [];
+		List<CollectionElementSyntax> elementInProperOrderButWithoutProperTrivia = [];
 		// no need to reverse because we used a stack in the first place
 		foreach (var (isPrepend, element) in elements)
 		{
 			if (isPrepend)
 			{
-				finalElements.Insert(0, element);
+				elementInProperOrderButWithoutProperTrivia.Insert(0, element);
 			}
 			else
 			{
-				finalElements.Add(element);
+				elementInProperOrderButWithoutProperTrivia.Add(element);
 			}
 		}
 
-		collectionElements = SyntaxFactory.CollectionExpression([.. finalElements]);
+		var elementsWithoutTrailingTrivia = elementInProperOrderButWithoutProperTrivia.Select(e => e.WithTrailingTrivia());
+		var commasWithTrailingTrivia = elementInProperOrderButWithoutProperTrivia.Select(e =>
+			SyntaxFactory.Token(SyntaxKind.CommaToken).WithTrailingTrivia(e.GetTrailingTrivia()))
+			// exclude the trailing comma
+			.Take(elements.Count - 1);
+		var elementsWithProperTrivia = SyntaxFactory.SeparatedList(elementsWithoutTrailingTrivia, commasWithTrailingTrivia);
+		collectionElements = SyntaxFactory.CollectionExpression(elementsWithProperTrivia);
 		return true;
 	}
 
