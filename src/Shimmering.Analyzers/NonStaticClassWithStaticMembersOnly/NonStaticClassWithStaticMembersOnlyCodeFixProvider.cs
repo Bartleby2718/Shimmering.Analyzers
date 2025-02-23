@@ -3,8 +3,8 @@ namespace Shimmering.Analyzers.NonStaticClassWithStaticMembersOnly;
 /// <summary>
 /// Makes a non-static class static, if reported by <see cref="NonStaticClassWithStaticMembersOnlyAnalyzer"/>.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NonStaticClassWithStaticMembersOnlyCodeFixProvider)), Shared]
-internal sealed class NonStaticClassWithStaticMembersOnlyCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NonStaticClassWithStaticMembersOnlyCodeFixProvider))]
+internal sealed class NonStaticClassWithStaticMembersOnlyCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Make static class static";
 
@@ -19,8 +19,6 @@ internal sealed class NonStaticClassWithStaticMembersOnlyCodeFixProvider : CodeF
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.NonStaticClassWithStaticMembersOnly];
-
-	public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

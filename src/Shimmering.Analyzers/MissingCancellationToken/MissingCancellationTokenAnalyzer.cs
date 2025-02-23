@@ -5,28 +5,24 @@ namespace Shimmering.Analyzers.MissingCancellationToken;
 /// <summary>
 /// Reports instances of asynchronous methods missing a <see cref="CancellationToken"/> parameter.
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class MissingCancellationTokenAnalyzer : DiagnosticAnalyzer
+internal sealed class MissingCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = $"Include a {nameof(CancellationToken)} parameter";
 	private const string Message = $"An asynchronous method is missing a {nameof(CancellationToken)} parameter";
 	private const string Category = "CodeQuality";
 
-	private static readonly DiagnosticDescriptor Rule = new(
+	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.MissingCancellationToken,
 		Title,
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		isEnabledByDefault: true,
-		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.MissingCancellationToken}.md");
+		isEnabledByDefault: true);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void Initialize(AnalysisContext context)
+	public override void RegisterSyntaxNodeAction(AnalysisContext context)
 	{
-		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-		context.EnableConcurrentExecution();
 		context.RegisterSymbolAction(AnalyzeMethod, SymbolKind.Method);
 	}
 	private static void AnalyzeMethod(SymbolAnalysisContext context)

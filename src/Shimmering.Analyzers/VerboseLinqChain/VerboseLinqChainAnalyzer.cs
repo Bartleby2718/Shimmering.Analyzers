@@ -3,28 +3,24 @@ namespace Shimmering.Analyzers.VerboseLinqChain;
 /// <summary>
 /// Reports instances of a verbose chain of <see cref="Enumerable.Concat{TSource}(IEnumerable{TSource}, IEnumerable{TSource})"/>s and <see cref="Enumerable.Append"/>s, ending with with a <see cref="Enumerable.ToArray{TSource}(IEnumerable{TSource})"/> or a <see cref="Enumerable.ToList{TSource}(IEnumerable{TSource})"/>.
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class VerboseLinqChainAnalyzer : DiagnosticAnalyzer
+internal sealed class VerboseLinqChainAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Simplify LINQ chain";
 	private const string Message = "Replace a verbose LINQ chain with a collection expression";
 	private const string Category = "Refactoring";
 
-	private static readonly DiagnosticDescriptor Rule = new(
+	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.VerboseLinqChain,
 		Title,
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		isEnabledByDefault: true,
-		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.VerboseLinqChain}.md");
+		isEnabledByDefault: true);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void Initialize(AnalysisContext context)
+	public override void RegisterSyntaxNodeAction(AnalysisContext context)
 	{
-		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-		context.EnableConcurrentExecution();
 		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 	}
 

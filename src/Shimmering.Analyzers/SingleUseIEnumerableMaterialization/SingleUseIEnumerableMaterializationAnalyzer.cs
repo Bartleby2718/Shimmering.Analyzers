@@ -5,28 +5,24 @@ namespace Shimmering.Analyzers.SingleUseIEnumerableMaterialization;
 /// <summary>
 /// Reports instances of a single-use IEnumerable that is materialized.
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class SingleUseIEnumerableMaterializationAnalyzer : DiagnosticAnalyzer
+internal sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Avoid materializing a single-use IEnumerable";
 	private const string Message = "Avoid materializing an IEnumerable if it's used only once";
 	private const string Category = "CodeQuality";
 
-	private static readonly DiagnosticDescriptor Rule = new(
+	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.SingleUseIEnumerableMaterialization,
 		Title,
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		isEnabledByDefault: true,
-		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.SingleUseIEnumerableMaterialization}.md");
+		isEnabledByDefault: true);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void Initialize(AnalysisContext context)
+	public override void RegisterSyntaxNodeAction(AnalysisContext context)
 	{
-		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-		context.EnableConcurrentExecution();
 		context.RegisterSyntaxNodeAction(AnalyzeLocalDeclaration, SyntaxKind.LocalDeclarationStatement);
 	}
 

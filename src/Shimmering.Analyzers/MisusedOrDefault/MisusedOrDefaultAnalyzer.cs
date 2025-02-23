@@ -5,28 +5,24 @@ namespace Shimmering.Analyzers.MisusedOrDefault;
 /// <summary>
 /// Reports instances of a LINQ 'OrDefault' extension methods that are followed by the null-forgiving operator (!).
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class MisusedOrDefaultAnalyzer : DiagnosticAnalyzer
+internal sealed class MisusedOrDefaultAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "OrDefault()! is redundant";
 	private const string Message = "Replace '{0}!' with '{1}'";
 	private const string Category = "Usage";
 
-	private static readonly DiagnosticDescriptor Rule = new(
+	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.MisusedOrDefault,
 		Title,
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		isEnabledByDefault: true,
-		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.MisusedOrDefault}.md");
+		isEnabledByDefault: true);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void Initialize(AnalysisContext context)
+	public override void RegisterSyntaxNodeAction(AnalysisContext context)
 	{
-		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-		context.EnableConcurrentExecution();
 		context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.SuppressNullableWarningExpression);
 	}
 

@@ -3,15 +3,13 @@ namespace Shimmering.Analyzers.NullableCancellationToken;
 /// <summary>
 /// Makes a nullable <see cref="CancellationToken"/> non-nullable if reported by <see cref="NullableCancellationTokenAnalyzer"/>.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NullableCancellationTokenCodeFixProvider)), Shared]
-internal sealed class NullableCancellationTokenCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NullableCancellationTokenCodeFixProvider))]
+internal sealed class NullableCancellationTokenCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private static readonly string Title = $"Make {nameof(CancellationToken)} non-nullable";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.NullableCancellationToken];
-
-	public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

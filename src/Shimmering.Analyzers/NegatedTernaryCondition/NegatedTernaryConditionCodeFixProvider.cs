@@ -5,15 +5,13 @@ namespace Shimmering.Analyzers.NegatedTernaryCondition;
 /// <summary>
 /// TODO.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NegatedTernaryConditionCodeFixProvider)), Shared]
-internal sealed class NegatedTernaryConditionCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NegatedTernaryConditionCodeFixProvider))]
+internal sealed class NegatedTernaryConditionCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Invert the ternary for clarity";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.NegatedTernaryCondition];
-
-	public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

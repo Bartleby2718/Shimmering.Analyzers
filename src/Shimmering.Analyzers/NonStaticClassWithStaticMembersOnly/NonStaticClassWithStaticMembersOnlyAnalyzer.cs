@@ -3,28 +3,24 @@ namespace Shimmering.Analyzers.NonStaticClassWithStaticMembersOnly;
 /// <summary>
 /// Reports instances of a non-static class that can be made static.
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class NonStaticClassWithStaticMembersOnlyAnalyzer : DiagnosticAnalyzer
+internal sealed class NonStaticClassWithStaticMembersOnlyAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Make static class static";
 	private const string Message = "Non-static class '{0}' can be made static";
 	private const string Category = "Usage";
 
-	private static readonly DiagnosticDescriptor Rule = new(
+	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.NonStaticClassWithStaticMembersOnly,
 		Title,
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		isEnabledByDefault: true,
-		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.NonStaticClassWithStaticMembersOnly}.md");
+		isEnabledByDefault: true);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void Initialize(AnalysisContext context)
+	public override void RegisterSyntaxNodeAction(AnalysisContext context)
 	{
-		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-		context.EnableConcurrentExecution();
 		context.RegisterSyntaxNodeAction(AnalyzeClassDeclaration, SyntaxKind.ClassDeclaration);
 	}
 

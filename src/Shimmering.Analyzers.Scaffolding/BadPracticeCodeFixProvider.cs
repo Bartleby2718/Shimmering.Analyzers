@@ -3,15 +3,13 @@ namespace Shimmering.Analyzers.BadPractice;
 /// <summary>
 /// TODO.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(BadPracticeCodeFixProvider)), Shared]
-internal sealed class BadPracticeCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(BadPracticeCodeFixProvider))]
+internal sealed class BadPracticeCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "TODO:";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.BadPractice];
-
-	public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

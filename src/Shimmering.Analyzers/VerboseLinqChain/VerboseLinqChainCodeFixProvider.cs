@@ -5,15 +5,13 @@ namespace Shimmering.Analyzers.VerboseLinqChain;
 /// <summary>
 /// Converts a chain of LINQ calls with a collection expression.if reported by <see cref="VerboseLinqChainAnalyzer"/>.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(VerboseLinqChainCodeFixProvider)), Shared]
-internal sealed class VerboseLinqChainCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(VerboseLinqChainCodeFixProvider))]
+internal sealed class VerboseLinqChainCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Replace a verbose LINQ chain with a collection expression";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.VerboseLinqChain];
-
-	public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

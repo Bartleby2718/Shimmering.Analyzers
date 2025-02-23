@@ -3,28 +3,24 @@ namespace Shimmering.Analyzers.NegatedTernaryCondition;
 /// <summary>
 /// Reports instances of a tenary expression that starts with a negation operator in the condition part.
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class NegatedTernaryConditionAnalyzer : DiagnosticAnalyzer
+internal sealed class NegatedTernaryConditionAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Avoid negation in the ternary condition";
 	private const string Message = "This ternary condition has a negation";
 	private const string Category = "Style";
 
-	private static readonly DiagnosticDescriptor Rule = new(
+	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.NegatedTernaryCondition,
 		Title,
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		isEnabledByDefault: true,
-		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.NegatedTernaryCondition}.md");
+		isEnabledByDefault: true);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void Initialize(AnalysisContext context)
+	public override void RegisterSyntaxNodeAction(AnalysisContext context)
 	{
-		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-		context.EnableConcurrentExecution();
 		context.RegisterSyntaxNodeAction(AnalyzeConditionalExpression, SyntaxKind.ConditionalExpression);
 	}
 

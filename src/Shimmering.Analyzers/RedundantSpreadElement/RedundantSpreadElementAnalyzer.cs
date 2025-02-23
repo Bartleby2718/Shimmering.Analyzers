@@ -6,28 +6,24 @@ namespace Shimmering.Analyzers.RedundantSpreadElement;
 /// Reports instances of redundant spread elements in a collection expression, like [1, .. new[] { 2, 3 }, 4].
 /// </summary>
 // See also: https://github.com/dotnet/roslyn/blob/main/src/Analyzers/CSharp/Analyzers/UseCollectionExpression/CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.cs
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class RedundantSpreadElementAnalyzer : DiagnosticAnalyzer
+internal sealed class RedundantSpreadElementAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Inline spread element";
 	private const string Message = "Inline spread element";
 	private const string Category = "Style";
 
-	private static readonly DiagnosticDescriptor Rule = new(
+	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.RedundantSpreadElement,
 		Title,
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		isEnabledByDefault: true,
-		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.RedundantSpreadElement}.md");
+		isEnabledByDefault: true);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void Initialize(AnalysisContext context)
+	public override void RegisterSyntaxNodeAction(AnalysisContext context)
 	{
-		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-		context.EnableConcurrentExecution();
 		context.RegisterSyntaxNodeAction(AnalyzeCollectionExpression, SyntaxKind.CollectionExpression);
 	}
 

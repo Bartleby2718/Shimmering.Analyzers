@@ -9,15 +9,13 @@ namespace Shimmering.Analyzers.MisusedOrDefault;
 /// <summary>
 /// TODO.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MisusedOrDefaultCodeFixProvider)), Shared]
-internal sealed class MisusedOrDefaultCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MisusedOrDefaultCodeFixProvider))]
+internal sealed class MisusedOrDefaultCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Simplify 'OrDefault' method call";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.MisusedOrDefault];
-
-	public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

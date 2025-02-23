@@ -3,15 +3,13 @@ namespace Shimmering.Analyzers.SingleUseIEnumerableMaterialization;
 /// <summary>
 /// Removes an unnecessary materialization of an IEnumerable if reported by <see cref="SingleUseIEnumerableMaterializationAnalyzer"/>.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(SingleUseIEnumerableMaterializationCodeFixProvider)), Shared]
-internal sealed class SingleUseIEnumerableMaterializationCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(SingleUseIEnumerableMaterializationCodeFixProvider))]
+internal sealed class SingleUseIEnumerableMaterializationCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private static readonly string Title = "Remove unnecessary materialization";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.SingleUseIEnumerableMaterialization];
-
-	public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

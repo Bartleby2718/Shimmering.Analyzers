@@ -3,28 +3,24 @@ namespace Shimmering.Analyzers.TrailingBinaryOperator;
 /// <summary>
 /// Reports instances of trailing binary operators.
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class TrailingBinaryOperatorAnalyzer : DiagnosticAnalyzer
+internal sealed class TrailingBinaryOperatorAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Binary operators should be leading, not trailing";
 	private const string Message = "Move binary operator to the beginning of the line";
 	private const string Category = "Style";
 
-	private static readonly DiagnosticDescriptor Rule = new(
+	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.TrailingBinaryOperator,
 		Title,
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		isEnabledByDefault: false, // this is a matter of taste
-		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.TrailingBinaryOperator}.md");
+		isEnabledByDefault: false); // this is a matter of taste
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void Initialize(AnalysisContext context)
+	public override void RegisterSyntaxNodeAction(AnalysisContext context)
 	{
-		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-		context.EnableConcurrentExecution();
 		context.RegisterSyntaxNodeAction(
 			AnalyzeBinaryExpression,
 			// The list of expressions covered by BinaryExpressionSyntax, according to its doc comment at the time of writing.

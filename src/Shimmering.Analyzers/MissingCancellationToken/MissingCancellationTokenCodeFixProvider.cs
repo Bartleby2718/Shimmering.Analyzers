@@ -6,15 +6,13 @@ namespace Shimmering.Analyzers.MissingCancellationToken;
 /// <summary>
 /// Adds a <see cref="CancellationToken"/> parameter if reported by <see cref="MissingCancellationTokenAnalyzer"/>.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MissingCancellationTokenCodeFixProvider)), Shared]
-internal sealed class MissingCancellationTokenCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MissingCancellationTokenCodeFixProvider))]
+internal sealed class MissingCancellationTokenCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private static readonly string Title = $"Add a {nameof(CancellationToken)} parameter";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.MissingCancellationToken];
-
-	public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

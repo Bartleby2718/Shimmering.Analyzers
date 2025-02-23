@@ -5,28 +5,24 @@ namespace Shimmering.Analyzers.SingleElementConcat;
 /// <summary>
 /// Reports instances of calling <see cref="Enumerable.Concat"/> against a single-element collection that can be replaced with <see cref="Enumerable.Append"/>.
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class SingleElementConcatAnalyzer : DiagnosticAnalyzer
+internal sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Simplify .Concat()";
 	private const string Message = "Replace .Concat([e]) with .Append(e)";
 	private const string Category = "Refactoring";
 
-	private static readonly DiagnosticDescriptor Rule = new(
+	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.SingleElementConcat,
 		Title,
 		Message,
 		Category,
 		DiagnosticSeverity.Info,
-		isEnabledByDefault: true,
-		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{DiagnosticIds.SingleElementConcat}.md");
+		isEnabledByDefault: true);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void Initialize(AnalysisContext context)
+	public override void RegisterSyntaxNodeAction(AnalysisContext context)
 	{
-		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-		context.EnableConcurrentExecution();
 		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 	}
 

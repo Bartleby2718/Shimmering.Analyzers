@@ -3,15 +3,13 @@ namespace Shimmering.Analyzers.UniqueNonSetCollection;
 /// <summary>
 /// Converts .Distinct().ToList() or .Distinct().ToArray() with .ToHashSet() if reported by <see cref="UniqueNonSetCollectionAnalyzer"/>.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(UniqueNonSetCollectionCodeFixProvider)), Shared]
-internal sealed class UniqueNonSetCollectionCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(UniqueNonSetCollectionCodeFixProvider))]
+internal sealed class UniqueNonSetCollectionCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private static readonly string Title = "Replace .Distinct().ToList() or .Distinct().ToArray() with .ToHashSet()";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UniqueNonSetCollection];
-
-	public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

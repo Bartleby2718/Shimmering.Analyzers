@@ -3,15 +3,13 @@ namespace Shimmering.Analyzers.TrailingBinaryOperator;
 /// <summary>
 /// Moves trailing binary operators to the beginning of the line.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(TrailingBinaryOperatorCodeFixProvider)), Shared]
-internal sealed class TrailingBinaryOperatorCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(TrailingBinaryOperatorCodeFixProvider))]
+internal sealed class TrailingBinaryOperatorCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Make trailing binary operators leading";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.TrailingBinaryOperator];
-
-	public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
