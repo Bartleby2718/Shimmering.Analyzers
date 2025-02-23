@@ -19,12 +19,16 @@ assignees: ''
 - `dotnet --info`
 
 ### Actual Result
-
+```cs
+// ...
+```
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
 ### Expected Result
-
+```cs
+// ...
+```
 
 ### Additional Context

@@ -7,7 +7,10 @@ assignees: ''
 
 ---
 
-### What code do you want to flag and why?
+### What C# code do you want to flag and why?
+
+
+### In which versions of .NET does the flagged API exist? Please provide a link. ([example for `String.Split` Method](https://learn.microsoft.com/en-us/dotnet/api/system.string.split)).
 
 
 ### How should the code be fixed?
