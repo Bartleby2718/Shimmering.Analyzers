@@ -14,4 +14,5 @@ internal static class DiagnosticIds
 	public const string MisusedOrDefault = "SHIMMER1010";
 	public const string NonStaticClassWithStaticMembersOnly = "SHIMMER1011";
 	public const string ArrayOrArrayReturningMethodFollowedByToArray = "SHIMMER1012";
+	public const string ToListForEach = "SHIMMER1013";
 }

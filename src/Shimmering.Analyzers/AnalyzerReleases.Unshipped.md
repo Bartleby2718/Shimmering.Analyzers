@@ -17,3 +17,4 @@ SHIMMER1009 | Style | Info | NegatedTernaryConditionAnalyzer, [Documentation](ht
 SHIMMER1010 | Usage | Info | MisusedOrDefaultAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1010.md)
 SHIMMER1011 | Usage | Info | NonStaticClassWithStaticMembersOnlyAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1011.md)
 SHIMMER1012 | Usage | Warning | ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1012.md)
+SHIMMER1013 | Usage | Warning | ToListForEachAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1013.md)
