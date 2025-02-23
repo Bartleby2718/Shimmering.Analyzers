@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.Formatting;
 namespace Shimmering.Analyzers.NegatedTernaryCondition;
 
 /// <summary>
-/// TODO.
+/// Inverts a ternary expression, if reported by <see cref="NegatedTernaryConditionAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NegatedTernaryConditionCodeFixProvider))]
 internal sealed class NegatedTernaryConditionCodeFixProvider : ShimmeringCodeFixProvider

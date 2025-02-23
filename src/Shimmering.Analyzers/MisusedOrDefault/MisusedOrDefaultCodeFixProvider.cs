@@ -1,13 +1,10 @@
-using System.Xml.Linq;
-
 using Microsoft.CodeAnalysis.Formatting;
-
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.MisusedOrDefault;
 
 /// <summary>
-/// TODO.
+/// Replaces an 'OrDefault' LINQ method with its non-OrDefault counterpart, if reported by <see cref="MisusedOrDefaultAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MisusedOrDefaultCodeFixProvider))]
 internal sealed class MisusedOrDefaultCodeFixProvider : ShimmeringCodeFixProvider

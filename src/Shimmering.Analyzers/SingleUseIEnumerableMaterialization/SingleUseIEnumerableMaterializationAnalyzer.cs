@@ -33,7 +33,6 @@ internal sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSy
 		// For now, handle only single variable declarations for simplicity.
 		if (localDeclaration.Declaration.Variables.Count != 1) { return; }
 
-		// TODO: handle explicit types
 		if (!localDeclaration.Declaration.Type.IsVar) { return; }
 
 		var variableDeclarator = localDeclaration.Declaration.Variables.First();
@@ -46,9 +45,11 @@ internal sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSy
 		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
 
 		// Only proceed if the method is "ToList" or "ToArray"
-		// TODO: use EnumerableHelpers
-		var methodName = memberAccess.Name.Identifier.Text;
-		if (methodName is not (nameof(Enumerable.ToList) or nameof(Enumerable.ToArray))) { return; }
+		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, out var methodName)
+			|| methodName is not (nameof(Enumerable.ToList) or nameof(Enumerable.ToArray)))
+		{
+			return;
+		}
 
 		// Bail out if the receiver is an IQueryable<T> because removing materialization affects business logic
 		var semanticModel = context.SemanticModel;

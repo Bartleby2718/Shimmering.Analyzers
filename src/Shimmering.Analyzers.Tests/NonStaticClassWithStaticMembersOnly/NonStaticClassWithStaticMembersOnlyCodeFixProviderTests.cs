@@ -157,8 +157,6 @@ public class NonStaticClassWithStaticMembersOnlyCodeFixProviderTests
 		""");
 #pragma warning restore SA1027 // Use tabs correctly
 
-	// TODO: test sealed
-
 	[Test]
 #pragma warning disable SA1027 // Use tabs correctly
 	public Task TestTrivia() => Verifier.VerifyCodeFixAsync(
