@@ -22,7 +22,7 @@
   <!-- Package metadata from https://learn.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices -->
   <PropertyGroup>
     <PackageId>Shimmering.Analyzers</PackageId>
-    <PackageVersion>0.1.0-local34</PackageVersion>
+    <PackageVersion>0.1.0-local35</PackageVersion>
     <Authors>Bartleby</Authors>
     <Description>Package Description</Description>
     <Copyright>Copyright (C) Bartleby 2025</Copyright>
@@ -32,7 +32,7 @@
     <RepositoryUrl>https://github.com/Bartleby2718/Shimmering.Analyzers</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>roslyn;analyzers;linq</PackageTags>
-    <PackageReleaseNotes>local34 fixes #38. For all other versions, see https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/CHANGELOG.md.</PackageReleaseNotes>
+    <PackageReleaseNotes>local35 removes #3 and #26. For all other versions, see https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/CHANGELOG.md.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
