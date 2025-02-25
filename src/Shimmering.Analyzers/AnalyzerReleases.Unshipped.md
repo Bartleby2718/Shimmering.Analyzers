@@ -14,7 +14,6 @@ SHIMMER1007 | CodeQuality | Info | MissingCancellationTokenAnalyzer, [Documentat
 SHIMMER1008 | CodeQuality | Info | SingleUseIEnumerableMaterializationAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1008.md)
 SHIMMER1009 | Style | Info | NegatedTernaryConditionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1009.md)
 SHIMMER1010 | Usage | Info | MisusedOrDefaultAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1010.md)
-SHIMMER1011 | Usage | Info | NonStaticClassWithStaticMembersOnlyAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1011.md)
 SHIMMER1012 | Usage | Warning | ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1012.md)
 SHIMMER1013 | Usage | Warning | ToListForEachAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1013.md)
 SHIMMER1014 | Usage | Warning | ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1014.md)
