@@ -5,6 +5,7 @@ namespace Shimmering.Analyzers.ToArrayOrToListFollowedByEnumerableExtensionMetho
 /// <summary>
 /// Reports instances of LINQ materialization immediately followed by another Enumerable extension method.
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Unnecessary materialization to array/list in LINQ chain";

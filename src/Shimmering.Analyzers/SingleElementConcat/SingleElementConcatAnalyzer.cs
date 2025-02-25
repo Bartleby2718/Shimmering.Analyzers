@@ -5,6 +5,7 @@ namespace Shimmering.Analyzers.SingleElementConcat;
 /// <summary>
 /// Reports instances of calling <see cref="Enumerable.Concat"/> against a single-element collection that can be replaced with <see cref="Enumerable.Append"/>.
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Simplify .Concat()";

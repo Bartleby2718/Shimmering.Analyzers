@@ -6,6 +6,7 @@ namespace Shimmering.Analyzers.RedundantSpreadElement;
 /// Reports instances of redundant spread elements in a collection expression, like [1, .. new[] { 2, 3 }, 4].
 /// </summary>
 // See also: https://github.com/dotnet/roslyn/blob/main/src/Analyzers/CSharp/Analyzers/UseCollectionExpression/CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.cs
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class RedundantSpreadElementAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Inline spread element";

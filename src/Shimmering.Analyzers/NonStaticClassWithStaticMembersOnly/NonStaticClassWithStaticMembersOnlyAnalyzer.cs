@@ -3,6 +3,7 @@ namespace Shimmering.Analyzers.NonStaticClassWithStaticMembersOnly;
 /// <summary>
 /// Reports instances of a non-static class that can be made static.
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class NonStaticClassWithStaticMembersOnlyAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Make static class static";

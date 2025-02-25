@@ -5,6 +5,7 @@ namespace Shimmering.Analyzers.SingleUseIEnumerableMaterialization;
 /// <summary>
 /// Reports instances of a single-use IEnumerable that is materialized.
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Avoid materializing a single-use IEnumerable";

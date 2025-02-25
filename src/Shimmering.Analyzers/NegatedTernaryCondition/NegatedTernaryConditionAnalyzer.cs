@@ -3,6 +3,7 @@ namespace Shimmering.Analyzers.NegatedTernaryCondition;
 /// <summary>
 /// Reports instances of a tenary expression that starts with a negation operator in the condition part.
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class NegatedTernaryConditionAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Avoid negation in the ternary condition";

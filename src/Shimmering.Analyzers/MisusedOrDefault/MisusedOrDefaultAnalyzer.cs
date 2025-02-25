@@ -5,6 +5,7 @@ namespace Shimmering.Analyzers.MisusedOrDefault;
 /// <summary>
 /// Reports instances of a LINQ 'OrDefault' extension methods that are followed by the null-forgiving operator (!).
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class MisusedOrDefaultAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "OrDefault()! is redundant";

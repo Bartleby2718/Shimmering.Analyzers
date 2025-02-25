@@ -3,7 +3,6 @@ namespace Shimmering.Analyzers;
 /// <summary>
 /// A base <see cref="DiagnosticAnalyzer"/> class in this project, used for <see cref="SyntaxNode"/> analysis.
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
 public abstract class ShimmeringSyntaxNodeAnalyzer : DiagnosticAnalyzer
 {
 	public sealed override void Initialize(AnalysisContext context)

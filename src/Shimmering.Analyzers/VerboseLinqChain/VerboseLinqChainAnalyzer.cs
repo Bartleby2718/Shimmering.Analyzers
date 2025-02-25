@@ -3,6 +3,7 @@ namespace Shimmering.Analyzers.VerboseLinqChain;
 /// <summary>
 /// Reports instances of a verbose chain of <see cref="Enumerable.Concat{TSource}(IEnumerable{TSource}, IEnumerable{TSource})"/>s and <see cref="Enumerable.Append"/>s, ending with with a <see cref="Enumerable.ToArray{TSource}(IEnumerable{TSource})"/> or a <see cref="Enumerable.ToList{TSource}(IEnumerable{TSource})"/>.
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class VerboseLinqChainAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Simplify LINQ chain";

@@ -3,6 +3,7 @@ namespace Shimmering.Analyzers.BadPractice;
 /// <summary>
 /// TODO.
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "TODO:";

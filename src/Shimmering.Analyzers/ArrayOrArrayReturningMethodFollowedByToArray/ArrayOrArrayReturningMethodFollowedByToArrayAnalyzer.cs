@@ -5,6 +5,7 @@ namespace Shimmering.Analyzers.ArrayOrArrayReturningMethodFollowedByToArray;
 /// <summary>
 /// Reports instances of an array or an array-returning method immediately followed by <see cref="Enumerable.ToArray"/>, as in myString.Split(...).ToArray().
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "An array creation like new[] { 1 } or array-returning method like String.Split() must not be followed by .ToArray()";
