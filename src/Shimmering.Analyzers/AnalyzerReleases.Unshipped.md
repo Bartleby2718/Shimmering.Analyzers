@@ -6,7 +6,6 @@
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
 SHIMMER1001 | Refactoring | Info | SingleElementConcatAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1001.md)
-SHIMMER1002 | Style | Disabled | TrailingBinaryOperatorAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1002.md)
 SHIMMER1003 | Refactoring | Info | UniqueNonSetCollectionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1003.md)
 SHIMMER1004 | Style | Info | RedundantSpreadElementAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1004.md)
 SHIMMER1005 | Refactoring | Info | VerboseLinqChainAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/SHIMMER1005.md)

@@ -3,7 +3,6 @@ namespace Shimmering.Analyzers;
 internal static class DiagnosticIds
 {
 	public const string SingleElementConcat = "SHIMMER1001";
-	public const string TrailingBinaryOperator = "SHIMMER1002";
 	public const string UniqueNonSetCollection = "SHIMMER1003";
 	public const string RedundantSpreadElement = "SHIMMER1004";
 	public const string VerboseLinqChain = "SHIMMER1005";
