@@ -56,8 +56,15 @@ internal sealed class MissingCancellationTokenAnalyzer : ShimmeringSyntaxNodeAna
 	private static bool IsCancellationTokenType(ITypeSymbol type, Compilation compilation)
 	{
 		var cancellationTokenType = compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.CancellationToken);
-		return type is INamedTypeSymbol namedType
-			&& SymbolEqualityComparer.Default.Equals(namedType.OriginalDefinition, cancellationTokenType);
+		if (cancellationTokenType is null) { return false; }
+
+		if (type is not INamedTypeSymbol namedType) { return false; }
+
+		var isNonNullCancellationToken = SymbolEqualityComparer.Default.Equals(namedType.OriginalDefinition, cancellationTokenType);
+		if (isNonNullCancellationToken) { return true; }
+
+		return namedType.NullableAnnotation == NullableAnnotation.Annotated
+			&& SymbolEqualityComparer.Default.Equals(namedType.TypeArguments[0], cancellationTokenType);
 	}
 
 	/// <summary>

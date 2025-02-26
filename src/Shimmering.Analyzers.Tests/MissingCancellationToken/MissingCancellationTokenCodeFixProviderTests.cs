@@ -30,6 +30,9 @@ public class MissingCancellationTokenCodeFixProviderTests
 				// another parameter after CancellationToken
 				public Task Do5Async(CancellationToken cancellationToken = default, int number = 1) => Task.CompletedTask;
 				public Task Do6Async(CancellationToken cancellationToken, int number) => Task.CompletedTask;
+
+				// CancellationToken? already exists
+				public Task Do7Async(CancellationToken? cancellationToken) => Task.CompletedTask;
 			}
 		}
 		""");
