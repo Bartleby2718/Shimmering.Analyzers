@@ -24,6 +24,10 @@ public class ToArrayOrToListFollowedByEnumerableExtensionMethodCodeFixProviderTe
 					int[] numbers = [];
 					var greaterThanThree = numbers.ToHashSet().Where(x => x > 3); // ToHashSet
 					numbers.ToList().Sort(); // Sort is not an Enumerable extension method
+					var queryable = Enumerable.Empty<int>()
+						.AsQueryable()
+						.ToList()
+						.Where(_ => true);
 				}
 			}
 		}

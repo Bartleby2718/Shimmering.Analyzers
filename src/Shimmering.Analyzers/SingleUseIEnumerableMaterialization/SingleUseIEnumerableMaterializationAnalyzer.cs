@@ -53,14 +53,10 @@ internal sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSy
 		}
 
 		// Bail out if the receiver is an IQueryable<T> because removing materialization affects business logic
-		var semanticModel = context.SemanticModel;
-		var receiverType = semanticModel.GetTypeInfo(memberAccess.Expression).Type;
-		if (receiverType is null) { return; }
-		var implementsIQueryable = AnalyzerHelpers.IsOrImplementsInterface(
-			semanticModel.Compilation,
-			receiverType,
-			FullyQualifiedTypeNames.IQueryableOfT);
-		if (implementsIQueryable) { return; }
+		if (AnalyzerHelpers.IsOrImplementsInterface(context, memberAccess.Expression, FullyQualifiedTypeNames.IQueryableOfT))
+		{
+			return;
+		}
 
 		// Get the symbol for the variable.
 		var variableSymbol = context.SemanticModel.GetDeclaredSymbol(variableDeclarator);

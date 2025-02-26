@@ -54,6 +54,12 @@ internal sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer
 		}
 
 		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+		// materializing an IQueryable may be intentional (e.g. because the following method doesn't work on EntityFramework)
+		if (AnalyzerHelpers.IsOrImplementsInterface(context, memberAccess.Expression, FullyQualifiedTypeNames.IQueryableOfT))
+		{
+			return;
+		}
+
 		var diagnostic = Diagnostic.Create(Rule, memberAccess.Name.GetLocation());
 		context.ReportDiagnostic(diagnostic);
 	}

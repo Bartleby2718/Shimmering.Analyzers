@@ -2,10 +2,16 @@ namespace Shimmering.Analyzers.Utilities;
 
 internal static class AnalyzerHelpers
 {
-	public static bool IsOrImplementsInterface(Compilation compilation, ITypeSymbol type, string interfaceMetadataName)
+	public static bool IsOrImplementsInterface(SyntaxNodeAnalysisContext context, ExpressionSyntax expression, string interfaceMetadataName)
 	{
-		var interfaceType = compilation.GetTypeByMetadataName(interfaceMetadataName);
-		return SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, interfaceType)
-			|| type.AllInterfaces.Any(i => SymbolEqualityComparer.Default.Equals(i.OriginalDefinition, interfaceType));
+		var semanticModel = context.SemanticModel;
+		var receiverType = semanticModel.GetTypeInfo(expression, context.CancellationToken).Type;
+		if (receiverType is null) { return false; }
+
+		var interfaceMetadata = semanticModel.Compilation.GetTypeByMetadataName(interfaceMetadataName);
+		if (interfaceMetadata is null) { return false; }
+
+		return receiverType.OriginalDefinition.Equals(interfaceMetadata, SymbolEqualityComparer.Default)
+			|| receiverType.AllInterfaces.Any(i => i.OriginalDefinition.Equals(interfaceMetadata, SymbolEqualityComparer.Default));
 	}
 }
