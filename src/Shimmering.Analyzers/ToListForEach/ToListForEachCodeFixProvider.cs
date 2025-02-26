@@ -60,6 +60,9 @@ internal sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
 		// remove trivia, as you probably wouldn't want trivia in the middle of foreach
 		var enumerableExpression = toListMemberAccess.Expression.WithoutTrivia();
 
+		var invocationStatement = invocation.FirstAncestorOrSelf<ExpressionStatementSyntax>()!;
+		var foreachTrailingTrivia = invocation.GetTrailingTrivia().Concat(invocationStatement.GetTrailingTrivia());
+
 		// Build the foreach statement.
 		var foreachStatement = SyntaxFactory.ForEachStatement(
 			SyntaxFactory.Token(SyntaxKind.ForEachKeyword),
@@ -70,9 +73,8 @@ internal sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
 			enumerableExpression,
 			SyntaxFactory.Token(SyntaxKind.CloseParenToken),
 			loopBody)
-			.WithTriviaFrom(invocation);
-
-		var invocationStatement = invocation.FirstAncestorOrSelf<ExpressionStatementSyntax>()!;
+			.WithLeadingTrivia(invocation.GetLeadingTrivia())
+			.WithTrailingTrivia(foreachTrailingTrivia);
 
 		var newRoot = root.ReplaceNode(invocationStatement, foreachStatement);
 		return document.WithSyntaxRoot(newRoot);

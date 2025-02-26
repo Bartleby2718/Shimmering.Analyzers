@@ -113,7 +113,7 @@ public class ToListForEachCodeFixProviderTests
 		    void Do()
 		    {
 		        int[] numbers = [];
-		        [|numbers.ToList().ForEach(Console.WriteLine)|];
+		        [|numbers.ToList().ForEach(Console.WriteLine)|]; // after statement
 		    }
 		}
 		""",
@@ -129,7 +129,7 @@ public class ToListForEachCodeFixProviderTests
 		        foreach (var item in numbers)
 		        {
 		            Console.WriteLine(item);
-		        }
+		        } // after statement
 		    }
 		}
 		""");
@@ -168,7 +168,7 @@ public class ToListForEachCodeFixProviderTests
 		        foreach (var n in numbers)
 		        {
 		            Console.WriteLine(n)/* after lambda */;
-		        }/* right after ForEach */
+		        }/* right after ForEach */ // after statement
 		    }
 		}
 		""");
@@ -207,7 +207,7 @@ public class ToListForEachCodeFixProviderTests
 		        foreach (var a in actions)
 		        {
 		            a()/* after action */;
-		        }/* right after ForEach */
+		        }/* right after ForEach */ // after statement
 		    }
 		}
 		""");
@@ -246,7 +246,7 @@ public class ToListForEachCodeFixProviderTests
 		        foreach (var item in numbers)
 		        {
 		            Console.WriteLine(item)/* after method group */;
-		        }/* right after ForEach */
+		        }/* right after ForEach */ // after statement
 		    }
 		}
 		""");
