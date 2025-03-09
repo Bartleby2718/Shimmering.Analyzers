@@ -1,23 +1,31 @@
-﻿using Shimmering.Analyzers.BadPractice;
-using Shimmering.Analyzers.Tests.BadPractice;
+﻿using Shimmering.Analyzers.CATEGORY_PLACEHOLDERRules.BadPractice;
+using Shimmering.Analyzers.Tests.CATEGORY_PLACEHOLDERRules.BadPractice;
 
-if (args.Length != 1)
+if (args.Length != 2)
 {
-	Console.WriteLine("Expected a single parameter for the rule name");
+	Console.Error.WriteLine("Expected two arguments: category as the first one and rule name as the second.");
 	return;
 }
 
-var ruleName = args[0];
+var category = args[0];
+if (category is not "Usage" or "Style")
+{
+	Console.Error.WriteLine("The category must be either Usage or Style.");
+	return;
+}
 
-var analyzersDirectory = Path.Combine("Shimmering.Analyzers", ruleName);
+var ruleName = args[1];
+
+var analyzersDirectory = Path.Combine("Shimmering.Analyzers", $"{category}Rules", ruleName);
 Directory.CreateDirectory(analyzersDirectory);
 
-var testDirectory = Path.Combine("Shimmering.Analyzers.Tests", ruleName);
+var testDirectory = Path.Combine("Shimmering.Analyzers.Tests", $"{category}Rules", ruleName);
 Directory.CreateDirectory(testDirectory);
 
 const string scaffoldingProjectName = "Shimmering.Analyzers.Scaffolding";
 var analyzerTemplateFilePath = Path.Combine(scaffoldingProjectName, $"{nameof(BadPracticeAnalyzer)}.cs");
 var analyzerFileContent = File.ReadAllText(analyzerTemplateFilePath)
+	.Replace("CATEGORY_PLACEHOLDER", category)
 	.Replace("BadPractice", ruleName);
 CreateFile(
 	Path.Combine(analyzersDirectory, $"{ruleName}Analyzer.cs"),
@@ -25,6 +33,7 @@ CreateFile(
 
 var codeFixProviderTemplateFilePath = Path.Combine(scaffoldingProjectName, $"{nameof(BadPracticeCodeFixProvider)}.cs");
 var codeFixProviderFileContent = File.ReadAllText(codeFixProviderTemplateFilePath)
+	.Replace("CATEGORY_PLACEHOLDER", category)
 	.Replace("BadPractice", ruleName);
 CreateFile(
 	Path.Combine(analyzersDirectory, $"{ruleName}CodeFixProvider.cs"),
@@ -32,6 +41,7 @@ CreateFile(
 
 var testTemplateFilePath = Path.Combine(scaffoldingProjectName, $"{nameof(BadPracticeCodeFixProviderTests)}.cs");
 var testFileContent = File.ReadAllText(testTemplateFilePath)
+	.Replace("CATEGORY_PLACEHOLDER", category)
 	.Replace("BadPractice", ruleName);
 CreateFile(
 	Path.Combine(testDirectory, $"{ruleName}CodeFixProviderTests.cs"),

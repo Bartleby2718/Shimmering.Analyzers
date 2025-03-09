@@ -1,6 +1,9 @@
-namespace Shimmering.Analyzers.BadPractice;
+namespace Shimmering.Analyzers.CATEGORY_PLACEHOLDERRules.BadPractice;
 
 internal class DiagnosticIds
 {
-	public const string BadPractice = "BAD0001";
+	public static class CATEGORY_PLACEHOLDERRules
+	{
+		public const string BadPractice = "BAD0001";
+	}
 }

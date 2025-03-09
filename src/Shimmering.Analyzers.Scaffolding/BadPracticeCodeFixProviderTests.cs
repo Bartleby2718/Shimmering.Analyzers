@@ -1,6 +1,6 @@
-using Shimmering.Analyzers.BadPractice;
+using Shimmering.Analyzers.CATEGORY_PLACEHOLDERRules.BadPractice;
 
-namespace Shimmering.Analyzers.Tests.BadPractice;
+namespace Shimmering.Analyzers.Tests.CATEGORY_PLACEHOLDERRules.BadPractice;
 
 using Verifier = CSharpCodeFixVerifier<
 	BadPracticeAnalyzer,
