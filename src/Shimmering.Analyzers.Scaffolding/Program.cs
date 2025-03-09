@@ -4,14 +4,14 @@ using Shimmering.Analyzers.Tests.CATEGORY_PLACEHOLDERRules.BadPractice;
 if (args.Length != 2)
 {
 	Console.Error.WriteLine("Expected two arguments: category as the first one and rule name as the second.");
-	return;
+	Environment.Exit(1);
 }
 
 var category = args[0];
-if (category is not "Usage" or "Style")
+if (category is not ("Usage" or "Style"))
 {
-	Console.Error.WriteLine("The category must be either Usage or Style.");
-	return;
+	Console.Error.WriteLine($"The category must be either Usage or Style, but received {category}");
+	Environment.Exit(2);
 }
 
 var ruleName = args[1];
