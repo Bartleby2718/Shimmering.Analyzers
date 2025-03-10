@@ -17,3 +17,4 @@ SHIMMER1101 |  Usage   |  Info    | SingleElementConcatAnalyzer, [Documentation]
 SHIMMER1102 |  Usage   | Disabled | UniqueNonSetCollectionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/UsageRules/SHIMMER1102.md)
 SHIMMER2000 |  Style   |  Info    | VerboseLinqChainAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/StyleRules/SHIMMER2000.md)
 SHIMMER2010 |  Style   |  Info    | NegatedTernaryConditionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/StyleRules/SHIMMER2010.md)
+SHIMMER2020 |  Style   |  Info    | InlineSingleUseOutVariableAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/StyleRules/SHIMMER2020.md)

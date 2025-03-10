@@ -27,5 +27,7 @@ internal static class DiagnosticIds
 		public const string VerboseLinqChain = "SHIMMER2000";
 		// 201X: double negatives
 		public const string NegatedTernaryCondition = "SHIMMER2010";
+		// 202X: variable declaration/assignment
+		public const string InlineSingleUseOutVariable = "SHIMMER2020";
 	}
 }
