@@ -27,13 +27,22 @@ internal sealed class NegatedTernaryConditionAnalyzer : ShimmeringSyntaxNodeAnal
 
 	private static void AnalyzeConditionalExpression(SyntaxNodeAnalysisContext context)
 	{
-		var conditionalExpr = (ConditionalExpressionSyntax)context.Node;
-		// Check if the condition is a negation (i.e. !expr)
-		if (conditionalExpr.Condition is PrefixUnaryExpressionSyntax prefixUnary &&
+		var conditionalExpression = (ConditionalExpressionSyntax)context.Node;
+
+		// Ignore ternary expressions that are nested inside the condition, as it may be an intentional choice for readability.
+		if (conditionalExpression.Condition is ConditionalExpressionSyntax
+			|| conditionalExpression.WhenTrue is ConditionalExpressionSyntax
+			|| conditionalExpression.WhenFalse is ConditionalExpressionSyntax)
+		{
+			return;
+		}
+
+		// Check if the condition is a negation (i.e. !expression)
+		if (conditionalExpression.Condition is PrefixUnaryExpressionSyntax prefixUnary &&
 			prefixUnary.IsKind(SyntaxKind.LogicalNotExpression))
 		{
 			// Report the diagnostic on the whole conditional expression.
-			var diagnostic = Diagnostic.Create(Rule, conditionalExpr.GetLocation());
+			var diagnostic = Diagnostic.Create(Rule, conditionalExpression.GetLocation());
 			context.ReportDiagnostic(diagnostic);
 		}
 	}

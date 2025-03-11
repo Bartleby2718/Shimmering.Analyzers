@@ -10,7 +10,24 @@ using Verifier = CSharpCodeFixVerifier<
 public class NegatedTernaryConditionCodeFixProviderTests
 {
 	[Test]
-	public Task TestTernaryWithoutNegationInCondition() => Verifier.VerifyAnalyzerAsync(
+	public Task TestIgnoreTernaryContainingTernary() => Verifier.VerifyAnalyzerAsync(
+		"""
+		namespace Tests
+		{
+			class Test
+			{
+				public int Method1(int? number1, int? number2) => !number1.HasValue ? 1
+					: number2.HasValue ? number2.Value
+					: number1.Value;
+				public int Method2(int? number1, int? number2) => !number1.HasValue ? 1
+					: number2.HasValue ? number2.Value
+					: number1.Value;
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestIgnoreTernaryWithoutNegationInCondition() => Verifier.VerifyAnalyzerAsync(
 		"""
 		namespace Tests
 		{
