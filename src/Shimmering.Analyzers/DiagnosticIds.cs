@@ -19,7 +19,6 @@ internal static class DiagnosticIds
 		public const string MisusedOrDefault = "SHIMMER1100";
 		public const string SingleElementConcat = "SHIMMER1101";
 		public const string UniqueNonSetCollection = "SHIMMER1102";
-		public const string UseDiscardForUnusedOutVariable = "SHIMMER1200";
 	}
 
 	public static class StyleRules
