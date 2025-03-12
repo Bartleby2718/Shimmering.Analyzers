@@ -14,6 +14,8 @@ internal static class DiagnosticIds
 		// 102X: collection expression
 		public const string RedundantSpreadElement = "SHIMMER1020";
 		public const string SingleUseIEnumerableMaterialization = "SHIMMER1021";
+		// 103X: discard
+		public const string UseDiscardForUnusedOutVariable = "SHIMMER1030";
 
 		// 110X: idiomatic use of enumerable extension methods
 		public const string MisusedOrDefault = "SHIMMER1100";
