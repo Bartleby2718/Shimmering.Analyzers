@@ -17,7 +17,7 @@ internal sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAn
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Info,
+		DiagnosticSeverity.Warning,
 		isEnabledByDefault: true);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];

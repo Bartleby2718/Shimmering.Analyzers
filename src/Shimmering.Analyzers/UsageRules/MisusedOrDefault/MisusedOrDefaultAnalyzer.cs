@@ -17,7 +17,7 @@ internal sealed class MisusedOrDefaultAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Info,
+		DiagnosticSeverity.Warning,
 		isEnabledByDefault: true);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
