@@ -1,4 +1,4 @@
-namespace Shimmering.Analyzers.BadPractice;
+namespace Shimmering.Analyzers.CATEGORY_PLACEHOLDERRules.BadPractice;
 
 /// <summary>
 /// TODO.
@@ -8,10 +8,10 @@ internal sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "TODO:";
 	private const string Message = "TODO:";
-	private const string Category = "TODO:";
+	private const string Category = "CATEGORY_PLACEHOLDER";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
-		DiagnosticIds.BadPractice,
+		DiagnosticIds.CATEGORY_PLACEHOLDERRules.BadPractice,
 		Title,
 		Message,
 		Category,

@@ -1,4 +1,4 @@
-namespace Shimmering.Analyzers.BadPractice;
+namespace Shimmering.Analyzers.CATEGORY_PLACEHOLDERRules.BadPractice;
 
 /// <summary>
 /// TODO.
@@ -9,7 +9,7 @@ internal sealed class BadPracticeCodeFixProvider : ShimmeringCodeFixProvider
 	private const string Title = "TODO:";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
-		[DiagnosticIds.BadPractice];
+		[DiagnosticIds.CATEGORY_PLACEHOLDERRules.BadPractice];
 
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

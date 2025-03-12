@@ -2,16 +2,30 @@ namespace Shimmering.Analyzers;
 
 internal static class DiagnosticIds
 {
-	public const string SingleElementConcat = "SHIMMER1001";
-	public const string UniqueNonSetCollection = "SHIMMER1003";
-	public const string RedundantSpreadElement = "SHIMMER1004";
-	public const string VerboseLinqChain = "SHIMMER1005";
-	public const string NullableCancellationToken = "SHIMMER1006";
-	public const string MissingCancellationToken = "SHIMMER1007";
-	public const string SingleUseIEnumerableMaterialization = "SHIMMER1008";
-	public const string NegatedTernaryCondition = "SHIMMER1009";
-	public const string MisusedOrDefault = "SHIMMER1010";
-	public const string ArrayOrArrayReturningMethodFollowedByToArray = "SHIMMER1012";
-	public const string ToListForEach = "SHIMMER1013";
-	public const string ToArrayOrToListFollowedByEnumerableExtensionMethod = "SHIMMER1014";
+	public static class UsageRules
+	{
+		// 100X: asynchronous programming
+		public const string NullableCancellationToken = "SHIMMER1000";
+		public const string MissingCancellationToken = "SHIMMER1001";
+		// 101X: avoiding unnecessary materialization
+		public const string ToListForEach = "SHIMMER1010";
+		public const string ToArrayOrToListFollowedByEnumerableExtensionMethod = "SHIMMER1011";
+		public const string ArrayOrArrayReturningMethodFollowedByToArray = "SHIMMER1012";
+		// 102X: collection expression
+		public const string RedundantSpreadElement = "SHIMMER1020";
+		public const string SingleUseIEnumerableMaterialization = "SHIMMER1021";
+
+		// 110X: idiomatic use of enumerable extension methods
+		public const string MisusedOrDefault = "SHIMMER1100";
+		public const string SingleElementConcat = "SHIMMER1101";
+		public const string UniqueNonSetCollection = "SHIMMER1102";
+	}
+
+	public static class StyleRules
+	{
+		// 200X: collection expression
+		public const string VerboseLinqChain = "SHIMMER2000";
+		// 201X: double negatives
+		public const string NegatedTernaryCondition = "SHIMMER2010";
+	}
 }

@@ -7,28 +7,24 @@ public class WatchmanTests
 	[Test]
 	public void TestDiagnosticIdsOnlyContainPublicConstStringFieldsStartingWithShimmerfFollowedByFourDigits()
 	{
-		var type = typeof(DiagnosticIds);
+		var declaredMembers = typeof(DiagnosticIds).GetMembers(BindingFlags.DeclaredOnly);
 
-		// get all members
-		var declaredMembers = type.GetMembers(
-			BindingFlags.DeclaredOnly
-			| BindingFlags.Public
-			| BindingFlags.NonPublic
-			| BindingFlags.Static
-			| BindingFlags.Instance);
+		// every member should be a class
+		var nonClassMembers = declaredMembers.Where(m => m is not Type type || !type.IsClass);
+		Assert.That(nonClassMembers, Is.Empty);
 
-		// every member should be a field
-		var nonFieldMembers = declaredMembers.Where(m => m.MemberType != MemberTypes.Field);
+		// every class should end with "Rules"
+		var classes = declaredMembers.OfType<Type>();
+		Assert.That(classes.Select(c => c.Name), Is.All.EndsWith("Rules"));
+
+		// every member in those classes should be a field
+		var nonFieldMembers = classes.SelectMany(t => t
+			.GetMembers(BindingFlags.DeclaredOnly)
+			.Where(m => m.MemberType != MemberTypes.Field));
 		Assert.That(nonFieldMembers, Is.Empty);
 
-		// get all fields
-		var fields = type.GetFields(
-			BindingFlags.DeclaredOnly
-			| BindingFlags.Public
-			| BindingFlags.NonPublic
-			| BindingFlags.Static
-			| BindingFlags.Instance);
-
+		// all fields should be public const strings starting with "SHIMMER" followed by four digits
+		var fields = classes.SelectMany(c => c.GetFields());
 		foreach (var field in fields)
 		{
 			Assert.Multiple(() =>
