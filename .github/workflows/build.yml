@@ -21,13 +21,13 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore src
 
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build --no-restore src
 
       - name: Run Tests
-        run: dotnet test --no-build --logger "trx;LogFileName=test_results.trx"
+        run: dotnet test --no-build src --logger "trx;LogFileName=test_results.trx"
 
       - name: Publish Test Results
         if: always()
