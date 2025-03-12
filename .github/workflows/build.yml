@@ -34,7 +34,7 @@ jobs:
         uses: dorny/test-reporter@v1
         with:
           name: dotnet tests
-          path: test_results.trx
+          path: src/Shimmering.Analyzers.Tests/TestResults/test_results.trx
           reporter: dotnet-trx
 
       # Publishing steps only run on push to main, and only on one OS (ubuntu-latest) to avoid duplication
