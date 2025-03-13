@@ -69,7 +69,7 @@ internal sealed class MissingCancellationTokenCodeFixProvider : ShimmeringCodeFi
 		if (await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false) is not CompilationUnitSyntax root) { return document; }
 
 		var newRoot = root.ReplaceNode(methodDeclaration, newMethodDeclaration);
-		var newRootWithUsingDirective = CodeFixHelpers.EnsureUsingDirectivesExist(newRoot, namespaces: [FullyQualifiedNamespaces.SystemThreading]);
+		var newRootWithUsingDirective = CodeFixHelpers.EnsureUsingDirectivesExist(document, newRoot, namespaces: [FullyQualifiedNamespaces.SystemThreading]);
 		return document.WithSyntaxRoot(newRootWithUsingDirective);
 	}
 

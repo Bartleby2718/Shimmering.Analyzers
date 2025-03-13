@@ -1,0 +1,82 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  id-token: write
+  contents: write
+  checks: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Get Package Version
+        id: package_version
+        shell: pwsh
+        run: |
+          [xml]$csproj = Get-Content "src/Shimmering.Analyzers/Shimmering.Analyzers.csproj"
+          $packageVersion = $csproj.Project.PropertyGroup.PackageVersion
+          Write-Host "PackageVersion: $packageVersion"
+          echo "version=$packageVersion" >> $env:GITHUB_OUTPUT
+
+      - name: Restore
+        run: dotnet restore src
+
+      - name: Build
+        run: dotnet build --no-restore src
+
+      - name: Test
+        run: dotnet test --no-build src --logger "trx;LogFileName=test_results.trx"
+
+      - name: Publish Test Results
+        if: always()
+        uses: dorny/test-reporter@v1
+        with:
+          name: dotnet tests
+          path: src/Shimmering.Analyzers.Tests/TestResults/test_results.trx
+          reporter: dotnet-trx
+
+      # Publishing steps only run on push to main, and only on one OS (ubuntu-latest) to avoid duplication
+      - name: Pack
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        run: dotnet pack src --output ./artifacts
+
+      - name: Upload NuGet Package
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-package
+          path: ./artifacts/*.nupkg
+
+      - name: Create GitHub Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.package_version.outputs.version }}
+          name: Release v${{ steps.package_version.outputs.version }}
+          body: "Release created automatically via GitHub Actions. Build number: ${{ github.run_number }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # push the package to NuGet.org in addition to uploading as an artifact.
+      - name: Publish to NuGet.org
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        # Regenerate the API at https://www.nuget.org/account/apikeys
+        # Add to secrets at https://github.com/Bartleby2718/Shimmering.Analyzers/settings/secrets/actions
+        run: dotnet nuget push ./artifacts/*.nupkg --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
