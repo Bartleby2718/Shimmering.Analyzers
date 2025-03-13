@@ -55,13 +55,24 @@ jobs:
           name: nuget-package
           path: ./artifacts/*.nupkg
 
-      - name: Create GitHub Release
+      - name: Get NuGet package version
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        id: package_version
+        uses: KageKirin/Get-CsprojVersion@v1
+        with:
+          file: src/Shimmering.Analyzers/Shimmering.Analyzers.csproj
+
+      - name: Print version
         # if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        run: echo ${{ steps.package_version.outputs.version }}
+
+      - name: Create GitHub Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ github.run_number }}
-          name: Release v${{ github.run_number }}
-          body: "Release created automatically via GitHub Actions. How J can delete this..."
+          tag_name: v${{ steps.package_version.outputs.version }}
+          name: Release v${{ steps.package_version.outputs.version }}
+          body: "Release created automatically via GitHub Actions. Build number: ${{ github.run_number }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -70,4 +81,4 @@ jobs:
         # if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
         # Regenerate the API at https://www.nuget.org/account/apikeys
         # Add to secrets at https://github.com/Bartleby2718/Shimmering.Analyzers/settings/secrets/actions
-        run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push ./artifacts/*.nupkg --skip-duplicate api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
