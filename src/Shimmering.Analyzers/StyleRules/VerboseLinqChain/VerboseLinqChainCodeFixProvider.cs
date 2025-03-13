@@ -94,30 +94,23 @@ internal sealed class VerboseLinqChainCodeFixProvider : ShimmeringCodeFixProvide
 					variableDeclaration.Variables[0].WithInitializer(newEqualsValueClause)));
 
 			var newRootWithUpdatedVariableDeclaration = compilationUnit.ReplaceNode(variableDeclaration, newVariableDeclaration);
-			var newRootWithUsingDirectives = EnsureNecessaryUsingDirectivesExist(newRootWithUpdatedVariableDeclaration, declaredTypeSymbol);
+
+			var containingNamespace = declaredTypeSymbol?.ContainingNamespace?.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat);
+			// No need to add the using directive if the type is not System.Collections.Generic (e.g. array)
+			var newRootWithUsingDirectives = containingNamespace != FullyQualifiedNamespaces.SystemCollectionsGeneric
+				// or if the using directive already exists
+				|| compilationUnit.Usings.Any(u => u.Name?.ToString() == FullyQualifiedNamespaces.SystemCollectionsGeneric)
+				? newRootWithUpdatedVariableDeclaration
+				: CodeFixHelpers.EnsureUsingDirectivesExist(
+					document,
+					newRootWithUpdatedVariableDeclaration,
+					namespaces: [FullyQualifiedNamespaces.SystemCollectionsGeneric]);
+
 			return document.WithSyntaxRoot(newRootWithUsingDirectives);
 		}
 
 		// Shouldn't have got here, but return the same document just in case.
 		return document;
-	}
-
-	private static CompilationUnitSyntax EnsureNecessaryUsingDirectivesExist(CompilationUnitSyntax compilationUnit, ITypeSymbol? typeSymbol)
-	{
-		var containingNamespace = typeSymbol?.ContainingNamespace?.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat);
-		// No need to add the using directive if the type is not System.Collections.Generic (e.g. array)
-		if (containingNamespace != FullyQualifiedNamespaces.SystemCollectionsGeneric
-			// or if the using directive already exists
-			|| compilationUnit.Usings.Any(u => u.Name?.ToString() == FullyQualifiedNamespaces.SystemCollectionsGeneric))
-		{
-			return compilationUnit;
-		}
-
-		var newUsing = SyntaxFactory.UsingDirective(
-			SyntaxFactory.ParseName(FullyQualifiedNamespaces.SystemCollectionsGeneric)
-				.WithLeadingTrivia(SyntaxFactory.Space))
-				.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
-		return compilationUnit.AddUsings(newUsing);
 	}
 
 	private static bool IsVariableDeclaration(InvocationExpressionSyntax invocation)
