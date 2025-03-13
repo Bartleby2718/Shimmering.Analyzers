@@ -8,7 +8,7 @@ on:
 
 permissions:
   id-token: write
-  contents: read
+  contents: write
   checks: write
 
 jobs:
@@ -61,7 +61,7 @@ jobs:
         with:
           tag_name: v${{ github.run_number }}
           name: Release v${{ github.run_number }}
-          body: "Release created automatically via GitHub Actions."
+          body: "Release created automatically via GitHub Actions. How J can delete this..."
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
