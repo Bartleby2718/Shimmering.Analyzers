@@ -18,20 +18,21 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Setup .NET
+      - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
 
-      - name: Restore dependencies
+      - name: Restore
         run: dotnet restore src
 
       - name: Build
         run: dotnet build --no-restore src
 
-      - name: Run Tests
+      - name: Test
         run: dotnet test --no-build src --logger "trx;LogFileName=test_results.trx"
 
       - name: Publish Test Results
@@ -44,7 +45,7 @@ jobs:
 
       # Publishing steps only run on push to main, and only on one OS (ubuntu-latest) to avoid duplication
       - name: Pack
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        # if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
         run: dotnet pack --output ./artifacts
 
       - name: Upload NuGet Package
@@ -53,3 +54,20 @@ jobs:
         with:
           name: nuget-package
           path: ./artifacts/*.nupkg
+
+      - name: Create GitHub Release
+        # if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          body: "Release created automatically via GitHub Actions."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # push the package to NuGet.org in addition to uploading as an artifact.
+      - name: Publish to NuGet.org
+        # if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        # Regenerate the API at https://www.nuget.org/account/apikeys
+        # Add to secrets at https://github.com/Bartleby2718/Shimmering.Analyzers/settings/secrets/actions
+        run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
