@@ -26,6 +26,15 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
+      - name: Get Package Version
+        id: package_version
+        shell: pwsh
+        run: |
+    [xml]$csproj = Get-Content "src/Shimmering.Analyzers/Shimmering.Analyzers.csproj"
+    $packageVersion = $csproj.Project.PropertyGroup.PackageVersion
+    Write-Host "PackageVersion: $packageVersion"
+    echo "version=$packageVersion" >> $env:GITHUB_OUTPUT
+
       - name: Restore
         run: dotnet restore src
 
@@ -54,16 +63,6 @@ jobs:
         with:
           name: nuget-package
           path: ./artifacts/*.nupkg
-
-      - name: Get NuGet package version
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
-        id: package_version
-        shell: pwsh
-        run: |
-    [xml]$csproj = Get-Content "src/Shimmering.Analyzers/Shimmering.Analyzers.csproj"
-    $packageVersion = $csproj.Project.PropertyGroup.PackageVersion
-    Write-Host "PackageVersion: $packageVersion"
-    echo "version=$packageVersion" >> $env:GITHUB_OUTPUT
 
       - name: Create GitHub Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
