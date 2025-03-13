@@ -81,4 +81,4 @@ jobs:
         # if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
         # Regenerate the API at https://www.nuget.org/account/apikeys
         # Add to secrets at https://github.com/Bartleby2718/Shimmering.Analyzers/settings/secrets/actions
-        run: dotnet nuget push ./artifacts/*.nupkg --skip-duplicate api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push ./artifacts/*.nupkg --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
