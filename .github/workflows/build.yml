@@ -54,7 +54,7 @@ jobs:
 
       # Publishing steps only run on push to main, and only on one OS (ubuntu-latest) to avoid duplication
       - name: Pack
-        # if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
         run: dotnet pack src --output ./artifacts
 
       - name: Upload NuGet Package
@@ -76,7 +76,7 @@ jobs:
 
       # push the package to NuGet.org in addition to uploading as an artifact.
       - name: Publish to NuGet.org
-        # if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
         # Regenerate the API at https://www.nuget.org/account/apikeys
         # Add to secrets at https://github.com/Bartleby2718/Shimmering.Analyzers/settings/secrets/actions
         run: dotnet nuget push ./artifacts/*.nupkg --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
