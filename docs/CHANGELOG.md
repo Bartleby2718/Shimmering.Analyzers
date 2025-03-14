@@ -16,3 +16,4 @@ To see the table containing all rules and the version each was added, please see
   - [SHIMMER1102](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/UsageRules/SHIMMER1102.md)
   - [SHIMMER2000](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/StyleRules/SHIMMER2000.md)
   - [SHIMMER2010](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/StyleRules/SHIMMER2010.md)
+  - [SHIMMER2020](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/StyleRules/SHIMMER2020.md)
