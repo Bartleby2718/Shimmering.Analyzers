@@ -19,3 +19,4 @@ SHIMMER1102 |  Usage   | Disabled | UniqueNonSetCollectionAnalyzer, [Documentati
 SHIMMER2000 |  Style   |  Info    | VerboseLinqChainAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/StyleRules/SHIMMER2000.md)
 SHIMMER2010 |  Style   |  Info    | NegatedTernaryConditionAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/StyleRules/SHIMMER2010.md)
 SHIMMER2020 |  Style   |  Info    | InlineSingleUseOutVariableAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/StyleRules/SHIMMER2020.md)
+SHIMMER2030 |  Style   | Disabled | PrimaryConstructorParameterReassignmentAnalyzer, [Documentation](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/StyleRules/SHIMMER2030.md)

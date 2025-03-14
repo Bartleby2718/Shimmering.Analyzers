@@ -22,3 +22,4 @@ SHIMMER1102 |  Usage   |      Disabled       |     1.0.0     | UniqueNonSetColle
 SHIMMER2000 |  Style   |        Info         |     1.0.0     | VerboseLinqChainAnalyzer, [Documentation](./StyleRules/SHIMMER2000.md)
 SHIMMER2010 |  Style   |        Info         |     1.0.0     | NegatedTernaryConditionAnalyzer, [Documentation](./StyleRules/SHIMMER2010.md)
 SHIMMER2020 |  Style   |        Info         |     1.0.0     | InlineSingleUseOutVariableAnalyzer, [Documentation](./StyleRules/SHIMMER2020.md)
+SHIMMER2030 |  Style   |      Disabled       |     1.0.0     | PrimaryConstructorParameterReassignmentAnalyzer, [Documentation](./StyleRules/SHIMMER2030.md)

@@ -31,5 +31,7 @@ internal static class DiagnosticIds
 		public const string NegatedTernaryCondition = "SHIMMER2010";
 		// 202X: variable declaration/assignment
 		public const string InlineSingleUseOutVariable = "SHIMMER2020";
+		// 203X: primary constructor
+		public const string PrimaryConstructorParameterReassignment = "SHIMMER2030";
 	}
 }
