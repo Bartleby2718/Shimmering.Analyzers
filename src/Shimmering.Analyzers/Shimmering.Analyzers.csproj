@@ -42,8 +42,8 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <!-- prevent the package from being included as a dependency (https://github.com/NuGet/Home/wiki/DevelopmentDependency-support-for-PackageReference) -->
     <DevelopmentDependency>true</DevelopmentDependency>
-    <!-- Pack only in the Configuration build, to avoid uploading a Debug artifact inadvertently -->
-    <IsPackable Condition="'$(Configuration)' != 'Release'">false</IsPackable>
+    <!-- Pack only in the Release Configuration, to avoid uploading a Debug artifact inadvertently -->
+    <IsPackable Condition="'$(Configuration)' == 'Release'">true</IsPackable>
   </PropertyGroup>
 
   <!-- Items corresponding to the 'files' element in nuspec -->
