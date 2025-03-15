@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Shimmering.Analyzers;
 
 /// <summary>
@@ -29,5 +31,7 @@ public abstract class ShimmeringSyntaxNodeAnalyzer : DiagnosticAnalyzer
 		defaultSeverity,
 		isEnabledByDefault,
 		description,
-		helpLinkUri: $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{id}.md");
+		helpLinkUri: category is "Usage" or "Style"
+			? $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{category}Rules/{id}.md"
+			: throw new UnreachableException($"The only supported categories are 'Usage' and 'Style', but received '{category}'"));
 }
