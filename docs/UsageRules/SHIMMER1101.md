@@ -43,6 +43,9 @@ Fixed code:
 this._field = new[] { 1, 2 }.Append(3);
 ```
 
+## Justification of the Severity
+While the fixed code is more concise and clear, this has negligible impact on performance and does not cause any bugs.
+
 ## When to Suppress
 
 Suppress this diagnostic when you want to use `.Concat()` consistently.
