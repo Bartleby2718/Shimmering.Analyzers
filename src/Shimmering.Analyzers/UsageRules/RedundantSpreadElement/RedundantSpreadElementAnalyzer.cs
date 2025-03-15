@@ -7,7 +7,7 @@ namespace Shimmering.Analyzers.UsageRules.RedundantSpreadElement;
 /// </summary>
 // See also: https://github.com/dotnet/roslyn/blob/main/src/Analyzers/CSharp/Analyzers/UseCollectionExpression/CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.cs
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class RedundantSpreadElementAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class RedundantSpreadElementAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Inline spread element";
 	private const string Message = "Inline spread element";

@@ -6,7 +6,7 @@ namespace Shimmering.Analyzers.UsageRules.MissingCancellationToken;
 /// Reports instances of asynchronous methods missing a <see cref="CancellationToken"/> parameter.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class MissingCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class MissingCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = $"Include a {nameof(CancellationToken)} parameter";
 	private const string Message = $"An asynchronous method is missing a {nameof(CancellationToken)} parameter";

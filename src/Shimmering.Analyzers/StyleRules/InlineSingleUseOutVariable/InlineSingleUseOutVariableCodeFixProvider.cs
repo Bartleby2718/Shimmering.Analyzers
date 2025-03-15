@@ -6,7 +6,7 @@ namespace Shimmering.Analyzers.StyleRules.InlineSingleUseOutVariable;
 /// Inlines an out variable if it's only used in an assignment, if reported by <see cref="InlineSingleUseOutVariableAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(InlineSingleUseOutVariableCodeFixProvider))]
-internal sealed class InlineSingleUseOutVariableCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class InlineSingleUseOutVariableCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Inline temporary variable";
 

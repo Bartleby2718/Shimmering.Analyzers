@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.UsageRules.ToArrayOrToListFollowedByEnumerableExt
 /// Replaces an unnecessary materialization, if reported by <see cref="ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ToArrayOrToListFollowedByEnumerableExtensionMethodCodeFixProvider))]
-internal sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Remove unnecessary materialization";
 

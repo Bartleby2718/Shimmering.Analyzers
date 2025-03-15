@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.CATEGORY_PLACEHOLDERRules.BadPractice;
 /// TODO.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(BadPracticeCodeFixProvider))]
-internal sealed class BadPracticeCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class BadPracticeCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "TODO:";
 

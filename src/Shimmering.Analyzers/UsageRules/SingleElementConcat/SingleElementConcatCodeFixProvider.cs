@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.UsageRules.SingleElementConcat;
 /// Converts an <see cref="Enumerable.Concat"/> to an <see cref="Enumerable.Append"/> if reported by <see cref="SingleElementConcatAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(SingleElementConcatCodeFixProvider))]
-internal sealed class SingleElementConcatCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class SingleElementConcatCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Replace .Concat([e]) with .Append(e)";
 

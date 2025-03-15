@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.UsageRules.ArrayOrArrayReturningMethodFollowedByT
 /// Removes .ToArray(), if reported by <see cref="ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProvider))]
-internal sealed class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Remove redundant .ToArray()";
 

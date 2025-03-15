@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.UsageRules.UseDiscardForUnusedOutVariable;
 /// Reports instances of an out variable that's not used anywhere.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class UseDiscardForUnusedOutVariableAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class UseDiscardForUnusedOutVariableAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Use discard for unused out variable";
 	private const string Message = "Unused out variable '{0}' can be replaced with discard '_'";

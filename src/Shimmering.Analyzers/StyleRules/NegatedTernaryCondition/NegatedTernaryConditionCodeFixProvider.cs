@@ -6,7 +6,7 @@ namespace Shimmering.Analyzers.StyleRules.NegatedTernaryCondition;
 /// Inverts a ternary expression, if reported by <see cref="NegatedTernaryConditionAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NegatedTernaryConditionCodeFixProvider))]
-internal sealed class NegatedTernaryConditionCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class NegatedTernaryConditionCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Invert the ternary for clarity";
 

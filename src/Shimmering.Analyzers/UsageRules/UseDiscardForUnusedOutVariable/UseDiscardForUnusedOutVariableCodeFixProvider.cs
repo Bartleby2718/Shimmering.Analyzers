@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.UsageRules.UseDiscardForUnusedOutVariable;
 /// Replaces an out variable with a discard, if reported by <see cref="UseDiscardForUnusedOutVariableAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(UseDiscardForUnusedOutVariableCodeFixProvider))]
-internal sealed class UseDiscardForUnusedOutVariableCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class UseDiscardForUnusedOutVariableCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Replace with discard";
 

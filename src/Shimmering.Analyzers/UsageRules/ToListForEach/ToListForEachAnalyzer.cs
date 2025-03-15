@@ -6,7 +6,7 @@ namespace Shimmering.Analyzers.UsageRules.ToListForEach;
 /// Reports stances of ToList().ForEach().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "ToList().ForEach() causes unnecessary memory allocation";
 	private const string Message = "Replace ToList().ForEach() with a foreach loop to reduce memory usage";

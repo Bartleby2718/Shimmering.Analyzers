@@ -6,7 +6,7 @@ namespace Shimmering.Analyzers.UsageRules.NullableCancellationToken;
 /// Reports instances of nullable <see cref="CancellationToken"/>s in method signatures.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = $"Do not use a nullable {nameof(CancellationToken)}";
 	private const string Message = $"{nameof(CancellationToken)} should not be nullable";

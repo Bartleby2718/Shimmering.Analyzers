@@ -7,7 +7,7 @@ namespace Shimmering.Analyzers.StyleRules.InlineSingleUseOutVariable;
 /// Reports instances of an out variable that's only assigned to a variable and not used otherwise.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class InlineSingleUseOutVariableAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class InlineSingleUseOutVariableAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Inline single-use out variable";
 	private const string Message = "Out variable '{0}' is used only once and can be inlined";

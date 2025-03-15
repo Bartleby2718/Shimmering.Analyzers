@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.CATEGORY_PLACEHOLDERRules.BadPractice;
 /// TODO.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "TODO:";
 	private const string Message = "TODO:";

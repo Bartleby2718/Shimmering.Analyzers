@@ -7,7 +7,7 @@ namespace Shimmering.Analyzers.UsageRules.MissingCancellationToken;
 /// Adds a <see cref="CancellationToken"/> parameter if reported by <see cref="MissingCancellationTokenAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MissingCancellationTokenCodeFixProvider))]
-internal sealed class MissingCancellationTokenCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class MissingCancellationTokenCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private static readonly string Title = $"Add a {nameof(CancellationToken)} parameter";
 

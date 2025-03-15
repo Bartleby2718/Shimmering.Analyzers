@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.UsageRules.NullableCancellationToken;
 /// Makes a nullable <see cref="CancellationToken"/> non-nullable if reported by <see cref="NullableCancellationTokenAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NullableCancellationTokenCodeFixProvider))]
-internal sealed class NullableCancellationTokenCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class NullableCancellationTokenCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private static readonly string Title = $"Make {nameof(CancellationToken)} non-nullable";
 

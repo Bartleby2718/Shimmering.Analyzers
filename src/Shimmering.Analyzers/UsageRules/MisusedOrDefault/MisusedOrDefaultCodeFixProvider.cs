@@ -7,7 +7,7 @@ namespace Shimmering.Analyzers.UsageRules.MisusedOrDefault;
 /// Replaces an 'OrDefault' LINQ method with its non-OrDefault counterpart, if reported by <see cref="MisusedOrDefaultAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MisusedOrDefaultCodeFixProvider))]
-internal sealed class MisusedOrDefaultCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class MisusedOrDefaultCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Simplify 'OrDefault' method call";
 

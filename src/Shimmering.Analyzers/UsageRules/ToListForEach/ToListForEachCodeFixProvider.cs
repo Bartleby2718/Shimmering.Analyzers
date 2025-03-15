@@ -6,7 +6,7 @@ namespace Shimmering.Analyzers.UsageRules.ToListForEach;
 /// Replaces a .ToList().ForEach() with a foreach loop without materialization, if reported by <see cref="ToListForEachAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ToListForEachCodeFixProvider))]
-internal sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Replace with a foreach loop";
 

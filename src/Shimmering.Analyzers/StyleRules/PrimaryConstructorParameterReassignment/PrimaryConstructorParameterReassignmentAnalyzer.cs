@@ -1,5 +1,3 @@
-using System.Threading;
-
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.StyleRules.PrimaryConstructorParameterReassignment;
@@ -8,7 +6,7 @@ namespace Shimmering.Analyzers.StyleRules.PrimaryConstructorParameterReassignmen
 /// Reports instances of primary constructor parameters that are reassigned.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class PrimaryConstructorParameterReassignmentAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class PrimaryConstructorParameterReassignmentAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Avoid reassigning primary constructor parameter";
 	private const string Message = "Primary constructor parameter '{0}' shouldn't be reassigned";

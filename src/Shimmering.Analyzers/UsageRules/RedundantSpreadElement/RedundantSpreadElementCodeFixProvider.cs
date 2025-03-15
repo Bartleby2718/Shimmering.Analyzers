@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.UsageRules.RedundantSpreadElement;
 /// Flattens a spread element (e.g. [1, .. new[] { 2, 3 }, 4] to [1, 2, 3, 4]) in a collection, if reported by <see cref="RedundantSpreadElementAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(RedundantSpreadElementCodeFixProvider))]
-internal sealed class RedundantSpreadElementCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class RedundantSpreadElementCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private static readonly string Title = "Flatten spread element";
 

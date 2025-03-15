@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.UsageRules.SingleUseIEnumerableMaterialization;
 /// Removes an unnecessary materialization of an IEnumerable if reported by <see cref="SingleUseIEnumerableMaterializationAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(SingleUseIEnumerableMaterializationCodeFixProvider))]
-internal sealed class SingleUseIEnumerableMaterializationCodeFixProvider : ShimmeringCodeFixProvider
+public sealed class SingleUseIEnumerableMaterializationCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private static readonly string Title = "Remove unnecessary materialization";
 
