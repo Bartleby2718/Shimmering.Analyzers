@@ -21,6 +21,24 @@ public sealed class InlineSingleUseOutVariableAnalyzer : ShimmeringSyntaxNodeAna
 		DiagnosticSeverity.Info,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		using System;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do(string dayOfWeekString)
+				{
+					if (Enum.TryParse<DayOfWeek>(dayOfWeekString, out DayOfWeek dayOfWeek1))
+					{
+						DayOfWeek dayOfWeek2 = dayOfWeek1;
+					}
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

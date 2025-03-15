@@ -18,6 +18,21 @@ public sealed class VerboseLinqChainAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		DiagnosticSeverity.Info,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					var array = new[] { 1 }.Append(2).Prepend(3).ToArray();
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

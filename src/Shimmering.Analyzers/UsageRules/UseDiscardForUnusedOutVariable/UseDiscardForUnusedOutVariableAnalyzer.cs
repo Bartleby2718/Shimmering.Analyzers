@@ -18,6 +18,24 @@ public sealed class UseDiscardForUnusedOutVariableAnalyzer : ShimmeringSyntaxNod
 		DiagnosticSeverity.Warning,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		using System;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Method(string day)
+				{
+					if (Enum.TryParse<DayOfWeek>(day, out DayOfWeek dayOfWeek))
+					{
+						Console.WriteLine($"{day} is a valid day of week.");
+					}
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

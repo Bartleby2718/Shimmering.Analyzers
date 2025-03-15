@@ -20,6 +20,19 @@ public sealed class PrimaryConstructorParameterReassignmentAnalyzer : Shimmering
 		DiagnosticSeverity.Info,
 		isEnabledByDefault: false);
 
+	public override string SampleCode => """
+		namespace Tests
+		{
+			class Test(int x)
+			{
+				void Do()
+				{
+					x = x / 2;
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

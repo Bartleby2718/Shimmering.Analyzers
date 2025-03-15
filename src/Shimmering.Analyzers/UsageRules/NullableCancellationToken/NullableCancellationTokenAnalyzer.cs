@@ -20,6 +20,19 @@ public sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnal
 		DiagnosticSeverity.Warning,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		using System.Threading;
+		using System.Threading.Tasks;
+
+		namespace Tests
+		{
+			class Test
+			{
+				Task DoAsync(CancellationToken? cancellationToken = null) => Task.CompletedTask;
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

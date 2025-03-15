@@ -20,6 +20,22 @@ public sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		DiagnosticSeverity.Info,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					var result = new[] { 1, 2 }.Concat(new[] { 3 });
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

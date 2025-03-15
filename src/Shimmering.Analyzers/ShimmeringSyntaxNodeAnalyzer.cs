@@ -7,6 +7,8 @@ namespace Shimmering.Analyzers;
 /// </summary>
 public abstract class ShimmeringSyntaxNodeAnalyzer : DiagnosticAnalyzer
 {
+	public abstract string SampleCode { get; }
+
 	public sealed override void Initialize(AnalysisContext context)
 	{
 		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);

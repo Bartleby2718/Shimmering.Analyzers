@@ -20,6 +20,27 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 		DiagnosticSeverity.Info,
 		isEnabledByDefault: false);
 
+	public override string SampleCode => """
+		using System;
+		using System.Collections.Generic;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do(List<int> numbers)
+				{
+					var oddNumbers = numbers.Where(n => n % 2 == 1).ToArray();
+					foreach (var oddNumber in oddNumbers)
+					{
+						Console.WriteLine(oddNumber);
+					}
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

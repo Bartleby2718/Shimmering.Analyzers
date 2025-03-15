@@ -21,6 +21,16 @@ public sealed class RedundantSpreadElementAnalyzer : ShimmeringSyntaxNodeAnalyze
 		DiagnosticSeverity.Info,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		namespace Tests
+		{
+			class Test
+			{
+				int[] Array => [1, .. new[] { 2, 3 }, 4];
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

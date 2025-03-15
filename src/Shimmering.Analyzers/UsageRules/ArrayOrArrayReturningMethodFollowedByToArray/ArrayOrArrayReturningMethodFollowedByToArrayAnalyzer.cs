@@ -20,6 +20,19 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Shimm
 		DiagnosticSeverity.Warning,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					var array = "a".Split(' ').ToArray();
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

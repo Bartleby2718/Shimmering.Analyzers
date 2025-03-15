@@ -20,6 +20,23 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringSyntaxNodeAnalyze
 		DiagnosticSeverity.Info,
 		isEnabledByDefault: false);
 
+	public override string SampleCode => """
+		using System;
+		using System.Collections.Generic;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				IReadOnlyCollection<int> Do(List<int> numbers)
+				{
+					return numbers.Distinct().ToArray();
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

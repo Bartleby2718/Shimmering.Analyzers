@@ -20,6 +20,23 @@ public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer :
 		DiagnosticSeverity.Warning,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		using System;
+		using System.Collections.Generic;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do(List<int> numbers)
+				{
+					var greaterThanThree = numbers.ToArray().Where(x => x > 3);
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

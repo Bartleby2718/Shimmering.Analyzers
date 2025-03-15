@@ -18,6 +18,16 @@ public sealed class NegatedTernaryConditionAnalyzer : ShimmeringSyntaxNodeAnalyz
 		DiagnosticSeverity.Info,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		namespace Tests
+		{
+			class Test
+			{
+				string Do(bool condition) => !condition ? "when false" : "when true";
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

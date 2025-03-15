@@ -20,6 +20,22 @@ public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		DiagnosticSeverity.Warning,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do(int[] numbers)
+				{
+					numbers.ToList().ForEach(n => Console.WriteLine(n));
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)

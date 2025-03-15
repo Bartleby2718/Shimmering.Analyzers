@@ -18,6 +18,19 @@ public sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		DiagnosticSeverity.Info,
 		isEnabledByDefault: true);
 
+	public override string SampleCode => """
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					// the code to flag
+				}
+			}
+		}
+		""";
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	public override void RegisterSyntaxNodeAction(AnalysisContext context)
