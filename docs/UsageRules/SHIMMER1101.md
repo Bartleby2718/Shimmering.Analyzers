@@ -17,7 +17,7 @@ Code fix exists?                   | True
 
 ## Detailed Explanation
 
-Using `Enumerable.Concat()` to add a single element is semantically imprecise and may mislead readers about the intent of the code. The analyzer flags these instances because `.Concat()` is designed for merging two enumerables, while `.Append()` clearly indicates the addition of one element to an existing enumerable.
+Using `Enumerable.Concat()` to add a single element is semantically imprecise and may mislead readers about the intent of the code. The analyzer flags these instances because `.Concat()` is designed for merging two enumerables, while `.Append()` more clearly indicates the addition of one element to an existing enumerable.
 
 ## Examples
 
