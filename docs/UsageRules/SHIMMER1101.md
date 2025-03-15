@@ -10,10 +10,10 @@ Analyzer message                   | Replace .Concat([e]) with .Append(e)
 Code fix title                     | Replace .Concat([e]) with .Append(e)
 Default severity                   | Info
 Minimum framework/language version | N/A
-Enabled by default?                | True
+Enabled by default?                | Yes
 Category                           | Usage
 Link to code                       | SingleElementConcatAnalyzer.cs
-Code fix exists?                   | True
+Code fix exists?                   | Yes
 
 ## Detailed Explanation
 
