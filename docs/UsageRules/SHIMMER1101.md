@@ -46,9 +46,3 @@ this._field = new[] { 1, 2 }.Append(3);
 ## When to Suppress
 
 Suppress this diagnostic when you want to use `.Concat()` consistently.
-
-## Related Rules
-N/A
-
-## Inspiration
-[@Bartleby2718](https://github.com/Bartleby2718)
