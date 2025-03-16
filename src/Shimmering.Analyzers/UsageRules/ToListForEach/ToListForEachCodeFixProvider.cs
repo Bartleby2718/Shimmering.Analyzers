@@ -30,12 +30,12 @@ public sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
 		context.RegisterCodeFix(
 			CodeAction.Create(
 				Title,
-				ct => DoSomethingAsync(context.Document, invocation, ct),
+				ct => ReplaceWithForeachLoop(context.Document, invocation, ct),
 				nameof(ToListForEachCodeFixProvider)),
 			diagnostic);
 	}
 
-	private static async Task<Document> DoSomethingAsync(
+	private static async Task<Document> ReplaceWithForeachLoop(
 		Document document,
 		InvocationExpressionSyntax invocation,
 		CancellationToken cancellationToken)
