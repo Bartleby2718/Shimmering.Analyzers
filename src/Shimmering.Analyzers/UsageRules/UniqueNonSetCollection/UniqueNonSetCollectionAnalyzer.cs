@@ -29,10 +29,10 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringSyntaxNodeAnalyze
 		{
 			class Test
 			{
-				IReadOnlyCollection<int> Do()
+				void Do()
 				{
 					List<int> numbers = [];
-					return [|numbers.Distinct().ToArray()|];
+					var distinctNumbers = [|numbers.Distinct().ToArray()|];
 				}
 			}
 		}

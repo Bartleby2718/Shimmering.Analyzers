@@ -20,10 +20,10 @@ public sealed class UniqueNonSetCollectionCodeFixProvider : ShimmeringCodeFixPro
 		{
 			class Test
 			{
-				IReadOnlyCollection<int> Do()
+				void Do()
 				{
 					List<int> numbers = [];
-					return numbers.ToHashSet();
+					var distinctNumbers = numbers.ToHashSet();
 				}
 			}
 		}
