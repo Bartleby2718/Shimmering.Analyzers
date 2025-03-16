@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shimmering.Analyzers\Shimmering.Analyzers.csproj" />
+    <ProjectReference Include="..\Shimmering.Analyzers.Tests\Shimmering.Analyzers.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>
