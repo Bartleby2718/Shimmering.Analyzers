@@ -11,6 +11,22 @@ public sealed class SingleElementConcatCodeFixProvider : ShimmeringCodeFixProvid
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.SingleElementConcat];
 
+	public override string SampleCodeFixed => """
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					var result = new[] { 1, 2 }.Append(3);
+				}
+			}
+		}
+		""";
+
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

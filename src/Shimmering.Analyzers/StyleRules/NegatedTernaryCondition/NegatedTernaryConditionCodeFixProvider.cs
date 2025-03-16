@@ -13,6 +13,16 @@ public sealed class NegatedTernaryConditionCodeFixProvider : ShimmeringCodeFixPr
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.StyleRules.NegatedTernaryCondition];
 
+	public override string SampleCodeFixed => """
+		namespace Tests
+		{
+			class Test
+			{
+				string Do(bool condition) => condition ? "when true" : "when false";
+			}
+		}
+		""";
+
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

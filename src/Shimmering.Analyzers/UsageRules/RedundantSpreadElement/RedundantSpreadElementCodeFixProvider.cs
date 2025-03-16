@@ -11,6 +11,16 @@ public sealed class RedundantSpreadElementCodeFixProvider : ShimmeringCodeFixPro
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.RedundantSpreadElement];
 
+	public override string SampleCodeFixed => """
+		namespace Tests
+		{
+			class Test
+			{
+				int[] Array => [1, 2, 3, 4];
+			}
+		}
+		""";
+
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

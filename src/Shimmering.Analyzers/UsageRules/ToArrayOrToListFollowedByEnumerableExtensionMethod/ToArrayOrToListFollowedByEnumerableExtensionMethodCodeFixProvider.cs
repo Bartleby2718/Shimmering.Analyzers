@@ -11,6 +11,24 @@ public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodCodeFixPro
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.ToArrayOrToListFollowedByEnumerableExtensionMethod];
 
+	public override string SampleCodeFixed => """
+		using System;
+		using System.Collections.Generic;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					int[] numbers = [];
+					var greaterThanThree = numbers.Where(x => x > 3);
+				}
+			}
+		}
+		""";
+
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

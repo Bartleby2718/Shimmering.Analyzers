@@ -11,6 +11,24 @@ public sealed class UniqueNonSetCollectionCodeFixProvider : ShimmeringCodeFixPro
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.UniqueNonSetCollection];
 
+	public override string SampleCodeFixed => """
+		using System;
+		using System.Collections.Generic;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				IReadOnlyCollection<int> Do()
+				{
+					List<int> numbers = [];
+					return numbers.ToHashSet();
+				}
+			}
+		}
+		""";
+
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

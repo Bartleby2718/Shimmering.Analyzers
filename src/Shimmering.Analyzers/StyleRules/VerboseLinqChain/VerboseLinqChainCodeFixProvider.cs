@@ -13,6 +13,21 @@ public sealed class VerboseLinqChainCodeFixProvider : ShimmeringCodeFixProvider
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.StyleRules.VerboseLinqChain];
 
+	public override string SampleCodeFixed => """
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					int[] array = [3, .. new[] { 1 }, 2];
+				}
+			}
+		}
+		""";
+
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

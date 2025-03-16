@@ -14,6 +14,22 @@ public sealed class MisusedOrDefaultCodeFixProvider : ShimmeringCodeFixProvider
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.MisusedOrDefault];
 
+	public override string SampleCodeFixed => """
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					var a = new[] { 1 }.Single();
+				}
+			}
+		}
+		""";
+
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

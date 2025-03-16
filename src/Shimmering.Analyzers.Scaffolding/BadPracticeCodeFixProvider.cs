@@ -11,6 +11,19 @@ public sealed class BadPracticeCodeFixProvider : ShimmeringCodeFixProvider
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.CATEGORY_PLACEHOLDERRules.BadPractice];
 
+	public override string SampleCodeFixed => """
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					// the code after the fix
+				}
+			}
+		}
+		""";
+
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

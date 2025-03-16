@@ -11,6 +11,24 @@ public sealed class UseDiscardForUnusedOutVariableCodeFixProvider : ShimmeringCo
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.UseDiscardForUnusedOutVariable];
 
+	public override string SampleCodeFixed => """
+		using System;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Method(string day)
+				{
+					if (Enum.TryParse<DayOfWeek>(day, out _))
+					{
+						Console.WriteLine($"{day} is a valid day of week.");
+					}
+				}
+			}
+		}
+		""";
+
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

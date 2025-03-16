@@ -14,6 +14,25 @@ public sealed class MissingCancellationTokenCodeFixProvider : ShimmeringCodeFixP
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.MissingCancellationToken];
 
+#pragma warning disable SA1027 // Use tabs correctly
+	public override string SampleCodeFixed => """
+		using System.Threading.Tasks;
+		using System.Threading;
+
+		namespace Tests
+		{
+		    class Test
+		    {
+		        async Task DoAsync(CancellationToken cancellationToken = default)
+		        {
+		            await Task.CompletedTask;
+		        }
+		    }
+		}
+		"""
+#pragma warning restore SA1027 // Use tabs correctly
+;
+
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

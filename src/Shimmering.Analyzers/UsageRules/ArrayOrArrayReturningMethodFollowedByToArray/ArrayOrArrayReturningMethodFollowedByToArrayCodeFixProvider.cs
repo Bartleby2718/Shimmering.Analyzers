@@ -11,6 +11,21 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProvider 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.ArrayOrArrayReturningMethodFollowedByToArray];
 
+	public override string SampleCodeFixed => """
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					var array = "a".Split(' ');
+				}
+			}
+		}
+		""";
+
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

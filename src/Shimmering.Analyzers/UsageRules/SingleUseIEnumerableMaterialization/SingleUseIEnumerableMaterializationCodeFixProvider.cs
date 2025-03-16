@@ -11,6 +11,28 @@ public sealed class SingleUseIEnumerableMaterializationCodeFixProvider : Shimmer
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.SingleUseIEnumerableMaterialization];
 
+	public override string SampleCodeFixed => """
+		using System;
+		using System.Collections.Generic;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do()
+				{
+					List<int> numbers = [];
+					var oddNumbers = numbers.Where(n => n % 2 == 1);
+					foreach (var oddNumber in oddNumbers)
+					{
+						Console.WriteLine(oddNumber);
+					}
+				}
+			}
+		}
+		""";
+
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

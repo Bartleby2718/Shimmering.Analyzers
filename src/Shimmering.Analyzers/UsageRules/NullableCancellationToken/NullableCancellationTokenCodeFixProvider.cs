@@ -11,6 +11,19 @@ public sealed class NullableCancellationTokenCodeFixProvider : ShimmeringCodeFix
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.NullableCancellationToken];
 
+	public override string SampleCodeFixed => """
+		using System.Threading;
+		using System.Threading.Tasks;
+
+		namespace Tests
+		{
+			class Test
+			{
+				Task DoAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+			}
+		}
+		""";
+
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

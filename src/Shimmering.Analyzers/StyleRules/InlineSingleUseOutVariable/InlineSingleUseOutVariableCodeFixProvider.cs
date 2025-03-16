@@ -13,6 +13,23 @@ public sealed class InlineSingleUseOutVariableCodeFixProvider : ShimmeringCodeFi
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.StyleRules.InlineSingleUseOutVariable];
 
+	public override string SampleCodeFixed => """
+		using System;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do(string dayOfWeekString)
+				{
+					if (Enum.TryParse<DayOfWeek>(dayOfWeekString, out DayOfWeek dayOfWeek2))
+					{
+					}
+				}
+			}
+		}
+		""";
+
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
