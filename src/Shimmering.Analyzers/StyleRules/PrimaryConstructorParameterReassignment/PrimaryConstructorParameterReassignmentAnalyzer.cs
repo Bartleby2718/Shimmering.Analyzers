@@ -27,7 +27,7 @@ public sealed class PrimaryConstructorParameterReassignmentAnalyzer : Shimmering
 			{
 				void Do()
 				{
-					x = x / 2;
+					[|x|] = x / 2;
 				}
 			}
 		}

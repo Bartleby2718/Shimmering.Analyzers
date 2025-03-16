@@ -27,7 +27,7 @@ public sealed class VerboseLinqChainAnalyzer : ShimmeringSyntaxNodeAnalyzer
 			{
 				void Do()
 				{
-					var array = new[] { 1 }.Append(2).Prepend(3).ToArray();
+					var array = [|new[] { 1 }.Append(2).Prepend(3).ToArray()|];
 				}
 			}
 		}

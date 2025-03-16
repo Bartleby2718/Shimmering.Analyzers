@@ -30,7 +30,7 @@ public sealed class MisusedOrDefaultAnalyzer : ShimmeringSyntaxNodeAnalyzer
 			{
 				void Do()
 				{
-					var a = new[] { 1 }.SingleOrDefault()!;
+					var a = [|new[] { 1 }.SingleOrDefault()!|];
 				}
 			}
 		}

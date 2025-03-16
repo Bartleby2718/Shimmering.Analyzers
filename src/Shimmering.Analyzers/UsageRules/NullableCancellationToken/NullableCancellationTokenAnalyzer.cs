@@ -28,7 +28,7 @@ public sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnal
 		{
 			class Test
 			{
-				Task DoAsync(CancellationToken? cancellationToken = null) => Task.CompletedTask;
+				Task DoAsync([|CancellationToken? cancellationToken = null|]) => Task.CompletedTask;
 			}
 		}
 		""";

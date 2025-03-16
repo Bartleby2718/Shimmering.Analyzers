@@ -16,7 +16,10 @@ public abstract class ShimmeringAnalyzerBenchmark<TAnalyzer>
 	[GlobalSetup]
     public void Setup()
     {
-        var syntaxTree = CSharpSyntaxTree.ParseText(new TAnalyzer().SampleCode);
+        var sourceCode = new TAnalyzer().SampleCode
+            .Replace("[|", string.Empty)
+            .Replace("|]", string.Empty);
+        var syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
         PortableExecutableReference[] references = [MetadataReference.CreateFromFile(typeof(object).Assembly.Location)];
         this._compilation = CSharpCompilation.Create("AssemblyName", [syntaxTree], references);
     }
@@ -24,7 +27,7 @@ public abstract class ShimmeringAnalyzerBenchmark<TAnalyzer>
     [Benchmark]
     public void RunAnalyzer()
     {
-        var compilationWithAnalyzers = _compilation.WithAnalyzers([new TAnalyzer()]);
+        var compilationWithAnalyzers = this._compilation.WithAnalyzers([new TAnalyzer()]);
         // Force evaluation of diagnostics.
         compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync().Wait();
     }

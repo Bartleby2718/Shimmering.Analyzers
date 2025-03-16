@@ -25,7 +25,7 @@ public sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
 			{
 				void Do()
 				{
-					// the code to flag
+					// [|the code to flag|] and the rest of the code
 				}
 			}
 		}

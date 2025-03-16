@@ -21,13 +21,15 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Shimm
 		isEnabledByDefault: true);
 
 	public override string SampleCode => """
+		using System.Linq;
+
 		namespace Tests
 		{
 			class Test
 			{
 				void Do()
 				{
-					var array = "a".Split(' ').ToArray();
+					var array = [|"a".Split(' ').ToArray()|];
 				}
 			}
 		}

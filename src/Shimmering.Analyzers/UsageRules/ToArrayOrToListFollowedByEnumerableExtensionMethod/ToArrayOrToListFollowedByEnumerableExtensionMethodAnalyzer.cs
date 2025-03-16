@@ -29,9 +29,10 @@ public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer :
 		{
 			class Test
 			{
-				void Do(List<int> numbers)
+				void Do()
 				{
-					var greaterThanThree = numbers.ToArray().Where(x => x > 3);
+					int[] numbers = [];
+					var greaterThanThree = numbers.[|ToArray|]().Where(x => x > 3);
 				}
 			}
 		}

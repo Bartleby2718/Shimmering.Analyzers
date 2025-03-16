@@ -30,7 +30,7 @@ public sealed class InlineSingleUseOutVariableAnalyzer : ShimmeringSyntaxNodeAna
 			{
 				void Do(string dayOfWeekString)
 				{
-					if (Enum.TryParse<DayOfWeek>(dayOfWeekString, out DayOfWeek dayOfWeek1))
+					if (Enum.TryParse<DayOfWeek>(dayOfWeekString, out DayOfWeek [|dayOfWeek1|]))
 					{
 						DayOfWeek dayOfWeek2 = dayOfWeek1;
 					}

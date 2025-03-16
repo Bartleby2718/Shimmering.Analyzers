@@ -23,7 +23,7 @@ public sealed class NegatedTernaryConditionAnalyzer : ShimmeringSyntaxNodeAnalyz
 		{
 			class Test
 			{
-				string Do(bool condition) => !condition ? "when false" : "when true";
+				string Do(bool condition) => [|!condition ? "when false" : "when true"|];
 			}
 		}
 		""";

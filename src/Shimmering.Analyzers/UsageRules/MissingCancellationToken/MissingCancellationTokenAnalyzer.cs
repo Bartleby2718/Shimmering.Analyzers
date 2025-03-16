@@ -20,20 +20,23 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnaly
 		DiagnosticSeverity.Info,
 		isEnabledByDefault: true);
 
+#pragma warning disable SA1027 // Use tabs correctly
 	public override string SampleCode => """
 		using System.Threading.Tasks;
 
 		namespace Tests
 		{
-			class Test
-			{
-				async Task DoAsync()
-				{
-					await Task.CompletedTask;
-				}
-			}
+		    class Test
+		    {
+		        async Task [|DoAsync|]()
+		        {
+		            await Task.CompletedTask;
+		        }
+		    }
 		}
-		""";
+		"""
+#pragma warning restore SA1027 // Use tabs correctly
+;
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 

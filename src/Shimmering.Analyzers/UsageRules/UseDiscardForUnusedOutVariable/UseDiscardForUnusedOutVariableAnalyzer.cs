@@ -27,7 +27,7 @@ public sealed class UseDiscardForUnusedOutVariableAnalyzer : ShimmeringSyntaxNod
 			{
 				void Method(string day)
 				{
-					if (Enum.TryParse<DayOfWeek>(day, out DayOfWeek dayOfWeek))
+					if (Enum.TryParse<DayOfWeek>(day, out DayOfWeek [|dayOfWeek|]))
 					{
 						Console.WriteLine($"{day} is a valid day of week.");
 					}

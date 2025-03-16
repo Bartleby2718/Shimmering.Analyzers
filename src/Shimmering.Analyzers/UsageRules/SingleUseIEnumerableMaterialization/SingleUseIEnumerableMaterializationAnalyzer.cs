@@ -29,9 +29,10 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 		{
 			class Test
 			{
-				void Do(List<int> numbers)
+				void Do()
 				{
-					var oddNumbers = numbers.Where(n => n % 2 == 1).ToArray();
+					List<int> numbers = [];
+					var oddNumbers = [|numbers.Where(n => n % 2 == 1).ToArray()|];
 					foreach (var oddNumber in oddNumbers)
 					{
 						Console.WriteLine(oddNumber);

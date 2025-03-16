@@ -30,7 +30,7 @@ public sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
 			{
 				void Do()
 				{
-					var result = new[] { 1, 2 }.Concat(new[] { 3 });
+					var result = [|new[] { 1, 2 }.Concat(new[] { 3 })|];
 				}
 			}
 		}
