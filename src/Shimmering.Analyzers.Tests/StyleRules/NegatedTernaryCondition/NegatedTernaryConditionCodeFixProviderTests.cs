@@ -7,37 +7,8 @@ using Verifier = CSharpCodeFixVerifier<
 	NegatedTernaryConditionCodeFixProvider,
 	DefaultVerifier>;
 
-public class NegatedTernaryConditionCodeFixProviderTests
+public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProviderTests<NegatedTernaryConditionAnalyzer, NegatedTernaryConditionCodeFixProvider>
 {
-	[Test]
-	public Task TestIgnoreTernaryContainingTernary() => Verifier.VerifyAnalyzerAsync(
-		"""
-		namespace Tests
-		{
-			class Test
-			{
-				public int Method1(int? number1, int? number2) => !number1.HasValue ? 1
-					: number2.HasValue ? number2.Value
-					: number1.Value;
-				public int Method2(int? number1, int? number2) => !number1.HasValue ? 1
-					: number2.HasValue ? number2.Value
-					: number1.Value;
-			}
-		}
-		""");
-
-	[Test]
-	public Task TestIgnoreTernaryWithoutNegationInCondition() => Verifier.VerifyAnalyzerAsync(
-		"""
-		namespace Tests
-		{
-			class Test
-			{
-				public string MyString() => true ? "true" : "false";
-			}
-		}
-		""");
-
 	[Test]
 	public Task TestTernaryInOneLine() => Verifier.VerifyCodeFixAsync(
 		"""

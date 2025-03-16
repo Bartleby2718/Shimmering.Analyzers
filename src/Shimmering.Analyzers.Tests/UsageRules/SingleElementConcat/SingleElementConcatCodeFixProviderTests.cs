@@ -7,7 +7,7 @@ using Verifier = CSharpCodeFixVerifier<
 	SingleElementConcatCodeFixProvider,
 	DefaultVerifier>;
 
-public class SingleElementConcatTests
+public class SingleElementConcatCodeFixProviderTests : ShimmeringCodeFixProviderTests<SingleElementConcatAnalyzer, SingleElementConcatCodeFixProvider>
 {
 	[Test]
 	public Task TestSpreadElementIsIgnored() => Verifier.VerifyAnalyzerAsync(

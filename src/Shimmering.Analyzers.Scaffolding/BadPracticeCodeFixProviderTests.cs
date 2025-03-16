@@ -7,23 +7,8 @@ using Verifier = CSharpCodeFixVerifier<
 	BadPracticeCodeFixProvider,
 	DefaultVerifier>;
 
-public class BadPracticeCodeFixProviderTests
+public class BadPracticeCodeFixProviderTests : ShimmeringCodeFixProviderTests<BadPracticeAnalyzer, BadPracticeCodeFixProvider>
 {
-	[Test]
-	public Task TestSomethingThatShouldNotBeFlagged() => Verifier.VerifyAnalyzerAsync(
-		"""
-		using System.Threading;
-		using System.Threading.Tasks;
-
-		namespace Tests
-		{
-			class Test
-			{
-				public Task DoAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
-			}
-		}
-		""");
-
 	[Test]
 	public Task TestSomethingThatShouldBeFixed() => Verifier.VerifyCodeFixAsync(
 		"""

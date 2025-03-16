@@ -7,27 +7,8 @@ using Verifier = CSharpCodeFixVerifier<
 	MisusedOrDefaultCodeFixProvider,
 	DefaultVerifier>;
 
-public class MisusedOrDefaultCodeFixProviderTests
+public class MisusedOrDefaultCodeFixProviderTests : ShimmeringCodeFixProviderTests<MisusedOrDefaultAnalyzer, MisusedOrDefaultCodeFixProvider>
 {
-	[Test]
-	public Task TestUnsupportedCases() => Verifier.VerifyAnalyzerAsync(
-		"""
-		using System;
-		using System.Linq;
-
-		namespace Tests
-		{
-			class Test
-			{
-				public void Do()
-				{
-					var x = new[] { 1 }.Single()!; // no OrDefault
-					var y = (new[] { 1 }.SingleOrDefault())!; // parenthesized expression
-				}
-			}
-		}
-		""");
-
 	[Test]
 	public Task TestOrDefaultIsReplaced() => Verifier.VerifyCodeFixAsync(
 		"""

@@ -39,13 +39,21 @@ CreateFile(
 	Path.Combine(analyzersDirectory, $"{ruleName}CodeFixProvider.cs"),
 	codeFixProviderFileContent);
 
-var testTemplateFilePath = Path.Combine(scaffoldingProjectName, $"{nameof(BadPracticeCodeFixProviderTests)}.cs");
-var testFileContent = File.ReadAllText(testTemplateFilePath)
+var analyzerTestTemplateFilePath = Path.Combine(scaffoldingProjectName, $"{nameof(BadPracticeAnalyzerTests)}.cs");
+var analyzerTestFileContent = File.ReadAllText(analyzerTestTemplateFilePath)
+	.Replace("CATEGORY_PLACEHOLDER", category)
+	.Replace("BadPractice", ruleName);
+CreateFile(
+	Path.Combine(testDirectory, $"{ruleName}AnalyzerTests.cs"),
+	analyzerTestFileContent);
+
+var codeFixProviderTestTemplateFilePath = Path.Combine(scaffoldingProjectName, $"{nameof(BadPracticeCodeFixProviderTests)}.cs");
+var codeFixProviderTestFileContent = File.ReadAllText(codeFixProviderTestTemplateFilePath)
 	.Replace("CATEGORY_PLACEHOLDER", category)
 	.Replace("BadPractice", ruleName);
 CreateFile(
 	Path.Combine(testDirectory, $"{ruleName}CodeFixProviderTests.cs"),
-	testFileContent);
+	codeFixProviderTestFileContent);
 
 Console.WriteLine($"Analyzer rule {ruleName} created successfully.");
 

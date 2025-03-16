@@ -7,48 +7,8 @@ using Verifier = CSharpCodeFixVerifier<
 	UseDiscardForUnusedOutVariableCodeFixProvider,
 	DefaultVerifier>;
 
-public class UseDiscardForUnusedOutVariableCodeFixProviderTests
+public class UseDiscardForUnusedOutVariableCodeFixProviderTests : ShimmeringCodeFixProviderTests<UseDiscardForUnusedOutVariableAnalyzer, UseDiscardForUnusedOutVariableCodeFixProvider>
 {
-	[Test]
-	public Task TestIgnoreIfOutVariableIsRead() => Verifier.VerifyAnalyzerAsync(
-		"""
-		using System;
-
-		namespace Tests
-		{
-			class Test
-			{
-				void Method()
-				{
-					if (Enum.TryParse<DayOfWeek>("Sunday", out DayOfWeek dayOfWeek))
-					{
-						 Console.WriteLine(dayOfWeek);
-					}
-				}
-			}
-		}
-		""");
-
-	[Test]
-	public Task TestIgnoreIfOutVariableIsWritten() => Verifier.VerifyAnalyzerAsync(
-		"""
-		using System;
-
-		namespace Tests
-		{
-			class Test
-			{
-				void Method()
-				{
-					if (Enum.TryParse<DayOfWeek>("Sunday", out DayOfWeek dayOfWeek))
-					{
-						 dayOfWeek = DayOfWeek.Sunday;
-					}
-				}
-			}
-		}
-		""");
-
 	[Test]
 	public Task TestExplicitlyTypedOutVariable() => Verifier.VerifyCodeFixAsync(
 		"""

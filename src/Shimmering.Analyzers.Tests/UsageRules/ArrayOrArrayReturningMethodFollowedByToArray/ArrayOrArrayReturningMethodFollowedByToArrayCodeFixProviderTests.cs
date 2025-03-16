@@ -7,27 +7,8 @@ using Verifier = CSharpCodeFixVerifier<
 	ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProvider,
 	DefaultVerifier>;
 
-public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests
+public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : ShimmeringCodeFixProviderTests<ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer, ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProvider>
 {
-	[Test]
-	public Task TestUnsupportedCases() => Verifier.VerifyAnalyzerAsync(
-		"""
-		using System;
-		using System.Linq;
-
-		namespace Tests
-		{
-			class Test
-			{
-				public void Do()
-				{
-					var list = "d".Split(' ').ToList(); // array followed by ToList
-					var array = "d".ToList().ToArray(); // list-returning method followed by ToArray
-				}
-			}
-		}
-		""");
-
 	[Test]
 	public Task TestToArrayNotChainedBySomethingElse() => Verifier.VerifyCodeFixAsync(
 		"""

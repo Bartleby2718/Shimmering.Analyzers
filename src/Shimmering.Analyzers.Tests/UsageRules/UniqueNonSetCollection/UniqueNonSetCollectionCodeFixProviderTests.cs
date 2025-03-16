@@ -9,7 +9,7 @@ using Verifier = CSharpCodeFixVerifier<
 	UniqueNonSetCollectionCodeFixProvider,
 	DefaultVerifier>;
 
-public class UniqueNonSetCollectionCodeFixProviderTests
+public class UniqueNonSetCollectionCodeFixProviderTests : ShimmeringCodeFixProviderTests<UniqueNonSetCollectionAnalyzer, UniqueNonSetCollectionCodeFixProvider>
 {
 	[Test]
 	public Task TestToArray() => Verifier.VerifyCodeFixAsync(
