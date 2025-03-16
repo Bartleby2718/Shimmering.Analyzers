@@ -5,10 +5,8 @@ namespace Shimmering.Analyzers;
 /// <summary>
 /// A base <see cref="DiagnosticAnalyzer"/> class in this project, used for <see cref="SyntaxNode"/> analysis.
 /// </summary>
-public abstract class ShimmeringSyntaxNodeAnalyzer : DiagnosticAnalyzer
+public abstract class ShimmeringSyntaxNodeAnalyzer : ShimmeringAnalyzer
 {
-	public abstract string SampleCode { get; }
-
 	public sealed override void Initialize(AnalysisContext context)
 	{
 		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
