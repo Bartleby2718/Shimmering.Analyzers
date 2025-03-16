@@ -30,12 +30,12 @@ public sealed class NegatedTernaryConditionCodeFixProvider : ShimmeringCodeFixPr
 		context.RegisterCodeFix(
 			CodeAction.Create(
 				Title,
-				ct => DoSomethingAsync(context.Document, conditionalExpression, ct),
+				ct => InvertTernary(context.Document, conditionalExpression, ct),
 				nameof(NegatedTernaryConditionCodeFixProvider)),
 			diagnostic);
 	}
 
-	private static async Task<Document> DoSomethingAsync(
+	private static async Task<Document> InvertTernary(
 		Document document,
 		ConditionalExpressionSyntax conditionalExpression,
 		CancellationToken cancellationToken)
