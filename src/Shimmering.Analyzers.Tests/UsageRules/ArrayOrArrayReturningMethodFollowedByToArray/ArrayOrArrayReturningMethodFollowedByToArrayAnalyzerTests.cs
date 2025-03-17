@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer,
 	DefaultVerifier>;
 
-public class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzerTests
+public class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzerTests : ShimmeringAnalyzerTests<ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer>
 {
 	[Test]
 	public Task TestUnsupportedCases() => Verifier.VerifyAnalyzerAsync(

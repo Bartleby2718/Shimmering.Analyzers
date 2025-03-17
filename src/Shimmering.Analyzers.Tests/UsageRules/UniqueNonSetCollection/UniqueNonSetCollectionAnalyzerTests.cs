@@ -8,6 +8,6 @@ using Verifier = CSharpAnalyzerVerifier<
 	UniqueNonSetCollectionAnalyzer,
 	DefaultVerifier>;
 
-public class UniqueNonSetCollectionAnalyzerTests
+public class UniqueNonSetCollectionAnalyzerTests : ShimmeringAnalyzerTests<UniqueNonSetCollectionAnalyzer>
 {
 }

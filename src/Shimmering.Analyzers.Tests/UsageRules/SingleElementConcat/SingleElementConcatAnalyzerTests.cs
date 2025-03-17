@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	SingleElementConcatAnalyzer,
 	DefaultVerifier>;
 
-public class SingleElementConcatAnalyzerTests
+public class SingleElementConcatAnalyzerTests : ShimmeringAnalyzerTests<SingleElementConcatAnalyzer>
 {
 	[Test]
 	public Task TestSpreadElementIsIgnored() => Verifier.VerifyAnalyzerAsync(

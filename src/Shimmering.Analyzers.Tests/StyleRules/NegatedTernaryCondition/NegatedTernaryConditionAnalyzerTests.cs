@@ -7,7 +7,7 @@ using Verifier = CSharpCodeFixVerifier<
 	NegatedTernaryConditionCodeFixProvider,
 	DefaultVerifier>;
 
-public class NegatedTernaryConditionAnalyzerTests
+public class NegatedTernaryConditionAnalyzerTests : ShimmeringAnalyzerTests<NegatedTernaryConditionAnalyzer>
 {
 	[Test]
 	public Task TestIgnoreTernaryContainingTernary() => Verifier.VerifyAnalyzerAsync(

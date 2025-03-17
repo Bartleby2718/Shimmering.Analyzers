@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	SingleUseIEnumerableMaterializationAnalyzer,
 	DefaultVerifier>;
 
-public class SingleUseIEnumerableMaterializationAnalyzerTests
+public class SingleUseIEnumerableMaterializationAnalyzerTests : ShimmeringAnalyzerTests<SingleUseIEnumerableMaterializationAnalyzer>
 {
 	[Test]
 	public Task TestExplicitTypeIsNotFlagged() => Verifier.VerifyAnalyzerAsync(

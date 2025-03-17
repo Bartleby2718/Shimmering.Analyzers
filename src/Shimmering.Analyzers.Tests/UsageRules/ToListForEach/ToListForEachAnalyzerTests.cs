@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	ToListForEachAnalyzer,
 	DefaultVerifier>;
 
-public class ToListForEachAnalyzerTests
+public class ToListForEachAnalyzerTests : ShimmeringAnalyzerTests<ToListForEachAnalyzer>
 {
 	[Test]
 #pragma warning disable SA1027 // Use tabs correctly

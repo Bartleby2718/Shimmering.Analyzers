@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	UseDiscardForUnusedOutVariableAnalyzer,
 	DefaultVerifier>;
 
-public class UseDiscardForUnusedOutVariableAnalyzerTests
+public class UseDiscardForUnusedOutVariableAnalyzerTests : ShimmeringAnalyzerTests<UseDiscardForUnusedOutVariableAnalyzer>
 {
 	[Test]
 	public Task TestIgnoreIfOutVariableIsRead() => Verifier.VerifyAnalyzerAsync(

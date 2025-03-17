@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	RedundantSpreadElementAnalyzer,
 	DefaultVerifier>;
 
-public class RedundantSpreadElementAnalyzerTests
+public class RedundantSpreadElementAnalyzerTests : ShimmeringAnalyzerTests<RedundantSpreadElementAnalyzer>
 {
 	[Test]
 	public Task TestUnsupportedCases() => Verifier.VerifyAnalyzerAsync(

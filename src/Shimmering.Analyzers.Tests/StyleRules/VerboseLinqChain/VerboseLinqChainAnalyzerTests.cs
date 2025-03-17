@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	VerboseLinqChainAnalyzer,
 	DefaultVerifier>;
 
-public class VerboseLinqChainAnalyzerTests
+public class VerboseLinqChainAnalyzerTests : ShimmeringAnalyzerTests<VerboseLinqChainAnalyzer>
 {
 	[Test]
 	public Task TestUnsupportedCases() => Verifier.VerifyAnalyzerAsync(

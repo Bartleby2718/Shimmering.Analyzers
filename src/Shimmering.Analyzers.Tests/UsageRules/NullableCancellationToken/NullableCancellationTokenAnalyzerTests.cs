@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	NullableCancellationTokenAnalyzer,
 	DefaultVerifier>;
 
-public class NullableCancellationTokenAnalyzerTests
+public class NullableCancellationTokenAnalyzerTests : ShimmeringAnalyzerTests<NullableCancellationTokenAnalyzer>
 {
 	[Test]
 	public Task TestNonNullableCancellationTokens() => Verifier.VerifyAnalyzerAsync(

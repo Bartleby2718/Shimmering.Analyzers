@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	MisusedOrDefaultAnalyzer,
 	DefaultVerifier>;
 
-public class MisusedOrDefaultAnalyzerTests
+public class MisusedOrDefaultAnalyzerTests : ShimmeringAnalyzerTests<MisusedOrDefaultAnalyzer>
 {
 	[Test]
 	public Task TestUnsupportedCases() => Verifier.VerifyAnalyzerAsync(

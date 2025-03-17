@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	BadPracticeAnalyzer,
 	DefaultVerifier>;
 
-public class BadPracticeAnalyzerTests
+public class BadPracticeAnalyzerTests : ShimmeringAnalyzerTests<BadPracticeAnalyzer>
 {
 	[Test]
 	public Task TestSomethingThatShouldNotBeFlagged() => Verifier.VerifyAnalyzerAsync(

@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	PrimaryConstructorParameterReassignmentAnalyzer,
 	DefaultVerifier>;
 
-public class PrimaryConstructorParameterReassignmentAnalyzerTests
+public class PrimaryConstructorParameterReassignmentAnalyzerTests : ShimmeringAnalyzerTests<PrimaryConstructorParameterReassignmentAnalyzer>
 {
 	[Test]
 	public Task TestNonAssignmentIsNotFlagged() => Verifier.VerifyAnalyzerAsync(

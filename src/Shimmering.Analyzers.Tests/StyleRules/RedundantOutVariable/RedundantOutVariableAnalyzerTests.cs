@@ -6,7 +6,7 @@ using Verifier = CSharpAnalyzerVerifier<
 	RedundantOutVariableAnalyzer,
 	DefaultVerifier>;
 
-public class RedundantOutVariableAnalyzerTests
+public class RedundantOutVariableAnalyzerTests : ShimmeringAnalyzerTests<RedundantOutVariableAnalyzer>
 {
 	[Test]
 	public Task TestShouldNotFlagIfNotUsedForAssignment() => Verifier.VerifyAnalyzerAsync(
