@@ -1,1 +1,1 @@
-# InlineSingleUseOutVariable
+# RedundantOutVariable

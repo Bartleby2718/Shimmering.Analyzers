@@ -1,14 +1,54 @@
-using Shimmering.Analyzers.StyleRules.InlineSingleUseOutVariable;
+using Shimmering.Analyzers.StyleRules.RedundantOutVariable;
 
-namespace Shimmering.Analyzers.Tests.StyleRules.InlineSingleUseOutVariable;
+namespace Shimmering.Analyzers.Tests.StyleRules.RedundantOutVariable;
 
 using Verifier = CSharpCodeFixVerifier<
-	InlineSingleUseOutVariableAnalyzer,
-	InlineSingleUseOutVariableCodeFixProvider,
+	RedundantOutVariableAnalyzer,
+	RedundantOutVariableCodeFixProvider,
 	DefaultVerifier>;
 
-public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixProviderTests<InlineSingleUseOutVariableAnalyzer, InlineSingleUseOutVariableCodeFixProvider>
+public class RedundantOutVariableCodeFixProviderTests : ShimmeringCodeFixProviderTests<RedundantOutVariableAnalyzer, RedundantOutVariableCodeFixProvider>
 {
+	[Test]
+	public Task TestFieldAssignment() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System;
+		using System.Collections.Generic;
+
+		namespace Tests
+		{
+			class Test
+			{
+				private int _field;
+
+				void Method()
+				{
+					var exists = new Dictionary<string, int>().TryGetValue("key", [|out var value|]);
+					Console.WriteLine("assignment may not happen immediately");
+					this._field = value;
+				}
+			}
+		}
+		""",
+		"""
+		using System;
+		using System.Collections.Generic;
+
+		namespace Tests
+		{
+			class Test
+			{
+				private int _field;
+
+				void Method()
+				{
+					var exists = new Dictionary<string, int>().TryGetValue("key", out this._field);
+					Console.WriteLine("assignment may not happen immediately");
+				}
+			}
+		}
+		""");
+
 	[Test]
 	public Task TestOutVariableIsImplicitAndAssignedVariableIsExplicit() => Verifier.VerifyCodeFixAsync(
 		"""
@@ -21,7 +61,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 			{
 				void Method()
 				{
-					var exists = new Dictionary<string, int>().TryGetValue("key", out var [|value|]);
+					var exists = new Dictionary<string, int>().TryGetValue("key", [|out var value|]);
 					Console.WriteLine("assignment may not happen immediately");
 					int value2 = value;
 				}
@@ -38,7 +78,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 			{
 				void Method()
 				{
-					var exists = new Dictionary<string, int>().TryGetValue("key", out var value2);
+					var exists = new Dictionary<string, int>().TryGetValue("key", out int value2);
 					Console.WriteLine("assignment may not happen immediately");
 				}
 			}
@@ -57,7 +97,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 			{
 				void Method()
 				{
-					var exists = new Dictionary<string, int>().TryGetValue("key", out var [|value|]);
+					var exists = new Dictionary<string, int>().TryGetValue("key", [|out var value|]);
 					Console.WriteLine("assignment may not happen immediately");
 					var value2 = value;
 				}
@@ -93,7 +133,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 			{
 				void Method()
 				{
-					var exists = new Dictionary<string, int>().TryGetValue("key", out int [|value|]);
+					var exists = new Dictionary<string, int>().TryGetValue("key", [|out int value|]);
 					Console.WriteLine("assignment may not happen immediately");
 					int value2 = value;
 				}
@@ -129,7 +169,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 			{
 				void Method()
 				{
-					var exists = new Dictionary<string, int>().TryGetValue("key", out int [|value|]);
+					var exists = new Dictionary<string, int>().TryGetValue("key", [|out int value|]);
 					Console.WriteLine("assignment may not happen immediately");
 					var value2 = value;
 				}
@@ -146,7 +186,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 			{
 				void Method()
 				{
-					var exists = new Dictionary<string, int>().TryGetValue("key", out int value2);
+					var exists = new Dictionary<string, int>().TryGetValue("key", out var value2);
 					Console.WriteLine("assignment may not happen immediately");
 				}
 			}
@@ -154,7 +194,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 		""");
 
 	[Test]
-	public Task TestInlineSimplAssignmentWithExplicitOutVariableType() => Verifier.VerifyCodeFixAsync(
+	public Task TestInlineSimpleAssignmentWithExplicitOutVariableType() => Verifier.VerifyCodeFixAsync(
 		"""
 		using System;
 		using System.Collections.Generic;
@@ -166,7 +206,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 				void Method()
 				{
 					int value2 = 0;
-					var exists = new Dictionary<string, int>().TryGetValue("key", out int [|value|]);
+					var exists = new Dictionary<string, int>().TryGetValue("key", [|out int value|]);
 					Console.WriteLine("assignment may not happen immediately");
 					value2 = value;
 				}
@@ -192,7 +232,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 		""");
 
 	[Test]
-	public Task TestInlineSimplAssignmentWithImplicitOutVariableType() => Verifier.VerifyCodeFixAsync(
+	public Task TestInlineSimpleAssignmentWithImplicitOutVariableType() => Verifier.VerifyCodeFixAsync(
 		"""
 		using System;
 		using System.Collections.Generic;
@@ -204,7 +244,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 				void Method()
 				{
 					int value2 = 0;
-					var exists = new Dictionary<string, int>().TryGetValue("key", out var [|value|]);
+					var exists = new Dictionary<string, int>().TryGetValue("key", [|out var value|]);
 					Console.WriteLine("assignment may not happen immediately");
 					value2 = value;
 				}
@@ -240,7 +280,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 			{
 				void Method()
 				{
-					Another(out int [|value1|], out var [|value2|]);
+					Another([|out int value1|], [|out var value2|]);
 					Console.WriteLine("assignment may not happen immediately");
 					var first = value1;
 					int second = value2;
@@ -263,7 +303,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 			{
 				void Method()
 				{
-					Another(out int first, out var second);
+					Another(out var first, out int second);
 					Console.WriteLine("assignment may not happen immediately");
 				}
 
@@ -288,7 +328,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 				void Method()
 				{
 					int second = 0;
-					Another(out /* before explicit type */int/* after explicit type */ /* before first variable */[|value1|]/* after first variable */, out /* before implicit type */var/* after explicit type */ /* before second variable */[|value2|]/* after second variable */);
+					Another([|out /* before explicit type */int/* after explicit type */ /* before first variable */value1|]/* after first variable */, [|out /* before implicit type */var/* after explicit type */ /* before second variable */value2|]/* after second variable */);
 					Console.WriteLine("assignment may not happen immediately");
 					var first = value1;
 					second = value2;
@@ -312,7 +352,7 @@ public class InlineSingleUseOutVariableCodeFixProviderTests : ShimmeringCodeFixP
 				void Method()
 				{
 					int second = 0;
-					Another(out /* before explicit type */int/* after explicit type */ /* before first variable */first, out /* before implicit type */second);
+					Another(out /* before explicit type */var/* after explicit type */ /* before first variable */first/* after first variable */, out /* before implicit type */second/* after second variable */);
 					Console.WriteLine("assignment may not happen immediately");
 				}
 

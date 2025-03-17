@@ -19,5 +19,5 @@ SHIMMER1101 |  Usage   |  Info    | SingleElementConcatAnalyzer, [Documentation]
 SHIMMER1102 |  Usage   | Disabled | UniqueNonSetCollectionAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1102.md)
 SHIMMER2000 |  Style   |  Info    | VerboseLinqChainAnalyzer, [Documentation](../../docs/StyleRules/SHIMMER2000.md)
 SHIMMER2010 |  Style   |  Info    | NegatedTernaryConditionAnalyzer, [Documentation](../../docs/StyleRules/SHIMMER2010.md)
-SHIMMER2020 |  Style   |  Info    | InlineSingleUseOutVariableAnalyzer, [Documentation](../../docs/StyleRules/SHIMMER2020.md)
+SHIMMER2020 |  Style   |  Info    | RedundantOutVariableAnalyzer, [Documentation](../../docs/StyleRules/SHIMMER2020.md)
 SHIMMER2030 |  Style   | Disabled | PrimaryConstructorParameterReassignmentAnalyzer, [Documentation](../../docs/StyleRules/SHIMMER2030.md)
