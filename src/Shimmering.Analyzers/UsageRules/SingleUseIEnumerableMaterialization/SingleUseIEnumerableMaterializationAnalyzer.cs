@@ -68,7 +68,7 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
 
 		// Only proceed if the method is "ToList" or "ToArray"
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, out var methodName)
+		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)
 			|| methodName is not (nameof(Enumerable.ToList) or nameof(Enumerable.ToArray)))
 		{
 			return;
@@ -81,7 +81,7 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 		}
 
 		// Get the symbol for the variable.
-		var variableSymbol = context.SemanticModel.GetDeclaredSymbol(variableDeclarator);
+		var variableSymbol = context.SemanticModel.GetDeclaredSymbol(variableDeclarator, context.CancellationToken);
 		if (variableSymbol == null) { return; }
 
 		// Find the enclosing block.
@@ -90,7 +90,7 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 		// Find all identifier usages of this variable (excluding the declaration itself).
 		var identifierUsages = parentBlock.DescendantNodes()
 			.OfType<IdentifierNameSyntax>()
-			.Where(id => SymbolEqualityComparer.Default.Equals(variableSymbol, context.SemanticModel.GetSymbolInfo(id).Symbol))
+			.Where(id => SymbolEqualityComparer.Default.Equals(variableSymbol, context.SemanticModel.GetSymbolInfo(id, context.CancellationToken).Symbol))
 			.Where(id => id.SpanStart != variableDeclarator.Identifier.SpanStart)
 			.ToList();
 
@@ -99,7 +99,7 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 		// The identifier should not be in a lambda, as it's actually "used" multiple times
 		// in a lambda like .Where(x => identifier.Contains(x))
 		if (!IsInLambda(identifierUsage)
-			&& IsSafeToUseIEnumerableWithoutMaterializing(identifierUsage, context.SemanticModel))
+			&& IsSafeToUseIEnumerableWithoutMaterializing(identifierUsage, context.SemanticModel, context.CancellationToken))
 		{
 			var diagnostic = Diagnostic.Create(Rule, invocation.GetLocation(), variableSymbol.Name);
 			context.ReportDiagnostic(diagnostic);
@@ -111,8 +111,8 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 		return identifier.Ancestors().Any(a => a is LambdaExpressionSyntax);
 	}
 
-	private static bool IsSafeToUseIEnumerableWithoutMaterializing(IdentifierNameSyntax identifier, SemanticModel semanticModel) =>
-		IsUsedInForeach(identifier) || IsFollowedByLinqMethod(identifier, semanticModel);
+	private static bool IsSafeToUseIEnumerableWithoutMaterializing(IdentifierNameSyntax identifier, SemanticModel semanticModel, CancellationToken cancellationToken) =>
+		IsUsedInForeach(identifier) || IsFollowedByLinqMethod(identifier, semanticModel, cancellationToken);
 
 	private static bool IsUsedInForeach(IdentifierNameSyntax identifier)
 	{
@@ -120,10 +120,10 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 			&& foreachStatement.Expression == identifier;
 	}
 
-	private static bool IsFollowedByLinqMethod(IdentifierNameSyntax identifier, SemanticModel semanticModel)
+	private static bool IsFollowedByLinqMethod(IdentifierNameSyntax identifier, SemanticModel semanticModel, CancellationToken cancellationToken)
 	{
 		return identifier.Parent is MemberAccessExpressionSyntax memberAccess
 			&& memberAccess.Parent is InvocationExpressionSyntax invocation
-			&& EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, invocation, out _);
+			&& EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, invocation, cancellationToken, out _);
 	}
 }

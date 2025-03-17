@@ -50,7 +50,7 @@ public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer :
 		var invocation = (InvocationExpressionSyntax)context.Node;
 
 		// Check if the invocation is a member access like "something.ToList()"
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, out var methodName)
+		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)
 			|| methodName is not (nameof(Enumerable.ToList) or nameof(Enumerable.ToArray)))
 		{
 			return;
@@ -66,7 +66,7 @@ public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer :
 
 		// Check if the outer invocation is also a LINQ extension method
 		// TODO: What about List instance methods and Enumerable extension methods that have the same name? (Contains, Reverse, ToArray)
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, outerInvocation, out var parentMethodName))
+		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, outerInvocation, context.CancellationToken, out var parentMethodName))
 		{
 			return;
 		}

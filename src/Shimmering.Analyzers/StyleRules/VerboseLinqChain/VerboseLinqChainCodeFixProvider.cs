@@ -57,7 +57,7 @@ public sealed class VerboseLinqChainCodeFixProvider : ShimmeringCodeFixProvider
 		var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
 		if (semanticModel == null) { return document; }
 
-		if (!VerboseLinqChainHelpers.TryConstructCollectionExpression(semanticModel, lastInvocation, out var collectionExpression)
+		if (!VerboseLinqChainHelpers.TryConstructCollectionExpression(semanticModel, lastInvocation, cancellationToken, out var collectionExpression)
 			|| collectionExpression == null)
 		{
 			return document;

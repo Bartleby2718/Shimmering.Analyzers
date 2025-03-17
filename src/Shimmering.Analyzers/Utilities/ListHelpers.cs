@@ -5,11 +5,11 @@ namespace Shimmering.Analyzers.Utilities;
 internal static class ListHelpers
 {
 	public static bool IsListInstanceMethodCall(
-		SemanticModel semanticModel, InvocationExpressionSyntax invocation, [NotNullWhen(returnValue: true)] out string? methodName)
+		SemanticModel semanticModel, InvocationExpressionSyntax invocation, CancellationToken cancellationToken, [NotNullWhen(returnValue: true)] out string? methodName)
 	{
 		methodName = null;
 
-		if (semanticModel.GetSymbolInfo(invocation).Symbol is not IMethodSymbol methodSymbol) { return false; }
+		if (semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol is not IMethodSymbol methodSymbol) { return false; }
 		if (methodSymbol.IsStatic) { return false; }
 
 		var containingClass = methodSymbol.ContainingType;

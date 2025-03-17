@@ -44,7 +44,7 @@ public sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnal
 	{
 		var parameter = (ParameterSyntax)context.Node;
 		if (parameter.Type is not NullableTypeSyntax nullableType) { return; }
-		if (context.SemanticModel.GetSymbolInfo(nullableType.ElementType).Symbol is not INamedTypeSymbol typeSymbol) { return; }
+		if (context.SemanticModel.GetSymbolInfo(nullableType.ElementType, context.CancellationToken).Symbol is not INamedTypeSymbol typeSymbol) { return; }
 		var cancellationTokenSymbol = context.Compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.CancellationToken);
 		if (SymbolEqualityComparer.Default.Equals(typeSymbol, cancellationTokenSymbol))
 		{

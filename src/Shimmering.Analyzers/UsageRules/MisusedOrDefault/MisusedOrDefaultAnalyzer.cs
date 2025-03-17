@@ -47,7 +47,7 @@ public sealed class MisusedOrDefaultAnalyzer : ShimmeringSyntaxNodeAnalyzer
 	{
 		var suppressNode = (PostfixUnaryExpressionSyntax)context.Node;
 		if (suppressNode.Operand is not InvocationExpressionSyntax invocation) { return; }
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, out var methodName)) { return; }
+		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
 		if (!MisusedOrDefaultHelpers.MethodMapping.TryGetValue(methodName, out var replacementMethodName)) { return; }
 
 		var diagnostic = Diagnostic.Create(Rule, suppressNode.GetLocation(), methodName, replacementMethodName);

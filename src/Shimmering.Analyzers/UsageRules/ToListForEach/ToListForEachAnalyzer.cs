@@ -52,7 +52,7 @@ public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 
 		// the last invocation should be ForEach()
 		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess
-			|| !ListHelpers.IsListInstanceMethodCall(context.SemanticModel, invocation, out var methodName)
+			|| !ListHelpers.IsListInstanceMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)
 			|| methodName != nameof(List<int>.ForEach))
 		{
 			return;
@@ -60,7 +60,7 @@ public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 
 		// the target of ForEach should be ToList()
 		if (memberAccess.Expression is not InvocationExpressionSyntax toListInvocation
-			|| !EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, toListInvocation, out var innerMethodName)
+			|| !EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, toListInvocation, context.CancellationToken, out var innerMethodName)
 			|| innerMethodName != nameof(Enumerable.ToList))
 		{
 			return;

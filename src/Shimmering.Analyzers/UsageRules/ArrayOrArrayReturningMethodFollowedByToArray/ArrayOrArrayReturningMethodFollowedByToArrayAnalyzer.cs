@@ -46,7 +46,7 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Shimm
 	{
 		var invocation = (InvocationExpressionSyntax)context.Node;
 
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, out var methodName)) { return; }
+		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
 		if (methodName != nameof(Enumerable.ToArray)) { return; }
 
 		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;

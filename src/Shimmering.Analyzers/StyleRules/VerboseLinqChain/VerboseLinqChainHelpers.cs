@@ -11,9 +11,10 @@ internal static class VerboseLinqChainHelpers
 	public static bool TryConstructCollectionExpression(
 		SemanticModel semanticModel,
 		InvocationExpressionSyntax lastInvocation,
+		CancellationToken cancellationToken,
 		out CollectionExpressionSyntax? collectionElements)
 	{
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, lastInvocation, out var lastMethodName)
+		if (!EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, lastInvocation, cancellationToken, out var lastMethodName)
 			|| lastMethodName is not (nameof(Enumerable.ToArray) or nameof(Enumerable.ToList) or "ToHashSet")
 			|| lastInvocation.Expression is not MemberAccessExpressionSyntax lastMemberAccess
 			|| lastMemberAccess.Expression is not InvocationExpressionSyntax invocation)

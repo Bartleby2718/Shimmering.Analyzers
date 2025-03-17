@@ -55,7 +55,7 @@ public sealed class VerboseLinqChainAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		// Only argument and variable declaration are supported. (e.g. tuple expression is not touched)
 		if (!isArgumentToInvocation && !isVariableDeclaration) { return; }
 
-		if (!VerboseLinqChainHelpers.TryConstructCollectionExpression(semanticModel, invocation, out _)) { return; }
+		if (!VerboseLinqChainHelpers.TryConstructCollectionExpression(semanticModel, invocation, context.CancellationToken, out _)) { return; }
 
 		var diagnostic = Diagnostic.Create(Rule, invocation.GetLocation());
 		context.ReportDiagnostic(diagnostic);

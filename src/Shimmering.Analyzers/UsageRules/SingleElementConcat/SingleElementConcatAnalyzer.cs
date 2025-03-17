@@ -47,7 +47,7 @@ public sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
 	{
 		if (context.Node is not InvocationExpressionSyntax invocation) { return; }
 
-		if (!IsConcat(context.SemanticModel, invocation)) { return; }
+		if (!IsConcat(context.SemanticModel, invocation, context.CancellationToken)) { return; }
 
 		var supportsCollectionExpressions = CsharpVersionHelpers.SupportsCollectionExpressions(context);
 		if (SingleElementConcatHelpers.TryGetSingleElement(invocation, supportsCollectionExpressions, out _))
@@ -56,7 +56,7 @@ public sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		}
 	}
 
-	private static bool IsConcat(SemanticModel semanticModel, InvocationExpressionSyntax invocation)
+	private static bool IsConcat(SemanticModel semanticModel, InvocationExpressionSyntax invocation, CancellationToken cancellationToken)
 	{
 		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess)
 			return false;
@@ -66,7 +66,7 @@ public sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
 			return false;
 
 		// validate that it's an extension method
-		if (semanticModel.GetSymbolInfo(memberAccess).Symbol is not IMethodSymbol methodSymbol)
+		if (semanticModel.GetSymbolInfo(memberAccess, cancellationToken).Symbol is not IMethodSymbol methodSymbol)
 			return false;
 		if (methodSymbol.MethodKind != MethodKind.ReducedExtension)
 			return false;
