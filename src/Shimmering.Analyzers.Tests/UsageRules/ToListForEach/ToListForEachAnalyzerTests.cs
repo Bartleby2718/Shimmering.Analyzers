@@ -31,4 +31,23 @@ public class ToListForEachAnalyzerTests : ShimmeringAnalyzerTests<ToListForEachA
 		}
 		""");
 #pragma warning restore SA1027 // Use tabs correctly
+
+	[Test]
+	public Task TestIQueryableIsNotFlagged() => Verifier.VerifyAnalyzerAsync(
+		"""
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do()
+				{
+					var iqueryable = Enumerable.Empty<int>().AsQueryable();
+					iqueryable.ToList().ForEach(n => Console.WriteLine(n));
+				}
+			}
+		}
+		""");
 }
