@@ -390,6 +390,8 @@ dotnet_diagnostic.IDE0130.severity = error
 #### StyleCop.Analyzers (SA) ####
 # SingleLineCommentsMustBeginWithSingleSpace
 dotnet_diagnostic.SA1005.severity = none
+# BlockStatementsMustNotContainEmbeddedComments
+dotnet_diagnostic.SA1108.severity = none
 # ParameterMustNotSpanMultipleLines
 dotnet_diagnostic.SA1118.severity = none
 # DoNotCombineAttributes

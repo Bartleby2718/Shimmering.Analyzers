@@ -14,6 +14,7 @@ SHIMMER1012 |  Usage   | Warning  | ArrayOrArrayReturningMethodFollowedByToArray
 SHIMMER1020 |  Usage   |  Info    | RedundantSpreadElementAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1020.md)
 SHIMMER1021 |  Usage   | Disabled | SingleUseIEnumerableMaterializationAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1021.md)
 SHIMMER1030 |  Usage   | Warning  | UseDiscardForUnusedOutVariableAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1030.md)
+SHIMMER1040 |  Usage   |  Info    | MissingRemoveEmptyEntriesAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1040.md)
 SHIMMER1100 |  Usage   | Warning  | MisusedOrDefaultAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1100.md)
 SHIMMER1101 |  Usage   |  Info    | SingleElementConcatAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1101.md)
 SHIMMER1102 |  Usage   | Disabled | UniqueNonSetCollectionAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1102.md)

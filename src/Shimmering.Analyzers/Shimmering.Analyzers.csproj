@@ -22,7 +22,7 @@
   <!-- Package metadata from https://learn.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices -->
   <PropertyGroup>
     <PackageId>Shimmering.Analyzers</PackageId>
-    <PackageVersion>1.0.0-alpha05</PackageVersion>
+    <PackageVersion>1.0.0-alpha06</PackageVersion>
     <Authors>Bartleby</Authors>
     <Description>Package Description</Description>
     <Copyright>Copyright (C) Bartleby 2025</Copyright>

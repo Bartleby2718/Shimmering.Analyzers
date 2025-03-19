@@ -16,6 +16,8 @@ internal static class DiagnosticIds
 		public const string SingleUseIEnumerableMaterialization = "SHIMMER1021";
 		// 103X: discard
 		public const string UseDiscardForUnusedOutVariable = "SHIMMER1030";
+		// 104X: string.Split()
+		public const string MissingRemoveEmptyEntries = "SHIMMER1040";
 
 		// 110X: idiomatic use of enumerable extension methods
 		public const string MisusedOrDefault = "SHIMMER1100";
