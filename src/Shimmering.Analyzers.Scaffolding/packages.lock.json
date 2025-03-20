@@ -37,11 +37,6 @@
           "StyleCop.Analyzers.Unstable": "1.2.0.556"
         }
       },
-      "coverlet.collector": {
-        "type": "Transitive",
-        "resolved": "6.0.3",
-        "contentHash": "SvLbRq7gjzE34BI90vP6ge812+PAjinNoKhdFZHwVEu/ozJgZY+0KyDh1K0teDeMeuzQJuF8OvleRBYXsZDz0A=="
-      },
       "DiffPlex": {
         "type": "Transitive",
         "resolved": "1.7.2",
@@ -810,8 +805,7 @@
           "NUnit.Analyzers": "[4.6.0, )",
           "NUnit3TestAdapter": "[4.6.0, )",
           "NunitXml.TestLogger": "[3.0.117, )",
-          "Shimmering.Analyzers": "[1.0.0-alpha04, )",
-          "coverlet.collector": "[6.0.3, )"
+          "Shimmering.Analyzers": "[1.0.0-alpha06, )"
         }
       }
     }
