@@ -7,7 +7,7 @@
 | ID                                 | SHIMMER1100
 | Analyzer title                     | OrDefault()! is redundant
 | Analyzer message                   | Replace '{0}!' with '{1}'
-| Code fix title                     | Simplify 'OrDefault' method call
+| Code fix title                     | Simplify 'OrDefault()!' method call
 | Default severity                   | Warning
 | Minimum framework/language version | N/A
 | Enabled by default?                | Yes
@@ -17,7 +17,7 @@
 
 ## Detailed Explanation
 
-This analyzer detects instances where a LINQ `OrDefault` method is immediately followed by the null-forgiving operator (`!`). Such usage is redundant because the non-`OrDefault` counterpart of the method exists and should be used instead, when you expect there will _always_ be such an element.
+This analyzer detects instances where a built-in LINQ `OrDefault` method is immediately followed by the null-forgiving operator (`!`). Such usage is redundant because the non-`OrDefault` counterpart of the method exists and should be used instead, when you expect there will _always_ be such an element.
 
 If you believe the `OrDefault` method could return `null` but the null-forgiving operator (`!`) may have been added by mistake, you should remove the null-forgiving operator instead.
 
@@ -61,5 +61,6 @@ namespace Tests
 
 Assuming that the null-forgiving operator (`!`) was intentional, updated code will always be clearer and shorter, while the behavior is exactly the same.
 
-# When to suppress
-This should not be suppressed, even though you may not end up replacing the flagged code with the non-`OrDefault` method.
+## When to suppress
+
+This should not be suppressed, although you may fix instead by removing an unnecessary `!`.

@@ -6,14 +6,14 @@
 |------------------------------------|-------
 | ID                                 | SHIMMER1XXX
 | Analyzer title                     | 
-| Analyzer message                   | 
-| Code fix title                     | 
-| Default severity                   | Info
+| Analyzer message                   | This is what you see in the Error List on Visual Studio.
+| Code fix title                     | This is what you see if you click the light bulb for flagged code on Visual Studio.
+| Default severity                   | Error|Warning|Info|Hidden
 | Minimum framework/language version | 
-| Enabled by default?                | Yes
-| Category                           | Usage
+| Enabled by default?                | Yes|No
+| Category                           | Usage|Style
 | Link to code                       | [BadPracticeAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/BadPractice/BadPracticeAnalyzer.cs)
-| Code fix exists?                   | Yes
+| Code fix exists?                   | Yes|No
 
 ## Detailed Explanation
 
