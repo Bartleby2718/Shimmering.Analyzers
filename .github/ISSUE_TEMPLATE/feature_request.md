@@ -10,7 +10,11 @@ assignees: ''
 ### What C# code do you want to flag and why?
 
 
-### In which versions of .NET does the flagged API exist? Please provide a link. ([example for `String.Split` Method](https://learn.microsoft.com/en-us/dotnet/api/system.string.split)).
+### Does the new rule enforce a best practice in C#/.NET or just a coding style?
+
+
+### In which versions of C#/.NET does the flagged syntax/API exist? Please provide a link.
+[example for `String.Split` Method](https://learn.microsoft.com/en-us/dotnet/api/system.string.split)
 
 
 ### How should the code be fixed?
