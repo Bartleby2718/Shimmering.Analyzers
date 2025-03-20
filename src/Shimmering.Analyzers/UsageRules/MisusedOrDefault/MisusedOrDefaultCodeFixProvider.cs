@@ -9,7 +9,7 @@ namespace Shimmering.Analyzers.UsageRules.MisusedOrDefault;
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MisusedOrDefaultCodeFixProvider))]
 public sealed class MisusedOrDefaultCodeFixProvider : ShimmeringCodeFixProvider
 {
-	private const string Title = "Simplify 'OrDefault' method call";
+	private const string Title = "Simplify 'OrDefault()!' method call";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.MisusedOrDefault];
