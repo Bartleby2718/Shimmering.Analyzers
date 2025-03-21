@@ -51,7 +51,7 @@ namespace Tests
 
 ## Justification of the Severity
 
-While a nullable CancellationToken (`CancellationToken?`) is syntactically valid, it promotes an anti-pattern that requires unnecessary null handling logic.
+While a nullable CancellationToken (`CancellationToken?`) is syntactically valid, it promotes an anti-pattern that requires unnecessary null handling logic. There is no situation where you'd want to prefer `Cancellation?` token over `CancellationToken.None`.
 
 ## When to Suppress
 
