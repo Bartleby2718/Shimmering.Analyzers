@@ -17,7 +17,7 @@
 
 ## Detailed Explanation
 
-There's an overload of [`String.Split()`](https://learn.microsoft.com/en-us/dotnet/api/system.string.split)Using `Enumerable.Concat()` to add a single element is semantically imprecise and may mislead readers about the intent of the code. The analyzer flags these instances because `.Concat()` is designed for merging two enumerables, while `.Append()` more clearly indicates the addition of one element to an existing enumerable.
+The `StringSplitOptions.RemoveEmptyEntries` parameter allows you to remove empty entries in one [`String.Split()`](https://learn.microsoft.com/en-us/dotnet/api/system.string.split) call and therefore is more efficient than chaining with a LINQ call or two to do the same thing.
 
 ## Examples
 
@@ -58,4 +58,4 @@ namespace Tests
 
 ## Justification of the Severity
 
-The overload that uses `StringSplitOptions` is more efficient because it can return the desired result in a single pass. However, the flagged code is also highly readable.
+The code fix improves performance while keeping the code maintainable, but the flagged code does not cause any bugs or errors.
