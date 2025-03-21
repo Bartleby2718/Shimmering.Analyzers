@@ -10,6 +10,8 @@ permissions:
   id-token: write
   contents: write
   checks: write
+  # needed for marocchino/sticky-pull-request-comment@v2
+  pull-requests: write
 
 jobs:
   build:
