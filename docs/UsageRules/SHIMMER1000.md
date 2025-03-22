@@ -55,7 +55,7 @@ While a nullable CancellationToken (`CancellationToken?`) is syntactically valid
 
 ## When to Suppress
 
-Suppress this diagnostic only if it's unmanageable to update the corresponding tests. However, you should likely be able to leverage simple string replacement (e.g. `It.IsAny<CancellationToken>()` to `It.IsAny<CancellationToken?>()` if your tests use [Moq](https://www.nuget.org/packages/moq/)) to do this in tests as well.
+Suppress this diagnostic only if it's unmanageable to update the corresponding tests. However, you should likely be able to leverage simple string replacement (e.g. `It.IsAny<CancellationToken?>()` to `It.IsAny<CancellationToken>()` if your tests use [Moq](https://www.nuget.org/packages/moq/)) to do this in tests as well.
 
 ## Related Rules
 
