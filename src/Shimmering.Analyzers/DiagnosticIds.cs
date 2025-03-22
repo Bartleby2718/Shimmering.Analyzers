@@ -15,7 +15,7 @@ internal static class DiagnosticIds
 		public const string RedundantSpreadElement = "SHIMMER1020";
 		public const string SingleUseIEnumerableMaterialization = "SHIMMER1021";
 		// 104X: string.Split()
-		public const string MissingRemoveEmptyEntries = "SHIMMER1040";
+		public const string MissingRemoveEmptyEntries = "SHIMMER1030";
 
 		// 110X: idiomatic use of enumerable extension methods
 		public const string MisusedOrDefault = "SHIMMER1100";

@@ -4,7 +4,7 @@
 
 | Field                              | Value
 |------------------------------------|-------
-| ID                                 | SHIMMER1040
+| ID                                 | SHIMMER1030
 | Analyzer title                     | Use StringSplitOptions.RemoveEmptyEntries
 | Analyzer message                   | Use the overload of String.Split with StringSplitOptions.RemoveEmptyEntries to remove empty entries
 | Code fix title                     | Optimize string.Split()
