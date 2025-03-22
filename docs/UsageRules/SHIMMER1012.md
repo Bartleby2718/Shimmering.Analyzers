@@ -1,1 +1,63 @@
 # ArrayOrArrayReturningMethodFollowedByToArray
+
+## Diagnostic Rule Overview
+
+| Field                              | Value
+|------------------------------------|-------
+| ID                                 | SHIMMER1012
+| Analyzer title                     | An array creation like new[] { 1 } or array-returning method like String.Split() must not be followed by .ToArray()
+| Analyzer message                   | .ToArray() is redundant
+| Code fix title                     | Remove redundant .ToArray()
+| Default severity                   | Warning
+| Minimum framework/language version | 
+| Enabled by default?                | Ye
+| Category                           | Usage
+| Link to code                       | [ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/ArrayOrArrayReturningMethodFollowedByToArray/ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer.cs)
+| Code fix exists?                   | Yes
+
+## Detailed Explanation
+
+Calling `.ToArray()` on an already materialized array is redundant and wastes memory.
+
+## Examples
+
+Flagged code:
+```cs
+using System.Linq;
+
+namespace Tests;
+class Test
+{
+    void Do()
+    {
+        var array = [|"a b".Split(' ').ToArray()|];
+    }
+}
+```
+
+Fixed code:
+```cs
+using System.Linq;
+
+namespace Tests;
+class Test
+{
+    void Do()
+    {
+        var array = "a b".Split(' ');
+    }
+}
+```
+
+## Justification of the Severity
+
+While this is not a bug, this will slow down your code and increase memory usage.
+
+## Related Rules
+
+- [SHIMMER1010: ToList().ForEach() causes unnecessary memory allocation](./SHIMMER1010.md)
+- [SHIMMER1011: Unnecessary materialization to array/list in LINQ chain](./SHIMMER1011.md)
+
+## Inspiration
+
+This is from [@Treit](https://github.com/Treit)'s blog post https://mtreit.com/programming,/.net/2024/07/30/ToList.html. The same material was also covered in [this YouTube video](https://www.youtube.com/watch?v=LaoRkzSE5tI).
