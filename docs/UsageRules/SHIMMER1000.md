@@ -26,12 +26,10 @@ Flagged code:
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Tests
+namespace Tests;
+class Test
 {
-    class Test
-    {
-        Task DoAsync([|CancellationToken? cancellationToken = null|]) => Task.CompletedTask;
-    }
+    Task DoAsync([|CancellationToken? cancellationToken = null|]) => Task.CompletedTask;
 }
 ```
 
@@ -40,12 +38,10 @@ Fixed code:
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Tests
+namespace Tests;
+class Test
 {
-    class Test
-    {
-        Task DoAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
-    }
+    Task DoAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
 }
 ```
 

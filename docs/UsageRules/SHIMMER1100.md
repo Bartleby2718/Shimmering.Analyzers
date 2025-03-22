@@ -25,36 +25,33 @@ If you believe the `OrDefault` method could return `null` but the null-forgiving
 
 Flagged code:
 ```cs
-using System;
 using System.Linq;
 
-namespace Tests
+namespace Tests;
+class Test
 {
-    class Test
+    static int[] array = [1];
+    void Do()
     {
-        void Do()
-        {
-            var a = new[] { 1 }.SingleOrDefault()!;
-        }
+        var a = [|array.SingleOrDefault()!|];
     }
 }
 ```
 
 Fixed code:
 ```cs
-using System;
 using System.Linq;
 
-namespace Tests
+namespace Tests;
+class Test
 {
-    class Test
+    static int[] array = [1];
+    void Do()
     {
-        void Do()
-        {
-            var a = new[] { 1 }.Single();
-        }
+        var a = array.Single();
     }
 }
+
 ```
 
 ## Justification of the Severity

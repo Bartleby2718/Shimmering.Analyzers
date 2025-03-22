@@ -26,15 +26,13 @@ Flagged code:
 using System;
 using System.Linq;
 
-namespace Tests
+namespace Tests;
+class Test
 {
-    class Test
+    void Do(string input)
     {
-        void Do(string input)
-        {
-            var x = [|input.Split(' ')
-                .Where(x => x.Length > 0)|];
-        }
+        var x = [|input.Split(' ')
+            .Where(x => x.Length > 0)|];
     }
 }
 ```
@@ -44,14 +42,12 @@ Fixed code:
 using System;
 using System.Linq;
 
-namespace Tests
+namespace Tests;
+class Test
 {
-    class Test
+    void Do(string input)
     {
-        void Do(string input)
-        {
-            var x = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        }
+        var x = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
     }
 }
 ```
