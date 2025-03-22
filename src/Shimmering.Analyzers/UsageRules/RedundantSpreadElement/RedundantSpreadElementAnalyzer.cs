@@ -22,12 +22,10 @@ public sealed class RedundantSpreadElementAnalyzer : ShimmeringSyntaxNodeAnalyze
 		isEnabledByDefault: true);
 
 	public override string SampleCode => """
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
-			{
-				int[] Array => [1, [|.. new[] { 2, 3 }|], 4];
-			}
+			int[] Array => [1, [|.. new[] { 2, 3 }|], 4];
 		}
 		""";
 

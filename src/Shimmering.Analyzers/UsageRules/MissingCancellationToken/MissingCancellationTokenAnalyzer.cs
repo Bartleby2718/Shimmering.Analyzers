@@ -22,19 +22,17 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnaly
 
 #pragma warning disable SA1027 // Use tabs correctly
 	public override string SampleCode => """
-		using System.Threading.Tasks;
+        using System.Threading.Tasks;
 
-		namespace Tests
-		{
-		    class Test
-		    {
-		        async Task [|DoAsync|]()
-		        {
-		            await Task.CompletedTask;
-		        }
-		    }
-		}
-		"""
+        namespace Tests;
+        class Test
+        {
+            async Task [|DoAsync|]()
+            {
+                await Task.CompletedTask;
+            }
+        }
+        """
 #pragma warning restore SA1027 // Use tabs correctly
 ;
 

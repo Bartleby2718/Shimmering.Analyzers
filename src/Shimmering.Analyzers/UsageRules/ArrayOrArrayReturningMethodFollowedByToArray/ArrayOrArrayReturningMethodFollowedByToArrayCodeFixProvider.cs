@@ -14,14 +14,12 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProvider 
 	public override string SampleCodeFixed => """
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
-				{
-					var array = "a".Split(' ');
-				}
+				var array = "a b".Split(' ');
 			}
 		}
 		""";

@@ -16,20 +16,18 @@ public sealed class MissingCancellationTokenCodeFixProvider : ShimmeringCodeFixP
 
 #pragma warning disable SA1027 // Use tabs correctly
 	public override string SampleCodeFixed => """
-		using System.Threading.Tasks;
-		using System.Threading;
+        using System.Threading.Tasks;
+        using System.Threading;
 
-		namespace Tests
-		{
-		    class Test
-		    {
-		        async Task DoAsync(CancellationToken cancellationToken = default)
-		        {
-		            await Task.CompletedTask;
-		        }
-		    }
-		}
-		"""
+        namespace Tests;
+        class Test
+        {
+            async Task DoAsync(CancellationToken cancellationToken = default)
+            {
+                await Task.CompletedTask;
+            }
+        }
+        """
 #pragma warning restore SA1027 // Use tabs correctly
 ;
 

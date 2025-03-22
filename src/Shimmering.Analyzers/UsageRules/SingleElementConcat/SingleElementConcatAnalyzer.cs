@@ -21,17 +21,14 @@ public sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		isEnabledByDefault: true);
 
 	public override string SampleCode => """
-		using System;
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
-				{
-					var result = [|new[] { 1, 2 }.Concat(new[] { 3 })|];
-				}
+				var result = [|new[] { 1, 2 }.Concat(new[] { 3 })|];
 			}
 		}
 		""";

@@ -19,14 +19,12 @@ public sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		isEnabledByDefault: true);
 
 	public override string SampleCode => """
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
-				{
-					// [|the code to flag|] and the rest of the code
-				}
+				// [|the code to flag|] and the rest of the code
 			}
 		}
 		""";

@@ -12,14 +12,12 @@ public sealed class BadPracticeCodeFixProvider : ShimmeringCodeFixProvider
 		[DiagnosticIds.CATEGORY_PLACEHOLDERRules.BadPractice];
 
 	public override string SampleCodeFixed => """
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
-				{
-					// the code after the fix
-				}
+				// the code after the fix
 			}
 		}
 		""";

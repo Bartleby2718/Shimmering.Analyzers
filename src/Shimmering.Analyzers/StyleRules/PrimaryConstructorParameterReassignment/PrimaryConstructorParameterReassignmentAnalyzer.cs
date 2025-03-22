@@ -21,14 +21,12 @@ public sealed class PrimaryConstructorParameterReassignmentAnalyzer : Shimmering
 		isEnabledByDefault: false);
 
 	public override string SampleCode => """
-		namespace Tests
+		namespace Tests;
+		class Test(int x)
 		{
-			class Test(int x)
+			void Do()
 			{
-				void Do()
-				{
-					[|x|] = x / 2;
-				}
+				[|x|] = x / 2;
 			}
 		}
 		""";

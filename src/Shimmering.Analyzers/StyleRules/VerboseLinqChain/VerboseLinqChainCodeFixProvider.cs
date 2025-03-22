@@ -16,14 +16,13 @@ public sealed class VerboseLinqChainCodeFixProvider : ShimmeringCodeFixProvider
 	public override string SampleCodeFixed => """
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			static int[] array1 = [0, 1];
+			void Do()
 			{
-				void Do()
-				{
-					int[] array = [3, .. new[] { 1 }, 2];
-				}
+				int[] array2 = [3, .. array1, 2];
 			}
 		}
 		""";

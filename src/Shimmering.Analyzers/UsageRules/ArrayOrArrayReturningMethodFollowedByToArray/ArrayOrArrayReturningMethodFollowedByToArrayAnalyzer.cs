@@ -23,14 +23,12 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Shimm
 	public override string SampleCode => """
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
-				{
-					var array = [|"a".Split(' ').ToArray()|];
-				}
+				var array = [|"a b".Split(' ').ToArray()|];
 			}
 		}
 		""";

@@ -21,19 +21,16 @@ public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer :
 		isEnabledByDefault: true);
 
 	public override string SampleCode => """
-		using System;
 		using System.Collections.Generic;
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
-				{
-					int[] numbers = [];
-					var greaterThanThree = numbers.[|ToArray|]().Where(x => x > 3);
-				}
+				int[] numbers = [];
+				var greaterThanThree = numbers.[|ToArray|]().Where(x => x > 3);
 			}
 		}
 		""";

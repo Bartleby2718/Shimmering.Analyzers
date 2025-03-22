@@ -23,16 +23,14 @@ public sealed class RedundantOutVariableAnalyzer : ShimmeringSyntaxNodeAnalyzer
 	public override string SampleCode => """
 		using System;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do(string dayOfWeekString)
 			{
-				void Do(string dayOfWeekString)
+				if (Enum.TryParse<DayOfWeek>(dayOfWeekString, [|out DayOfWeek dayOfWeek1|]))
 				{
-					if (Enum.TryParse<DayOfWeek>(dayOfWeekString, [|out DayOfWeek dayOfWeek1|]))
-					{
-						DayOfWeek dayOfWeek2 = dayOfWeek1;
-					}
+					DayOfWeek dayOfWeek2 = dayOfWeek1;
 				}
 			}
 		}

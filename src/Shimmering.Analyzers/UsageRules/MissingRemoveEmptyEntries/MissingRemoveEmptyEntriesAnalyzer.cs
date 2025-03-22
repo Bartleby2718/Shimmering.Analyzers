@@ -24,15 +24,13 @@ public sealed class MissingRemoveEmptyEntriesAnalyzer : ShimmeringSyntaxNodeAnal
 		using System;
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do(string input)
 			{
-				void Do(string input)
-				{
-					var x = [|input.Split(' ')
-						.Where(x => x.Length > 0)|];
-				}
+				var x = [|input.Split(' ')
+					.Where(x => x.Length > 0)|];
 			}
 		}
 		""";

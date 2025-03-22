@@ -12,12 +12,10 @@ public sealed class RedundantSpreadElementCodeFixProvider : ShimmeringCodeFixPro
 		[DiagnosticIds.UsageRules.RedundantSpreadElement];
 
 	public override string SampleCodeFixed => """
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
-			{
-				int[] Array => [1, 2, 3, 4];
-			}
+			int[] Array => [1, 2, 3, 4];
 		}
 		""";
 

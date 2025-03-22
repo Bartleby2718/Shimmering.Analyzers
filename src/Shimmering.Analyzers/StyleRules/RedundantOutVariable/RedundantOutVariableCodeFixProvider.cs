@@ -16,15 +16,13 @@ public sealed class RedundantOutVariableCodeFixProvider : ShimmeringCodeFixProvi
 	public override string SampleCodeFixed => """
 		using System;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do(string dayOfWeekString)
 			{
-				void Do(string dayOfWeekString)
+				if (Enum.TryParse<DayOfWeek>(dayOfWeekString, out DayOfWeek dayOfWeek2))
 				{
-					if (Enum.TryParse<DayOfWeek>(dayOfWeekString, out DayOfWeek dayOfWeek2))
-					{
-					}
 				}
 			}
 		}

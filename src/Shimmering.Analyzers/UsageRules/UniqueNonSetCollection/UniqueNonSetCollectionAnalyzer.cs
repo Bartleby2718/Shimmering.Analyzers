@@ -21,19 +21,16 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringSyntaxNodeAnalyze
 		isEnabledByDefault: false);
 
 	public override string SampleCode => """
-		using System;
 		using System.Collections.Generic;
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
-				{
-					List<int> numbers = [];
-					var distinctNumbers = [|numbers.Distinct().ToArray()|];
-				}
+				List<int> numbers = [];
+				var distinctNumbers = [|numbers.Distinct().ToArray()|];
 			}
 		}
 		""";

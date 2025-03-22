@@ -21,17 +21,15 @@ public sealed class MisusedOrDefaultAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		isEnabledByDefault: true);
 
 	public override string SampleCode => """
-		using System;
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			static int[] array = [1];
+			void Do()
 			{
-				void Do()
-				{
-					var a = [|new[] { 1 }.SingleOrDefault()!|];
-				}
+				var a = [|array.SingleOrDefault()!|];
 			}
 		}
 		""";

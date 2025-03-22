@@ -24,12 +24,10 @@ public sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnal
 		using System.Threading;
 		using System.Threading.Tasks;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
-			{
-				Task DoAsync([|CancellationToken? cancellationToken = null|]) => Task.CompletedTask;
-			}
+			Task DoAsync([|CancellationToken? cancellationToken = null|]) => Task.CompletedTask;
 		}
 		""";
 

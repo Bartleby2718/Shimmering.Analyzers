@@ -19,12 +19,10 @@ public sealed class NegatedTernaryConditionAnalyzer : ShimmeringSyntaxNodeAnalyz
 		isEnabledByDefault: true);
 
 	public override string SampleCode => """
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
-			{
-				string Do(bool condition) => [|!condition ? "when false" : "when true"|];
-			}
+			string Do(bool condition) => [|!condition ? "when false" : "when true"|];
 		}
 		""";
 

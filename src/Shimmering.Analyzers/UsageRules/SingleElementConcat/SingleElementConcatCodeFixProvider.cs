@@ -12,17 +12,14 @@ public sealed class SingleElementConcatCodeFixProvider : ShimmeringCodeFixProvid
 		[DiagnosticIds.UsageRules.SingleElementConcat];
 
 	public override string SampleCodeFixed => """
-		using System;
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
-				{
-					var result = new[] { 1, 2 }.Append(3);
-				}
+				var result = new[] { 1, 2 }.Append(3);
 			}
 		}
 		""";

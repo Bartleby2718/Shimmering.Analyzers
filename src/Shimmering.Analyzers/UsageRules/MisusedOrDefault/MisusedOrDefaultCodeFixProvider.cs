@@ -15,17 +15,15 @@ public sealed class MisusedOrDefaultCodeFixProvider : ShimmeringCodeFixProvider
 		[DiagnosticIds.UsageRules.MisusedOrDefault];
 
 	public override string SampleCodeFixed => """
-		using System;
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			static int[] array = [1];
+			void Do()
 			{
-				void Do()
-				{
-					var a = new[] { 1 }.Single();
-				}
+				var a = array.Single();
 			}
 		}
 		""";

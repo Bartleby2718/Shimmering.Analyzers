@@ -14,12 +14,10 @@ public sealed class NegatedTernaryConditionCodeFixProvider : ShimmeringCodeFixPr
 		[DiagnosticIds.StyleRules.NegatedTernaryCondition];
 
 	public override string SampleCodeFixed => """
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
-			{
-				string Do(bool condition) => condition ? "when true" : "when false";
-			}
+			string Do(bool condition) => condition ? "when true" : "when false";
 		}
 		""";
 

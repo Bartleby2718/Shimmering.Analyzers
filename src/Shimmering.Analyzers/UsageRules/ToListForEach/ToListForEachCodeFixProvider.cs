@@ -15,23 +15,21 @@ public sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
 
 #pragma warning disable SA1027 // Use tabs correctly
 	public override string SampleCodeFixed => """
-		using System;
-		using System.Linq;
+        using System;
+        using System.Linq;
 
-		namespace Tests
-		{
-		    class Test
-		    {
-		        void Do(int[] numbers)
-		        {
-		            foreach (var n in numbers)
-		            {
-		                Console.WriteLine(n);
-		            }
-		        }
-		    }
-		}
-		"""
+        namespace Tests;
+        class Test
+        {
+            void Do(int[] numbers)
+            {
+                foreach (var n in numbers)
+                {
+                    Console.WriteLine(n);
+                }
+            }
+        }
+        """
 #pragma warning restore SA1027 // Use tabs correctly
 ;
 

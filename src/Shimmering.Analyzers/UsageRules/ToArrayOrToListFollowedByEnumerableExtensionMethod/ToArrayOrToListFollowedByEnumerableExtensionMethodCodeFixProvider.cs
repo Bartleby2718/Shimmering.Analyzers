@@ -12,19 +12,16 @@ public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodCodeFixPro
 		[DiagnosticIds.UsageRules.ToArrayOrToListFollowedByEnumerableExtensionMethod];
 
 	public override string SampleCodeFixed => """
-		using System;
 		using System.Collections.Generic;
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
-				{
-					int[] numbers = [];
-					var greaterThanThree = numbers.Where(x => x > 3);
-				}
+				int[] numbers = [];
+				var greaterThanThree = numbers.Where(x => x > 3);
 			}
 		}
 		""";

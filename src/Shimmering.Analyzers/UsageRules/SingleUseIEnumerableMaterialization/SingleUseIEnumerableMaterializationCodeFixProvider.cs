@@ -16,18 +16,16 @@ public sealed class SingleUseIEnumerableMaterializationCodeFixProvider : Shimmer
 		using System.Collections.Generic;
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
+				List<int> numbers = [];
+				var oddNumbers = numbers.Where(n => n % 2 == 1);
+				foreach (var oddNumber in oddNumbers)
 				{
-					List<int> numbers = [];
-					var oddNumbers = numbers.Where(n => n % 2 == 1);
-					foreach (var oddNumber in oddNumbers)
-					{
-						Console.WriteLine(oddNumber);
-					}
+					Console.WriteLine(oddNumber);
 				}
 			}
 		}

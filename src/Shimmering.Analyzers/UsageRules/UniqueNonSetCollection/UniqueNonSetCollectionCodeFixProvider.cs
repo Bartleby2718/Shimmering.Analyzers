@@ -12,19 +12,16 @@ public sealed class UniqueNonSetCollectionCodeFixProvider : ShimmeringCodeFixPro
 		[DiagnosticIds.UsageRules.UniqueNonSetCollection];
 
 	public override string SampleCodeFixed => """
-		using System;
 		using System.Collections.Generic;
 		using System.Linq;
 
-		namespace Tests
+		namespace Tests;
+		class Test
 		{
-			class Test
+			void Do()
 			{
-				void Do()
-				{
-					List<int> numbers = [];
-					var distinctNumbers = numbers.ToHashSet();
-				}
+				List<int> numbers = [];
+				var distinctNumbers = numbers.ToHashSet();
 			}
 		}
 		""";
