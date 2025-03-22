@@ -17,7 +17,7 @@
 
 ## Detailed Explanation
 
-The `StringSplitOptions.RemoveEmptyEntries` parameter allows you to remove empty entries in one [`String.Split()`](https://learn.microsoft.com/en-us/dotnet/api/system.string.split) call and therefore is more efficient than chaining with a LINQ call or two to do the same thing.
+The `StringSplitOptions.RemoveEmptyEntries` parameter allows you to remove empty entries in a single [`String.Split()`](https://learn.microsoft.com/en-us/dotnet/api/system.string.split) call and therefore is more efficient than chaining with a LINQ call or two to do the same thing.
 
 ## Examples
 
@@ -58,4 +58,4 @@ namespace Tests
 
 ## Justification of the Severity
 
-The code fix improves performance while keeping the code maintainable, but the flagged code does not cause any bugs or errors.
+The code fix improves performance while keeping the code readable, but the flagged code does not cause any bugs or errors.
