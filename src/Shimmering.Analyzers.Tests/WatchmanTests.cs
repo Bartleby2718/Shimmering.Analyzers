@@ -41,4 +41,22 @@ public class WatchmanTests
 			});
 		}
 	}
+
+	[Test]
+	public void TestAllAbstractClassesStartWithShimmering()
+	{
+		var abstractClasses = typeof(ShimmeringAnalyzer).Assembly
+			.GetTypes()
+			.Where(t => t.IsClass && t.IsAbstract && !t.IsSealed);
+
+		var invalidClasses = abstractClasses
+			.Where(t => !t.Name.StartsWith("Shimmering", StringComparison.Ordinal))
+			.Select(t => t.Name)
+			.ToArray();
+
+		Assert.That(
+			invalidClasses,
+			Is.Empty,
+			$"The following abstract classes do not start with 'Abc': {string.Join(", ", invalidClasses)}");
+	}
 }
