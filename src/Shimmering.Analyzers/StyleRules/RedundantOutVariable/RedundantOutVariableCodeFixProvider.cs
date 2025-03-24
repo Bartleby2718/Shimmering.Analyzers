@@ -21,7 +21,7 @@ public sealed class RedundantOutVariableCodeFixProvider : ShimmeringCodeFixProvi
 		{
 			void Do(string dayOfWeekString)
 			{
-				if (Enum.TryParse<DayOfWeek>(dayOfWeekString, out DayOfWeek dayOfWeek2))
+				if (Enum.TryParse(dayOfWeekString, out DayOfWeek dayOfWeek2))
 				{
 				}
 			}
