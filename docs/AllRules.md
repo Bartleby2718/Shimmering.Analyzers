@@ -1,7 +1,7 @@
 # Categorization
 Currently, there are two categories in `Shimmering.Analyzers`:
-1. **Usage**: These rules have ID `SHIMMER1XXX` and aim to enforce better usage of .NET APIs and C# constructs. If your code is flagged, it means there's likely a more idiomatic or efficient way to achieve the same result in .NET.
-2. **Style**: These rules have ID `SHIMMER2XXX` and aim to enforce a consistent, but subjective, style throughout the code base. enforce the correct usage of .NET APIs and C# constructs. If your code is flagged, it means there's likely a more idiomatic or efficient way to achieve the same result in .NET.
+1. **Usage**: These rules have ID `SHIMMER1XXX` and aim to enforce better usage of .NET APIs and C# constructs. If your code is flagged, it means there's likely a more idiomatic or efficient or modern way to achieve the same result in .NET.
+2. **Style**: These rules have ID `SHIMMER2XXX` and aim to enforce a consistent, but subjective, style throughout the code base. enforce the correct usage of .NET APIs and C# constructs.
 
 Some **Usage** rules are disabled by default. This is because they enforce a best practice that does not apply in all cases. Savvy users can consider enabling such rules by default and suppressing them on a case-by-case basis in source code.
 

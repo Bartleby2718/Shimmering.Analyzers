@@ -25,9 +25,10 @@ public sealed class VerboseLinqChainAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		class Test
 		{
 			static int[] array1 = [0, 1];
+			static int[] array2 = [5];
 			void Do()
 			{
-				var array2 = [|array1.Append(2).Prepend(3).ToArray()|];
+				var array3 = [|array1.Append(2).Prepend(3).Concat(array2).ToArray()|];
 			}
 		}
 		""";
