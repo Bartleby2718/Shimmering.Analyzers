@@ -11,7 +11,7 @@ Some **Usage** rules are disabled by default. This is because they enforce a bes
 SHIMMER1000 |  Usage   | Warning  | 1.0.0 | NullableCancellationTokenAnalyzer, [Documentation](UsageRules/SHIMMER1000.md)
 SHIMMER1001 |  Usage   |   Info   | 1.0.0 | MissingCancellationTokenAnalyzer, [Documentation](UsageRules/SHIMMER1001.md)
 SHIMMER1010 |  Usage   | Warning  | 1.0.0 | ToListForEachAnalyzer, [Documentation](UsageRules/SHIMMER1010.md)
-SHIMMER1011 |  Usage   | Warning  | 1.0.0 | ToArrayOrToListFollowedByEnumerableExtensionMethodAEnalyzer, [Documentation](UsageRules/SHIMMER1011.md)
+SHIMMER1011 |  Usage   | Warning  | 1.0.0 | ToArrayOrToListFollowedByLinqMethodAEnalyzer, [Documentation](UsageRules/SHIMMER1011.md)
 SHIMMER1012 |  Usage   | Warning  | 1.0.0 | ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer, [Documentation](UsageRules/SHIMMER1012.md)
 SHIMMER1020 |  Usage   |   Info   | 1.0.0 | RedundantSpreadElementAnalyzer, [Documentation](UsageRules/SHIMMER1020.md)
 SHIMMER1021 |  Usage   | Disabled | 1.0.0 | SingleUseIEnumerableMaterializationAnalyzer, [Documentation](UsageRules/SHIMMER1021.md)

@@ -57,13 +57,13 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringSyntaxNodeAnalyze
 		}
 
 		// the invocation must be .ToArray() or .ToList()
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
+		if (!EnumerableHelpers.IsLinqMethodCall(semanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
 		if (methodName is not (nameof(Enumerable.ToArray) or nameof(Enumerable.ToList))) { return; }
 		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
 
 		// the previous invocation must be .Distinct()
 		if (memberAccess.Expression is not InvocationExpressionSyntax innerInvocation) { return; }
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, innerInvocation, context.CancellationToken, out var innerMethodName)) { return; }
+		if (!EnumerableHelpers.IsLinqMethodCall(semanticModel, innerInvocation, context.CancellationToken, out var innerMethodName)) { return; }
 		if (innerMethodName is not nameof(Enumerable.Distinct)) { return; }
 
 		// Technically, we shouldn't flag when ToHashSet() can cause a compilation failure.

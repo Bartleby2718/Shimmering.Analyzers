@@ -1,4 +1,4 @@
-# ToArrayOrToListFollowedByEnumerableExtensionMethod
+# ToArrayOrToListFollowedByLinqMethod
 
 ## Diagnostic Rule Overview
 
@@ -12,7 +12,7 @@
 | Minimum framework/language version | N/A
 | Enabled by default?                | Yes
 | Category                           | Usage
-| Link to code                       | [ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/ToArrayOrToListFollowedByEnumerableExtensionMethod/ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer.cs)
+| Link to code                       | [ToArrayOrToListFollowedByLinqMethodAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/ToArrayOrToListFollowedByLinqMethod/ToArrayOrToListFollowedByLinqMethodAnalyzer.cs)
 | Code fix exists?                   | Yes
 
 ## Detailed Explanation

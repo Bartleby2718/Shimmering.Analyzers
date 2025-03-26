@@ -66,7 +66,7 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
 
 		// Only proceed if the method is "ToList" or "ToArray"
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)
+		if (!EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)
 			|| methodName is not (nameof(Enumerable.ToList) or nameof(Enumerable.ToArray)))
 		{
 			return;
@@ -122,6 +122,6 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 	{
 		return identifier.Parent is MemberAccessExpressionSyntax memberAccess
 			&& memberAccess.Parent is InvocationExpressionSyntax invocation
-			&& EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, invocation, cancellationToken, out _);
+			&& EnumerableHelpers.IsLinqMethodCall(semanticModel, invocation, cancellationToken, out _);
 	}
 }

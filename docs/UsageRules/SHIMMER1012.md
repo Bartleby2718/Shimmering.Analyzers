@@ -5,7 +5,7 @@
 | Field                              | Value
 |------------------------------------|-------
 | ID                                 | SHIMMER1012
-| Analyzer title                     | An array creation like new[] { 1 } or array-returning method like String.Split() must not be followed by .ToArray()
+| Analyzer title                     | An array creation expression or array-returning method should not be followed by .ToArray()
 | Analyzer message                   | .ToArray() is redundant
 | Code fix title                     | Remove redundant .ToArray()
 | Default severity                   | Warning

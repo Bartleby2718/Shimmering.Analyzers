@@ -58,7 +58,7 @@ public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 
 		// the target of .ForEach should be .ToList()
 		if (memberAccess.Expression is not InvocationExpressionSyntax toListInvocation
-			|| !EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, toListInvocation, context.CancellationToken, out var innerMethodName)
+			|| !EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, toListInvocation, context.CancellationToken, out var innerMethodName)
 			|| innerMethodName != nameof(Enumerable.ToList))
 		{
 			return;

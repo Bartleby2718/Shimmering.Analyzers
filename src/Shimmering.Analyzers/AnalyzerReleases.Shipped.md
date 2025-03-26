@@ -9,7 +9,7 @@ Rule ID | Category | Severity | Notes
 SHIMMER1000 |  Usage   | Warning  | NullableCancellationTokenAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1000.md)
 SHIMMER1001 |  Usage   |  Info    | MissingCancellationTokenAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1001.md)
 SHIMMER1010 |  Usage   | Warning  | ToListForEachAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1010.md)
-SHIMMER1011 |  Usage   | Warning  | ToArrayOrToListFollowedByEnumerableExtensionMethodAEnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1011.md)
+SHIMMER1011 |  Usage   | Warning  | ToArrayOrToListFollowedByLinqMethodAEnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1011.md)
 SHIMMER1012 |  Usage   | Warning  | ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1012.md)
 SHIMMER1020 |  Usage   |  Info    | RedundantSpreadElementAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1020.md)
 SHIMMER1021 |  Usage   | Disabled | SingleUseIEnumerableMaterializationAnalyzer, [Documentation](../../docs/UsageRules/SHIMMER1021.md)

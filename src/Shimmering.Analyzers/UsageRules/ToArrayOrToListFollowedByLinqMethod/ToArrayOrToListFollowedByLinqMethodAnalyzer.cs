@@ -1,19 +1,19 @@
 using Shimmering.Analyzers.Utilities;
 
-namespace Shimmering.Analyzers.UsageRules.ToArrayOrToListFollowedByEnumerableExtensionMethod;
+namespace Shimmering.Analyzers.UsageRules.ToArrayOrToListFollowedByLinqMethod;
 
 /// <summary>
-/// Reports instances of LINQ materialization immediately followed by another Enumerable extension method.
+/// Reports instances of LINQ materialization immediately followed by another LINQ method.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Unnecessary materialization to array/list in LINQ chain";
 	private const string Message = "Remove unnecessary materialization to an array or a list";
 	private const string Category = "Usage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
-		DiagnosticIds.UsageRules.ToArrayOrToListFollowedByEnumerableExtensionMethod,
+		DiagnosticIds.UsageRules.ToArrayOrToListFollowedByLinqMethod,
 		Title,
 		Message,
 		Category,
@@ -47,7 +47,7 @@ public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer :
 		var invocation = (InvocationExpressionSyntax)context.Node;
 
 		// Check if the invocation is a member access like "something.ToList()"
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)
+		if (!EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)
 			|| methodName is not (nameof(Enumerable.ToList) or nameof(Enumerable.ToArray)))
 		{
 			return;
@@ -61,9 +61,9 @@ public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer :
 			return;
 		}
 
-		// Check if the outer invocation is also a LINQ extension method
-		// TODO: What about List instance methods and Enumerable extension methods that have the same name? (Contains, Reverse, ToArray)
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, outerInvocation, context.CancellationToken, out var parentMethodName))
+		// Check if the outer invocation is also a LINQ method
+		// TODO: What about List instance methods and LINQ methods that have the same name? (Contains, Reverse, ToArray)
+		if (!EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, outerInvocation, context.CancellationToken, out var parentMethodName))
 		{
 			return;
 		}

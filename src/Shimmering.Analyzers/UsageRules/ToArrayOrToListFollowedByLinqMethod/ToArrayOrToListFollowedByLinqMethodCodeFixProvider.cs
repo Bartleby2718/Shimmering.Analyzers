@@ -1,15 +1,15 @@
-namespace Shimmering.Analyzers.UsageRules.ToArrayOrToListFollowedByEnumerableExtensionMethod;
+namespace Shimmering.Analyzers.UsageRules.ToArrayOrToListFollowedByLinqMethod;
 
 /// <summary>
-/// Replaces an unnecessary materialization, if reported by <see cref="ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer"/>.
+/// Replaces an unnecessary materialization, if reported by <see cref="ToArrayOrToListFollowedByLinqMethodAnalyzer"/>.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ToArrayOrToListFollowedByEnumerableExtensionMethodCodeFixProvider))]
-public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodCodeFixProvider : ShimmeringCodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ToArrayOrToListFollowedByLinqMethodCodeFixProvider))]
+public sealed class ToArrayOrToListFollowedByLinqMethodCodeFixProvider : ShimmeringCodeFixProvider
 {
 	private const string Title = "Remove unnecessary materialization";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
-		[DiagnosticIds.UsageRules.ToArrayOrToListFollowedByEnumerableExtensionMethod];
+		[DiagnosticIds.UsageRules.ToArrayOrToListFollowedByLinqMethod];
 
 	public override string SampleCodeFixed => """
 		using System.Collections.Generic;
@@ -36,7 +36,7 @@ public sealed class ToArrayOrToListFollowedByEnumerableExtensionMethodCodeFixPro
 			CodeAction.Create(
 				Title,
 				ct => RemoveMaterializationAsync(context.Document, diagnostic, ct),
-				nameof(ToArrayOrToListFollowedByEnumerableExtensionMethodCodeFixProvider)),
+				nameof(ToArrayOrToListFollowedByLinqMethodCodeFixProvider)),
 			diagnostic);
 	}
 

@@ -4,7 +4,7 @@ namespace Shimmering.Analyzers.Utilities;
 
 internal static class EnumerableHelpers
 {
-	public static bool IsLinqExtensionMethodCall(
+	public static bool IsLinqMethodCall(
 		SemanticModel semanticModel, InvocationExpressionSyntax invocation, CancellationToken cancellationToken, [NotNullWhen(returnValue: true)] out string? methodName)
 	{
 		methodName = null;

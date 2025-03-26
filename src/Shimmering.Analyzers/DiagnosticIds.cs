@@ -9,7 +9,7 @@ internal static class DiagnosticIds
 		public const string MissingCancellationToken = "SHIMMER1001";
 		// 101X: avoiding unnecessary materialization
 		public const string ToListForEach = "SHIMMER1010";
-		public const string ToArrayOrToListFollowedByEnumerableExtensionMethod = "SHIMMER1011";
+		public const string ToArrayOrToListFollowedByLinqMethod = "SHIMMER1011";
 		public const string ArrayOrArrayReturningMethodFollowedByToArray = "SHIMMER1012";
 		// 102X: collection expression
 		public const string RedundantSpreadElement = "SHIMMER1020";
@@ -17,7 +17,7 @@ internal static class DiagnosticIds
 		// 104X: string.Split()
 		public const string MissingRemoveEmptyEntries = "SHIMMER1030";
 
-		// 110X: idiomatic use of enumerable extension methods
+		// 110X: idiomatic use of LINQ methods
 		public const string MisusedOrDefault = "SHIMMER1100";
 		public const string SingleElementConcat = "SHIMMER1101";
 		public const string UniqueNonSetCollection = "SHIMMER1102";
