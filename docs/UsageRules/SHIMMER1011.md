@@ -9,7 +9,7 @@
 | Analyzer message                   | Remove unnecessary materialization to an array or a list
 | Code fix title                     | Remove unnecessary materialization
 | Default severity                   | Warning
-| Minimum framework/language version | 
+| Minimum framework/language version | N/A
 | Enabled by default?                | Yes
 | Category                           | Usage
 | Link to code                       | [ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/ToArrayOrToListFollowedByEnumerableExtensionMethod/ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer.cs)

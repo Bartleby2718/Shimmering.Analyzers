@@ -9,7 +9,7 @@
 | Analyzer message                   | .ToArray() is redundant
 | Code fix title                     | Remove redundant .ToArray()
 | Default severity                   | Warning
-| Minimum framework/language version | 
+| Minimum framework/language version | N/A
 | Enabled by default?                | Ye
 | Category                           | Usage
 | Link to code                       | [ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/ArrayOrArrayReturningMethodFollowedByToArray/ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer.cs)
