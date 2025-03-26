@@ -61,7 +61,7 @@ While this is not a bug, this will slow down your code and increase memory usage
 
 ## Related Rules
 
-- [SHIMMER1010: ToList().ForEach() causes unnecessary memory allocation](./SHIMMER1010.md)
+- [SHIMMER1010: .ToList().ForEach() causes unnecessary memory allocation](./SHIMMER1010.md)
 - [SHIMMER1012: Do not use a nullable CancellationToken](./SHIMMER1012.md)
 
 ## Inspiration

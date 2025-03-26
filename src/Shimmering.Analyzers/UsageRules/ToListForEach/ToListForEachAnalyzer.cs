@@ -3,13 +3,13 @@ using Shimmering.Analyzers.Utilities;
 namespace Shimmering.Analyzers.UsageRules.ToListForEach;
 
 /// <summary>
-/// Reports stances of ToList().ForEach().
+/// Reports stances of .ToList().ForEach().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
-	private const string Title = "ToList().ForEach() causes unnecessary memory allocation";
-	private const string Message = "Replace ToList().ForEach() with a foreach loop to reduce memory usage";
+	private const string Title = ".ToList().ForEach() causes unnecessary memory allocation";
+	private const string Message = "Replace .ToList().ForEach() with a foreach loop to reduce memory usage";
 	private const string Category = "Usage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
@@ -48,7 +48,7 @@ public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 	{
 		var invocation = (InvocationExpressionSyntax)context.Node;
 
-		// the last invocation should be ForEach()
+		// the last invocation should be .ForEach()
 		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess
 			|| !ListHelpers.IsListInstanceMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)
 			|| methodName != nameof(List<int>.ForEach))
@@ -56,7 +56,7 @@ public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 			return;
 		}
 
-		// the target of ForEach should be ToList()
+		// the target of .ForEach should be .ToList()
 		if (memberAccess.Expression is not InvocationExpressionSyntax toListInvocation
 			|| !EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, toListInvocation, context.CancellationToken, out var innerMethodName)
 			|| innerMethodName != nameof(Enumerable.ToList))

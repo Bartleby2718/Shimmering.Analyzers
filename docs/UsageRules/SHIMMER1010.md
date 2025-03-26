@@ -5,8 +5,8 @@
 | Field                              | Value
 |------------------------------------|-------
 | ID                                 | SHIMMER1010
-| Analyzer title                     | ToList().ForEach() causes unnecessary memory allocation
-| Analyzer message                   | Replace ToList().ForEach() with a foreach loop to reduce memory usage
+| Analyzer title                     | .ToList().ForEach() causes unnecessary memory allocation
+| Analyzer message                   | Replace .ToList().ForEach() with a foreach loop to reduce memory usage
 | Code fix title                     | Replace with a foreach loop
 | Default severity                   | Warning
 | Minimum framework/language version | N/A
