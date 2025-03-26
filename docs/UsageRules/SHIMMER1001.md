@@ -5,7 +5,7 @@
 | Field                              | Value
 |------------------------------------|-------
 | ID                                 | SHIMMER1001
-| Analyzer title                     | Include a CancellationToken parameter
+| Analyzer title                     | Include a CancellationToken parameter in an asynchronous method
 | Analyzer message                   | An asynchronous method is missing a CancellationToken parameter
 | Code fix title                     | Add a CancellationToken parameter
 | Default severity                   | Info
