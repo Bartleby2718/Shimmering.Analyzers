@@ -8,7 +8,7 @@ namespace Shimmering.Analyzers.StyleRules.RedundantOutVariable;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class RedundantOutVariableAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
-	private const string Title = "Redundant Out Variable";
+	private const string Title = "Redundant out variable";
 	private const string Message = "Out variable '{0}' is used exactly once and for assignment and therefore can be inlined";
 	private const string Category = "Style";
 
