@@ -47,7 +47,7 @@ public sealed class MissingRemoveEmptyEntriesAnalyzer : ShimmeringSyntaxNodeAnal
 		var invocation = (InvocationExpressionSyntax)context.Node;
 		var semanticModel = context.SemanticModel;
 		var cancellationToken = context.CancellationToken;
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, invocation, cancellationToken, out var methodName)
+		if (!EnumerableHelpers.IsLinqMethodCall(semanticModel, invocation, cancellationToken, out var methodName)
 			|| methodName != nameof(Enumerable.Where))
 		{
 			return;
@@ -85,7 +85,7 @@ public sealed class MissingRemoveEmptyEntriesAnalyzer : ShimmeringSyntaxNodeAnal
 
 		var invocationToFlag = invocation.Parent is MemberAccessExpressionSyntax outerMemberAccess
 			&& outerMemberAccess.Parent is InvocationExpressionSyntax outerInvocation
-			&& EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, outerInvocation, cancellationToken, out var outerMethodName)
+			&& EnumerableHelpers.IsLinqMethodCall(semanticModel, outerInvocation, cancellationToken, out var outerMethodName)
 			&& outerMethodName == nameof(Enumerable.ToArray)
 			? outerInvocation
 			: invocation;

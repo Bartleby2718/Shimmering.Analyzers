@@ -14,7 +14,7 @@ internal static class VerboseLinqChainHelpers
 		CancellationToken cancellationToken,
 		out CollectionExpressionSyntax? collectionElements)
 	{
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, lastInvocation, cancellationToken, out var lastMethodName)
+		if (!EnumerableHelpers.IsLinqMethodCall(semanticModel, lastInvocation, cancellationToken, out var lastMethodName)
 			|| lastMethodName is not (nameof(Enumerable.ToArray) or nameof(Enumerable.ToList) or "ToHashSet")
 			|| lastInvocation.Expression is not MemberAccessExpressionSyntax lastMemberAccess
 			|| lastMemberAccess.Expression is not InvocationExpressionSyntax invocation)

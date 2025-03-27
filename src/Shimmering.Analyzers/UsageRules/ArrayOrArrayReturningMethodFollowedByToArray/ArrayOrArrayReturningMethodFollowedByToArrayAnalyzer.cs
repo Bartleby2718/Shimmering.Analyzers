@@ -8,7 +8,7 @@ namespace Shimmering.Analyzers.UsageRules.ArrayOrArrayReturningMethodFollowedByT
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
-	private const string Title = "An array creation like new[] { 1 } or array-returning method like String.Split() must not be followed by .ToArray()";
+	private const string Title = "An array creation expression or array-returning method should not be followed by .ToArray()";
 	private const string Message = ".ToArray() is redundant";
 	private const string Category = "Usage";
 
@@ -44,7 +44,7 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Shimm
 	{
 		var invocation = (InvocationExpressionSyntax)context.Node;
 
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
+		if (!EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
 		if (methodName != nameof(Enumerable.ToArray)) { return; }
 
 		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;

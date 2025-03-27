@@ -1,12 +1,12 @@
-using Shimmering.Analyzers.UsageRules.ToArrayOrToListFollowedByEnumerableExtensionMethod;
+using Shimmering.Analyzers.UsageRules.ToArrayOrToListFollowedByLinqMethod;
 
-namespace Shimmering.Analyzers.Tests.UsageRules.ToArrayOrToListFollowedByEnumerableExtensionMethod;
+namespace Shimmering.Analyzers.Tests.UsageRules.ToArrayOrToListFollowedByLinqMethod;
 
 using Verifier = CSharpAnalyzerVerifier<
-	ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer,
+	ToArrayOrToListFollowedByLinqMethodAnalyzer,
 	DefaultVerifier>;
 
-public class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzerTests : ShimmeringAnalyzerTests<ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzer>
+public class ToArrayOrToListFollowedByLinqMethodAnalyzerTests : ShimmeringAnalyzerTests<ToArrayOrToListFollowedByLinqMethodAnalyzer>
 {
 	[Test]
 	public Task TestUnsupportedCases() => Verifier.VerifyAnalyzerAsync(
@@ -22,7 +22,7 @@ public class ToArrayOrToListFollowedByEnumerableExtensionMethodAnalyzerTests : S
 				{
 					int[] numbers = [];
 					var greaterThanThree = numbers.ToHashSet().Where(x => x > 3); // ToHashSet
-					numbers.ToList().Sort(); // Sort is not an Enumerable extension method
+					numbers.ToList().Sort(); // Sort is not an LINQ method
 					var queryable = Enumerable.Empty<int>()
 						.AsQueryable()
 						.ToList()

@@ -63,7 +63,7 @@ public sealed class MisusedOrDefaultCodeFixProvider : ShimmeringCodeFixProvider
 
 		var invocation = (InvocationExpressionSyntax)suppressNode.Operand;
 		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(semanticModel, invocation, cancellationToken, out var oldMethodName)) { return document; }
+		if (!EnumerableHelpers.IsLinqMethodCall(semanticModel, invocation, cancellationToken, out var oldMethodName)) { return document; }
 
 		var newMethodName = MisusedOrDefaultHelpers.MethodMapping[oldMethodName];
 		var newIdentifier = SyntaxFactory.IdentifierName(newMethodName);

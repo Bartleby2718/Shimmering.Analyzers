@@ -55,9 +55,10 @@ Suppress this diagnostic only if it's unmanageable to update the corresponding t
 
 ## Related Rules
 
+- [SHIMMER1001: Include a CancellationToken parameter in an asynchronous method](./SHIMMER1001.md)
 - [CA1068: CancellationToken parameters must come last](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1068)
 - [CA2016: Forward the CancellationToken parameter to methods that take one](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2016)
 
 ## Inspiration
 
-This is from Mike Cop, @madelson's internal documentation created during his time at @mastercard.
+This was inspired by Mike Cop, @madelson's internal documentation created during his time at @mastercard.

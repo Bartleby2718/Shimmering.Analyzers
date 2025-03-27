@@ -3,7 +3,7 @@ using Shimmering.Analyzers.Utilities;
 namespace Shimmering.Analyzers.UsageRules.MisusedOrDefault;
 
 /// <summary>
-/// Reports instances of a LINQ 'OrDefault' extension methods that are followed by the null-forgiving operator (!).
+/// Reports instances of a 'OrDefault' LINQ methods that are followed by the null-forgiving operator (!).
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class MisusedOrDefaultAnalyzer : ShimmeringSyntaxNodeAnalyzer
@@ -45,7 +45,7 @@ public sealed class MisusedOrDefaultAnalyzer : ShimmeringSyntaxNodeAnalyzer
 	{
 		var suppressNode = (PostfixUnaryExpressionSyntax)context.Node;
 		if (suppressNode.Operand is not InvocationExpressionSyntax invocation) { return; }
-		if (!EnumerableHelpers.IsLinqExtensionMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
+		if (!EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
 		if (!MisusedOrDefaultHelpers.MethodMapping.TryGetValue(methodName, out var replacementMethodName)) { return; }
 
 		var diagnostic = Diagnostic.Create(Rule, suppressNode.GetLocation(), methodName, replacementMethodName);
