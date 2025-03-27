@@ -6,7 +6,7 @@ namespace Shimmering.Analyzers.StyleRules.NegatedTernaryCondition;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class NegatedTernaryConditionAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
-	private const string Title = "Avoid negation in the ternary condition";
+	private const string Title = "Avoid negation in ternary condition";
 	private const string Message = "This ternary condition has a negation";
 	private const string Category = "Style";
 
