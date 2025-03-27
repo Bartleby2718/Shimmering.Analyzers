@@ -66,4 +66,4 @@ While this is not a bug, this will slow down your code and increase memory usage
 
 ## Inspiration
 
-This is from [@Treit](https://github.com/Treit)'s blog post https://mtreit.com/programming,/.net/2024/07/30/ToList.html. The same material was also covered in [this YouTube video](https://www.youtube.com/watch?v=LaoRkzSE5tI).
+This was inspired by [@Treit](https://github.com/Treit)'s blog post https://mtreit.com/programming,/.net/2024/07/30/ToList.html. The same material was also covered in [this YouTube video](https://www.youtube.com/watch?v=LaoRkzSE5tI).

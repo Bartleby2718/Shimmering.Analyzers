@@ -61,4 +61,4 @@ Suppress this diagnostic only if it's unmanageable to update the corresponding t
 
 ## Inspiration
 
-This is from Mike Cop, @madelson's internal documentation created during his time at @mastercard.
+This was inspired by Mike Cop, @madelson's internal documentation created during his time at @mastercard.
