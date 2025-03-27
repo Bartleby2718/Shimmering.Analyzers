@@ -57,12 +57,12 @@ class Test
 
 ## Justification of the Severity
 
-While this is not a bug, this will slow down your code and increase memory usage.
+While this is not a bug, this will slow down your code and increase memory usage with no benefits. As a reminder, the diagnostic doesn't flag if the preceding enumerable implements `IQueryable<T>`, which is likely the main case where you'd actually want to allocate a list.
 
 ## Related Rules
 
 - [SHIMMER1010: .ToList().ForEach() causes unnecessary memory allocation](./SHIMMER1010.md)
-- [SHIMMER1012: Do not use a nullable CancellationToken](./SHIMMER1012.md)
+- [SHIMMER1012: An array creation expression or array-returning method should not be followed by .ToArray()](./SHIMMER1012.md)
 
 ## Inspiration
 
