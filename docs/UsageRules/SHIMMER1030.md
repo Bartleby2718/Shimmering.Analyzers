@@ -19,6 +19,20 @@
 
 The `StringSplitOptions.RemoveEmptyEntries` parameter allows you to remove empty entries in a single [`String.Split()`](https://learn.microsoft.com/en-us/dotnet/api/system.string.split) call and therefore is more efficient than chaining with a LINQ call or two to do the same thing.
 
+Currently, the checked patterns in the `.Where()` call are:
+```cs
+x => x.Length > 0
+x => x.Length != 0
+x => x.Length >= 1
+x => x != ""
+x => x != string.Empty
+x => !string.IsNullOrEmpty(x)
+x => x.Any()
+x => x is not ""
+```
+
+Note that this diagnostic is not triggered if `StringSplitOptions` is already used.
+
 ## Examples
 
 Flagged code:

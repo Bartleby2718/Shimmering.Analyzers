@@ -19,6 +19,10 @@
 
 Materializing an `IEnumerable<T>` (e.g., using `.ToArray()` or `.ToList()`) when it's only used once is wasteful, as it forces an unnecessary allocation.
 
+Currently, this diagnostic is triggered only for a local variable declaration with an implicit type (`var`).
+
+Note that this diagnostic is not triggered if the preceding enumerable implements `IQueryable<T>`, as materialization was likely an intentional decision 
+
 ## Examples
 
 Flagged code:
