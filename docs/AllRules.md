@@ -13,7 +13,7 @@ SHIMMER1001 |  Usage   |   Info   | 1.0.0 | MissingCancellationTokenAnalyzer, [D
 SHIMMER1010 |  Usage   | Warning  | 1.0.0 | ToListForEachAnalyzer, [Documentation](UsageRules/SHIMMER1010.md)
 SHIMMER1011 |  Usage   | Warning  | 1.0.0 | ToArrayOrToListFollowedByLinqMethodAEnalyzer, [Documentation](UsageRules/SHIMMER1011.md)
 SHIMMER1012 |  Usage   | Warning  | 1.0.0 | ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer, [Documentation](UsageRules/SHIMMER1012.md)
-SHIMMER1020 |  Usage   |   Info   | 1.0.0 | RedundantSpreadElementAnalyzer, [Documentation](UsageRules/SHIMMER1020.md)
+SHIMMER1020 |  Usage   | Warning  | 1.0.0 | RedundantSpreadElementAnalyzer, [Documentation](UsageRules/SHIMMER1020.md)
 SHIMMER1021 |  Usage   | Disabled | 1.0.0 | SingleUseIEnumerableMaterializationAnalyzer, [Documentation](UsageRules/SHIMMER1021.md)
 SHIMMER1030 |  Usage   |   Info   | 1.0.0 | MissingRemoveEmptyEntriesAnalyzer, [Documentation](UsageRules/SHIMMER1030.md)
 SHIMMER1100 |  Usage   |  Warning | 1.0.0 | MisusedOrDefaultAnalyzer, [Documentation](UsageRules/SHIMMER1100.md)

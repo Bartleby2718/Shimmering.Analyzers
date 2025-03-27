@@ -8,7 +8,7 @@
 | Analyzer title                     | Inline spread element
 | Analyzer message                   | Inline spread element
 | Code fix title                     | Flatten spread element
-| Default severity                   | Info
+| Default severity                   | Warning
 | Minimum framework/language version | [C# 12](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history#c-version-12)
 | Enabled by default?                | Yes
 | Category                           | Usage
