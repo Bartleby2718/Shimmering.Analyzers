@@ -64,7 +64,7 @@ public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 			return;
 		}
 
-		// Bail out if the receiver is an IQueryable < T > because removing materialization affects business logic
+		// Bail out if the receiver is an IQueryable<T> because removing materialization affects business logic
 		if (toListInvocation.Expression is not MemberAccessExpressionSyntax innerMemberAccess
 			|| AnalyzerHelpers.IsOrImplementsInterface(context, innerMemberAccess.Expression, FullyQualifiedTypeNames.IQueryableOfT))
 		{

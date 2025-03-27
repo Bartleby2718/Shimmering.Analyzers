@@ -17,7 +17,7 @@
 
 ## Detailed Explanation
 
-Calling `.ToList().ForEach()` is wasteful when a simple `foreach` loop would achieve the same result without unnecessary allocation.
+Avoid converting an `IEnumerable<T>` to a `List<T>` just to use the `List<T>.ForEach()` method. The unnecessary `.ToList()` call causes extra memory allocation, while a simple `foreach` loop achieves the same result without this overhead. If you _do_ want to a list, you can work around this diagnostic by using a plain `foreach` loop.
 
 Note that this diagnostic is not triggered if the preceding enumerable implements `IQueryable<T>`, as using `.ToList()` for materialization is a valid use case. 
 
@@ -58,12 +58,12 @@ class Test
 
 ## Justification of the Severity
 
-While this is not a bug, this will slow down your code and increase memory usage.
+While this is not a bug, this will slow down your code and increase memory usage with no benefits. As a reminder, the diagnostic doesn't flag if the preceding enumerable implements `IQueryable<T>`, which is likely the main case where you'd actually want to allocate a list.
 
 ## Related Rules
 
 - [SHIMMER1011: Unnecessary materialization to array/list in LINQ chain](./SHIMMER1011.md)
-- [SHIMMER1012: Do not use a nullable CancellationToken](./SHIMMER1012.md)
+- [SHIMMER1012: An array creation expression or array-returning method should not be followed by .ToArray()](./SHIMMER1012.md)
 
 ## Inspiration
 
