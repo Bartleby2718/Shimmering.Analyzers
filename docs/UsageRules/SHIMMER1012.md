@@ -17,7 +17,7 @@
 
 ## Detailed Explanation
 
-Calling `.ToArray()` on an already materialized array is redundant and wastes memory.
+Calling `.ToArray()` on an existing array is redundant and wastes memory because `.ToArray()` will always create/allocate a new array.
 
 ## Examples
 
@@ -51,7 +51,7 @@ class Test
 
 ## Justification of the Severity
 
-While this is not a bug, this will slow down your code and increase memory usage.
+While this is not a bug, this will slow down your code and increase memory usage with no benefits. As a reminder, calling `.ToArray()` on an existing array is not a no-op but rather creates and allocates a new array, so it has costs but not benefits.
 
 ## Related Rules
 
@@ -60,4 +60,4 @@ While this is not a bug, this will slow down your code and increase memory usage
 
 ## Inspiration
 
-This is from [@Treit](https://github.com/Treit)'s blog post https://mtreit.com/programming,/.net/2024/07/30/ToList.html. The same material was also covered in [this YouTube video](https://www.youtube.com/watch?v=LaoRkzSE5tI).
+This was inspired by [@Treit](https://github.com/Treit)'s blog post https://mtreit.com/programming,/.net/2024/07/30/ToList.html. The same material was also covered in [this YouTube video](https://www.youtube.com/watch?v=LaoRkzSE5tI).
