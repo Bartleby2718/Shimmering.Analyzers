@@ -19,6 +19,10 @@
 
 [A `CancellationToken` enables cooperative cancellation between threads, thread pool work items, or `Task` objects.](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) Asynchronous methods that do not accept a `CancellationToken` limit the caller's ability to cancel the operation, causing unnecessary resource consumption. See also: https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads
 
+Note that this diagnostic is not triggered if the method:
+1. is an override or implementation of an interface; or
+2. already has a `CancellationToken` parameter (either nullable or non-nullable).
+
 ## Examples
 
 Flagged code:
@@ -52,11 +56,17 @@ class Test
 
 ## Justification of the Severity
 
-Any suggestions?
+In some cases, a `CancellationToken` parameter should not be added to an asynchronous method in some cases. See the following section.
 
 ## When to Suppress
 
-Suppress this diagnostic if it's unmanageable to update the corresponding tests.
+Suppress this diagnostic if:
+1. cancellation is unnecessary because the operation is quick or does not perform I/O or long-running tasks.
+2. it can cause breaking changes by breaking existing contracts
+3. it affects reflection-based code
+4. it impacts unit tests using `Moq` and there are too many of them
+5. the method delegates to another API without cancellation support
+6. the operation should not be cancelled based on your business logic
 
 ## Related Rules
 
