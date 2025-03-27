@@ -5,7 +5,7 @@
 | Field                              | Value
 |------------------------------------|-------
 | ID                                 | SHIMMER2010
-| Analyzer title                     | Avoid negation in the ternary condition
+| Analyzer title                     | Avoid negation in ternary condition
 | Analyzer message                   | This ternary condition has a negation
 | Code fix title                     | Invert the ternary for clarity
 | Default severity                   | Info
@@ -47,4 +47,4 @@ While removing negation in the ternary condition often improves readability, thi
 
 ## When to Suppress
 
-Suppress this diagnostic when the existing code is more readable.
+Suppress this diagnostic if you find the existing code more readable.

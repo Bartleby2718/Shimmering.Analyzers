@@ -5,7 +5,7 @@
 | Field                              | Value
 |------------------------------------|-------
 | ID                                 | SHIMMER2020
-| Analyzer title                     | Redundant Out Variable
+| Analyzer title                     | Redundant out Variable
 | Analyzer message                   | Out variable '{0}' is used exactly once and for assignment and therefore can be inlined
 | Code fix title                     | Inline temporary variable
 | Default severity                   | Info

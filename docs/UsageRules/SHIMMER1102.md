@@ -9,7 +9,7 @@
 | Analyzer message                   | Prefer sets when uniqueness is required
 | Code fix title                     | Replace .Distinct().ToList() or .Distinct().ToArray() with .ToHashSet()
 | Default severity                   | Info
-| Minimum framework/language version | .NET	Core 2.0+, .NET Framework 4.7.2+, .NET Standard 2.1
+| Minimum framework/language version | .NET Core 2.0+, .NET Framework 4.7.2+, .NET Standard 2.1
 | Enabled by default?                | No
 | Category                           | Usage
 | Link to code                       | [UniqueNonSetCollectionAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/UniqueNonSetCollection/UniqueNonSetCollectionAnalyzer.cs)

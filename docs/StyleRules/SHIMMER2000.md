@@ -55,7 +55,7 @@ class Test
 
 ## Justification of the Severity
 
-While using a collection expression improves readability, this is a stylistic suggestion that is not related to performance or buggy behaviors.
+While using a collection expression improves readability, this is a stylistic suggestion that is not related to performance or buggy behavior.
 
 ## When to Suppress
 
