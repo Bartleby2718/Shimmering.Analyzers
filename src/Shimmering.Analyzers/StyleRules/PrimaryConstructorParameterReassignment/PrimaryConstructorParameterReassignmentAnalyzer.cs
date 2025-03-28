@@ -17,7 +17,7 @@ public sealed class PrimaryConstructorParameterReassignmentAnalyzer : Shimmering
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Info,
+		DiagnosticSeverity.Hidden,
 		isEnabledByDefault: false);
 
 	public override string SampleCode => """

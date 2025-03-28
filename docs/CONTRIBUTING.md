@@ -8,3 +8,5 @@ Thanks for your interest in this NuGet package! Please follow the following step
    Each PR should tackle one problem, whether it's updating documentation, fixing a bug, or adding/updating a pair of analyzer and a code fix provider.
 
    When adding a new pair of analyzer and a code fix provider, please see [Shimmering.Analyzers.Scaffolding/README.md](../src/Shimmering.Analyzers.Scaffolding/README.md) to kickstart your development.
+
+Special thanks for [@matthew-elgart](https://github.com/matthew-elgart) for brainstorming with me and reviewing PRs!

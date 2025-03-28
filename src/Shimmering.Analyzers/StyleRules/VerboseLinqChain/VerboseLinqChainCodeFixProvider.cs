@@ -8,7 +8,7 @@ namespace Shimmering.Analyzers.StyleRules.VerboseLinqChain;
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(VerboseLinqChainCodeFixProvider))]
 public sealed class VerboseLinqChainCodeFixProvider : ShimmeringCodeFixProvider
 {
-	private const string Title = "Replace a verbose LINQ chain with a collection expression";
+	private const string Title = "Replace with a collection expression";
 
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.StyleRules.VerboseLinqChain];
@@ -20,9 +20,10 @@ public sealed class VerboseLinqChainCodeFixProvider : ShimmeringCodeFixProvider
 		class Test
 		{
 			static int[] array1 = [0, 1];
+			static int[] array2 = [5];
 			void Do()
 			{
-				int[] array2 = [3, .. array1, 2];
+				int[] array3 = [3, .. array1, 2, .. array2];
 			}
 		}
 		""";
