@@ -43,10 +43,6 @@ class Test
 
 While this is not a bug, this will slow down your code and increase memory usage.
 
-## When to Suppress
-
-If I can't think of a good reason, maybe that means this should be a warning?
-
 ## Related Rules
 
 - [SHIMMER2000: Simplify LINQ chain](../StyleRules/SHIMMER2000.md)
