@@ -17,7 +17,7 @@
 
 ## Detailed Explanation
 
-Using `.Distinct().ToArray()` or `.Distinct().ToList()` suggests that the goal is to remove duplicates. A `HashSet<T>` achieves the same outcome more efficiently while allowing a faster lookup.
+Using `.Distinct().ToArray()` or `.Distinct().ToList()` suggests that the goal is to remove duplicates. A `HashSet<T>` is a data structure that may better fit your use case, as it achieves the same outcome more efficiently while allowing a faster lookup.
 
 ## Examples
 
@@ -55,11 +55,11 @@ class Test
 
 ## Justification of the Severity
 
-This diagnostic can cause compilation errors, so it's disabled by default.
+This diagnostic is disabled by default because this diagnostic can cause compilation errors, which can be disruptive.
 
 ## When to Suppress
 
-Suppress this diagnostic if you need the collection to be ordered or indexed.
+Suppress this diagnostic if changing the type breaks an existing contract or you need the collection to be ordered or indexed.
 
 ## Inspiration
 
