@@ -30,7 +30,7 @@ public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : ShimmeringSynt
 			void Do()
 			{
 				int[] numbers = [];
-				var greaterThanThree = numbers.[|ToArray|]().Where(x => x > 3);
+				var greaterThanThree = [|numbers.ToArray()|].Where(x => x > 3);
 			}
 		}
 		""";
@@ -75,7 +75,7 @@ public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : ShimmeringSynt
 			return;
 		}
 
-		var diagnostic = Diagnostic.Create(Rule, memberAccess.Name.GetLocation());
+		var diagnostic = Diagnostic.Create(Rule, invocation.GetLocation());
 		context.ReportDiagnostic(diagnostic);
 	}
 }

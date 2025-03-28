@@ -22,7 +22,7 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 				public void Do()
 				{
 					int[] numbers = [];
-					var greaterThanThree = numbers.[|ToArray|]().Where(x => x > 3);
+					var greaterThanThree = [|numbers.ToArray()|].Where(x => x > 3);
 				}
 			}
 		}
@@ -57,7 +57,7 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 				public void Do()
 				{
 					int[] numbers = [];
-					var squares = numbers.[|ToList|]().Select(x => x * x).ToArray();
+					var squares = [|numbers.ToList()|].Select(x => x * x).ToArray();
 				}
 			}
 		}
@@ -93,9 +93,9 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 				{
 					int[] numbers = [];
 					// line before source
-					var squares = numbers // right after source
+					var squares = [|numbers // right after source
 						// line before ToList
-						.[|ToList|]() // right after ToList
+						.ToList()|] // right after ToList
 						// line before Select
 						.Select(x => x * x) // right after Select
 						// line before ToArray
