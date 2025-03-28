@@ -17,11 +17,13 @@
 
 ## Detailed Explanation
 
-Materializing an `IEnumerable<T>` (e.g., using `.ToArray()` or `.ToList()`) when it's only used once is wasteful, as it forces an unnecessary allocation.
+Materializing an `IEnumerable<T>` when it's only used once is wasteful, as it forces an unnecessary allocation. Therefore, this diagnostic flags an enumerable that is used only once and that usage is either in a `foreach` loop or followed by a LINQ method.
 
-Currently, this diagnostic is triggered only for a local variable declaration with an implicit type (`var`).
+Currently, this diagnostic is triggered only for a local variable declaration with an implicit type (`var`), where materialization is done through either `.ToArray()` or `.ToList()`.
 
-Note that this diagnostic is not triggered if the preceding enumerable implements `IQueryable<T>`, as materialization was likely an intentional decision 
+Note that this diagnostic is not triggered if:
+1. the preceding enumerable implements `IQueryable<T>`, as materialization was likely an intentional decision
+2. the enumerable is used in a lambda (e.g. `.Where(x => notFlaggedEnumerable.Contains(x))`)
 
 ## Examples
 
@@ -69,8 +71,8 @@ class Test
 
 ## Justification of the Severity
 
-While this is not a bug, this will slow down your code and increase memory usage.
+While this is not a bug, this will slow down your code and increase memory usage with no benefits. As a reminder, the diagnostic doesn't flag if the preceding enumerable implements `IQueryable<T>` or if the enumerable is referenced multiple times, which are the main cases where you'd actually want to materialize an enumerable.
 
 ## When to Suppress
 
-Suppress this diagnostic if the enumerable is actually used multiple times.
+Suppress this diagnostic if the enumerable is actually used multiple times. As a reminder, this diagnostic is not triggered if the enumerable is used in a lambda.
