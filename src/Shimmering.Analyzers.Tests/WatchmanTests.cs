@@ -59,4 +59,38 @@ public class WatchmanTests
 			Is.Empty,
 			$"The following abstract classes do not start with 'Abc': {string.Join(", ", invalidClasses)}");
 	}
+
+	[Test]
+	public void TestDocumentationFilesExist()
+	{
+		var diagnosticIds = typeof(DiagnosticIds)
+			.GetNestedTypes()
+			.SelectMany(nestedType => nestedType.GetFields())
+			.Select(field => field.GetValue(null) as string)
+			.OfType<string>()
+			.ToArray();
+
+		var docsDirectory = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "docs"));
+		var existingMarkdownFiles = Directory.GetFiles(docsDirectory, "*.md", SearchOption.AllDirectories)
+			.Select(path => Path.GetRelativePath(docsDirectory, path))
+			.ToArray();
+
+		var expectedRelativePaths = diagnosticIds
+			.Select(id => Path.Combine(
+				id.StartsWith("SHIMMER1") ? "UsageRules"
+					: id.StartsWith("SHIMMER2") ? "StyleRules"
+					: throw new InvalidOperationException(),
+				$"{id}.md"))
+			.ToArray();
+
+		string[] expectedMarkdownFiles =
+		[
+			"AllRules.md",
+			"AnalyzerDocumentationTemplate.md",
+			"CONTRIBUTING.md",
+			.. expectedRelativePaths,
+		];
+
+		Assert.That(existingMarkdownFiles, Is.EquivalentTo(expectedMarkdownFiles));
+	}
 }
