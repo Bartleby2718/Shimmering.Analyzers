@@ -11,7 +11,7 @@ internal static class DiagnosticIds
 		public const string ToListForEach = "SHIMMER1010";
 		public const string ToArrayOrToListFollowedByLinqMethod = "SHIMMER1011";
 		public const string ArrayOrArrayReturningMethodFollowedByToArray = "SHIMMER1012";
-		public const string SingleUseIEnumerableMaterialization = "SHIMMER1013";
+		public const string SingleUseIEnumerableMaterialization = "SHIMMER1015";
 		// 102X: collection expression
 		public const string RedundantSpreadElement = "SHIMMER1020";
 		// 104X: string.Split()

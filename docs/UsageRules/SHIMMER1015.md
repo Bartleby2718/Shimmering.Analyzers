@@ -4,7 +4,7 @@
 
 | Field                              | Value
 |------------------------------------|-------
-| ID                                 | SHIMMER1013
+| ID                                 | SHIMMER1015
 | Analyzer title                     | Avoid materializing a single-use IEnumerable
 | Analyzer message                   | Avoid materializing an IEnumerable if it's used only once
 | Code fix title                     | Remove unnecessary materialization
