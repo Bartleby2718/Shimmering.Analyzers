@@ -17,8 +17,7 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Info,
-		isEnabledByDefault: false);
+		DiagnosticSeverity.Hidden);
 
 	public override string SampleCode => """
 		using System;

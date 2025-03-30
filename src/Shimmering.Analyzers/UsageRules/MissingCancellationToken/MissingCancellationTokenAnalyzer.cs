@@ -17,8 +17,7 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnaly
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Info,
-		isEnabledByDefault: true);
+		DiagnosticSeverity.Info);
 
 #pragma warning disable SA1027 // Use tabs correctly
 	public override string SampleCode => """

@@ -17,8 +17,7 @@ public sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnal
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Warning,
-		isEnabledByDefault: true);
+		DiagnosticSeverity.Warning);
 
 	public override string SampleCode => """
 		using System.Threading;

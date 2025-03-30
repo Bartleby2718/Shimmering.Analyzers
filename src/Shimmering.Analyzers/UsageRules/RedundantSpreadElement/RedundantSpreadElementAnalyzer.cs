@@ -18,8 +18,7 @@ public sealed class RedundantSpreadElementAnalyzer : ShimmeringSyntaxNodeAnalyze
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Warning,
-		isEnabledByDefault: true);
+		DiagnosticSeverity.Warning);
 
 	public override string SampleCode => """
 		namespace Tests;

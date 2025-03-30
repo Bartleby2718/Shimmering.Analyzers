@@ -17,8 +17,7 @@ public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : ShimmeringSynt
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Warning,
-		isEnabledByDefault: true);
+		DiagnosticSeverity.Warning);
 
 	public override string SampleCode => """
 		using System.Collections.Generic;

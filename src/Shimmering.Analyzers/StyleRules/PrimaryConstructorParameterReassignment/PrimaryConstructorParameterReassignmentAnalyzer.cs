@@ -17,8 +17,7 @@ public sealed class PrimaryConstructorParameterReassignmentAnalyzer : Shimmering
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Hidden,
-		isEnabledByDefault: false);
+		DiagnosticSeverity.Hidden);
 
 	public override string SampleCode => """
 		namespace Tests;

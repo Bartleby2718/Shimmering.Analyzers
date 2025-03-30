@@ -22,14 +22,13 @@ public abstract class ShimmeringSyntaxNodeAnalyzer : ShimmeringAnalyzer
 		LocalizableString messageFormat,
 		string category,
 		DiagnosticSeverity defaultSeverity,
-		bool isEnabledByDefault = true,
 		LocalizableString? description = null) => new(
 		id,
 		title,
 		messageFormat,
 		category,
 		defaultSeverity,
-		isEnabledByDefault,
+		isEnabledByDefault: true,
 		description,
 		helpLinkUri: category is "Usage" or "Style"
 			? $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{category}Rules/{id}.md"

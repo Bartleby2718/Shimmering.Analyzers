@@ -17,8 +17,7 @@ public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Warning,
-		isEnabledByDefault: true);
+		DiagnosticSeverity.Warning);
 
 #pragma warning disable SA1027 // Use tabs correctly
 	public override string SampleCode => """

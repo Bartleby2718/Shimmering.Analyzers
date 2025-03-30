@@ -15,8 +15,7 @@ public sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Info,
-		isEnabledByDefault: true);
+		DiagnosticSeverity.Info);
 
 	public override string SampleCode => """
 		namespace Tests;

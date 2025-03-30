@@ -15,8 +15,7 @@ public sealed class VerboseLinqChainAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		Title,
 		Message,
 		Category,
-		DiagnosticSeverity.Info,
-		isEnabledByDefault: true);
+		DiagnosticSeverity.Info);
 
 	public override string SampleCode => """
 		using System.Linq;
