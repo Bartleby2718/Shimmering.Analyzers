@@ -22,17 +22,17 @@
   <!-- Package metadata from https://learn.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices -->
   <PropertyGroup>
     <PackageId>Shimmering.Analyzers</PackageId>
-    <PackageVersion>1.0.0-alpha07</PackageVersion>
+    <PackageVersion>1.0.0-alpha08</PackageVersion>
     <Authors>Bartleby</Authors>
-    <Description>Package Description</Description>
+    <Description>Shimmering.Analyzers is an opinionated NuGet package consisting of Roslyn analyzers, written to promote best practices in .NET and enforce certain code styles.</Description>
     <Copyright>Copyright (C) Bartleby 2025</Copyright>
     <PackageProjectUrl>https://github.com/Bartleby2718/Shimmering.Analyzers</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReadmeFile>../README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Bartleby2718/Shimmering.Analyzers</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>roslyn;analyzers;linq</PackageTags>
-    <PackageReleaseNotes>alpha07 fixes #31, #51, #66, #68, and #69. For all other versions, see https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/src/Shimmering.Analyzers/AnalyzerReleases.Shipped.md.</PackageReleaseNotes>
+    <PackageReleaseNotes>alpha08 fixes #40, #75, #76, #77, and #79. For all other versions, see https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/src/Shimmering.Analyzers/AnalyzerReleases.Shipped.md.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
@@ -51,7 +51,8 @@
     <None Include="$(OutputPath)$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs/" />
     <None Include="$(OutputPath)$(AssemblyName).xml" Pack="true" PackagePath="analyzers/dotnet/cs/" />
     <None Include="icon.png" Pack="true" PackagePath="" />
-    <None Include="README.md" Pack="true" PackagePath="" />
+    <!-- Content for testing purposes -->
+    <Content Include="../README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>

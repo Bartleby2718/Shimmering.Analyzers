@@ -1,2 +1,0 @@
-### Shimmering.Analyzers
-Testing
