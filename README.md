@@ -40,7 +40,7 @@ dotnet_analyzer_diagnostic.category-ShimmeringStyle.severity = error
 This NuGet package was initially inspired by [@madelson](https://github.com/madelson)'s internal documentation ("Mike Cop") on .NET best practices that he created during his time at [@mastercard](https://github.com/mastercard). [@Bartleby2718](https://github.com/Bartleby2718) obtained [@mastercard](https://github.com/mastercard)'s approval to publish an open-source NuGet package enforcing some of those rules through Roslyn analyzers, hoping to share these best practices more widely with the broader .NET community.
 
 ## List of All Rules
-Please see [docs/AllRules.md](docs/AllRules.md).
+Please see [docs/reference/AllRules.md](docs/reference/AllRules.md).
 
 ## Contributing
-Please see [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md).
+Please see [docs/reference/CONTRIBUTING.md](docs/reference/CONTRIBUTING.md).

@@ -31,6 +31,6 @@ public abstract class ShimmeringSyntaxNodeAnalyzer : ShimmeringAnalyzer
 		isEnabledByDefault: true,
 		description,
 		helpLinkUri: category is "ShimmeringUsage" or "ShimmeringStyle"
-			? $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/{category.Substring(10)}Rules/{id}.md"
+			? $"https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/docs/reference/{category.Substring(10)}Rules/{id}.md"
 			: throw new UnreachableException($"The only supported categories are 'ShimmeringUsage' and 'ShimmeringStyle', but received '{category}'"));
 }
