@@ -8,7 +8,7 @@ public sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "TODO:";
 	private const string Message = "TODO:";
-	private const string Category = "CATEGORY_PLACEHOLDER";
+	private const string Category = "ShimmeringCATEGORY_PLACEHOLDER";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.CATEGORY_PLACEHOLDERRules.BadPractice,

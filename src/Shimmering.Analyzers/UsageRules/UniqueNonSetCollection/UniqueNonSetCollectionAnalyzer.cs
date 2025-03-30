@@ -10,7 +10,7 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringSyntaxNodeAnalyze
 {
 	private const string Title = "Use a set instead";
 	private const string Message = "Prefer sets when uniqueness is required";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.UniqueNonSetCollection,

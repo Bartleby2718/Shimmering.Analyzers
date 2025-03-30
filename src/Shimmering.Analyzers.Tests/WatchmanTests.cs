@@ -111,8 +111,8 @@ public class WatchmanTests
 		Assert.Multiple(() =>
 		{
 			Assert.That(lines[0], Is.EqualTo("# Table"));
-			Assert.That(lines[1], Is.EqualTo("  Rule ID   | Category | Severity | Since | Notes"));
-			Assert.That(lines[2], Is.EqualTo("------------|----------|----------|-------|-------"));
+			Assert.That(lines[1], Is.EqualTo("  Rule ID   |    Category     | Severity | Since | Notes"));
+			Assert.That(lines[2], Is.EqualTo("------------|-----------------|----------|-------|-------"));
 			Assert.That(lines, Has.Length.EqualTo(analyzers.Count + 3));
 		});
 
@@ -131,13 +131,13 @@ public class WatchmanTests
 
 							Assert.That(columns[0], Is.EqualTo($"{analyzer.Id} "));
 
-							Assert.That(columns[1], Is.EqualTo($"  {analyzer.Category}   "));
+							Assert.That(columns[1], Is.EqualTo($" {analyzer.Category} "));
 
 							var severity = analyzer.Severity.ToString();
 							Assert.That(columns[2], Is.EqualTo(CenterAlign(severity, totalWidth: 10)));
 
 							// skip validation on the Since column
-							var link = $"[Documentation]({analyzer.Category}Rules/{analyzer.Id}.md)";
+							var link = $"[Documentation]({analyzer.Category[10..]}Rules/{analyzer.Id}.md)";
 							Assert.That(columns[4], Is.EqualTo($" {analyzer.Name}, {link}"));
 						}),
 					message: lines[i]);

@@ -11,7 +11,7 @@
 | Default severity                   | Info
 | Minimum framework/language version | N/A
 | Enabled by default?                | Yes
-| Category                           | Usage
+| Category                           | ShimmeringUsage
 | Link to code                       | [MissingCancellationTokenAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/MissingCancellationToken/MissingCancellationTokenAnalyzer.cs)
 | Code fix exists?                   | Yes
 

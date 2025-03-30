@@ -11,7 +11,7 @@
 | Default severity                   | Warning
 | Minimum framework/language version | [C# 12](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history#c-version-12)
 | Enabled by default?                | Yes
-| Category                           | Usage
+| Category                           | ShimmeringUsage
 | Link to code                       | [RedundantSpreadElementAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/RedundantSpreadElement/RedundantSpreadElementAnalyzer.cs)
 | Code fix exists?                   | Yes
 

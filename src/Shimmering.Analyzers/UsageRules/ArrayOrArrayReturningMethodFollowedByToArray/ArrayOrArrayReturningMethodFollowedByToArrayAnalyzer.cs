@@ -10,7 +10,7 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Shimm
 {
 	private const string Title = "An array creation expression or array-returning method should not be followed by .ToArray()";
 	private const string Message = ".ToArray() is redundant";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.ArrayOrArrayReturningMethodFollowedByToArray,

@@ -11,7 +11,7 @@
 | Default severity                   | Info
 | Minimum framework/language version | N/A
 | Enabled by default?                | Yes
-| Category                           | Style
+| Category                           | ShimmeringStyle
 | Link to code                       | [NegatedTernaryConditionAnalyzer.cs](../../src/Shimmering.Analyzers/StyleRules/NegatedTernaryCondition/NegatedTernaryConditionAnalyzer.cs)
 | Code fix exists?                   | Yes
 

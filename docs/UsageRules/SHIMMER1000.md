@@ -11,7 +11,7 @@
 | Default severity                   | Warning
 | Minimum framework/language version | N/A
 | Enabled by default?                | Yes
-| Category                           | Usage
+| Category                           | ShimmeringUsage
 | Link to code                       | [NullableCancellationTokenAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/NullableCancellationToken/NullableCancellationTokenAnalyzer.cs)
 | Code fix exists?                   | Yes
 

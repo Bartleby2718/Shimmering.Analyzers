@@ -163,11 +163,11 @@ public class UniqueNonSetCollectionCodeFixProviderTests : ShimmeringCodeFixProvi
 
 		test.TestState.ExpectedDiagnostics.Add(new DiagnosticResult(
 			DiagnosticIds.UsageRules.UniqueNonSetCollection,
-			DiagnosticSeverity.Info)
+			DiagnosticSeverity.Hidden)
 			.WithSpan(9, 41, 13, 14));
 		test.TestState.ExpectedDiagnostics.Add(new DiagnosticResult(
 			DiagnosticIds.UsageRules.UniqueNonSetCollection,
-			DiagnosticSeverity.Info)
+			DiagnosticSeverity.Hidden)
 			.WithSpan(15, 52, 17, 13));
 
 		test.SolutionTransforms.Add((solution, projectId) =>

@@ -10,7 +10,7 @@ public sealed class PrimaryConstructorParameterReassignmentAnalyzer : Shimmering
 {
 	private const string Title = "Avoid reassigning primary constructor parameter";
 	private const string Message = "Primary constructor parameter '{0}' shouldn't be reassigned";
-	private const string Category = "Style";
+	private const string Category = "ShimmeringStyle";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.StyleRules.PrimaryConstructorParameterReassignment,

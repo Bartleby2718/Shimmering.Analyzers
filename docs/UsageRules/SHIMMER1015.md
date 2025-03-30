@@ -11,7 +11,7 @@
 | Default severity                   | Info
 | Minimum framework/language version | N/A
 | Enabled by default?                | No
-| Category                           | Usage
+| Category                           | ShimmeringUsage
 | Link to code                       | [SingleUseIEnumerableMaterializationAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/SingleUseIEnumerableMaterialization/SingleUseIEnumerableMaterializationAnalyzer.cs)
 | Code fix exists?                   | Yes
 

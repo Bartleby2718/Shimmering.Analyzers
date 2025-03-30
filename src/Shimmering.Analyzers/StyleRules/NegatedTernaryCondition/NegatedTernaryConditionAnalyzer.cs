@@ -8,7 +8,7 @@ public sealed class NegatedTernaryConditionAnalyzer : ShimmeringSyntaxNodeAnalyz
 {
 	private const string Title = "Avoid negation in ternary condition";
 	private const string Message = "This ternary condition has a negation";
-	private const string Category = "Style";
+	private const string Category = "ShimmeringStyle";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.StyleRules.NegatedTernaryCondition,

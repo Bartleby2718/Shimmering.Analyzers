@@ -11,7 +11,7 @@ public sealed class RedundantSpreadElementAnalyzer : ShimmeringSyntaxNodeAnalyze
 {
 	private const string Title = "Inline spread element";
 	private const string Message = "Inline spread element";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.RedundantSpreadElement,

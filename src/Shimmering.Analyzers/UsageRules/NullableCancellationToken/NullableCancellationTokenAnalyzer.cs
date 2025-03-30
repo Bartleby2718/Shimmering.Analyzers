@@ -10,7 +10,7 @@ public sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnal
 {
 	private const string Title = $"Do not use a nullable {nameof(CancellationToken)}";
 	private const string Message = $"{nameof(CancellationToken)} should not be nullable";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.NullableCancellationToken,

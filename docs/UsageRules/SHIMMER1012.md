@@ -11,7 +11,7 @@
 | Default severity                   | Warning
 | Minimum framework/language version | N/A
 | Enabled by default?                | Ye
-| Category                           | Usage
+| Category                           | ShimmeringUsage
 | Link to code                       | [ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/ArrayOrArrayReturningMethodFollowedByToArray/ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer.cs)
 | Code fix exists?                   | Yes
 

@@ -11,7 +11,7 @@
 | Default severity                   | Error|Warning|Info|Hidden
 | Minimum framework/language version | 
 | Enabled by default?                | Yes|No
-| Category                           | Usage|Style
+| Category                           | ShimmeringUsage|ShimmeringStyle
 | Link to code                       | [BadPracticeAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/BadPractice/BadPracticeAnalyzer.cs)
 | Code fix exists?                   | Yes|No
 

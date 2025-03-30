@@ -10,7 +10,7 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 {
 	private const string Title = "Avoid materializing a single-use IEnumerable";
 	private const string Message = "Avoid materializing an IEnumerable if it's used only once";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.SingleUseIEnumerableMaterialization,

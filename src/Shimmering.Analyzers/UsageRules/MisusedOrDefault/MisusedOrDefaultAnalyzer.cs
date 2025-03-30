@@ -10,7 +10,7 @@ public sealed class MisusedOrDefaultAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "OrDefault()! is redundant";
 	private const string Message = "Replace '{0}!' with '{1}'";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.MisusedOrDefault,

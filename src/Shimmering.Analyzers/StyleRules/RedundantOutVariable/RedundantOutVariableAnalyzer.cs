@@ -10,7 +10,7 @@ public sealed class RedundantOutVariableAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Redundant out variable";
 	private const string Message = "Out variable '{0}' is used exactly once and for assignment and therefore can be inlined";
-	private const string Category = "Style";
+	private const string Category = "ShimmeringStyle";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.StyleRules.RedundantOutVariable,

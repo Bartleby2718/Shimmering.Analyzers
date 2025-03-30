@@ -10,7 +10,7 @@ public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : ShimmeringSynt
 {
 	private const string Title = "Unnecessary materialization to array/list in LINQ chain";
 	private const string Message = "Remove unnecessary materialization to an array or a list";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.ToArrayOrToListFollowedByLinqMethod,

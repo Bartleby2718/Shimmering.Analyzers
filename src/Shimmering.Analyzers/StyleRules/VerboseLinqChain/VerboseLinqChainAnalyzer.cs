@@ -8,7 +8,7 @@ public sealed class VerboseLinqChainAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Simplify LINQ chain";
 	private const string Message = "Replace a verbose LINQ chain with a collection expression";
-	private const string Category = "Style";
+	private const string Category = "ShimmeringStyle";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.StyleRules.VerboseLinqChain,

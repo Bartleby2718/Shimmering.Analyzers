@@ -11,7 +11,7 @@
 | Default severity                   | Warning
 | Minimum framework/language version | N/A
 | Enabled by default?                | Yes
-| Category                           | Usage
+| Category                           | ShimmeringUsage
 | Link to code                       | [ToListForEachAnalyzer.cs](../../src/Shimmering.Analyzers/UsageRules/ToListForEach/ToListForEachAnalyzer.cs)
 | Code fix exists?                   | Yes
 

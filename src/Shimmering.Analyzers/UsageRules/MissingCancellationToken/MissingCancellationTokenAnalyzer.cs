@@ -10,7 +10,7 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnaly
 {
 	private const string Title = "Include a CancellationToken parameter in an asynchronous method";
 	private const string Message = $"An asynchronous method is missing a {nameof(CancellationToken)} parameter";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.MissingCancellationToken,

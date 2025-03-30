@@ -10,7 +10,7 @@ public sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = "Simplify .Concat()";
 	private const string Message = "Replace .Concat([e]) with .Append(e)";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.SingleElementConcat,

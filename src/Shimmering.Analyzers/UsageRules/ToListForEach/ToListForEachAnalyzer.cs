@@ -10,7 +10,7 @@ public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 {
 	private const string Title = ".ToList().ForEach() causes unnecessary memory allocation";
 	private const string Message = "Replace .ToList().ForEach() with a foreach loop to reduce memory usage";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.ToListForEach,

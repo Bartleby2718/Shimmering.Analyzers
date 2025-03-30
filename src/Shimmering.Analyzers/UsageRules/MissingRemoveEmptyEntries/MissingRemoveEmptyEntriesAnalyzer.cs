@@ -10,7 +10,7 @@ public sealed class MissingRemoveEmptyEntriesAnalyzer : ShimmeringSyntaxNodeAnal
 {
 	private const string Title = "Use StringSplitOptions.RemoveEmptyEntries";
 	private const string Message = "Use the overload of String.Split with StringSplitOptions.RemoveEmptyEntries to remove empty entries";
-	private const string Category = "Usage";
+	private const string Category = "ShimmeringUsage";
 
 	private static readonly DiagnosticDescriptor Rule = CreateRule(
 		DiagnosticIds.UsageRules.MissingRemoveEmptyEntries,
