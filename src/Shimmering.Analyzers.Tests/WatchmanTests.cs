@@ -89,6 +89,8 @@ public class WatchmanTests
 			"AllRules.md",
 			"AnalyzerDocumentationTemplate.md",
 			"CONTRIBUTING.md",
+			Path.Combine("UsageRules", "index.md"),
+			Path.Combine("StyleRules", "index.md"),
 			.. expectedRelativePaths,
 		];
 
@@ -105,12 +107,12 @@ public class WatchmanTests
 
 		var allRulesFile = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "docs", "AllRules.md"));
 		var lines = File.ReadAllLines(allRulesFile)
-			.SkipWhile(line => !line.StartsWith("# Table"))
+			.SkipWhile(line => !line.StartsWith("## Table"))
 			.ToArray();
 
 		Assert.Multiple(() =>
 		{
-			Assert.That(lines[0], Is.EqualTo("# Table"));
+			Assert.That(lines[0], Is.EqualTo("## Table"));
 			Assert.That(lines[1], Is.EqualTo("  Rule ID   |    Category     | Severity | Since | Notes"));
 			Assert.That(lines[2], Is.EqualTo("------------|-----------------|----------|-------|-------"));
 			Assert.That(lines, Has.Length.EqualTo(analyzers.Count + 3));

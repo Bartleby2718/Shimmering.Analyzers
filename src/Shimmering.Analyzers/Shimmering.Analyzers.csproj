@@ -73,7 +73,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\docs\reference\**\*.*" Pack="false">
+    <Content Include="..\..\site\docs\**\*.*" Pack="false">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Link>docs\%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Content>
