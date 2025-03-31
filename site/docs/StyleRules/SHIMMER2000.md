@@ -10,7 +10,6 @@
 | Code fix title                     | Replace with a collection expression
 | Default severity                   | Info
 | Minimum framework/language version | C# 12
-| Enabled by default?                | Yes
 | Category                           | ShimmeringStyle
 | Link to code                       | [VerboseLinqChainAnalyzer.cs](../../../src/Shimmering.Analyzers/StyleRules/VerboseLinqChain/VerboseLinqChainAnalyzer.cs)
 | Code fix exists?                   | Yes

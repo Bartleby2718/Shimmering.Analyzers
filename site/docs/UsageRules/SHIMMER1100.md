@@ -10,7 +10,6 @@
 | Code fix title                     | Simplify 'OrDefault()!' method call
 | Default severity                   | Warning
 | Minimum framework/language version | N/A
-| Enabled by default?                | Yes
 | Category                           | ShimmeringUsage
 | Link to code                       | [MisusedOrDefaultAnalyzer.cs](../../../src/Shimmering.Analyzers/UsageRules/MisusedOrDefault/MisusedOrDefaultAnalyzer.cs)
 | Code fix exists?                   | Yes

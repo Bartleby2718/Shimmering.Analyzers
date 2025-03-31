@@ -10,7 +10,6 @@
 | Code fix title                     | Replace .Concat([e]) with .Append(e)
 | Default severity                   | Info
 | Minimum framework/language version | N/A
-| Enabled by default?                | Yes
 | Category                           | ShimmeringUsage
 | Link to code                       | SingleElementConcatAnalyzer.cs
 | Code fix exists?                   | Yes

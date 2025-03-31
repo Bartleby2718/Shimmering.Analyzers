@@ -10,7 +10,6 @@
 | Code fix title                     | Optimize string.Split()
 | Default severity                   | Info
 | Minimum framework/language version | N/A
-| Enabled by default?                | Yes
 | Category                           | ShimmeringUsage
 | Link to code                       | [MissingRemoveEmptyEntriesAnalyzer.cs](../../../src/Shimmering.Analyzers/UsageRules/MissingRemoveEmptyEntries/MissingRemoveEmptyEntriesAnalyzer.cs)
 | Code fix exists?                   | Yes

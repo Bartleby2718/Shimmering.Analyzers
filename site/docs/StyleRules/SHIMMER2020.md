@@ -10,7 +10,6 @@
 | Code fix title                     | Inline temporary variable
 | Default severity                   | Info
 | Minimum framework/language version | [C# 7](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history#c-version-70)
-| Enabled by default?                | Yes
 | Category                           | ShimmeringStyle
 | Link to code                       | [RedundantOutVariableAnalyzer.cs](../../../src/Shimmering.Analyzers/StyleRules/RedundantOutVariable/RedundantOutVariableAnalyzer.cs)
 | Code fix exists?                   | Yes

@@ -10,7 +10,6 @@
 | Code fix title                     | Remove unnecessary materialization
 | Default severity                   | Warning
 | Minimum framework/language version | N/A
-| Enabled by default?                | Yes
 | Category                           | ShimmeringUsage
 | Link to code                       | [ToArrayOrToListFollowedByLinqMethodAnalyzer.cs](../../../src/Shimmering.Analyzers/UsageRules/ToArrayOrToListFollowedByLinqMethod/ToArrayOrToListFollowedByLinqMethodAnalyzer.cs)
 | Code fix exists?                   | Yes
