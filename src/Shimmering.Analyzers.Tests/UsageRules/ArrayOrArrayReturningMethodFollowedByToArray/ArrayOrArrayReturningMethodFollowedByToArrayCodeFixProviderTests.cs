@@ -91,8 +91,87 @@ public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : 
 		}
 		""");
 
+	// TODO: should be fixed in #85
 	[Test]
-	public Task TestTrivia() => Verifier.VerifyCodeFixAsync(
+	public Task TestTriviaWhenToArrayComesLastWithComments() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do()
+				{
+					// line before declaration
+					var arrayLength = [|"a"
+						// line before Split
+						.Split(' ') // right after Split
+						// line before ToArray
+						.ToArray()|]; // right after ToArray
+				}
+			}
+		}
+		""",
+		"""
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do()
+				{
+					// line before declaration
+					var arrayLength = "a"
+						// line before Split
+						.Split(' ') // right after Split
+		; // right after ToArray
+				}
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestTriviaWhenToArrayComesLastWithoutComments() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do()
+				{
+					var arrayLength = [|"a"
+						.Split(' ')
+						.ToArray()|];
+				}
+			}
+		}
+		""",
+		"""
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do()
+				{
+					var arrayLength = "a"
+						.Split(' ');
+				}
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestTriviaWhenToArrayIsFollowedBySomethingElse() => Verifier.VerifyCodeFixAsync(
 		"""
 		using System;
 		using System.Linq;

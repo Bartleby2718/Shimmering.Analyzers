@@ -31,6 +31,7 @@ public abstract class ShimmeringRedundantInvocationCodeFixProvider : ShimmeringC
 			diagnostic);
 	}
 
+	// This isn't yet perfect, but make best effort trying to update trivia in a reasonable manner
 	private static async Task<Document> RemoveInvocationAsync(
 		Document document,
 		InvocationExpressionSyntax invocation,
@@ -40,9 +41,15 @@ public abstract class ShimmeringRedundantInvocationCodeFixProvider : ShimmeringC
 		if (root == null) { return document; }
 
 		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+		var innerNode = memberAccess.Expression;
+		var innerNodeTrailingTrivia = innerNode.GetTrailingTrivia();
+		// This doesn't always yield an ideal trivia but is a reasonable solution until #85 is resolved.
+		var naiveReplacement = document.WithSyntaxRoot(root.ReplaceNode(invocation, innerNode.WithTrailingTrivia()));
+		if (innerNodeTrailingTrivia.All(t => t.IsKind(SyntaxKind.WhitespaceTrivia) || t.IsKind(SyntaxKind.EndOfLineTrivia)))
+		{
+			return naiveReplacement;
+		}
 
-		// do not use the trivia from 'invocation' because we want to keep the trivia for the original node
-		var newRoot = root.ReplaceNode(invocation, memberAccess.Expression);
-		return document.WithSyntaxRoot(newRoot);
+		return document.WithSyntaxRoot(root.ReplaceNode(invocation, innerNode));
 	}
 }
