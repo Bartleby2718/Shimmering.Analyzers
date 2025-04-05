@@ -35,7 +35,7 @@ class Test
     static int[] array = [1];
     void Do()
     {
-        var a = [|array.SingleOrDefault()!|];
+        var a = array.SingleOrDefault()!;
     }
 }
 ```

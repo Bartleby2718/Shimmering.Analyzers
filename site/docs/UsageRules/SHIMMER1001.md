@@ -34,7 +34,7 @@ using System.Threading.Tasks;
 namespace Tests;
 class Test
 {
-    async Task [|DoAsync|]()
+    async Task DoAsync()
     {
         await Task.CompletedTask;
     }

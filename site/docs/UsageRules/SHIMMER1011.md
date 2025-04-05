@@ -36,7 +36,7 @@ class Test
     void Do()
     {
         int[] numbers = [];
-        var greaterThanThree = [|numbers.ToArray|]().Where(x => x > 3);
+        var greaterThanThree = numbers.ToArray().Where(x => x > 3);
     }
 }
 ```

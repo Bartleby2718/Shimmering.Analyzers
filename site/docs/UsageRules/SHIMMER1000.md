@@ -31,7 +31,7 @@ using System.Threading.Tasks;
 namespace Tests;
 class Test
 {
-    Task DoAsync([|CancellationToken? cancellationToken = null|]) => Task.CompletedTask;
+    Task DoAsync(CancellationToken? cancellationToken = null) => Task.CompletedTask;
 }
 ```
 

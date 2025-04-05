@@ -35,7 +35,7 @@ class Test
 {
     void Do(int[] numbers)
     {
-        [|numbers.ToList().ForEach(n => Console.WriteLine(n))|];
+        numbers.ToList().ForEach(n => Console.WriteLine(n));
     }
 }
 ```

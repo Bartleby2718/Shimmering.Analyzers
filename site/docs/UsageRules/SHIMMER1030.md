@@ -47,8 +47,8 @@ class Test
 {
     void Do(string input)
     {
-        var x = [|input.Split(' ')
-            .Where(x => x.Length > 0)|];
+        var x = input.Split(' ')
+            .Where(x => x.Length > 0);
     }
 }
 ```

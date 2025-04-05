@@ -30,7 +30,7 @@ Flagged code:
 namespace Tests;
 class Test
 {
-    string Do(bool condition) => [|!condition ? "when false" : "when true"|];
+    string Do(bool condition) => !condition ? "when false" : "when true";
 }
 ```
 

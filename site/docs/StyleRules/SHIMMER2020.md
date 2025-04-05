@@ -32,7 +32,7 @@ class Test
 {
     void Do(string dayOfWeekString)
     {
-        if (Enum.TryParse(dayOfWeekString, [|out DayOfWeek dayOfWeek1|]))
+        if (Enum.TryParse(dayOfWeekString, out DayOfWeek dayOfWeek1))
         {
             DayOfWeek dayOfWeek2 = dayOfWeek1;
         }

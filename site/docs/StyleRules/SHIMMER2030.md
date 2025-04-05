@@ -35,7 +35,7 @@ class Test(int x)
 {
     void Do()
     {
-        [|x|] = x / 2;
+        x = x / 2;
     }
 }
 ```

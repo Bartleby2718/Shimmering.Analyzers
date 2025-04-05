@@ -28,7 +28,7 @@ Flagged code:
 namespace Tests;
 class Test
 {
-    int[] Array => [1, [|.. new[] { 2, 3 }|], 4];
+    int[] Array => [1, .. new[] { 2, 3 }, 4];
 }
 ```
 

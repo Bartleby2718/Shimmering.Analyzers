@@ -32,7 +32,7 @@ class Test
 {
     void Do()
     {
-        var array = [|"a b".Split(' ').ToArray()|];
+        var array = "a b".Split(' ').ToArray();
     }
 }
 ```

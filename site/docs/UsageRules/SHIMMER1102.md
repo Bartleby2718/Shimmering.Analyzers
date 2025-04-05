@@ -35,7 +35,7 @@ class Test
     void Do()
     {
         List<int> numbers = [];
-        var distinctNumbers = [|numbers.Distinct().ToArray()|];
+        var distinctNumbers = numbers.Distinct().ToArray();
     }
 }
 ```
