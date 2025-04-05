@@ -11,7 +11,7 @@
 | Default severity                   | Info
 | Minimum framework/language version | C# 12
 | Category                           | ShimmeringStyle
-| Link to code                       | [VerboseLinqChainAnalyzer.cs](../../../src/Shimmering.Analyzers/StyleRules/VerboseLinqChain/VerboseLinqChainAnalyzer.cs)
+| Link to code                       | [VerboseLinqChainAnalyzer.cs](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/src/Shimmering.Analyzers/StyleRules/VerboseLinqChain/VerboseLinqChainAnalyzer.cs)
 | Code fix exists?                   | Yes
 
 ## Detailed Explanation

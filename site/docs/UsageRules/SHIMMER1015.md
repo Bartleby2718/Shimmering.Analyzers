@@ -12,7 +12,7 @@
 | Minimum framework/language version | N/A
 | Enabled by default?                | No
 | Category                           | ShimmeringUsage
-| Link to code                       | [SingleUseIEnumerableMaterializationAnalyzer.cs](../../../src/Shimmering.Analyzers/UsageRules/SingleUseIEnumerableMaterialization/SingleUseIEnumerableMaterializationAnalyzer.cs)
+| Link to code                       | [SingleUseIEnumerableMaterializationAnalyzer.cs](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/src/Shimmering.Analyzers/UsageRules/SingleUseIEnumerableMaterialization/SingleUseIEnumerableMaterializationAnalyzer.cs)
 | Code fix exists?                   | Yes
 
 ## Detailed Explanation

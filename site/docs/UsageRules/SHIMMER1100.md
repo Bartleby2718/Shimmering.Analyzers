@@ -11,7 +11,7 @@
 | Default severity                   | Warning
 | Minimum framework/language version | N/A
 | Category                           | ShimmeringUsage
-| Link to code                       | [MisusedOrDefaultAnalyzer.cs](../../../src/Shimmering.Analyzers/UsageRules/MisusedOrDefault/MisusedOrDefaultAnalyzer.cs)
+| Link to code                       | [MisusedOrDefaultAnalyzer.cs](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/src/Shimmering.Analyzers/UsageRules/MisusedOrDefault/MisusedOrDefaultAnalyzer.cs)
 | Code fix exists?                   | Yes
 
 ## Detailed Explanation

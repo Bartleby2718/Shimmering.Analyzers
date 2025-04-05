@@ -11,7 +11,7 @@
 | Default severity                   | Warning
 | Minimum framework/language version | N/A
 | Category                           | ShimmeringUsage
-| Link to code                       | [ToArrayOrToListFollowedByLinqMethodAnalyzer.cs](../../../src/Shimmering.Analyzers/UsageRules/ToArrayOrToListFollowedByLinqMethod/ToArrayOrToListFollowedByLinqMethodAnalyzer.cs)
+| Link to code                       | [ToArrayOrToListFollowedByLinqMethodAnalyzer.cs](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/src/Shimmering.Analyzers/UsageRules/ToArrayOrToListFollowedByLinqMethod/ToArrayOrToListFollowedByLinqMethodAnalyzer.cs)
 | Code fix exists?                   | Yes
 
 ## Detailed Explanation

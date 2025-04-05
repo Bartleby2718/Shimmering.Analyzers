@@ -12,7 +12,7 @@
 | Minimum framework/language version | [C# 12](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history#c-version-12)
 | Enabled by default?                | No
 | Category                           | ShimmeringStyle
-| Link to code                       | [PrimaryConstructorParameterReassignmentAnalyzer.cs](../../../src/Shimmering.Analyzers/StyleRules/PrimaryConstructorParameterReassignment/PrimaryConstructorParameterReassignmentAnalyzer.cs)
+| Link to code                       | [PrimaryConstructorParameterReassignmentAnalyzer.cs](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/src/Shimmering.Analyzers/StyleRules/PrimaryConstructorParameterReassignment/PrimaryConstructorParameterReassignmentAnalyzer.cs)
 | Code fix exists?                   | No
 
 ## Detailed Explanation

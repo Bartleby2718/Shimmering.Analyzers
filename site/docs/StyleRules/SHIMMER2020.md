@@ -11,7 +11,7 @@
 | Default severity                   | Info
 | Minimum framework/language version | [C# 7](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history#c-version-70)
 | Category                           | ShimmeringStyle
-| Link to code                       | [RedundantOutVariableAnalyzer.cs](../../../src/Shimmering.Analyzers/StyleRules/RedundantOutVariable/RedundantOutVariableAnalyzer.cs)
+| Link to code                       | [RedundantOutVariableAnalyzer.cs](https://github.com/Bartleby2718/Shimmering.Analyzers/blob/main/src/Shimmering.Analyzers/StyleRules/RedundantOutVariable/RedundantOutVariableAnalyzer.cs)
 | Code fix exists?                   | Yes
 
 ## Detailed Explanation
