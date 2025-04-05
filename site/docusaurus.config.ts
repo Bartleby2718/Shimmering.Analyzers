@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Shimmering.Analyzers',
-  tagline: 'An opinionated set of Roslyn analyzers promoting best practices in .NET',
+  tagline: 'Roslyn analyzers enforcing idiomatic .NET best practices and opinionated code styles',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

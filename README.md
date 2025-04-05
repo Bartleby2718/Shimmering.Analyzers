@@ -1,6 +1,6 @@
 # Shimmering.Analyzers
 
-`Shimmering.Analyzers` is an opinionated NuGet package consisting of [Roslyn analyzers](https://learn.microsoft.com/en-us/visualstudio/code-quality/roslyn-analyzers-overview), written to promote best practices in .NET and enforce certain code styles.
+`Shimmering.Analyzers` is a NuGet package consisting of [Roslyn analyzers](https://learn.microsoft.com/en-us/visualstudio/code-quality/roslyn-analyzers-overview), written to promote best practices in .NET and enforce opinionated code styles.
 
 ## Installation
 ### Option 1: Through your IDE of choice
