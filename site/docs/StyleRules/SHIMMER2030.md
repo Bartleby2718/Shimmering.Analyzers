@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER2030
+---
 # PrimaryConstructorParameterReassignment
 
 ## Diagnostic Rule Overview

@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER1030
+---
 # MissingRemoveEmptyEntries
 
 ## Diagnostic Rule Overview

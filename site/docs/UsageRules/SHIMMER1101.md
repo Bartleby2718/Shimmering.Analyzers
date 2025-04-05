@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER1101
+---
 # SingleElementConcat
 
 ## Diagnostic Rule Overview

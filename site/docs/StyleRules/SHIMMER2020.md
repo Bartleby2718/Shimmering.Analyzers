@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER2020
+---
 # RedundantOutVariable
 
 ## Diagnostic Rule Overview

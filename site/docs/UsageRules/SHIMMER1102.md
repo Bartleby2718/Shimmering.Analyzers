@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER1102
+---
 # UniqueNonSetCollection
 
 ## Diagnostic Rule Overview

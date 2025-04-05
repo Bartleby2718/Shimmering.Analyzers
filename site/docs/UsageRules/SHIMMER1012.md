@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER1012
+---
 # ArrayOrArrayReturningMethodFollowedByToArray
 
 ## Diagnostic Rule Overview

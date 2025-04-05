@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER1020
+---
 # RedundantSpreadElement
 
 ## Diagnostic Rule Overview

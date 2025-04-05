@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER1000
+---
 # NullableCancellationToken
 
 ## Diagnostic Rule Overview

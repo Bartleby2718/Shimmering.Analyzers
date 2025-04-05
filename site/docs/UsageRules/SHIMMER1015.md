@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER1015
+---
 # SingleUseIEnumerableMaterialization
 
 ## Diagnostic Rule Overview

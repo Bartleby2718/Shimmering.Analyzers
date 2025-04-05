@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER1100
+---
 # MisusedOrDefault
 
 ## Diagnostic Rule Overview

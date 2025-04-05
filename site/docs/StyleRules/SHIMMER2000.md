@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER2000
+---
 # VerboseLinqChain
 
 ## Diagnostic Rule Overview

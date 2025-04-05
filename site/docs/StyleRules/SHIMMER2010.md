@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER2010
+---
 # NegatedTernaryCondition
 
 ## Diagnostic Rule Overview

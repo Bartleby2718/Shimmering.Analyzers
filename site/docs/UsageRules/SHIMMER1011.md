@@ -1,3 +1,6 @@
+---
+sidebar_label: SHIMMER1011
+---
 # ToArrayOrToListFollowedByLinqMethod
 
 ## Diagnostic Rule Overview
