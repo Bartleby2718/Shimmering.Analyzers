@@ -36,6 +36,34 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
 		""");
 
 	[Test]
+	public Task TestMethodWithOneParameter() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System.Threading.Tasks;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public Task [|Do1Async|](string parameter) => Task.CompletedTask;
+				public Task [|Do2Async|](int? parameter) => Task.CompletedTask;
+			}
+		}
+		""",
+		"""
+		using System.Threading.Tasks;
+		using System.Threading;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public Task Do1Async(string parameter, CancellationToken cancellationToken = default) => Task.CompletedTask;
+				public Task Do2Async(int? parameter, CancellationToken cancellationToken = default) => Task.CompletedTask;
+			}
+		}
+		""");
+
+	[Test]
 	public Task TestMethodWithParameters() => Verifier.VerifyCodeFixAsync(
 		"""
 		using System.Threading.Tasks;

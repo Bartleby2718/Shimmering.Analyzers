@@ -78,7 +78,10 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnaly
 		var isNonNullCancellationToken = SymbolEqualityComparer.Default.Equals(namedType.OriginalDefinition, cancellationTokenType);
 		if (isNonNullCancellationToken) { return true; }
 
-		return namedType.NullableAnnotation == NullableAnnotation.Annotated
+		// Handle the case of a nullable CancellationToken, i.e. CancellationToken?
+		// Nullable<T> is represented as a generic type where T is the underlying type.
+		return namedType.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T
+			&& namedType.TypeArguments.Length == 1
 			&& SymbolEqualityComparer.Default.Equals(namedType.TypeArguments[0], cancellationTokenType);
 	}
 
