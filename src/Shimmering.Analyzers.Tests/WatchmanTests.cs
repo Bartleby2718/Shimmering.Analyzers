@@ -147,6 +147,27 @@ public class WatchmanTests
 		});
 	}
 
+	[Test]
+	public async Task VerifyPackageVersionInReadme()
+	{
+		var informationalVersion = typeof(ShimmeringAnalyzer).Assembly
+			.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+			.InformationalVersion;
+		Assert.That(informationalVersion, Does.Contain("+"));
+		var packageVersion = informationalVersion[..informationalVersion.IndexOf('+')];
+		var expectedPackageReference = $"""
+			```xml
+			<PackageReference Include="Shimmering.Analyzers" Version="{packageVersion}">
+			  <PrivateAssets>all</PrivateAssets>
+			  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+			</PackageReference>
+			```
+			""";
+		var readmeFilePath = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "README.md"));
+		var readmeContent = await File.ReadAllTextAsync(readmeFilePath);
+		Assert.That(readmeContent, Does.Contain(expectedPackageReference));
+	}
+
 	private static List<AnalyzerInfo> GetAnalyzers()
 	{
 		var analyzerTypes = typeof(ShimmeringAnalyzer).Assembly
