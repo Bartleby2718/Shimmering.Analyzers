@@ -64,6 +64,8 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringSyntaxNodeAnalyze
 		if (memberAccess.Expression is not InvocationExpressionSyntax innerInvocation) { return; }
 		if (!EnumerableHelpers.IsLinqMethodCall(semanticModel, innerInvocation, context.CancellationToken, out var innerMethodName)) { return; }
 		if (innerMethodName is not nameof(Enumerable.Distinct)) { return; }
+		// Exclude the overload that accepts a comparer argument until https://github.com/Bartleby2718/Shimmering.Analyzers/issues/91 is done
+		if (innerInvocation.ArgumentList.Arguments.Count != 0) { return; }
 
 		// Technically, we shouldn't flag when ToHashSet() can cause a compilation failure.
 		// However, still flagging to promote a best practice
