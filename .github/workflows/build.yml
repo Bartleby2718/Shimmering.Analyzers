@@ -83,6 +83,11 @@ jobs:
         # Add to secrets at https://github.com/Bartleby2718/Shimmering.Analyzers/settings/secrets/actions
         run: dotnet nuget push ./artifacts/*.nupkg --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
+      # push the package to GitHub Packages in addition to NuGet.org.
+      - name: Push to GitHub Packages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+        run: dotnet nuget push ./artifacts/*.nupkg --source https://nuget.pkg.github.com/Bartleby2718/index.json --api-key ${{ secrets.GH_PACKAGES_TOKEN }}
+
       - name: Generate Coverage Report
         if: matrix.os == 'ubuntu-latest'
         run: |
