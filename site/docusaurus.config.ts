@@ -95,7 +95,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Jihoon Park. Built with Docusaurus.`,
+      copyright: `Copyright © 2025-${new Date().getFullYear()} Jihoon Park. Built with Docusaurus.`,
     },
     prism: {
       additionalLanguages: ['csharp'],

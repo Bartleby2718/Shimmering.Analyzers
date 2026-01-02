@@ -1,0 +1,28 @@
+name: Update Copyright Year
+on:
+  schedule:
+    # Runs at 12:00 UTC on January 2nd every year
+    - cron: '0 12 2 1 *'
+  workflow_dispatch: # Allows you to run it manually if needed
+
+jobs:
+  update-license:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update LICENSE Year
+        run: |
+          # This looks for "2025-" followed by any 4 digits, 
+          # and replaces it with "2025-" followed by the NEW current year.
+          YEAR=$(date +'%Y')
+          sed -i -E "s/(2025)-[0-9]{4}/\1-$YEAR/g" LICENSE
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update copyright year to $(date +'%Y')"
+          title: "chore: update copyright year"
+          body: "Automated update of the copyright year in LICENSE file."
+          branch: "chore/copyright-update"

@@ -23,10 +23,10 @@
   <PropertyGroup>
     <PackageId>Shimmering.Analyzers</PackageId>
     <!-- Set Version to implicitly set PackageVersion and InformationalVersion -->
-    <Version>1.0.0</Version>
+    <Version>1.0.1-alpha01</Version>
     <Authors>Bartleby</Authors>
     <Description>Shimmering.Analyzers is an opinionated NuGet package consisting of Roslyn analyzers, written to promote best practices in .NET and enforce certain code styles.</Description>
-    <Copyright>Copyright (C) Jihoon Park 2025</Copyright>
+    <Copyright>Copyright (C) Jihoon Park 2025-$([System.DateTime]::Now.Year)</Copyright>
     <PackageProjectUrl>https://github.com/Bartleby2718/Shimmering.Analyzers</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
