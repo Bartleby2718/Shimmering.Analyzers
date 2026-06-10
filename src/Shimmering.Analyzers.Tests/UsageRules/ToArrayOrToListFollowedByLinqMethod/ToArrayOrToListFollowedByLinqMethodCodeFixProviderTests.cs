@@ -133,20 +133,20 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 		using System.Linq;
 		using System.Collections.Generic;
 		class C {
-		    void M(IEnumerable<int> a) {
-		        [|a.Union(new[] {1}).ToList()|]
-		            .Union(new[] {2});
-		    }
+			void M(IEnumerable<int> a) {
+				[|a.Union(new[] {1}).ToList()|]
+					.Union(new[] {2});
+			}
 		}
 		""",
 		"""
 		using System.Linq;
 		using System.Collections.Generic;
 		class C {
-		    void M(IEnumerable<int> a) {
-		        a.Union(new[] {1})
-		            .Union(new[] {2});
-		    }
+			void M(IEnumerable<int> a) {
+				a.Union(new[] {1})
+					.Union(new[] {2});
+			}
 		}
 		""");
 }
