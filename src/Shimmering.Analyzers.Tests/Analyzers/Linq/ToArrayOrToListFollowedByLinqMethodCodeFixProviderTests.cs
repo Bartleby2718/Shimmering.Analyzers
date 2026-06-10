@@ -145,4 +145,74 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 			}
 		}
 		""");
+
+	[Test]
+	public Task TestToListContainsIsRemoved() => VerifyCodeFixAsync(
+		"""
+		using System;
+		using System.Linq;
+		using System.Collections.Generic;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do(IEnumerable<int> numbers)
+				{
+					var hasThree = [|numbers.ToList()|].Contains(3);
+				}
+			}
+		}
+		""",
+		"""
+		using System;
+		using System.Linq;
+		using System.Collections.Generic;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do(IEnumerable<int> numbers)
+				{
+					var hasThree = numbers.Contains(3);
+				}
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestToListReverseIsRemoved() => VerifyCodeFixAsync(
+		"""
+		using System;
+		using System.Linq;
+		using System.Collections.Generic;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do(IEnumerable<int> numbers)
+				{
+					[|numbers.ToList()|].Reverse();
+				}
+			}
+		}
+		""",
+		"""
+		using System;
+		using System.Linq;
+		using System.Collections.Generic;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do(IEnumerable<int> numbers)
+				{
+					numbers.Reverse();
+				}
+			}
+		}
+		""");
 }

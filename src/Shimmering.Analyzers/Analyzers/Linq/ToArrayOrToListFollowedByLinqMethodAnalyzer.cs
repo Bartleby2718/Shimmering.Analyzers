@@ -61,11 +61,28 @@ public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : Core.Shimmerin
 			return;
 		}
 
-		// Check if the outer invocation is also a LINQ method
-		// TODO: What about List instance methods and LINQ methods that have the same name? (Contains, Reverse, ToArray)
+		// Check if the outer invocation is also a LINQ method or a redundant List/Array instance method with the same name.
 		if (!EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, outerInvocation, context.CancellationToken, out var parentMethodName))
 		{
-			return;
+			if (context.SemanticModel.GetSymbolInfo(outerInvocation, context.CancellationToken).Symbol is IMethodSymbol outerMethodSymbol
+				&& outerMethodSymbol.Name is "Contains" or "Reverse")
+			{
+				var containingType = outerMethodSymbol.ContainingType;
+				if (containingType != null)
+				{
+					var originalDef = containingType.OriginalDefinition;
+					string typeName = originalDef.ToDisplayString();
+					if (typeName is "System.Collections.Generic.List<T>" or "System.Array" || containingType.TypeKind == TypeKind.Array)
+					{
+						parentMethodName = outerMethodSymbol.Name;
+					}
+				}
+			}
+
+			if (parentMethodName == null)
+			{
+				return;
+			}
 		}
 
 		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
