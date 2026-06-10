@@ -13,6 +13,15 @@ public abstract class ShimmeringCodeFixProviderTests<TAnalyzer, TCodeFixProvider
 	where TAnalyzer : DiagnosticAnalyzer, new()
 	where TCodeFixProvider : CodeFixProvider, new()
 {
-	protected static Task VerifyCodeFixAsync(string source, string fixedSource) =>
-		CSharpCodeFixVerifier<TAnalyzer, TCodeFixProvider, DefaultVerifier>.VerifyCodeFixAsync(source, fixedSource);
+	protected static Task VerifyCodeFixAsync(string source, string fixedSource)
+	{
+		var test = new CSharpCodeFixTest<TAnalyzer, TCodeFixProvider, DefaultVerifier>
+		{
+			TestCode = source,
+			FixedCode = fixedSource,
+			ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
+		};
+
+		return test.RunAsync();
+	}
 }

@@ -18,7 +18,7 @@ public static class DiagnosticIds
 		public const string RedundantSpreadElement = "SHIMMER1020";
 		// 103X: string.Split()
 		public const string MissingRemoveEmptyEntries = "SHIMMER1030";
-		// TODO: 1031 = https://github.com/Bartleby2718/Shimmering.Analyzers/issues/
+		public const string UseTrimEntries = "SHIMMER1031";
 
 		// 110X: idiomatic use of LINQ methods
 		public const string MisusedOrDefault = "SHIMMER1100";
