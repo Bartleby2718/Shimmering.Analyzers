@@ -12,7 +12,7 @@ public static class DiagnosticIds
 		public const string ToArrayOrToListFollowedByLinqMethod = "SHIMMER1011";
 		public const string ArrayOrArrayReturningMethodFollowedByToArray = "SHIMMER1012";
 		public const string ListOrListReturningMethodFollowedByToList = "SHIMMER1013";
-		// TODO: 1014 = https://github.com/Bartleby2718/Shimmering.Analyzers/issues/50
+		public const string HashSetOrHashSetReturningMethodFollowedByToHashSet = "SHIMMER1014";
 		public const string SingleUseIEnumerableMaterialization = "SHIMMER1015";
 		// 102X: collection expression
 		public const string RedundantSpreadElement = "SHIMMER1020";
