@@ -24,4 +24,16 @@ public abstract class ShimmeringCodeFixProviderTests<TAnalyzer, TCodeFixProvider
 
 		return test.RunAsync();
 	}
+
+	protected static Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)
+	{
+		var test = new CSharpAnalyzerTest<TAnalyzer, DefaultVerifier>
+		{
+			TestCode = source,
+			ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
+		};
+
+		test.ExpectedDiagnostics.AddRange(expected);
+		return test.RunAsync();
+	}
 }
