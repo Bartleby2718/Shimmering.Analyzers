@@ -1,3 +1,4 @@
+using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.UsageRules.ToArrayOrToListFollowedByLinqMethod;
@@ -6,13 +7,13 @@ namespace Shimmering.Analyzers.UsageRules.ToArrayOrToListFollowedByLinqMethod;
 /// Reports instances of LINQ materialization immediately followed by another LINQ method.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = "Unnecessary materialization to array/list in LINQ chain";
 	private const string Message = "Remove unnecessary materialization to an array or a list";
 	private const string Category = "ShimmeringUsage";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.UsageRules.ToArrayOrToListFollowedByLinqMethod,
 		Title,
 		Message,
@@ -36,7 +37,7 @@ public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : ShimmeringSynt
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 	}

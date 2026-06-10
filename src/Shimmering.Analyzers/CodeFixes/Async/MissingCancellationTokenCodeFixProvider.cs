@@ -1,7 +1,9 @@
 using System.Diagnostics;
+
+using Shimmering.Analyzers.Analyzers.Async;
 using Shimmering.Analyzers.Utilities;
 
-namespace Shimmering.Analyzers.UsageRules.MissingCancellationToken;
+namespace Shimmering.Analyzers.CodeFixes.Async;
 
 /// <summary>
 /// Adds a <see cref="CancellationToken"/> parameter if reported by <see cref="MissingCancellationTokenAnalyzer"/>.

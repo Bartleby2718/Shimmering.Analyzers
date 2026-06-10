@@ -99,4 +99,25 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
         }
         """);
 #pragma warning restore SA1027 // Use tabs correctly
+
+	[Test]
+	public Task TestBugReproNegatedTernary() => Verifier.VerifyCodeFixAsync(
+		"""
+		class C {
+		    void M() {
+		        var x = [|!true|] // line 1
+		            ? 0 // line 2
+		            : 1; // line 3
+		    }
+		}
+		""",
+		"""
+		class C {
+		    void M() {
+		        var x = true // line 1
+		            ? 1 // line 3
+		            : 0; // line 2
+		    }
+		}
+		""");
 }

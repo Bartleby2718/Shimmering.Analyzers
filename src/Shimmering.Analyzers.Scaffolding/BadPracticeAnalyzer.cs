@@ -1,16 +1,19 @@
+using Shimmering.Analyzers.Core;
+using Shimmering.Analyzers.Utilities;
+
 namespace Shimmering.Analyzers.CATEGORY_PLACEHOLDERRules.BadPractice;
 
 /// <summary>
 /// TODO.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class BadPracticeAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = "TODO:";
 	private const string Message = "TODO:";
 	private const string Category = "ShimmeringCATEGORY_PLACEHOLDER";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.CATEGORY_PLACEHOLDERRules.BadPractice,
 		Title,
 		Message,
@@ -30,7 +33,7 @@ public sealed class BadPracticeAnalyzer : ShimmeringSyntaxNodeAnalyzer
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		// TODO: context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.MyExpression);
 	}

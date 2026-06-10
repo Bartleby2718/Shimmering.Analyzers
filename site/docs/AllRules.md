@@ -16,6 +16,7 @@ SHIMMER1001 | ShimmeringUsage |   Info   | 1.0.0 | MissingCancellationTokenAnaly
 SHIMMER1010 | ShimmeringUsage | Warning  | 1.0.0 | ToListForEachAnalyzer, [Documentation](UsageRules/SHIMMER1010.md)
 SHIMMER1011 | ShimmeringUsage | Warning  | 1.0.0 | ToArrayOrToListFollowedByLinqMethodAnalyzer, [Documentation](UsageRules/SHIMMER1011.md)
 SHIMMER1012 | ShimmeringUsage | Warning  | 1.0.0 | ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer, [Documentation](UsageRules/SHIMMER1012.md)
+SHIMMER1013 | ShimmeringUsage | Warning  | 1.0.0 | ListOrListReturningMethodFollowedByToListAnalyzer, [Documentation](UsageRules/SHIMMER1013.md)
 SHIMMER1015 | ShimmeringUsage |  Hidden  | 1.0.0 | SingleUseIEnumerableMaterializationAnalyzer, [Documentation](UsageRules/SHIMMER1015.md)
 SHIMMER1020 | ShimmeringUsage | Warning  | 1.0.0 | RedundantSpreadElementAnalyzer, [Documentation](UsageRules/SHIMMER1020.md)
 SHIMMER1030 | ShimmeringUsage |   Info   | 1.0.0 | MissingRemoveEmptyEntriesAnalyzer, [Documentation](UsageRules/SHIMMER1030.md)

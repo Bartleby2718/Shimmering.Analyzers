@@ -1,3 +1,4 @@
+using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.StyleRules.PrimaryConstructorParameterReassignment;
@@ -6,13 +7,13 @@ namespace Shimmering.Analyzers.StyleRules.PrimaryConstructorParameterReassignmen
 /// Reports instances of primary constructor parameters that are reassigned.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class PrimaryConstructorParameterReassignmentAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class PrimaryConstructorParameterReassignmentAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = "Avoid reassigning primary constructor parameter";
 	private const string Message = "Primary constructor parameter '{0}' shouldn't be reassigned";
 	private const string Category = "ShimmeringStyle";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.StyleRules.PrimaryConstructorParameterReassignment,
 		Title,
 		Message,
@@ -32,7 +33,7 @@ public sealed class PrimaryConstructorParameterReassignmentAnalyzer : Shimmering
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		// assignment expressions
 		context.RegisterSyntaxNodeAction(

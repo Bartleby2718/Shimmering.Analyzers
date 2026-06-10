@@ -46,7 +46,7 @@ public class WatchmanTests
 	[Test]
 	public void TestAllAbstractClassesStartWithShimmering()
 	{
-		var abstractClasses = typeof(ShimmeringAnalyzer).Assembly
+		var abstractClasses = typeof(Shimmering.Analyzers.Core.ShimmeringAnalyzer).Assembly
 			.GetTypes()
 			.Where(t => t.IsClass && t.IsAbstract && !t.IsSealed);
 
@@ -78,9 +78,9 @@ public class WatchmanTests
 
 		var expectedRelativePaths = diagnosticIds
 			.Select(id => Path.Combine(
-				id.StartsWith("SHIMMER1") ? "UsageRules"
+				(id.StartsWith("SHIMMER1") || id.StartsWith("SHIMMER9")) ? "UsageRules"
 					: id.StartsWith("SHIMMER2") ? "StyleRules"
-					: throw new InvalidOperationException(),
+					: throw new InvalidOperationException($"Unexpected ID: {id}"),
 				$"{id}.md"))
 			.ToArray();
 
@@ -150,7 +150,7 @@ public class WatchmanTests
 	[Test]
 	public async Task VerifyPackageVersionInReadme()
 	{
-		var informationalVersion = typeof(ShimmeringAnalyzer).Assembly
+		var informationalVersion = typeof(Shimmering.Analyzers.Core.ShimmeringAnalyzer).Assembly
 			.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
 			.InformationalVersion;
 		Assert.That(informationalVersion, Does.Contain("+"));
@@ -170,17 +170,17 @@ public class WatchmanTests
 
 	private static List<AnalyzerInfo> GetAnalyzers()
 	{
-		var analyzerTypes = typeof(ShimmeringAnalyzer).Assembly
+		var analyzerTypes = typeof(Shimmering.Analyzers.Core.ShimmeringAnalyzer).Assembly
 			.GetTypes()
 			.Where(t => t.IsClass
 				&& !t.IsAbstract
-				&& typeof(ShimmeringAnalyzer).IsAssignableFrom(t))
+				&& typeof(Shimmering.Analyzers.Core.ShimmeringAnalyzer).IsAssignableFrom(t))
 			.ToArray();
 
 		List<AnalyzerInfo> analyzers = [];
 		foreach (var type in analyzerTypes)
 		{
-			if (Activator.CreateInstance(type) is not ShimmeringAnalyzer instance) { continue; }
+			if (Activator.CreateInstance(type) is not Shimmering.Analyzers.Core.ShimmeringAnalyzer instance) { continue; }
 
 			// So far, all analyzers support a single diagnostic each.
 			Assert.That(instance.SupportedDiagnostics, Has.Length.EqualTo(1));

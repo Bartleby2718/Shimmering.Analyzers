@@ -1,3 +1,4 @@
+using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.UsageRules.ToListForEach;
@@ -6,13 +7,13 @@ namespace Shimmering.Analyzers.UsageRules.ToListForEach;
 /// Reports stances of .ToList().ForEach().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class ToListForEachAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = ".ToList().ForEach() causes unnecessary memory allocation";
 	private const string Message = "Replace .ToList().ForEach() with a foreach loop to reduce memory usage";
 	private const string Category = "ShimmeringUsage";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.UsageRules.ToListForEach,
 		Title,
 		Message,
@@ -38,7 +39,7 @@ public sealed class ToListForEachAnalyzer : ShimmeringSyntaxNodeAnalyzer
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 	}

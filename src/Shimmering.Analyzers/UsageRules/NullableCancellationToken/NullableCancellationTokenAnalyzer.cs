@@ -1,4 +1,5 @@
-﻿using Shimmering.Analyzers.Utilities;
+using Shimmering.Analyzers.Core;
+using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.UsageRules.NullableCancellationToken;
 
@@ -6,13 +7,13 @@ namespace Shimmering.Analyzers.UsageRules.NullableCancellationToken;
 /// Reports instances of nullable <see cref="CancellationToken"/>s in method signatures.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class NullableCancellationTokenAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = $"Do not use a nullable {nameof(CancellationToken)}";
 	private const string Message = $"{nameof(CancellationToken)} should not be nullable";
 	private const string Category = "ShimmeringUsage";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.UsageRules.NullableCancellationToken,
 		Title,
 		Message,
@@ -32,7 +33,7 @@ public sealed class NullableCancellationTokenAnalyzer : ShimmeringSyntaxNodeAnal
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeParameter, SyntaxKind.Parameter);
 	}

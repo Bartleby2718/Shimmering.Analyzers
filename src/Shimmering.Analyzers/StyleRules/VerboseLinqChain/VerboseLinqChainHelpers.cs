@@ -1,4 +1,5 @@
 using Microsoft.CodeAnalysis.Formatting;
+
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.StyleRules.VerboseLinqChain;

@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Running;
+
 using Shimmering.Analyzers.Benchmark;
 using Shimmering.Analyzers.StyleRules.RedundantOutVariable;
 

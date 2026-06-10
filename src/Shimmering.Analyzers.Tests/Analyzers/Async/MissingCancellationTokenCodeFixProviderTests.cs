@@ -1,6 +1,7 @@
-using Shimmering.Analyzers.UsageRules.MissingCancellationToken;
+using Shimmering.Analyzers.Analyzers.Async;
+using Shimmering.Analyzers.CodeFixes.Async;
 
-namespace Shimmering.Analyzers.Tests.UsageRules.MissingCancellationToken;
+namespace Shimmering.Analyzers.Tests.Analyzers.Async;
 
 using Verifier = CSharpCodeFixVerifier<
 	MissingCancellationTokenAnalyzer,
@@ -23,8 +24,8 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
 		}
 		""",
 		"""
-		using System.Threading.Tasks;
 		using System.Threading;
+		using System.Threading.Tasks;
 
 		namespace Tests
 		{
@@ -50,8 +51,8 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
 		}
 		""",
 		"""
-		using System.Threading.Tasks;
 		using System.Threading;
+		using System.Threading.Tasks;
 
 		namespace Tests
 		{
@@ -77,8 +78,8 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
 		}
 		""",
 		"""
-		using System.Threading.Tasks;
 		using System.Threading;
+		using System.Threading.Tasks;
 
 		namespace Tests
 		{
@@ -105,8 +106,8 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
         }
         """,
 		"""
-        using System.Threading.Tasks;
         using System.Threading;
+        using System.Threading.Tasks;
 
         namespace Tests
         {
@@ -137,8 +138,8 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
         }
         """,
 		"""
-        using System.Threading.Tasks;
         using System.Threading;
+        using System.Threading.Tasks;
 
         namespace Tests
         {

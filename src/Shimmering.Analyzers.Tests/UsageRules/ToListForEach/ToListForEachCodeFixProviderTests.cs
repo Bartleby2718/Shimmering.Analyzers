@@ -227,4 +227,74 @@ public class ToListForEachCodeFixProviderTests : ShimmeringCodeFixProviderTests<
 		}
 		""");
 #pragma warning restore SA1027 // Use tabs correctly
+
+	[Test]
+#pragma warning disable SA1027 // Use tabs correctly
+	public Task TestTriviaForIndentation() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System;
+		using System.Collections.Generic;
+		using System.Linq;
+		
+		class Test
+		{
+		    void Do(IEnumerable<int> myEnumerable)
+		    {
+		        [|myEnumerable
+		            .ToList()
+		            .ForEach(x =>
+		            {
+		                Console.WriteLine(x);
+		            })|];
+		    }
+		}
+		""",
+		"""
+		using System;
+		using System.Collections.Generic;
+		using System.Linq;
+		
+		class Test
+		{
+		    void Do(IEnumerable<int> myEnumerable)
+		    {
+		        foreach (var x in myEnumerable)
+		        {
+		            Console.WriteLine(x);
+		        }
+		    }
+		}
+		""");
+#pragma warning restore SA1027 // Use tabs correctly
+
+	[Test]
+	public Task TestBugReproToListForEach() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System;
+		using System.Linq;
+		using System.Collections.Generic;
+		class C {
+		    void M(IEnumerable<int> myEnumerable) {
+		        [|myEnumerable
+		            .ToList()
+		            .ForEach(x =>
+		            {
+		                Console.WriteLine(x);
+		            })|];
+		    }
+		}
+		""",
+		"""
+		using System;
+		using System.Linq;
+		using System.Collections.Generic;
+		class C {
+		    void M(IEnumerable<int> myEnumerable) {
+		        foreach (var x in myEnumerable)
+		        {
+		            Console.WriteLine(x);
+		        }
+		    }
+		}
+		""");
 }

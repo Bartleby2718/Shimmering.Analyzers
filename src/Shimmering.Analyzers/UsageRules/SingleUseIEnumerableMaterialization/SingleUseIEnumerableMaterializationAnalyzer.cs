@@ -1,4 +1,5 @@
-﻿using Shimmering.Analyzers.Utilities;
+using Shimmering.Analyzers.Core;
+using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.UsageRules.SingleUseIEnumerableMaterialization;
 
@@ -6,13 +7,13 @@ namespace Shimmering.Analyzers.UsageRules.SingleUseIEnumerableMaterialization;
 /// Reports instances of a single-use IEnumerable that is materialized.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class SingleUseIEnumerableMaterializationAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = "Avoid materializing a single-use IEnumerable";
 	private const string Message = "Avoid materializing an IEnumerable if it's used only once";
 	private const string Category = "ShimmeringUsage";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.UsageRules.SingleUseIEnumerableMaterialization,
 		Title,
 		Message,
@@ -41,7 +42,7 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringSynt
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeLocalDeclaration, SyntaxKind.LocalDeclarationStatement);
 	}

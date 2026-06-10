@@ -1,3 +1,5 @@
+using DbUp.SqlServer;
+
 using Shimmering.Analyzers.UsageRules.ArrayOrArrayReturningMethodFollowedByToArray;
 
 namespace Shimmering.Analyzers.Tests.UsageRules.ArrayOrArrayReturningMethodFollowedByToArray;
@@ -9,6 +11,13 @@ using Verifier = CSharpCodeFixVerifier<
 
 public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : ShimmeringCodeFixProviderTests<ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer, ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProvider>
 {
+	[Test]
+	public void Do()
+	{
+		SqlScriptExecutor a = default!;
+		Console.WriteLine(a);
+	}
+
 	[Test]
 	public Task TestToArrayNotChainedBySomethingElse() => Verifier.VerifyCodeFixAsync(
 		"""
@@ -202,7 +211,7 @@ public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : 
 				}
 			}
 		}
-		""",
+""",
 		"""
 		using System;
 		using System.Linq;
@@ -217,11 +226,13 @@ public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : 
 					var arrayLength = "a"
 						// line before Split
 						.Split(' ') // right after Split
+ // right after ToArray
 						// line before Length
 						.Length; // right after declaration
 					MyMethod("b"
 						// line before ToCharArray
 						.ToCharArray() // right after ToCharArray
+ // right after ToArray
 						// line before Length
 						.Length); // right after invocation
 
@@ -229,5 +240,5 @@ public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : 
 				}
 			}
 		}
-		""");
+""");
 }

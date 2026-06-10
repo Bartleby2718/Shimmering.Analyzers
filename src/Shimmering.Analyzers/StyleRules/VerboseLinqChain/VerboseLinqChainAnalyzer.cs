@@ -1,16 +1,17 @@
+using Shimmering.Analyzers.Core;
 namespace Shimmering.Analyzers.StyleRules.VerboseLinqChain;
 
 /// <summary>
 /// Reports instances of a verbose chain of <see cref="Enumerable.Concat{TSource}(IEnumerable{TSource}, IEnumerable{TSource})"/>s and <see cref="Enumerable.Append"/>s, ending with with a <see cref="Enumerable.ToArray{TSource}(IEnumerable{TSource})"/> or a <see cref="Enumerable.ToList{TSource}(IEnumerable{TSource})"/>.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class VerboseLinqChainAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class VerboseLinqChainAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = "Simplify LINQ chain";
 	private const string Message = "Replace a verbose LINQ chain with a collection expression";
 	private const string Category = "ShimmeringStyle";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.StyleRules.VerboseLinqChain,
 		Title,
 		Message,
@@ -34,7 +35,7 @@ public sealed class VerboseLinqChainAnalyzer : ShimmeringSyntaxNodeAnalyzer
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 	}

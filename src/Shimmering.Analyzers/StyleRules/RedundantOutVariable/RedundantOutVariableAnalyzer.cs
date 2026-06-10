@@ -1,18 +1,20 @@
 using System.Diagnostics.CodeAnalysis;
 
+using Shimmering.Analyzers.Core;
+
 namespace Shimmering.Analyzers.StyleRules.RedundantOutVariable;
 
 /// <summary>
 /// Reports instances of an out variable that's only assigned to a variable and not used otherwise.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class RedundantOutVariableAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class RedundantOutVariableAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = "Redundant out variable";
 	private const string Message = "Out variable '{0}' is used exactly once and for assignment and therefore can be inlined";
 	private const string Category = "ShimmeringStyle";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.StyleRules.RedundantOutVariable,
 		Title,
 		Message,
@@ -37,7 +39,7 @@ public sealed class RedundantOutVariableAnalyzer : ShimmeringSyntaxNodeAnalyzer
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 	}

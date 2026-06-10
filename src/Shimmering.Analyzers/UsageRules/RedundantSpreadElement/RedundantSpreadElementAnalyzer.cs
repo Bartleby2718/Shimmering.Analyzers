@@ -1,3 +1,4 @@
+using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.UsageRules.RedundantSpreadElement;
@@ -7,13 +8,13 @@ namespace Shimmering.Analyzers.UsageRules.RedundantSpreadElement;
 /// </summary>
 // See also: https://github.com/dotnet/roslyn/blob/main/src/Analyzers/CSharp/Analyzers/UseCollectionExpression/CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.cs
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class RedundantSpreadElementAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class RedundantSpreadElementAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = "Inline spread element";
 	private const string Message = "Inline spread element";
 	private const string Category = "ShimmeringUsage";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.UsageRules.RedundantSpreadElement,
 		Title,
 		Message,
@@ -30,7 +31,7 @@ public sealed class RedundantSpreadElementAnalyzer : ShimmeringSyntaxNodeAnalyze
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeCollectionExpression, SyntaxKind.CollectionExpression);
 	}

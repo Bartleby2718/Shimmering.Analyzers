@@ -125,8 +125,8 @@ public class VerboseLinqChainCodeFixProviderTests : ShimmeringCodeFixProviderTes
 		}
 		""",
 		"""
-		using System.Linq;
 		using System.Collections.Generic;
+		using System.Linq;
 
 		namespace Tests
 		{
@@ -157,8 +157,8 @@ public class VerboseLinqChainCodeFixProviderTests : ShimmeringCodeFixProviderTes
 		}
 		""",
 		"""
-		using System.Linq;
 		using System.Collections.Generic;
+		using System.Linq;
 
 		namespace Tests
 		{
@@ -189,8 +189,8 @@ public class VerboseLinqChainCodeFixProviderTests : ShimmeringCodeFixProviderTes
 		}
 		""",
 		"""
-		using System.Linq;
 		using System.Collections.Generic;
+		using System.Linq;
 
 		namespace Tests
 		{

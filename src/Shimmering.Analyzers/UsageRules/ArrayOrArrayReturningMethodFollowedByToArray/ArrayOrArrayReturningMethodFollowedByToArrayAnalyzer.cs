@@ -1,3 +1,4 @@
+using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.UsageRules.ArrayOrArrayReturningMethodFollowedByToArray;
@@ -6,13 +7,13 @@ namespace Shimmering.Analyzers.UsageRules.ArrayOrArrayReturningMethodFollowedByT
 /// Reports instances of an array or an array-returning method immediately followed by <see cref="Enumerable.ToArray"/>, as in myString.Split(...).ToArray().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = "An array creation expression or array-returning method should not be followed by .ToArray()";
 	private const string Message = ".ToArray() is redundant";
 	private const string Category = "ShimmeringUsage";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.UsageRules.ArrayOrArrayReturningMethodFollowedByToArray,
 		Title,
 		Message,
@@ -34,7 +35,7 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Shimm
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 	}

@@ -95,8 +95,12 @@ public sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
 			loopBody)
 			.WithLeadingTrivia(invocation.GetLeadingTrivia())
 			.WithTrailingTrivia(foreachTrailingTrivia);
+		var foreachStatementWithTriviaFixed = foreachStatement
+			.WithCloseParenToken(foreachStatement.CloseParenToken.WithLeadingTrivia(foreachStatement.OpenParenToken.LeadingTrivia));
 
-		var newRoot = root.ReplaceNode(invocationStatement, foreachStatement);
+		var newRoot = root.ReplaceNode(
+			invocationStatement,
+			foreachStatementWithTriviaFixed.WithAdditionalAnnotations(Microsoft.CodeAnalysis.Formatting.Formatter.Annotation));
 		return document.WithSyntaxRoot(newRoot);
 	}
 
@@ -124,7 +128,7 @@ public sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
 		if (argumentExpression is LambdaExpressionSyntax lambda)
 		{
 			loopBody = lambda.Body is BlockSyntax block
-				? block
+				? block.WithAdditionalAnnotations(Microsoft.CodeAnalysis.Formatting.Formatter.Annotation)
 				: lambda.Body is ExpressionSyntax expression
 					? SyntaxFactory.Block(SyntaxFactory.ExpressionStatement(expression))
 					: SyntaxFactory.Block();

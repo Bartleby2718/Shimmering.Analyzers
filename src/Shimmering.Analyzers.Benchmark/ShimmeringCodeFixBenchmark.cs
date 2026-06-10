@@ -11,7 +11,7 @@ namespace Shimmering.Analyzers.Benchmark;
 
 [MemoryDiagnoser]
 public abstract class ShimmeringCodeFixBenchmark<TAnalyzer, TCodeFixProvider>
-	where TAnalyzer : ShimmeringSyntaxNodeAnalyzer, new()
+	where TAnalyzer : Core.ShimmeringAnalyzer, new()
 	where TCodeFixProvider : ShimmeringCodeFixProvider, new()
 {
 	private AdhocWorkspace _workspace = default!;
@@ -39,9 +39,9 @@ public abstract class ShimmeringCodeFixBenchmark<TAnalyzer, TCodeFixProvider>
 			.WithMetadataReferences(references));
 
 		// Add a document with the sample code that triggers the diagnostic.
-        var sourceCode = this._analyzer.SampleCode
-            .Replace("[|", string.Empty)
-            .Replace("|]", string.Empty);
+		var sourceCode = this._analyzer.SampleCode
+			.Replace("[|", string.Empty)
+			.Replace("|]", string.Empty);
 		this._document = this._workspace.AddDocument(this._project.Id, "TestDocument.cs", SourceText.From(sourceCode));
 	}
 

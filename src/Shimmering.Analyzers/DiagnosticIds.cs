@@ -1,6 +1,6 @@
 namespace Shimmering.Analyzers;
 
-internal static class DiagnosticIds
+public static class DiagnosticIds
 {
 	public static class UsageRules
 	{
@@ -11,7 +11,7 @@ internal static class DiagnosticIds
 		public const string ToListForEach = "SHIMMER1010";
 		public const string ToArrayOrToListFollowedByLinqMethod = "SHIMMER1011";
 		public const string ArrayOrArrayReturningMethodFollowedByToArray = "SHIMMER1012";
-		// TODO: 1013 = https://github.com/Bartleby2718/Shimmering.Analyzers/issues/49
+		public const string ListOrListReturningMethodFollowedByToList = "SHIMMER1013";
 		// TODO: 1014 = https://github.com/Bartleby2718/Shimmering.Analyzers/issues/50
 		public const string SingleUseIEnumerableMaterialization = "SHIMMER1015";
 		// 102X: collection expression

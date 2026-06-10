@@ -1,18 +1,19 @@
-﻿using Shimmering.Analyzers.Utilities;
+using Shimmering.Analyzers.Core;
+using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.UsageRules.SingleElementConcat;
 
 /// <summary>
-/// Reports instances of calling <see cref="Enumerable.Concat"/> against a single-element collection that can be replaced with <see cref="Enumerable.Append"/>.
+/// Reports instances of `.Concat(new[] { e })` or `.Concat(new List&lt;T&gt; { e })`.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class SingleElementConcatAnalyzer : Core.ShimmeringAnalyzer
 {
-	private const string Title = "Simplify .Concat()";
+	private const string Title = "Do not concat a single element";
 	private const string Message = "Replace .Concat([e]) with .Append(e)";
 	private const string Category = "ShimmeringUsage";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.UsageRules.SingleElementConcat,
 		Title,
 		Message,
@@ -27,14 +28,14 @@ public sealed class SingleElementConcatAnalyzer : ShimmeringSyntaxNodeAnalyzer
 		{
 			void Do()
 			{
-				var result = [|new[] { 1, 2 }.Concat(new[] { 3 })|];
+				_ = [|new[] { 1 }.Concat(new[] { 2 })|];
 			}
 		}
 		""";
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 	}

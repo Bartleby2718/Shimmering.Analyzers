@@ -1,6 +1,9 @@
-using Shimmering.Analyzers.UsageRules.MissingCancellationToken;
+using NUnit.Framework;
 
-namespace Shimmering.Analyzers.Tests.UsageRules.MissingCancellationToken;
+using Shimmering.Analyzers.Analyzers.Async;
+using Shimmering.Analyzers.CodeFixes.Async;
+
+namespace Shimmering.Analyzers.Tests.Analyzers.Async;
 
 using Verifier = CSharpAnalyzerVerifier<
 	MissingCancellationTokenAnalyzer,
@@ -92,6 +95,24 @@ public class MissingCancellationTokenAnalyzerTests : ShimmeringAnalyzerTests<Mis
 			class Parent
 			{
 				public virtual Task [|DoAsync|]() => Task.CompletedTask;
+			}
+		}
+		""");
+	[Test]
+	public Task TestMissingCancellationTokenInInvocation() => Verifier.VerifyAnalyzerAsync(
+		"""
+		using System.Threading;
+		using System.Threading.Tasks;
+
+		namespace Tests
+		{
+			class Test
+			{
+				public async Task DoAsync(CancellationToken token)
+				{
+					await Task.Delay(1000, [|default|]);
+					await Task.Delay(1000, [|CancellationToken.None|]);
+				}
 			}
 		}
 		""");

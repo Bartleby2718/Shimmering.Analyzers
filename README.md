@@ -11,7 +11,7 @@ dotnet add package Shimmering.Analyzers
 ### Option 3: Manually
 You can add the following `PackageReference` item to an `ItemGroup` element in your `csproj` file:
 ```xml
-<PackageReference Include="Shimmering.Analyzers" Version="1.0.0">
+<PackageReference Include="Shimmering.Analyzers" Version="1.0.1-alpha01">
   <PrivateAssets>all</PrivateAssets>
   <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 </PackageReference>

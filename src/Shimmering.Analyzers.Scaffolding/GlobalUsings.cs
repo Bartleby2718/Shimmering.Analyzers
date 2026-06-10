@@ -2,6 +2,7 @@
 #pragma warning disable SA1210 // Using directives should be ordered alphabetically by namespace
 // using directives that are needed in all analyzers
 global using System.Collections.Immutable;
+
 global using Microsoft.CodeAnalysis;
 global using Microsoft.CodeAnalysis.CSharp.Syntax;
 global using Microsoft.CodeAnalysis.Diagnostics;
@@ -15,4 +16,5 @@ global using Microsoft.CodeAnalysis.CodeFixes;
 // using directives that are needed in all test files
 global using Microsoft.CodeAnalysis.CSharp.Testing;
 global using Microsoft.CodeAnalysis.Testing;
+
 global using NUnit.Framework;

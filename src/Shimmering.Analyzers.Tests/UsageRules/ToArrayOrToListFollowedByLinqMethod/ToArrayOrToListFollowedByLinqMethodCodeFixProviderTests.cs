@@ -103,7 +103,7 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 				}
 			}
 		}
-		""",
+""",
 		"""
 		using System;
 		using System.Linq;
@@ -117,12 +117,36 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 					int[] numbers = [];
 					// line before source
 					var squares = numbers // right after source
+ // right after ToList
 						// line before Select
 						.Select(x => x * x) // right after Select
 						// line before ToArray
 						.ToArray();
 				}
 			}
+		}
+""");
+
+	[Test]
+	public Task TestBugReproToArray() => Verifier.VerifyCodeFixAsync(
+		"""
+		using System.Linq;
+		using System.Collections.Generic;
+		class C {
+		    void M(IEnumerable<int> a) {
+		        [|a.Union(new[] {1}).ToList()|]
+		            .Union(new[] {2});
+		    }
+		}
+		""",
+		"""
+		using System.Linq;
+		using System.Collections.Generic;
+		class C {
+		    void M(IEnumerable<int> a) {
+		        a.Union(new[] {1})
+		            .Union(new[] {2});
+		    }
 		}
 		""");
 }

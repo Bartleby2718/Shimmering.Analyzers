@@ -1,3 +1,4 @@
+using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.UsageRules.MissingRemoveEmptyEntries;
@@ -6,13 +7,13 @@ namespace Shimmering.Analyzers.UsageRules.MissingRemoveEmptyEntries;
 /// Reports instances of string.Split() where StringSplitOptions.RemoveEmptyEntries could have been used but wasn't used.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class MissingRemoveEmptyEntriesAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class MissingRemoveEmptyEntriesAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = "Use StringSplitOptions.RemoveEmptyEntries";
 	private const string Message = "Use the overload of String.Split with StringSplitOptions.RemoveEmptyEntries to remove empty entries";
 	private const string Category = "ShimmeringUsage";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.UsageRules.MissingRemoveEmptyEntries,
 		Title,
 		Message,
@@ -36,7 +37,7 @@ public sealed class MissingRemoveEmptyEntriesAnalyzer : ShimmeringSyntaxNodeAnal
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 	}

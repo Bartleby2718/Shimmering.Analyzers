@@ -1,4 +1,5 @@
-﻿using Shimmering.Analyzers.Utilities;
+using Shimmering.Analyzers.Core;
+using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.UsageRules.UniqueNonSetCollection;
 
@@ -6,13 +7,13 @@ namespace Shimmering.Analyzers.UsageRules.UniqueNonSetCollection;
 /// Reports instances of .Distinct().ToList() and .Distinct().ToArray() that can be replaced with .ToHashSet().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringSyntaxNodeAnalyzer
+public sealed class UniqueNonSetCollectionAnalyzer : Core.ShimmeringAnalyzer
 {
 	private const string Title = "Use a set instead";
 	private const string Message = "Prefer sets when uniqueness is required";
 	private const string Category = "ShimmeringUsage";
 
-	private static readonly DiagnosticDescriptor Rule = CreateRule(
+	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.UsageRules.UniqueNonSetCollection,
 		Title,
 		Message,
@@ -36,7 +37,7 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringSyntaxNodeAnalyze
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
-	public override void RegisterSyntaxNodeAction(AnalysisContext context)
+	protected override void InitializeCore(AnalysisContext context)
 	{
 		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 	}
