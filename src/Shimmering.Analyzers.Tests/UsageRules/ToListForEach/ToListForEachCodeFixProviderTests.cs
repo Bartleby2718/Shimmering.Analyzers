@@ -267,6 +267,7 @@ public class ToListForEachCodeFixProviderTests : ShimmeringCodeFixProviderTests<
 		""");
 #pragma warning restore SA1027 // Use tabs correctly
 
+#pragma warning disable SA1027 // Use tabs correctly
 	[Test]
 	public Task TestBugReproToListForEach() => Verifier.VerifyCodeFixAsync(
 		"""
@@ -274,14 +275,14 @@ public class ToListForEachCodeFixProviderTests : ShimmeringCodeFixProviderTests<
 		using System.Linq;
 		using System.Collections.Generic;
 		class C {
-		    void M(IEnumerable<int> myEnumerable) {
-		        [|myEnumerable
-		            .ToList()
-		            .ForEach(x =>
-		            {
-		                Console.WriteLine(x);
-		            })|];
-		    }
+			void M(IEnumerable<int> myEnumerable) {
+				[|myEnumerable
+					.ToList()
+					.ForEach(x =>
+					{
+						Console.WriteLine(x);
+					})|];
+			}
 		}
 		""",
 		"""
@@ -289,7 +290,7 @@ public class ToListForEachCodeFixProviderTests : ShimmeringCodeFixProviderTests<
 		using System.Linq;
 		using System.Collections.Generic;
 		class C {
-		    void M(IEnumerable<int> myEnumerable) {
+			void M(IEnumerable<int> myEnumerable) {
 		        foreach (var x in myEnumerable)
 		        {
 		            Console.WriteLine(x);
@@ -297,4 +298,5 @@ public class ToListForEachCodeFixProviderTests : ShimmeringCodeFixProviderTests<
 		    }
 		}
 		""");
+#pragma warning restore SA1027 // Use tabs correctly
 }
