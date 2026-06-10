@@ -3,15 +3,10 @@ using Shimmering.Analyzers.CodeFixes.Async;
 
 namespace Shimmering.Analyzers.Tests.Analyzers.Async;
 
-using Verifier = CSharpCodeFixVerifier<
-	MissingCancellationTokenAnalyzer,
-	MissingCancellationTokenCodeFixProvider,
-	DefaultVerifier>;
-
 public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixProviderTests<MissingCancellationTokenAnalyzer, MissingCancellationTokenCodeFixProvider>
 {
 	[Test]
-	public Task TestMethodWithoutParameters() => Verifier.VerifyCodeFixAsync(
+	public Task TestMethodWithoutParameters() => VerifyCodeFixAsync(
 		"""
 		using System.Threading.Tasks;
 
@@ -37,7 +32,7 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
 		""");
 
 	[Test]
-	public Task TestMethodWithOneParameter() => Verifier.VerifyCodeFixAsync(
+	public Task TestMethodWithOneParameter() => VerifyCodeFixAsync(
 		"""
 		using System.Threading.Tasks;
 
@@ -65,7 +60,7 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
 		""");
 
 	[Test]
-	public Task TestMethodWithParameters() => Verifier.VerifyCodeFixAsync(
+	public Task TestMethodWithParameters() => VerifyCodeFixAsync(
 		"""
 		using System.Threading.Tasks;
 
@@ -91,7 +86,7 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
 		""");
 
 	[Test]
-	public Task TestTriviaWhenParametersStartOnSameColumn() => Verifier.VerifyCodeFixAsync(
+	public Task TestTriviaWhenParametersStartOnSameColumn() => VerifyCodeFixAsync(
 #pragma warning disable SA1027 // Use tabs correctly
 		"""
         using System.Threading.Tasks;
@@ -122,7 +117,7 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
 #pragma warning restore SA1027 // Use tabs correctly
 
 	[Test]
-	public Task TestTriviaWhenParametersStartOnDifferentColumns() => Verifier.VerifyCodeFixAsync(
+	public Task TestTriviaWhenParametersStartOnDifferentColumns() => VerifyCodeFixAsync(
 #pragma warning disable SA1027 // Use tabs correctly
 		"""
         using System.Threading.Tasks;

@@ -5,14 +5,10 @@ using Shimmering.Analyzers.CodeFixes.Async;
 
 namespace Shimmering.Analyzers.Tests.Analyzers.Async;
 
-using Verifier = CSharpAnalyzerVerifier<
-	MissingCancellationTokenAnalyzer,
-	DefaultVerifier>;
-
 public class MissingCancellationTokenAnalyzerTests : ShimmeringAnalyzerTests<MissingCancellationTokenAnalyzer>
 {
 	[Test]
-	public Task TestMethodsWithCancellationTokens() => Verifier.VerifyAnalyzerAsync(
+	public Task TestMethodsWithCancellationTokens() => VerifyAnalyzerAsync(
 		"""
 		using System.Threading;
 		using System.Threading.Tasks;
@@ -40,7 +36,7 @@ public class MissingCancellationTokenAnalyzerTests : ShimmeringAnalyzerTests<Mis
 		""");
 
 	[Test]
-	public Task TestExplicitInterfaceImplementation() => Verifier.VerifyAnalyzerAsync(
+	public Task TestExplicitInterfaceImplementation() => VerifyAnalyzerAsync(
 		"""
 		using System.Threading;
 		using System.Threading.Tasks;
@@ -60,7 +56,7 @@ public class MissingCancellationTokenAnalyzerTests : ShimmeringAnalyzerTests<Mis
 		""");
 
 	[Test]
-	public Task TestImplicitInterfaceImplementation() => Verifier.VerifyAnalyzerAsync(
+	public Task TestImplicitInterfaceImplementation() => VerifyAnalyzerAsync(
 		"""
 		using System.Threading;
 		using System.Threading.Tasks;
@@ -80,7 +76,7 @@ public class MissingCancellationTokenAnalyzerTests : ShimmeringAnalyzerTests<Mis
 		""");
 
 	[Test]
-	public Task TestOverride() => Verifier.VerifyAnalyzerAsync(
+	public Task TestOverride() => VerifyAnalyzerAsync(
 		"""
 		using System.Threading;
 		using System.Threading.Tasks;
@@ -99,7 +95,7 @@ public class MissingCancellationTokenAnalyzerTests : ShimmeringAnalyzerTests<Mis
 		}
 		""");
 	[Test]
-	public Task TestMissingCancellationTokenInInvocation() => Verifier.VerifyAnalyzerAsync(
+	public Task TestMissingCancellationTokenInInvocation() => VerifyAnalyzerAsync(
 		"""
 		using System.Threading;
 		using System.Threading.Tasks;
