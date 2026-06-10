@@ -1,7 +1,7 @@
 namespace Shimmering.Analyzers.UsageRules.UseTrimEntries;
 
 /// <summary>
-/// TODO.
+/// Provides code fixes for <see cref="UseTrimEntriesAnalyzer"/>.
 /// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(UseTrimEntriesCodeFixProvider))]
 public sealed class UseTrimEntriesCodeFixProvider : ShimmeringCodeFixProvider

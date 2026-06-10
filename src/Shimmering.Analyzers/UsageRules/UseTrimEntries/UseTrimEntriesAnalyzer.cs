@@ -5,7 +5,7 @@ using Shimmering.Analyzers.Utilities;
 namespace Shimmering.Analyzers.UsageRules.UseTrimEntries;
 
 /// <summary>
-/// TODO.
+/// Reports instances of string.Split() followed by Enumerable.Select(x => x.Trim()) where StringSplitOptions.TrimEntries could have been used instead.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UseTrimEntriesAnalyzer : Core.ShimmeringAnalyzer

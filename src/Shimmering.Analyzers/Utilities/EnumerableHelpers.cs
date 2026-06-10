@@ -18,10 +18,6 @@ internal static class EnumerableHelpers
 		var containingNamespace = methodSymbol.ContainingNamespace?.ToDisplayString();
 		if (containingNamespace != FullyQualifiedNamespaces.SystemLinq) { return false; }
 
-		var assemblyName = methodSymbol.ContainingAssembly?.Name;
-		// TODO: add netstandard?
-		if (assemblyName != "System.Linq") { return false; }
-
 		if (!containingClass.ContainingNamespace.ContainingNamespace.ContainingNamespace.IsGlobalNamespace) { return false; }
 
 		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return false; }
