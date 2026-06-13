@@ -36,5 +36,7 @@ public static class DiagnosticIds
 		public const string RedundantOutVariable = "SHIMMER2020";
 		// 203X: primary constructor
 		public const string PrimaryConstructorParameterReassignment = "SHIMMER2030";
+		// 204X: fully-qualified references
+		public const string ForbidFullyQualifiedTypeReferences = "SHIMMER2040";
 	}
 }

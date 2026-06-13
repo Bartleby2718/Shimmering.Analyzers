@@ -29,3 +29,4 @@ SHIMMER2000 | ShimmeringStyle |   Info   | 1.0.0 | VerboseLinqChainAnalyzer, [Do
 SHIMMER2010 | ShimmeringStyle |   Info   | 1.0.0 | NegatedTernaryConditionAnalyzer, [Documentation](StyleRules/SHIMMER2010.md)
 SHIMMER2020 | ShimmeringStyle |   Info   | 1.0.0 | RedundantOutVariableAnalyzer, [Documentation](StyleRules/SHIMMER2020.md)
 SHIMMER2030 | ShimmeringStyle |  Hidden  | 1.0.0 | PrimaryConstructorParameterReassignmentAnalyzer, [Documentation](StyleRules/SHIMMER2030.md)
+SHIMMER2040 | ShimmeringStyle |   Info   | 1.0.0 | ForbidFullyQualifiedTypeReferencesAnalyzer, [Documentation](StyleRules/SHIMMER2040.md)
