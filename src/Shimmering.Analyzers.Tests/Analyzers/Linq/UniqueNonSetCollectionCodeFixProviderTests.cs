@@ -155,6 +155,7 @@ public class UniqueNonSetCollectionCodeFixProviderTests : ShimmeringCodeFixProvi
 					}
 				}
 				""",
+			ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
 		};
 
 		test.TestState.ExpectedDiagnostics.Add(new DiagnosticResult(
