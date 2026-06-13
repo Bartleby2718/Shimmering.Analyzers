@@ -13,14 +13,17 @@ internal static class ListHelpers
 		if (methodSymbol.IsStatic) { return false; }
 
 		var containingClass = methodSymbol.ContainingType;
-		if (containingClass.Name != nameof(List<int>)) { return false; }
+		if (containingClass is null || containingClass.Name != nameof(List<int>)) { return false; }
 
-		var containingNamespace = methodSymbol.ContainingNamespace?.ToDisplayString();
-		if (containingNamespace != FullyQualifiedNamespaces.SystemCollectionsGeneric) { return false; }
+		var containingNamespace = methodSymbol.ContainingNamespace;
+		if (containingNamespace is null || containingNamespace.Name != "Generic") { return false; }
+		var parentNamespace = containingNamespace.ContainingNamespace;
+		if (parentNamespace is null || parentNamespace.Name != "Collections") { return false; }
+		var grandParentNamespace = parentNamespace.ContainingNamespace;
+		if (grandParentNamespace is null || grandParentNamespace.Name != "System") { return false; }
+		if (grandParentNamespace.ContainingNamespace is null || !grandParentNamespace.ContainingNamespace.IsGlobalNamespace) { return false; }
 
-		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return false; }
-
-		methodName = memberAccess.Name.Identifier.Text;
+		methodName = methodSymbol.Name;
 		return true;
 	}
 }

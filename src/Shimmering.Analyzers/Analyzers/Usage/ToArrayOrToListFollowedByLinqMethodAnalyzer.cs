@@ -85,7 +85,7 @@ public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : Core.Shimmerin
 			}
 		}
 
-		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
 		// materializing an IQueryable may be intentional (e.g. because the following method doesn't work on EntityFramework)
 		if (AnalyzerHelpers.IsOrImplementsInterface(context, memberAccess.Expression, FullyQualifiedTypeNames.IQueryableOfT))
 		{

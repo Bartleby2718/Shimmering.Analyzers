@@ -40,7 +40,7 @@ public abstract class ShimmeringRedundantInvocationCodeFixProvider : ShimmeringC
 		var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 		if (root == null) { return document; }
 
-		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return document; }
 		var innerNode = memberAccess.Expression;
 		var innerNodeTrailingTrivia = innerNode.GetTrailingTrivia();
 		var invocationTrailingTrivia = invocation.GetTrailingTrivia();

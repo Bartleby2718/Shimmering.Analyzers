@@ -68,9 +68,47 @@ public sealed class UniqueNonSetCollectionAnalyzer : Core.ShimmeringAnalyzer
 		// Exclude the overload that accepts a comparer argument until https://github.com/Bartleby2718/Shimmering.Analyzers/issues/91 is done
 		if (innerInvocation.ArgumentList.Arguments.Count != 0) { return; }
 
-		// Technically, we shouldn't flag when ToHashSet() can cause a compilation failure.
-		// However, still flagging to promote a best practice
+		if (semanticModel.GetSymbolInfo(invocation, context.CancellationToken).Symbol is not IMethodSymbol methodSymbol) { return; }
+		var elementType = methodSymbol.TypeArguments.FirstOrDefault();
+		if (elementType == null) { return; }
+
+		if (!IsTargetTypeCompatible(semanticModel, invocation, elementType, context.CancellationToken))
+		{
+			return;
+		}
 
 		context.ReportDiagnostic(Diagnostic.Create(Rule, invocation.GetLocation()));
+	}
+
+	private static bool IsTargetTypeCompatible(
+		SemanticModel semanticModel,
+		InvocationExpressionSyntax invocation,
+		ITypeSymbol elementType,
+		CancellationToken cancellationToken)
+	{
+		var typeInfo = semanticModel.GetTypeInfo(invocation, cancellationToken);
+		var convertedType = typeInfo.ConvertedType;
+		if (convertedType == null || convertedType is IErrorTypeSymbol)
+		{
+			return false;
+		}
+
+		// If the parent is a var variable declaration, it is always compatible.
+		var variableDeclaration = invocation.Parent?.Parent?.Parent as VariableDeclarationSyntax;
+		if (variableDeclaration != null && variableDeclaration.Type.IsVar)
+		{
+			return true;
+		}
+
+		var compilation = semanticModel.Compilation;
+		var hashSetType = compilation.GetTypeByMetadataName("System.Collections.Generic.HashSet`1");
+		if (hashSetType == null)
+		{
+			return false;
+		}
+
+		var constructedHashSetType = hashSetType.Construct(elementType);
+		var conversion = compilation.ClassifyConversion(constructedHashSetType, convertedType);
+		return conversion.Exists && (conversion.IsImplicit || conversion.IsIdentity);
 	}
 }

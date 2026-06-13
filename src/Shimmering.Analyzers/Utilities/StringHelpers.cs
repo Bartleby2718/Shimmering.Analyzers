@@ -12,12 +12,11 @@ internal static class StringHelpers
 		if (semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol is not IMethodSymbol methodSymbol) { return false; }
 		if (methodSymbol.IsStatic != isStatic) { return false; }
 
-		var containingNamespace = methodSymbol.ContainingNamespace?.ToDisplayString();
-		if (containingNamespace != FullyQualifiedNamespaces.System) { return false; }
+		var containingNamespace = methodSymbol.ContainingNamespace;
+		if (containingNamespace is null || containingNamespace.Name != "System") { return false; }
+		if (containingNamespace.ContainingNamespace is null || !containingNamespace.ContainingNamespace.IsGlobalNamespace) { return false; }
 
-		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return false; }
-
-		methodName = memberAccess.Name.Identifier.Text;
+		methodName = methodSymbol.Name;
 		return true;
 	}
 }

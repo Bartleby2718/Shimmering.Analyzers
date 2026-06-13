@@ -65,7 +65,7 @@ public sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
 		var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 		if (root == null) { return document; }
 
-		var forEachMemberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+		if (invocation.Expression is not MemberAccessExpressionSyntax forEachMemberAccess) { return document; }
 
 		// Get the argument which can be a lambda or a method group.
 		var argumentExpression = invocation.ArgumentList.Arguments.First().Expression;
@@ -78,7 +78,7 @@ public sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
 
 		// Get the original enumerable from the ToList() call.
 		var toListInvocation = (InvocationExpressionSyntax)forEachMemberAccess.Expression;
-		var toListMemberAccess = (MemberAccessExpressionSyntax)toListInvocation.Expression;
+		if (toListInvocation.Expression is not MemberAccessExpressionSyntax toListMemberAccess) { return document; }
 		// remove trivia, as you probably wouldn't want trivia in the middle of foreach
 		var enumerableExpression = toListMemberAccess.Expression.WithoutTrivia();
 

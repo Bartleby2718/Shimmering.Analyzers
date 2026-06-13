@@ -50,8 +50,7 @@ public sealed class HashSetOrHashSetReturningMethodFollowedByToHashSetAnalyzer :
 		if (!EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
 		if (methodName != "ToHashSet") { return; }
 		if (invocation.ArgumentList.Arguments.Count > 0) { return; }
-
-		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
 		var innerExpression = memberAccess.Expression;
 		var typeSymbol = context.SemanticModel.GetTypeInfo(innerExpression, context.CancellationToken).Type;
 

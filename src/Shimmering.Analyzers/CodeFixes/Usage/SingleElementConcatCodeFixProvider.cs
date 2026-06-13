@@ -58,7 +58,7 @@ public sealed class SingleElementConcatCodeFixProvider : ShimmeringCodeFixProvid
 		var supportsCollectionExpressions = document.Project.ParseOptions is CSharpParseOptions { LanguageVersion: >= LanguageVersion.CSharp12 };
 		if (!SingleElementConcatHelpers.TryGetSingleElement(invocation, supportsCollectionExpressions, out var expression)) { return document; }
 
-		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return document; }
 		var newMemberAccess = memberAccess.WithName(SyntaxFactory.IdentifierName(nameof(Enumerable.Append)));
 
 		var newArgumentList = SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList([SyntaxFactory.Argument(expression)]));

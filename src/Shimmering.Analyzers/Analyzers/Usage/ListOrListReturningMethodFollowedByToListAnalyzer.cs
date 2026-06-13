@@ -49,8 +49,7 @@ public sealed class ListOrListReturningMethodFollowedByToListAnalyzer : Core.Shi
 
 		if (!EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
 		if (methodName != nameof(Enumerable.ToList)) { return; }
-
-		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
 		var innerExpression = memberAccess.Expression;
 		if (innerExpression is ObjectCreationExpressionSyntax objectCreationExpressionSyntax)
 		{

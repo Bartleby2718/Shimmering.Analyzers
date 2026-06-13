@@ -46,8 +46,7 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Core.
 
 		if (!EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
 		if (methodName != nameof(Enumerable.ToArray)) { return; }
-
-		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
 		var innerExpression = memberAccess.Expression;
 		if (innerExpression is ArrayCreationExpressionSyntax or ImplicitArrayCreationExpressionSyntax)
 		{

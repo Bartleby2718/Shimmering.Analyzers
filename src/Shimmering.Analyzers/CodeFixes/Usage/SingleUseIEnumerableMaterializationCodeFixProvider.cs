@@ -57,7 +57,7 @@ public sealed class SingleUseIEnumerableMaterializationCodeFixProvider : Shimmer
 		var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 		if (root == null) { return document; }
 
-		var memberAccess = (MemberAccessExpressionSyntax)invocation.Expression;
+		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return document; }
 		var newRoot = root.ReplaceNode(
 			invocation,
 			memberAccess.Expression.WithTrailingTrivia(invocation.GetTrailingTrivia()));

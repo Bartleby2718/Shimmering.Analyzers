@@ -13,16 +13,15 @@ internal static class EnumerableHelpers
 		if (!methodSymbol.IsExtensionMethod) { return false; }
 
 		var containingClass = methodSymbol.ContainingType;
-		if (containingClass.Name != nameof(Enumerable)) { return false; }
+		if (containingClass is null || containingClass.Name != nameof(Enumerable)) { return false; }
 
-		var containingNamespace = methodSymbol.ContainingNamespace?.ToDisplayString();
-		if (containingNamespace != FullyQualifiedNamespaces.SystemLinq) { return false; }
+		var containingNamespace = methodSymbol.ContainingNamespace;
+		if (containingNamespace is null || containingNamespace.Name != "Linq") { return false; }
+		var parentNamespace = containingNamespace.ContainingNamespace;
+		if (parentNamespace is null || parentNamespace.Name != "System") { return false; }
+		if (parentNamespace.ContainingNamespace is null || !parentNamespace.ContainingNamespace.IsGlobalNamespace) { return false; }
 
-		if (!containingClass.ContainingNamespace.ContainingNamespace.ContainingNamespace.IsGlobalNamespace) { return false; }
-
-		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return false; }
-
-		methodName = memberAccess.Name.Identifier.Text;
+		methodName = methodSymbol.Name;
 		return true;
 	}
 }

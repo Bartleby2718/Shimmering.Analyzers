@@ -53,9 +53,9 @@ public sealed class UniqueNonSetCollectionCodeFixProvider : ShimmeringCodeFixPro
 
 	private static async Task<Document> ReplaceWithToHashSetAsync(Document document, InvocationExpressionSyntax invocation, CancellationToken cancellationToken)
 	{
-		var toSomething = (MemberAccessExpressionSyntax)invocation.Expression;
-		var distinctCall = (InvocationExpressionSyntax)toSomething.Expression;
-		var distinctNode = (MemberAccessExpressionSyntax)distinctCall.Expression;
+		if (invocation.Expression is not MemberAccessExpressionSyntax toSomething) { return document; }
+		if (toSomething.Expression is not InvocationExpressionSyntax distinctCall) { return document; }
+		if (distinctCall.Expression is not MemberAccessExpressionSyntax distinctNode) { return document; }
 
 		/*
 			Dealing with trivia is tricky here because these are typically on different lines, like this:
