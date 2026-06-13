@@ -6,16 +6,16 @@ using Shimmering.Analyzers.Utilities;
 namespace Shimmering.Analyzers.Analyzers.Usage;
 
 /// <summary>
-/// Reports instances of an list or an list-returning method immediately followed by <see cref="Enumerable.ToList"/>, as in myString.Split(...).ToList().
+/// Reports instances of a list or a list-returning method immediately followed by <see cref="Enumerable.ToList"/>, as in myString.Split(...).ToList().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ListOrListReturningMethodFollowedByToListAnalyzer : Core.ShimmeringAnalyzer
+public sealed class ListOrListReturningMethodFollowedByToListAnalyzer : ShimmeringAnalyzer
 {
-	private const string Title = "An list creation expression or list-returning method should not be followed by .ToList()";
+	private const string Title = "A list creation expression or list-returning method should not be followed by .ToList()";
 	private const string Message = ".ToList() is redundant";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.ListOrListReturningMethodFollowedByToList,
 		Title,
 		Message,

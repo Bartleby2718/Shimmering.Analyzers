@@ -5,12 +5,12 @@ Please adhere to the following rules and best practices:
 ## 1. Documentation & Workflow
 
 - **File Links**: When mentioning repository files in markdown documentation, always use clickable relative links (e.g., [`README.md`](./README.md)).
-- **Testing**: After adding a feature, always add tests covering both the happy paths and edge cases. When fixing a bug, follow the red-green-refactor approach.
+- **Testing**: After adding a feature, always add tests covering both the happy paths and edge cases. When fixing a bug, follow the red-green-refactor approach. Every test name should be descriptive, explaining the business logic that's being enforced.
 - **Documentation**: After adding a feature, ensure all relevant documentation is created, updated, or removed.
 
 ## 2. Roslyn Analyzer Architecture
-- **Composition over Inheritance**: Use `Core.ShimmeringAnalyzer` as the base class for all analyzers.
-- **Metadata and Help Links**: Always construct `DiagnosticDescriptor` instances using `Core.RuleFactory.Create`. Do not hardcode help link URLs.
+- **Composition over Inheritance**: Use `ShimmeringAnalyzer` as the base class for all analyzers.
+- **Metadata and Help Links**: Always construct `DiagnosticDescriptor` instances using `ShimmeringRuleFactory.Create`. Do not hardcode help link URLs.
 - **Category Constants**: Use the constants defined in `Core.RuleCategories` for diagnostic categories (e.g., `RuleCategories.Style`, `RuleCategories.Usage`, `RuleCategories.Performance`). Do not use hardcoded strings for categories.
 - **Directory Structure**: Put analyzers under `src/Shimmering.Analyzers/Analyzers/{Category}/` and code fixes under `src/Shimmering.Analyzers/CodeFixes/{Category}/`. Group tests correspondingly under `src/Shimmering.Analyzers.Tests/Analyzers/{Category}/`.
 

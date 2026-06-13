@@ -7,13 +7,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// Reports instances of a 'OrDefault' LINQ methods that are followed by the null-forgiving operator (!).
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class MisusedOrDefaultAnalyzer : Core.ShimmeringAnalyzer
+public sealed class MisusedOrDefaultAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "OrDefault()! is redundant";
 	private const string Message = "Replace '{0}!' with '{1}'";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.MisusedOrDefault,
 		Title,
 		Message,

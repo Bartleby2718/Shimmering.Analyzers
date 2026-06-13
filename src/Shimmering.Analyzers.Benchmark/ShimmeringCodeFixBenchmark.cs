@@ -6,12 +6,13 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
+using Shimmering.Analyzers.Core;
 
 namespace Shimmering.Analyzers.Benchmark;
 
 [MemoryDiagnoser]
 public abstract class ShimmeringCodeFixBenchmark<TAnalyzer, TCodeFixProvider>
-	where TAnalyzer : Core.ShimmeringAnalyzer, new()
+	where TAnalyzer : ShimmeringAnalyzer, new()
 	where TCodeFixProvider : ShimmeringCodeFixProvider, new()
 {
 	private AdhocWorkspace _workspace = default!;

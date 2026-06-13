@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.CodeAnalysis;
 
 using Shimmering.Analyzers.Core;
@@ -9,13 +10,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// Reports instances of a HashSet or a HashSet-returning method immediately followed by Enumerable.ToHashSet, as in GetHashSet().ToHashSet().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class HashSetOrHashSetReturningMethodFollowedByToHashSetAnalyzer : Core.ShimmeringAnalyzer
+public sealed class HashSetOrHashSetReturningMethodFollowedByToHashSetAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "A HashSet creation expression, identifier, or HashSet-returning method should not be followed by .ToHashSet()";
 	private const string Message = ".ToHashSet() is redundant";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.HashSetOrHashSetReturningMethodFollowedByToHashSet,
 		Title,
 		Message,

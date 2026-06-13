@@ -8,13 +8,13 @@ namespace Shimmering.Analyzers.Analyzers.Style;
 /// Reports instances of an out variable that's only assigned to a variable and not used otherwise.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class RedundantOutVariableAnalyzer : Core.ShimmeringAnalyzer
+public sealed class RedundantOutVariableAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Redundant out variable";
 	private const string Message = "Out variable '{0}' is used exactly once and for assignment and therefore can be inlined";
 	private const string Category = RuleCategories.Style;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.StyleRules.RedundantOutVariable,
 		Title,
 		Message,

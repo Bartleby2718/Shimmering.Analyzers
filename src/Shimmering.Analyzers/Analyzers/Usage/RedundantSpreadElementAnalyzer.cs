@@ -8,13 +8,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// </summary>
 // See also: https://github.com/dotnet/roslyn/blob/main/src/Analyzers/CSharp/Analyzers/UseCollectionExpression/CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.cs
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class RedundantSpreadElementAnalyzer : Core.ShimmeringAnalyzer
+public sealed class RedundantSpreadElementAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Inline spread element";
 	private const string Message = "Inline spread element";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.RedundantSpreadElement,
 		Title,
 		Message,

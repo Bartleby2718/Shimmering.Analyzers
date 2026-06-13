@@ -7,13 +7,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// Reports instances of an array or an array-returning method immediately followed by <see cref="Enumerable.ToArray"/>, as in myString.Split(...).ToArray().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Core.ShimmeringAnalyzer
+public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "An array creation expression or array-returning method should not be followed by .ToArray()";
 	private const string Message = ".ToArray() is redundant";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.ArrayOrArrayReturningMethodFollowedByToArray,
 		Title,
 		Message,

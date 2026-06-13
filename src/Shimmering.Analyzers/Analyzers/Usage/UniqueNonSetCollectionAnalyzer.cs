@@ -7,13 +7,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// Reports instances of .Distinct().ToList() and .Distinct().ToArray() that can be replaced with .ToHashSet().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UniqueNonSetCollectionAnalyzer : Core.ShimmeringAnalyzer
+public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Use a set instead";
 	private const string Message = "Prefer sets when uniqueness is required";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.UniqueNonSetCollection,
 		Title,
 		Message,

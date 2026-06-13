@@ -5,13 +5,13 @@ namespace Shimmering.Analyzers.Analyzers.Style;
 /// Reports instances of a verbose chain of <see cref="Enumerable.Concat{TSource}(IEnumerable{TSource}, IEnumerable{TSource})"/>s and <see cref="Enumerable.Append"/>s, ending with with a <see cref="Enumerable.ToArray{TSource}(IEnumerable{TSource})"/> or a <see cref="Enumerable.ToList{TSource}(IEnumerable{TSource})"/>.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class VerboseLinqChainAnalyzer : Core.ShimmeringAnalyzer
+public sealed class VerboseLinqChainAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Simplify LINQ chain";
 	private const string Message = "Replace a verbose LINQ chain with a collection expression";
 	private const string Category = RuleCategories.Style;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.StyleRules.VerboseLinqChain,
 		Title,
 		Message,

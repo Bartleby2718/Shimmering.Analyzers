@@ -8,13 +8,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// Reports instances of string.Split() followed by Enumerable.Select(x => x.Trim()) where StringSplitOptions.TrimEntries could have been used instead.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UseTrimEntriesAnalyzer : Core.ShimmeringAnalyzer
+public sealed class UseTrimEntriesAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Use StringSplitOptions.TrimEntries";
 	private const string Message = "Use the overload of string.Split with StringSplitOptions.TrimEntries to trim entries";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.UseTrimEntries,
 		Title,
 		Message,

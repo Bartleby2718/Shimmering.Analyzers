@@ -1,3 +1,4 @@
+using System.Linq;
 using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 
@@ -7,13 +8,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// Reports instances of LINQ materialization immediately followed by another LINQ method.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : Core.ShimmeringAnalyzer
+public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Unnecessary materialization to array/list in LINQ chain";
 	private const string Message = "Remove unnecessary materialization to an array or a list";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.ToArrayOrToListFollowedByLinqMethod,
 		Title,
 		Message,
@@ -65,7 +66,7 @@ public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : Core.Shimmerin
 		if (!EnumerableHelpers.IsLinqMethodCall(context.SemanticModel, outerInvocation, context.CancellationToken, out var parentMethodName))
 		{
 			if (context.SemanticModel.GetSymbolInfo(outerInvocation, context.CancellationToken).Symbol is IMethodSymbol outerMethodSymbol
-				&& outerMethodSymbol.Name is "Contains" or "Reverse")
+				&& outerMethodSymbol.Name is nameof(Enumerable.Contains) or nameof(Enumerable.Reverse))
 			{
 				var containingType = outerMethodSymbol.ContainingType;
 				if (containingType != null)

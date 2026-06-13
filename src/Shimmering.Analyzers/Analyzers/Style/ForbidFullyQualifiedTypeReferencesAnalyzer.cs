@@ -13,13 +13,13 @@ namespace Shimmering.Analyzers.Analyzers.Style;
 /// Forbids fully-qualified type references in expressions and type syntax, requiring using directives instead.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ForbidFullyQualifiedTypeReferencesAnalyzer : Core.ShimmeringAnalyzer
+public sealed class ForbidFullyQualifiedTypeReferencesAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Avoid fully-qualified type references";
 	private const string Message = "Type reference '{0}' should not be fully-qualified; add 'using {1};' instead";
 	private const string Category = RuleCategories.Style;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.StyleRules.ForbidFullyQualifiedTypeReferences,
 		Title,
 		Message,

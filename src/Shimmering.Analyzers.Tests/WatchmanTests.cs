@@ -1,4 +1,5 @@
 using System.Reflection;
+using Shimmering.Analyzers.Core;
 
 namespace Shimmering.Analyzers.Tests;
 
@@ -46,7 +47,7 @@ public class WatchmanTests
 	[Test]
 	public void TestAllAbstractClassesStartWithShimmering()
 	{
-		var abstractClasses = typeof(Shimmering.Analyzers.Core.ShimmeringAnalyzer).Assembly
+		var abstractClasses = typeof(ShimmeringAnalyzer).Assembly
 			.GetTypes()
 			.Where(t => t.IsClass && t.IsAbstract && !t.IsSealed);
 
@@ -150,7 +151,7 @@ public class WatchmanTests
 	[Test]
 	public async Task VerifyPackageVersionInReadme()
 	{
-		var informationalVersion = typeof(Shimmering.Analyzers.Core.ShimmeringAnalyzer).Assembly
+		var informationalVersion = typeof(ShimmeringAnalyzer).Assembly
 			.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
 			.InformationalVersion;
 		Assert.That(informationalVersion, Does.Contain("+"));
@@ -170,17 +171,17 @@ public class WatchmanTests
 
 	private static List<AnalyzerInfo> GetAnalyzers()
 	{
-		var analyzerTypes = typeof(Shimmering.Analyzers.Core.ShimmeringAnalyzer).Assembly
+		var analyzerTypes = typeof(ShimmeringAnalyzer).Assembly
 			.GetTypes()
 			.Where(t => t.IsClass
 				&& !t.IsAbstract
-				&& typeof(Shimmering.Analyzers.Core.ShimmeringAnalyzer).IsAssignableFrom(t))
+				&& typeof(ShimmeringAnalyzer).IsAssignableFrom(t))
 			.ToArray();
 
 		List<AnalyzerInfo> analyzers = [];
 		foreach (var type in analyzerTypes)
 		{
-			if (Activator.CreateInstance(type) is not Shimmering.Analyzers.Core.ShimmeringAnalyzer instance) { continue; }
+			if (Activator.CreateInstance(type) is not ShimmeringAnalyzer instance) { continue; }
 
 			// So far, all analyzers support a single diagnostic each.
 			Assert.That(instance.SupportedDiagnostics, Has.Length.EqualTo(1));

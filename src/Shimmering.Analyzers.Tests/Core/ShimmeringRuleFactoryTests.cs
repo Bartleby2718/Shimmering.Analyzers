@@ -7,12 +7,12 @@ using Shimmering.Analyzers.Core;
 namespace Shimmering.Analyzers.Tests.Core;
 
 [TestFixture]
-public class RuleFactoryTests
+public class ShimmeringRuleFactoryTests
 {
 	[Test]
 	public void Create_GeneratesCorrectHelpLink_ForUsageRule()
 	{
-		var descriptor = RuleFactory.Create(
+		var descriptor = ShimmeringRuleFactory.Create(
 			"SHIMMER1000",
 			"Title",
 			"Message",
@@ -25,7 +25,7 @@ public class RuleFactoryTests
 	[Test]
 	public void Create_GeneratesCorrectHelpLink_ForStyleRule()
 	{
-		var descriptor = RuleFactory.Create(
+		var descriptor = ShimmeringRuleFactory.Create(
 			"SHIMMER2000",
 			"Title",
 			"Message",
@@ -38,7 +38,7 @@ public class RuleFactoryTests
 	[Test]
 	public void Create_GeneratesCorrectHelpLink_ForPerformanceRule()
 	{
-		var descriptor = RuleFactory.Create(
+		var descriptor = ShimmeringRuleFactory.Create(
 			"SHIMMER1010",
 			"Title",
 			"Message",

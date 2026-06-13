@@ -7,13 +7,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// Reports instances of nullable <see cref="CancellationToken"/>s in method signatures.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class NullableCancellationTokenAnalyzer : Core.ShimmeringAnalyzer
+public sealed class NullableCancellationTokenAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = $"Do not use a nullable {nameof(CancellationToken)}";
 	private const string Message = $"{nameof(CancellationToken)} should not be nullable";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.NullableCancellationToken,
 		Title,
 		Message,

@@ -7,13 +7,13 @@ namespace Shimmering.Analyzers.Analyzers.Style;
 /// Reports instances of primary constructor parameters that are reassigned.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class PrimaryConstructorParameterReassignmentAnalyzer : Core.ShimmeringAnalyzer
+public sealed class PrimaryConstructorParameterReassignmentAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Avoid reassigning primary constructor parameter";
 	private const string Message = "Primary constructor parameter '{0}' shouldn't be reassigned";
 	private const string Category = RuleCategories.Style;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.StyleRules.PrimaryConstructorParameterReassignment,
 		Title,
 		Message,

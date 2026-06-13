@@ -7,7 +7,7 @@ namespace Shimmering.Analyzers.Core;
 /// <summary>
 /// A factory for creating <see cref="DiagnosticDescriptor"/> instances with standardized metadata and help links.
 /// </summary>
-public static class RuleFactory
+public static class ShimmeringRuleFactory
 {
 	/// <summary>
 	/// Creates a <see cref="DiagnosticDescriptor"/> for a rule.

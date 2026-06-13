@@ -7,13 +7,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// Reports instances of a single-use IEnumerable that is materialized.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class SingleUseIEnumerableMaterializationAnalyzer : Core.ShimmeringAnalyzer
+public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Avoid materializing a single-use IEnumerable";
 	private const string Message = "Avoid materializing an IEnumerable if it's used only once";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.SingleUseIEnumerableMaterialization,
 		Title,
 		Message,

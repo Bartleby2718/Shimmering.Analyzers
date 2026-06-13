@@ -5,13 +5,13 @@ namespace Shimmering.Analyzers.Analyzers.Style;
 /// Reports instances of a tenary expression that starts with a negation operator in the condition part.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class NegatedTernaryConditionAnalyzer : Core.ShimmeringAnalyzer
+public sealed class NegatedTernaryConditionAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Avoid negation in ternary condition";
 	private const string Message = "This ternary condition has a negation";
 	private const string Category = RuleCategories.Style;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.StyleRules.NegatedTernaryCondition,
 		Title,
 		Message,

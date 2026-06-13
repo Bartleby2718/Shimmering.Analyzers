@@ -3,14 +3,15 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Shimmering.Analyzers.Core;
 
 namespace Shimmering.Analyzers.Benchmark;
 
 /// <summary>
-/// A generic benchmark for any <see cref="Core.ShimmeringAnalyzer"/> 
+/// A generic benchmark for any <see cref="ShimmeringAnalyzer"/> 
 /// </summary>
 public abstract class ShimmeringAnalyzerBenchmark<TAnalyzer>
-	where TAnalyzer : Core.ShimmeringAnalyzer, new() // ensures no reflection is needed.
+	where TAnalyzer : ShimmeringAnalyzer, new() // ensures no reflection is needed.
 {
 	private Compilation _compilation = default!;
 

@@ -7,13 +7,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// Reports stances of .ToList().ForEach().
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ToListForEachAnalyzer : Core.ShimmeringAnalyzer
+public sealed class ToListForEachAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = ".ToList().ForEach() causes unnecessary memory allocation";
 	private const string Message = "Replace .ToList().ForEach() with a foreach loop to reduce memory usage";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.ToListForEach,
 		Title,
 		Message,

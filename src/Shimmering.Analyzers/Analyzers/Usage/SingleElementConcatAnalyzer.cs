@@ -4,16 +4,16 @@ using Shimmering.Analyzers.Utilities;
 namespace Shimmering.Analyzers.Analyzers.Usage;
 
 /// <summary>
-/// Reports instances of `.Concat(new[] { e })` or `.Concat(new List&lt;T&gt; { e })`.
+/// Reports instances of <c>.Concat(new[] { e })</c> or <c>.Concat(new List&lt;T&gt; { e })</c>.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class SingleElementConcatAnalyzer : Core.ShimmeringAnalyzer
+public sealed class SingleElementConcatAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Do not concat a single element";
 	private const string Message = "Replace .Concat([e]) with .Append(e)";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.SingleElementConcat,
 		Title,
 		Message,
@@ -21,14 +21,17 @@ public sealed class SingleElementConcatAnalyzer : Core.ShimmeringAnalyzer
 		DiagnosticSeverity.Info);
 
 	public override string SampleCode => """
+		using System;
 		using System.Linq;
 
-		namespace Tests;
-		class Test
+		namespace Tests
 		{
-			void Do()
+			class Test
 			{
-				_ = [|new[] { 1 }.Concat(new[] { 2 })|];
+				void Do()
+				{
+					var result = [|new[] { 1, 2 }.Concat(new[] { 3 })|];
+				}
 			}
 		}
 		""";

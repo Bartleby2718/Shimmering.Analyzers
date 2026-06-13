@@ -7,13 +7,13 @@ namespace Shimmering.Analyzers.Analyzers.Usage;
 /// Reports instances of string.Split() where StringSplitOptions.RemoveEmptyEntries could have been used but wasn't used.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class MissingRemoveEmptyEntriesAnalyzer : Core.ShimmeringAnalyzer
+public sealed class MissingRemoveEmptyEntriesAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "Use StringSplitOptions.RemoveEmptyEntries";
 	private const string Message = "Use the overload of String.Split with StringSplitOptions.RemoveEmptyEntries to remove empty entries";
 	private const string Category = RuleCategories.Usage;
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.UsageRules.MissingRemoveEmptyEntries,
 		Title,
 		Message,

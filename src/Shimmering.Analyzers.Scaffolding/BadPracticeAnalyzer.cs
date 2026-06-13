@@ -7,13 +7,13 @@ namespace Shimmering.Analyzers.CATEGORY_PLACEHOLDERRules.BadPractice;
 /// TODO.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class BadPracticeAnalyzer : Core.ShimmeringAnalyzer
+public sealed class BadPracticeAnalyzer : ShimmeringAnalyzer
 {
 	private const string Title = "TODO:";
 	private const string Message = "TODO:";
 	private const string Category = "ShimmeringCATEGORY_PLACEHOLDER";
 
-	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
+	private static readonly DiagnosticDescriptor Rule = ShimmeringRuleFactory.Create(
 		DiagnosticIds.CATEGORY_PLACEHOLDERRules.BadPractice,
 		Title,
 		Message,
