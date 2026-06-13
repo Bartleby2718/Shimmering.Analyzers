@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 using Microsoft.CodeAnalysis;
@@ -18,7 +19,7 @@ public sealed class MissingCancellationTokenAnalyzer : Core.ShimmeringAnalyzer
 	private static readonly DiagnosticDescriptor Rule = RuleFactory.Create(
 		DiagnosticIds.UsageRules.MissingCancellationToken,
 		"Include a CancellationToken parameter in an asynchronous method",
-		"An asynchronous method is missing a CancellationToken parameter",
+		"{0}",
 		RuleCategories.Usage,
 		DiagnosticSeverity.Info);
 
@@ -35,7 +36,7 @@ public sealed class MissingCancellationTokenAnalyzer : Core.ShimmeringAnalyzer
 		}
 		""";
 
-	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
 	protected override void InitializeCore(AnalysisContext context)
 	{
@@ -59,13 +60,18 @@ public sealed class MissingCancellationTokenAnalyzer : Core.ShimmeringAnalyzer
 			return;
 		}
 
-		var diagnostic = Diagnostic.Create(Rule, methodSymbol.Locations[0]);
+		var diagnostic = Diagnostic.Create(Rule, methodSymbol.Locations[0], "An asynchronous method is missing a CancellationToken parameter");
 		context.ReportDiagnostic(diagnostic);
 	}
 
 	private static void AnalyzeInvocation(OperationAnalysisContext context)
 	{
 		var invocation = (Microsoft.CodeAnalysis.Operations.IInvocationOperation)context.Operation;
+
+		if (context.Operation.SemanticModel is null || !IsCancellationTokenAvailable(context.Operation.SemanticModel, invocation.Syntax.SpanStart, context.Compilation, out _))
+		{
+			return;
+		}
 
 		foreach (var argument in invocation.Arguments)
 		{
@@ -79,13 +85,13 @@ public sealed class MissingCancellationTokenAnalyzer : Core.ShimmeringAnalyzer
 
 				if (argument.IsImplicit)
 				{
-					context.ReportDiagnostic(Diagnostic.Create(Rule, invocation.Syntax.GetLocation()));
+					context.ReportDiagnostic(Diagnostic.Create(Rule, invocation.Syntax.GetLocation(), "Pass the available CancellationToken to this invocation"));
 					return;
 				}
 
 				if (value is Microsoft.CodeAnalysis.Operations.IDefaultValueOperation)
 				{
-					context.ReportDiagnostic(Diagnostic.Create(Rule, argument.Syntax.GetLocation()));
+					context.ReportDiagnostic(Diagnostic.Create(Rule, argument.Syntax.GetLocation(), "Pass the available CancellationToken to this invocation"));
 					return;
 				}
 
@@ -93,11 +99,33 @@ public sealed class MissingCancellationTokenAnalyzer : Core.ShimmeringAnalyzer
 					propertyRef.Property.Name == "None" &&
 					IsCancellationTokenType(propertyRef.Property.ContainingType, context.Compilation))
 				{
-					context.ReportDiagnostic(Diagnostic.Create(Rule, argument.Syntax.GetLocation()));
+					context.ReportDiagnostic(Diagnostic.Create(Rule, argument.Syntax.GetLocation(), "Pass the available CancellationToken to this invocation"));
 					return;
 				}
 			}
 		}
+	}
+
+	private static bool IsCancellationTokenAvailable(SemanticModel semanticModel, int position, Compilation compilation, [NotNullWhen(true)] out string? cancellationTokenName)
+	{
+		cancellationTokenName = null;
+		var symbols = semanticModel.LookupSymbols(position);
+		foreach (var symbol in symbols)
+		{
+			ITypeSymbol? type = symbol switch
+			{
+				ILocalSymbol local => local.Type,
+				IParameterSymbol parameter => parameter.Type,
+				_ => null,
+			};
+
+			if (type != null && IsCancellationTokenType(type, compilation))
+			{
+				cancellationTokenName = symbol.Name;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static bool IsAwaitable(ITypeSymbol returnType, Compilation compilation)

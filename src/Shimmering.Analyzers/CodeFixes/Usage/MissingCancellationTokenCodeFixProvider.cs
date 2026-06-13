@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 using Shimmering.Analyzers.Analyzers.Usage;
 using Shimmering.Analyzers.Utilities;
@@ -42,14 +43,16 @@ public sealed class MissingCancellationTokenCodeFixProvider : ShimmeringCodeFixP
 		var diagnosticSpan = diagnostic.Location.SourceSpan;
 
 		var node = root.FindNode(diagnosticSpan);
-		if (node is not MethodDeclarationSyntax methodDeclaration) { return; }
-
-		context.RegisterCodeFix(
-			CodeAction.Create(
-				Title,
-				ct => AddCancellationTokenParameterAsync(context.Document, methodDeclaration, ct),
-				nameof(MissingCancellationTokenCodeFixProvider)),
-			diagnostic);
+		var methodDeclaration = node.FirstAncestorOrSelf<MethodDeclarationSyntax>();
+		if (methodDeclaration != null)
+		{
+			context.RegisterCodeFix(
+				CodeAction.Create(
+					Title,
+					cancellationToken => AddCancellationTokenParameterAsync(context.Document, methodDeclaration, cancellationToken),
+					nameof(MissingCancellationTokenCodeFixProvider)),
+				diagnostic);
+		}
 	}
 
 	private static async Task<Document> AddCancellationTokenParameterAsync(

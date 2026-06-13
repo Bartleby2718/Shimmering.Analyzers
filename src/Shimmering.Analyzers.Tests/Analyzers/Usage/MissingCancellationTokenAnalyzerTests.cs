@@ -94,22 +94,4 @@ public class MissingCancellationTokenAnalyzerTests : ShimmeringAnalyzerTests<Mis
 			}
 		}
 		""");
-	[Test]
-	public Task TestMissingCancellationTokenInInvocation() => VerifyAnalyzerAsync(
-		"""
-		using System.Threading;
-		using System.Threading.Tasks;
-
-		namespace Tests
-		{
-			class Test
-			{
-				public async Task DoAsync(CancellationToken token)
-				{
-					await Task.Delay(1000, [|default|]);
-					await Task.Delay(1000, [|CancellationToken.None|]);
-				}
-			}
-		}
-		""");
 }

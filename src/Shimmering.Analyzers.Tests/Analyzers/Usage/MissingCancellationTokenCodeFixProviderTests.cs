@@ -148,4 +148,5 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
         }
         """);
 #pragma warning restore SA1027 // Use tabs correctly
+
 }
