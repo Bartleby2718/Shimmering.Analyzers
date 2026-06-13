@@ -1,7 +1,7 @@
-namespace Shimmering.Analyzers.Tests.Analyzers.Style;
-
 using Shimmering.Analyzers.Analyzers.Style;
 using Shimmering.Analyzers.CodeFixes.Style;
+
+namespace Shimmering.Analyzers.Tests.Analyzers.Style;
 
 public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProviderTests<NegatedTernaryConditionAnalyzer, NegatedTernaryConditionCodeFixProvider>
 {
@@ -52,9 +52,9 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
                 public string MyString() =>
                     // before condition
                     true // after condition
-                         // before false
-                        ? "2"
-                        // before true
+                         // before true
+                        ? "2" // after true
+                              // before false
                         : "1"; // after statement
             }
         }
@@ -62,41 +62,24 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
 #pragma warning restore SA1027 // Use tabs correctly
 
 	[Test]
-#pragma warning disable SA1027 // Use tabs correctly
 	public Task TestTriviaForTrailingOperators() => VerifyCodeFixAsync(
 		"""
-        namespace Tests
-        {
-            class Test
-            {
-                public string MyString() =>
-                    // before condition
-                    [|!true ?
-                    // before true
-                    "1" :
-                    // before false
-                    "2"|];
-            }
-        }
-        """,
-		"""
-        namespace Tests
-        {
-            class Test
-            {
-                public string MyString() =>
-                    // before condition
-                    [|true ?
-                    // before false
-                    "2" :
-                    // before true
-                    "1"|];
-            }
-        }
-        """);
-#pragma warning restore SA1027 // Use tabs correctly
+		namespace Tests
+		{
+			class Test
+			{
+				public string MyString() =>
+					// before condition
+					[|!true ?
+					// before true
+					"1" :
+					// before false
+					"2"|];
+			}
+		}
+		""",
+		"namespace Tests\r\n{\r\n\tclass Test\r\n\t{\r\n\t\tpublic string MyString() =>\r\n            // before condition\r\n            true ?\r\n            // before true\r\n            \"2\" :\r\n            // before false\r\n            \"1\";\r\n\t}\r\n}");
 
-#pragma warning disable SA1027 // Use tabs correctly
 	[Test]
 	public Task TestBugReproNegatedTernary() => VerifyCodeFixAsync(
 		"""
@@ -108,14 +91,5 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
 			}
 		}
 		""",
-		"""
-		class C {
-			void M() {
-				var x = true // line 1
-		            ? 1
-		            : 0; // line 3
-			}
-		}
-		""");
-#pragma warning restore SA1027 // Use tabs correctly
+		"class C {\r\n\tvoid M() {\r\n\t\tvar x = true // line 1\r\n            ? 1 // line 2\r\n            : 0; // line 3\r\n\t}\r\n}");
 }

@@ -1,7 +1,7 @@
-namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
 using Shimmering.Analyzers.CodeFixes.Usage;
+
+namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
 
 public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : ShimmeringCodeFixProviderTests<ToArrayOrToListFollowedByLinqMethodAnalyzer, ToArrayOrToListFollowedByLinqMethodCodeFixProvider>
 {
@@ -90,8 +90,7 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 					int[] numbers = [];
 					// line before source
 					var squares = [|numbers // right after source
-						// line before ToList
-						.ToList()|] // right after ToList
+						.ToList()|]
 						// line before Select
 						.Select(x => x * x) // right after Select
 						// line before ToArray
@@ -99,7 +98,7 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 				}
 			}
 		}
-""",
+		""",
 		"""
 		using System;
 		using System.Linq;
@@ -113,7 +112,6 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 					int[] numbers = [];
 					// line before source
 					var squares = numbers // right after source
- // right after ToList
 						// line before Select
 						.Select(x => x * x) // right after Select
 						// line before ToArray
@@ -121,10 +119,10 @@ public class ToArrayOrToListFollowedByLinqMethodCodeFixProviderTests : Shimmerin
 				}
 			}
 		}
-""");
+		""");
 
 	[Test]
-	public Task TestBugReproToArray() => VerifyCodeFixAsync(
+	public Task TestRemoveRedundantToListInChainedLinqOperations() => VerifyCodeFixAsync(
 		"""
 		using System.Linq;
 		using System.Collections.Generic;

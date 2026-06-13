@@ -1,19 +1,10 @@
-using DbUp.SqlServer;
-
-namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
 using Shimmering.Analyzers.CodeFixes.Usage;
 
+namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
+
 public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : ShimmeringCodeFixProviderTests<ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer, ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProvider>
 {
-	[Test]
-	public void Do()
-	{
-		SqlScriptExecutor a = default!;
-		Console.WriteLine(a);
-	}
-
 	[Test]
 	public Task TestToArrayNotChainedBySomethingElse() => VerifyCodeFixAsync(
 		"""
@@ -191,15 +182,13 @@ public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : 
 					var arrayLength = [|"a"
 						// line before Split
 						.Split(' ') // right after Split
-						// line before ToArray
-						.ToArray()|] // right after ToArray
+						.ToArray()|]
 						// line before Length
 						.Length; // right after declaration
 					MyMethod([|"b"
 						// line before ToCharArray
 						.ToCharArray() // right after ToCharArray
-						// line before ToArray
-						.ToArray()|] // right after ToArray
+						.ToArray()|]
 						// line before Length
 						.Length); // right after invocation
 
@@ -207,7 +196,7 @@ public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : 
 				}
 			}
 		}
-""",
+		""",
 		"""
 		using System;
 		using System.Linq;
@@ -222,13 +211,11 @@ public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : 
 					var arrayLength = "a"
 						// line before Split
 						.Split(' ') // right after Split
- // right after ToArray
 						// line before Length
 						.Length; // right after declaration
 					MyMethod("b"
 						// line before ToCharArray
 						.ToCharArray() // right after ToCharArray
- // right after ToArray
 						// line before Length
 						.Length); // right after invocation
 
@@ -236,5 +223,5 @@ public class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProviderTests : 
 				}
 			}
 		}
-""");
+		""");
 }

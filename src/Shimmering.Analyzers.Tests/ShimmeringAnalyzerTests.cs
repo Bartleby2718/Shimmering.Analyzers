@@ -13,7 +13,7 @@ namespace Shimmering.Analyzers.Tests;
 /// </summary>
 /// <typeparam name="TAnalyzer">The type of the analyzer to test.</typeparam>
 public abstract class ShimmeringAnalyzerTests<TAnalyzer>
-	where TAnalyzer : DiagnosticAnalyzer, new()
+	where TAnalyzer : ShimmeringAnalyzer, new()
 {
 	/// <summary>
 	/// Tests if <see cref="ShimmeringAnalyzer.SampleCode"/> is flagged by <typeparamref name="TAnalyzer"/>.
@@ -21,12 +21,7 @@ public abstract class ShimmeringAnalyzerTests<TAnalyzer>
 	[Test]
 	public Task TestSampleCode()
 	{
-		if (new TAnalyzer() is ShimmeringAnalyzer shimmeringAnalyzer)
-		{
-			return VerifyAnalyzerAsync(shimmeringAnalyzer.SampleCode);
-		}
-
-		return Task.CompletedTask;
+		return VerifyAnalyzerAsync(new TAnalyzer().SampleCode);
 	}
 
 	protected static Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)

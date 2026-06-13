@@ -6,7 +6,6 @@ using Shimmering.Analyzers.Core;
 
 namespace Shimmering.Analyzers.Tests.Core;
 
-[TestFixture]
 public class ShimmeringRuleFactoryTests
 {
 	[Test]

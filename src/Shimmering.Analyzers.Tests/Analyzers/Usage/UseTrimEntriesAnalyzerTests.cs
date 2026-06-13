@@ -1,7 +1,8 @@
-namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
-
+using System.Threading.Tasks;
+using NUnit.Framework;
 using Shimmering.Analyzers.Analyzers.Usage;
-using Shimmering.Analyzers.CodeFixes.Usage;
+
+namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
 
 public class UseTrimEntriesAnalyzerTests : ShimmeringAnalyzerTests<UseTrimEntriesAnalyzer>
 {
@@ -17,6 +18,60 @@ public class UseTrimEntriesAnalyzerTests : ShimmeringAnalyzerTests<UseTrimEntrie
 				public void Do(string[] input)
 				{
 					var x = input.Select(x => x.Trim());
+				}
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestFlagSplitSelectTrim() => VerifyAnalyzerAsync(
+		"""
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do(string input)
+				{
+					var x = [|input.Split(',').Select(x => x.Trim())|];
+				}
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestFlagSplitSelectTrimToArray() => VerifyAnalyzerAsync(
+		"""
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do(string input)
+				{
+					var x = [|input.Split(',').Select(x => x.Trim()).ToArray()|];
+				}
+			}
+		}
+		""");
+
+	[Test]
+	public Task TestIgnoreDifferentSelectLambda() => VerifyAnalyzerAsync(
+		"""
+		using System;
+		using System.Linq;
+
+		namespace Tests
+		{
+			class Test
+			{
+				void Do(string input)
+				{
+					var x = input.Split(',').Select(x => x.ToUpper());
 				}
 			}
 		}

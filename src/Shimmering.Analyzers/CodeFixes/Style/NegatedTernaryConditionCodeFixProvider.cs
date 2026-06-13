@@ -61,23 +61,14 @@ public sealed class NegatedTernaryConditionCodeFixProvider : ShimmeringCodeFixPr
 
 		var newCondition = prefixUnary.Operand.WithTriviaFrom(prefixUnary);
 
-		var newWhenTrue = conditionalExpression.WhenFalse;
-		var newWhenFalse = conditionalExpression.WhenTrue;
-		// If the old true branch had a trailing newline but the old false branch didn't, we'd want to preserve the style.
-		if (conditionalExpression.WhenFalse.GetTrailingTrivia().LastOrDefault().IsKind(SyntaxKind.None))
-		{
-			var lastSyntaxTriviaFromWhenFalse = conditionalExpression.WhenTrue.GetTrailingTrivia().LastOrDefault();
-			if (lastSyntaxTriviaFromWhenFalse.IsKind(SyntaxKind.EndOfLineTrivia))
-			{
-				newWhenTrue = newWhenTrue.WithTrailingTrivia(newWhenTrue.GetTrailingTrivia().Add(lastSyntaxTriviaFromWhenFalse));
-			}
-		}
+		var newWhenTrue = conditionalExpression.WhenFalse.WithTriviaFrom(conditionalExpression.WhenTrue);
+		var newWhenFalse = conditionalExpression.WhenTrue.WithTriviaFrom(conditionalExpression.WhenFalse);
 
 		var newConditionalExpression = SyntaxFactory.ConditionalExpression(
 				newCondition,
-				conditionalExpression.QuestionToken.WithTriviaFrom(conditionalExpression.ColonToken),
+				conditionalExpression.QuestionToken,
 				newWhenTrue,
-				conditionalExpression.ColonToken.WithTriviaFrom(conditionalExpression.QuestionToken),
+				conditionalExpression.ColonToken,
 				newWhenFalse)
 			.WithTriviaFrom(conditionalExpression)
 			.WithAdditionalAnnotations(Formatter.Annotation);

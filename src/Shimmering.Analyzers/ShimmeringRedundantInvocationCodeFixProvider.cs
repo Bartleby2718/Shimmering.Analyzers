@@ -52,7 +52,7 @@ public abstract class ShimmeringRedundantInvocationCodeFixProvider : ShimmeringC
 		}
 		else
 		{
-			replacementTrailingTrivia = innerNodeTrailingTrivia.AddRange(invocationTrailingTrivia);
+			replacementTrailingTrivia = MergeTrivia(innerNodeTrailingTrivia, invocationTrailingTrivia);
 		}
 
 		var replacementNode = innerNode
@@ -60,5 +60,37 @@ public abstract class ShimmeringRedundantInvocationCodeFixProvider : ShimmeringC
 			.WithTrailingTrivia(replacementTrailingTrivia);
 
 		return document.WithSyntaxRoot(root.ReplaceNode(invocation, replacementNode));
+	}
+
+	private static SyntaxTriviaList MergeTrivia(SyntaxTriviaList leading, SyntaxTriviaList trailing)
+	{
+		if (leading.Count == 0) { return trailing; }
+		if (trailing.Count == 0) { return leading; }
+
+		bool leadingEndsWithNewline = false;
+		for (int i = leading.Count - 1; i >= 0; i--)
+		{
+			if (leading[i].IsKind(SyntaxKind.EndOfLineTrivia))
+			{
+				leadingEndsWithNewline = true;
+				break;
+			}
+			if (!leading[i].IsKind(SyntaxKind.WhitespaceTrivia))
+			{
+				break;
+			}
+		}
+
+		if (leadingEndsWithNewline && trailing[0].IsKind(SyntaxKind.EndOfLineTrivia))
+		{
+			int skipCount = 1;
+			if (trailing.Count > 1 && trailing[1].IsKind(SyntaxKind.WhitespaceTrivia))
+			{
+				skipCount = 2;
+			}
+			return leading.AddRange(trailing.Skip(skipCount));
+		}
+
+		return leading.AddRange(trailing);
 	}
 }
