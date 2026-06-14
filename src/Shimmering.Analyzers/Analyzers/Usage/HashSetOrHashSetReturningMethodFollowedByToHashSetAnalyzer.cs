@@ -28,6 +28,7 @@ public sealed class HashSetOrHashSetReturningMethodFollowedByToHashSetAnalyzer :
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

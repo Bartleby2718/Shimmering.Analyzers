@@ -22,6 +22,7 @@ public sealed class PrimaryConstructorParameterReassignmentAnalyzer : Shimmering
 
 	public override string SampleCode => """
 		namespace Tests;
+
 		class Test(int x)
 		{
 			void Do()

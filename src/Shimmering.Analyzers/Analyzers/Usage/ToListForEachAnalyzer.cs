@@ -26,6 +26,7 @@ public sealed class ToListForEachAnalyzer : ShimmeringAnalyzer
         using System.Linq;
 
         namespace Tests;
+
         class Test
         {
             void Do(int[] numbers)

@@ -23,6 +23,7 @@ public sealed class MissingCancellationTokenCodeFixProvider : ShimmeringCodeFixP
         using System.Threading;
 
         namespace Tests;
+
         class Test
         {
             async Task DoAsync(CancellationToken cancellationToken = default)

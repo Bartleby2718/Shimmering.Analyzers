@@ -1,6 +1,6 @@
-namespace Shimmering.Analyzers.CodeFixes.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
+
+namespace Shimmering.Analyzers.CodeFixes.Usage;
 
 /// <summary>
 /// Converts .Distinct().ToList() or .Distinct().ToArray() with .ToHashSet() if reported by <see cref="UniqueNonSetCollectionAnalyzer"/>.
@@ -18,6 +18,7 @@ public sealed class UniqueNonSetCollectionCodeFixProvider : ShimmeringCodeFixPro
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

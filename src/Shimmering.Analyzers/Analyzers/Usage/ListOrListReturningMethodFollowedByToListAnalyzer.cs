@@ -27,6 +27,7 @@ public sealed class ListOrListReturningMethodFollowedByToListAnalyzer : Shimmeri
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

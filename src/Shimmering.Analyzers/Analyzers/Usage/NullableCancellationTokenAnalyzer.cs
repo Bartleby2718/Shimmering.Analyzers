@@ -25,6 +25,7 @@ public sealed class NullableCancellationTokenAnalyzer : ShimmeringAnalyzer
 		using System.Threading.Tasks;
 
 		namespace Tests;
+
 		class Test
 		{
 			Task DoAsync([|CancellationToken? cancellationToken = null|]) => Task.CompletedTask;

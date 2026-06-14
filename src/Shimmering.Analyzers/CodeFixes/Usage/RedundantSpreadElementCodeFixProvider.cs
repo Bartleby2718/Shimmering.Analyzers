@@ -1,6 +1,6 @@
-namespace Shimmering.Analyzers.CodeFixes.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
+
+namespace Shimmering.Analyzers.CodeFixes.Usage;
 
 /// <summary>
 /// Flattens a spread element (e.g. [1, .. new[] { 2, 3 }, 4] to [1, 2, 3, 4]) in a collection, if reported by <see cref="RedundantSpreadElementAnalyzer"/>.
@@ -15,6 +15,7 @@ public sealed class RedundantSpreadElementCodeFixProvider : ShimmeringCodeFixPro
 
 	public override string SampleCodeFixed => """
 		namespace Tests;
+
 		class Test
 		{
 			int[] Array => [1, 2, 3, 4];

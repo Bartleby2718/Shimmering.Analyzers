@@ -20,6 +20,7 @@ public sealed class NegatedTernaryConditionAnalyzer : ShimmeringAnalyzer
 
 	public override string SampleCode => """
 		namespace Tests;
+
 		class Test
 		{
 			string Do(bool condition) => [|!condition ? "when false" : "when true"|];

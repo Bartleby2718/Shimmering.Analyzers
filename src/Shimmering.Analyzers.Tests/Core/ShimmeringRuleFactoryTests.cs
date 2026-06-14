@@ -33,17 +33,4 @@ public class ShimmeringRuleFactoryTests
 
 		Assert.That(descriptor.HelpLinkUri, Is.EqualTo("https://bartleby2718.github.io/Shimmering.Analyzers/docs/StyleRules/SHIMMER2000"));
 	}
-
-	[Test]
-	public void Create_GeneratesCorrectHelpLink_ForPerformanceRule()
-	{
-		var descriptor = ShimmeringRuleFactory.Create(
-			"SHIMMER1010",
-			"Title",
-			"Message",
-			RuleCategories.Performance,
-			DiagnosticSeverity.Warning);
-
-		Assert.That(descriptor.HelpLinkUri, Is.EqualTo("https://bartleby2718.github.io/Shimmering.Analyzers/docs/UsageRules/SHIMMER1010"));
-	}
 }

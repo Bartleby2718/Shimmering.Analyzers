@@ -1,7 +1,7 @@
-namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
 using Shimmering.Analyzers.CodeFixes.Usage;
+
+namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
 
 public class MisusedOrDefaultCodeFixProviderTests : ShimmeringCodeFixProviderTests<MisusedOrDefaultAnalyzer, MisusedOrDefaultCodeFixProvider>
 {

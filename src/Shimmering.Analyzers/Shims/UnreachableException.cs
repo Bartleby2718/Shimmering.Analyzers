@@ -2,6 +2,7 @@
 // https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Diagnostics/UnreachableException.cs
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace System.Diagnostics;
+
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 
 /// <summary>

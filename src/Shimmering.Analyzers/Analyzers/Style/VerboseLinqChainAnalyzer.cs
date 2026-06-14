@@ -22,6 +22,7 @@ public sealed class VerboseLinqChainAnalyzer : ShimmeringAnalyzer
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			static int[] array1 = [0, 1];

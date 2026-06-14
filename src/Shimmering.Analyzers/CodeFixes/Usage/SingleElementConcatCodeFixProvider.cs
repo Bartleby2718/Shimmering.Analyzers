@@ -1,6 +1,6 @@
-namespace Shimmering.Analyzers.CodeFixes.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
+
+namespace Shimmering.Analyzers.CodeFixes.Usage;
 
 /// <summary>
 /// Converts an <see cref="Enumerable.Concat"/> to an <see cref="Enumerable.Append"/> if reported by <see cref="SingleElementConcatAnalyzer"/>.
@@ -17,6 +17,7 @@ public sealed class SingleElementConcatCodeFixProvider : ShimmeringCodeFixProvid
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

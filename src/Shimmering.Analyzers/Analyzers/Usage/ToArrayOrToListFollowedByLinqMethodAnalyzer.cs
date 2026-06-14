@@ -26,6 +26,7 @@ public sealed class ToArrayOrToListFollowedByLinqMethodAnalyzer : ShimmeringAnal
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

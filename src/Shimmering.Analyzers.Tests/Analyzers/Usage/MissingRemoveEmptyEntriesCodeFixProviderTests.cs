@@ -1,9 +1,8 @@
 using System;
-
-namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
 using Shimmering.Analyzers.CodeFixes.Usage;
+
+namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
 
 public class MissingRemoveEmptyEntriesCodeFixProviderTests : ShimmeringCodeFixProviderTests<MissingRemoveEmptyEntriesAnalyzer, MissingRemoveEmptyEntriesCodeFixProvider>
 {

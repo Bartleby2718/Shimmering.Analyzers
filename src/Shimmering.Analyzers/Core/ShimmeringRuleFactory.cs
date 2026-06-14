@@ -33,7 +33,6 @@ public static class ShimmeringRuleFactory
 		string helpLinkUri = category switch
 		{
 			RuleCategories.Usage => $"https://bartleby2718.github.io/Shimmering.Analyzers/docs/UsageRules/{id}",
-			RuleCategories.Performance => $"https://bartleby2718.github.io/Shimmering.Analyzers/docs/UsageRules/{id}", // Performance rules are documented under UsageRules for now to match status quo
 			RuleCategories.Style => $"https://bartleby2718.github.io/Shimmering.Analyzers/docs/StyleRules/{id}",
 			_ => throw new UnreachableException($"The category '{category}' is not supported for help link generation."),
 		};

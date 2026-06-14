@@ -1,10 +1,8 @@
 using Microsoft.CodeAnalysis.Formatting;
-
+using Shimmering.Analyzers.Analyzers.Usage;
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.CodeFixes.Usage;
-
-using Shimmering.Analyzers.Analyzers.Usage;
 
 /// <summary>
 /// Replaces an 'OrDefault' LINQ method with its non-OrDefault counterpart, if reported by <see cref="MisusedOrDefaultAnalyzer"/>.
@@ -21,6 +19,7 @@ public sealed class MisusedOrDefaultCodeFixProvider : ShimmeringCodeFixProvider
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			static int[] array = [1];

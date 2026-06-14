@@ -1,8 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
+using Shimmering.Analyzers.Analyzers.Style;
 
 namespace Shimmering.Analyzers.CodeFixes.Style;
-
-using Shimmering.Analyzers.Analyzers.Style;
 
 /// <summary>
 /// Inlines an out variable if it's only used in an assignment, if reported by <see cref="RedundantOutVariableAnalyzer"/>.
@@ -19,6 +18,7 @@ public sealed class RedundantOutVariableCodeFixProvider : ShimmeringCodeFixProvi
 		using System;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do(string dayOfWeekString)

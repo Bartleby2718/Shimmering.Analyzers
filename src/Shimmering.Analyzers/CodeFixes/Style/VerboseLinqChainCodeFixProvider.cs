@@ -1,8 +1,7 @@
+using Shimmering.Analyzers.Analyzers.Style;
 using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.CodeFixes.Style;
-
-using Shimmering.Analyzers.Analyzers.Style;
 
 /// <summary>
 /// Converts a chain of LINQ calls with a collection expression.if reported by <see cref="VerboseLinqChainAnalyzer"/>.
@@ -19,6 +18,7 @@ public sealed class VerboseLinqChainCodeFixProvider : ShimmeringCodeFixProvider
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			static int[] array1 = [0, 1];

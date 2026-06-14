@@ -1,6 +1,6 @@
-namespace Shimmering.Analyzers.CodeFixes.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
+
+namespace Shimmering.Analyzers.CodeFixes.Usage;
 
 /// <summary>
 /// Removes .ToList(), if reported by <see cref="ListOrListReturningMethodFollowedByToListAnalyzer"/>.
@@ -20,6 +20,7 @@ public sealed class ListOrListReturningMethodFollowedByToListCodeFixProvider : S
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

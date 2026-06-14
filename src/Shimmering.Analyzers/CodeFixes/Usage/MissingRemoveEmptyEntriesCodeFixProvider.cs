@@ -1,6 +1,6 @@
-namespace Shimmering.Analyzers.CodeFixes.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
+
+namespace Shimmering.Analyzers.CodeFixes.Usage;
 
 /// <summary>
 /// Replaces string.Split() with the overload that has <see cref="StringSplitOptions.RemoveEmptyEntries"/> as the second argument, if reported by <see cref="MissingRemoveEmptyEntriesAnalyzer"/>.
@@ -18,6 +18,7 @@ public sealed class MissingRemoveEmptyEntriesCodeFixProvider : ShimmeringCodeFix
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do(string input)

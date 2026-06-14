@@ -24,6 +24,7 @@ public sealed class MisusedOrDefaultAnalyzer : ShimmeringAnalyzer
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			static int[] array = [1];

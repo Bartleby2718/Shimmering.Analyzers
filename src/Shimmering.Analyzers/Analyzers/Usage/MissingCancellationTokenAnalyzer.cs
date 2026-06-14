@@ -27,6 +27,7 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringAnalyzer
 		using System.Threading.Tasks;
 
 		namespace Tests;
+
 		class Test
 		{
 			async Task [|DoAsync|]()

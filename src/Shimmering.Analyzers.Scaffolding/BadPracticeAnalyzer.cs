@@ -22,6 +22,7 @@ public sealed class BadPracticeAnalyzer : ShimmeringAnalyzer
 
 	public override string SampleCode => """
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

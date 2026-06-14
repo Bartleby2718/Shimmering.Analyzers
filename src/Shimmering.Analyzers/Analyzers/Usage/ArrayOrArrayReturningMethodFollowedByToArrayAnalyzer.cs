@@ -24,6 +24,7 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer : Shimm
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

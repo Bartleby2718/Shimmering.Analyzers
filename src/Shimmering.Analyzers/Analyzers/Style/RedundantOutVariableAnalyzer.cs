@@ -25,6 +25,7 @@ public sealed class RedundantOutVariableAnalyzer : ShimmeringAnalyzer
 		using System;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do(string dayOfWeekString)

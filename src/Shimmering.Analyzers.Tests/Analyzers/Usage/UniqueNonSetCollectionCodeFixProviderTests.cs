@@ -1,9 +1,8 @@
 using Microsoft.CodeAnalysis.Formatting;
-
-namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
 using Shimmering.Analyzers.CodeFixes.Usage;
+
+namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
 
 public class UniqueNonSetCollectionCodeFixProviderTests : ShimmeringCodeFixProviderTests<UniqueNonSetCollectionAnalyzer, UniqueNonSetCollectionCodeFixProvider>
 {
@@ -106,8 +105,11 @@ public class UniqueNonSetCollectionCodeFixProviderTests : ShimmeringCodeFixProvi
 		""");
 
 	/// <summary>
-	/// Spaces are used by default in Roslyn, so tabs are being converted to spaces in this test.
-	/// To test  <see cref="CSharpCodeFixTest{TAnalyzer, TCodeFix, TVerifier}"/> instead of <see cref="CSharpCodeFixVerifier{TAnalyzer, TCodeFix, TVerifier}"/>.
+	/// Tests that leading tabs are preserved when invocations are on different lines.
+	/// This test deviates from standard verifiers by manually constructing a <see cref="CSharpCodeFixTest{TAnalyzer, TCodeFix, TVerifier}"/>
+	/// to explicitly configure the workspace options to use tabs, which the default verifier would normalize to spaces.
+	/// It also explicitly specifies <see cref="ReferenceAssemblies.Net.Net80"/> because the test source uses <see cref="System.Linq.Enumerable.ToHashSet{TSource}(System.Collections.Generic.IEnumerable{TSource})"/>,
+	/// which is missing in default/older target reference assemblies.
 	/// </summary>
 	[Test]
 	public async Task TestLeadingTabsArePreservedWhenInvocationsAreOnDifferentLines()

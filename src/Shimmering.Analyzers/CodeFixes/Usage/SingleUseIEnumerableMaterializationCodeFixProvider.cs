@@ -1,6 +1,6 @@
-namespace Shimmering.Analyzers.CodeFixes.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
+
+namespace Shimmering.Analyzers.CodeFixes.Usage;
 
 /// <summary>
 /// Removes an unnecessary materialization of an IEnumerable if reported by <see cref="SingleUseIEnumerableMaterializationAnalyzer"/>.
@@ -19,6 +19,7 @@ public sealed class SingleUseIEnumerableMaterializationCodeFixProvider : Shimmer
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

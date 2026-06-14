@@ -23,6 +23,7 @@ public sealed class RedundantSpreadElementAnalyzer : ShimmeringAnalyzer
 
 	public override string SampleCode => """
 		namespace Tests;
+
 		class Test
 		{
 			int[] Array => [1, [|.. new[] { 2, 3 }|], 4];

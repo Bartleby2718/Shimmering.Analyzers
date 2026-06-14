@@ -1,6 +1,6 @@
-namespace Shimmering.Analyzers.CodeFixes.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
+
+namespace Shimmering.Analyzers.CodeFixes.Usage;
 
 /// <summary>
 /// Makes a nullable <see cref="CancellationToken"/> non-nullable if reported by <see cref="NullableCancellationTokenAnalyzer"/>.
@@ -18,6 +18,7 @@ public sealed class NullableCancellationTokenCodeFixProvider : ShimmeringCodeFix
 		using System.Threading.Tasks;
 
 		namespace Tests;
+
 		class Test
 		{
 			Task DoAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;

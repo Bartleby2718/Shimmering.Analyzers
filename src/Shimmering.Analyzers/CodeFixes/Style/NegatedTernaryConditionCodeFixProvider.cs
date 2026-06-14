@@ -1,8 +1,7 @@
 using Microsoft.CodeAnalysis.Formatting;
+using Shimmering.Analyzers.Analyzers.Style;
 
 namespace Shimmering.Analyzers.CodeFixes.Style;
-
-using Shimmering.Analyzers.Analyzers.Style;
 
 /// <summary>
 /// Inverts a ternary expression, if reported by <see cref="NegatedTernaryConditionAnalyzer"/>.
@@ -17,6 +16,7 @@ public sealed class NegatedTernaryConditionCodeFixProvider : ShimmeringCodeFixPr
 
 	public override string SampleCodeFixed => """
 		namespace Tests;
+
 		class Test
 		{
 			string Do(bool condition) => condition ? "when true" : "when false";

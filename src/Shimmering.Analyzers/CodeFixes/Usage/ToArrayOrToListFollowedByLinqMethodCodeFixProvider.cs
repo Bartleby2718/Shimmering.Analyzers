@@ -1,6 +1,6 @@
-namespace Shimmering.Analyzers.CodeFixes.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
+
+namespace Shimmering.Analyzers.CodeFixes.Usage;
 
 /// <summary>
 /// Replaces an unnecessary materialization, if reported by <see cref="ToArrayOrToListFollowedByLinqMethodAnalyzer"/>.
@@ -20,6 +20,7 @@ public sealed class ToArrayOrToListFollowedByLinqMethodCodeFixProvider : Shimmer
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

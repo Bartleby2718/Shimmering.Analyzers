@@ -1,7 +1,7 @@
-namespace Shimmering.Analyzers.Tests.Analyzers.Style;
-
 using Shimmering.Analyzers.Analyzers.Style;
 using Shimmering.Analyzers.CodeFixes.Style;
+
+namespace Shimmering.Analyzers.Tests.Analyzers.Style;
 
 public class RedundantOutVariableAnalyzerTests : ShimmeringAnalyzerTests<RedundantOutVariableAnalyzer>
 {

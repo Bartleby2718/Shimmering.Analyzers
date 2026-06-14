@@ -26,6 +26,7 @@ public sealed class SingleUseIEnumerableMaterializationAnalyzer : ShimmeringAnal
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

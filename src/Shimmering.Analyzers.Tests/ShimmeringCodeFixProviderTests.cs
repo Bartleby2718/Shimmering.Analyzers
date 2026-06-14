@@ -19,8 +19,8 @@ public abstract class ShimmeringCodeFixProviderTests<TAnalyzer, TCodeFixProvider
 	{
 		var test = new CSharpCodeFixTest<TAnalyzer, TCodeFixProvider, DefaultVerifier>
 		{
-			TestCode = source.Replace("\r\n", "\n").Replace("\n", "\r\n"),
-			FixedCode = fixedSource.Replace("\r\n", "\n").Replace("\n", "\r\n"),
+			TestCode = source.Replace("\r\n", "\n").Replace("\n", Environment.NewLine),
+			FixedCode = fixedSource.Replace("\r\n", "\n").Replace("\n", Environment.NewLine),
 			ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
 		};
 
@@ -31,7 +31,7 @@ public abstract class ShimmeringCodeFixProviderTests<TAnalyzer, TCodeFixProvider
 	{
 		var test = new CSharpAnalyzerTest<TAnalyzer, DefaultVerifier>
 		{
-			TestCode = source.Replace("\r\n", "\n").Replace("\n", "\r\n"),
+			TestCode = source.Replace("\r\n", "\n").Replace("\n", Environment.NewLine),
 			ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
 		};
 

@@ -1,9 +1,8 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
+using Shimmering.Analyzers.Analyzers.Usage;
 
 namespace Shimmering.Analyzers.CodeFixes.Usage;
-
-using Shimmering.Analyzers.Analyzers.Usage;
 
 /// <summary>
 /// Removes .ToHashSet(), if reported by <see cref="HashSetOrHashSetReturningMethodFollowedByToHashSetAnalyzer"/>.
@@ -23,6 +22,7 @@ public sealed class HashSetOrHashSetReturningMethodFollowedByToHashSetCodeFixPro
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

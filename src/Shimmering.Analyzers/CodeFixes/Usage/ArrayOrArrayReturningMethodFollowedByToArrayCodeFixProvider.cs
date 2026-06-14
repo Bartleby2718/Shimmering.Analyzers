@@ -1,6 +1,6 @@
-namespace Shimmering.Analyzers.CodeFixes.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
+
+namespace Shimmering.Analyzers.CodeFixes.Usage;
 
 /// <summary>
 /// Removes .ToArray(), if reported by <see cref="ArrayOrArrayReturningMethodFollowedByToArrayAnalyzer"/>.
@@ -19,6 +19,7 @@ public sealed class ArrayOrArrayReturningMethodFollowedByToArrayCodeFixProvider 
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

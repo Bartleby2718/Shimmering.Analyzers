@@ -25,6 +25,7 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringAnalyzer
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

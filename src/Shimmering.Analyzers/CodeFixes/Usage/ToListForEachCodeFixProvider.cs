@@ -1,8 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
+using Shimmering.Analyzers.Analyzers.Usage;
 
 namespace Shimmering.Analyzers.CodeFixes.Usage;
-
-using Shimmering.Analyzers.Analyzers.Usage;
 
 /// <summary>
 /// Replaces a .ToList().ForEach() with a foreach loop without materialization, if reported by <see cref="ToListForEachAnalyzer"/>.
@@ -21,6 +20,7 @@ public sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
         using System.Linq;
 
         namespace Tests;
+
         class Test
         {
             void Do(int[] numbers)

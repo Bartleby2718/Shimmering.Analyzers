@@ -28,7 +28,7 @@ public abstract class ShimmeringAnalyzerTests<TAnalyzer>
 	{
 		var test = new CSharpAnalyzerTest<TAnalyzer, DefaultVerifier>
 		{
-			TestCode = source,
+			TestCode = source.Replace("\r\n", "\n").Replace("\n", Environment.NewLine),
 			ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
 		};
 

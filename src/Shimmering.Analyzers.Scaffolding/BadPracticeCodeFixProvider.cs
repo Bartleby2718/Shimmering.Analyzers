@@ -13,6 +13,7 @@ public sealed class BadPracticeCodeFixProvider : ShimmeringCodeFixProvider
 
 	public override string SampleCodeFixed => """
 		namespace Tests;
+
 		class Test
 		{
 			void Do()

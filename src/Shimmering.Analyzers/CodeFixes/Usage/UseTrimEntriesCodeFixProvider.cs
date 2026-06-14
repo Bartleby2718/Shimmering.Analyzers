@@ -1,6 +1,6 @@
-namespace Shimmering.Analyzers.CodeFixes.Usage;
-
 using Shimmering.Analyzers.Analyzers.Usage;
+
+namespace Shimmering.Analyzers.CodeFixes.Usage;
 
 /// <summary>
 /// Provides code fixes for <see cref="UseTrimEntriesAnalyzer"/>.
@@ -18,6 +18,7 @@ public sealed class UseTrimEntriesCodeFixProvider : ShimmeringCodeFixProvider
 		using System.Linq;
 
 		namespace Tests;
+
 		class Test
 		{
 			void Do(string input)
