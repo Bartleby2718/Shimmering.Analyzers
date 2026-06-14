@@ -20,7 +20,7 @@ jobs:
           # This looks for "2025-" followed by any 4 digits, 
           # and replaces it with "2025-" followed by the NEW current year.
           YEAR=$(date +'%Y')
-          sed -i -E "s/(2025)-[0-9]{4}/\1-$YEAR/g" LICENSE
+          sed -i -E "s/(2025)(-[0-9]{4})?/\1-$YEAR/g" LICENSE
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
