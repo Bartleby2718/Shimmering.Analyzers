@@ -1,4 +1,5 @@
 using Microsoft.CodeAnalysis.Operations;
+
 using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 

@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
+
 using NUnit.Framework;
+
 using Shimmering.Analyzers.Analyzers.Usage;
 
 namespace Shimmering.Analyzers.Tests.Analyzers.Usage;

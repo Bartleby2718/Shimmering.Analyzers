@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+
 using Shimmering.Analyzers.Analyzers.Usage;
 
 namespace Shimmering.Analyzers.CodeFixes.Usage;

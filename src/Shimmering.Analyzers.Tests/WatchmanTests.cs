@@ -1,4 +1,5 @@
 using System.Reflection;
+
 using Shimmering.Analyzers.Core;
 
 namespace Shimmering.Analyzers.Tests;

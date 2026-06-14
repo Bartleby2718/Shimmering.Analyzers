@@ -1,4 +1,5 @@
 using Microsoft.CodeAnalysis.Formatting;
+
 using Shimmering.Analyzers.Analyzers.Usage;
 using Shimmering.Analyzers.CodeFixes.Usage;
 

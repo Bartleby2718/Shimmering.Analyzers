@@ -1,7 +1,7 @@
 using BenchmarkDotNet.Running;
 
-using Shimmering.Analyzers.Benchmark;
 using Shimmering.Analyzers.Analyzers.Style;
+using Shimmering.Analyzers.Benchmark;
 using Shimmering.Analyzers.CodeFixes.Style;
 
 Console.WriteLine("Let's start benchmarking!");

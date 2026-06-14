@@ -1,9 +1,12 @@
 using System;
 using System.Text;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing;
+
 using NUnit.Framework;
+
 using Shimmering.Analyzers.Analyzers.Usage;
 
 namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
