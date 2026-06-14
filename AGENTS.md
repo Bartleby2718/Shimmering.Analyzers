@@ -18,7 +18,9 @@ Please adhere to the following rules and best practices:
 
 Every commit should be a single logical piece of change, whether it's a new feature, a bug fix, or refactoring. When committing code, use the following format: `<model-used>: <changes written concisely>`
 
-*(e.g., `gemini-3.1-pro: Refactor foundational docs and decouple validator`)*
+*(e.g., `gemini-3.1-pro: Refactor foundational docs and decouple validator`, not `antigravity: Refactor foundational docs and decouple validator`)*
+
+Also, do not push commits unless instructed.
 
 ## 4. C# Coding Style
 
