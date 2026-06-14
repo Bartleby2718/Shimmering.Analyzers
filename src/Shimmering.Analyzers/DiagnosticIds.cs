@@ -26,6 +26,9 @@ public static class DiagnosticIds
 		// 105X: Obsolete API management
 		public const string RemoveObsoleteMembersInMajorVersion = "SHIMMER1050";
 
+		// 106X: read-only collection parameters
+		public const string UseReadOnlyCollectionParameter = "SHIMMER1060";
+
 		// 110X: idiomatic use of LINQ methods
 		public const string MisusedOrDefault = "SHIMMER1100";
 		public const string SingleElementConcat = "SHIMMER1101";
