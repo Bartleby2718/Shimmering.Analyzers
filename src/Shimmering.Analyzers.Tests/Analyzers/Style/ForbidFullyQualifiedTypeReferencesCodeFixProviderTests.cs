@@ -1,7 +1,3 @@
-using System.Threading.Tasks;
-
-using NUnit.Framework;
-
 using Shimmering.Analyzers.Analyzers.Style;
 using Shimmering.Analyzers.CodeFixes.Style;
 

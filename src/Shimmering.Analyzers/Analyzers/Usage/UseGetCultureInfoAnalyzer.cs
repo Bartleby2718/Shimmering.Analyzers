@@ -1,12 +1,3 @@
-using System.Collections.Immutable;
-using System.Globalization;
-using System.Linq;
-
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-
 using Shimmering.Analyzers.Core;
 
 namespace Shimmering.Analyzers.Analyzers.Usage;

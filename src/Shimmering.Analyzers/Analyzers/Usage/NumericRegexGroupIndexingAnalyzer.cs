@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Immutable;
-
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 
 using Shimmering.Analyzers.Core;

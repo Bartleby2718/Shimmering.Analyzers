@@ -23,4 +23,4 @@
 - [x] Add blank lines between file-scoped namespace declarations and class declarations in test raw string literals repository-wide.
 - [x] Update all `SHIMMER*.md` files to align with the standard `AnalyzerDocumentationTemplate.md` structure.
 - [x] Fix StyleCop rule SA1027 globally to enforce consistent tab-based indentation.
-- [ ] Enforce IDE0005 (Remove unnecessary usings) globally in `.editorconfig` as warning/error.
+- [x] Enforce IDE0005 (Remove unnecessary usings) globally in `.editorconfig` as warning/error.

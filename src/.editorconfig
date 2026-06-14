@@ -386,6 +386,8 @@ dotnet_diagnostic.CS1591.severity = none
 #### Built-in code style rules (IDE) ####
 # Namespace does not match folder structure
 dotnet_diagnostic.IDE0130.severity = error
+# Remove unnecessary usings
+dotnet_diagnostic.IDE0005.severity = warning
 
 #### StyleCop.Analyzers (SA) ####
 # SingleLineCommentsMustBeginWithSingleSpace

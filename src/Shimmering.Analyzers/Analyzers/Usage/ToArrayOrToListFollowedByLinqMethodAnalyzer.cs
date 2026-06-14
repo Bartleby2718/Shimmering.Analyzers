@@ -1,5 +1,3 @@
-using System.Linq;
-
 using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 

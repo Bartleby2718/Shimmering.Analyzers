@@ -1,5 +1,4 @@
 using Shimmering.Analyzers.Core;
-using Shimmering.Analyzers.Utilities;
 
 namespace Shimmering.Analyzers.CATEGORY_PLACEHOLDERRules.BadPractice;
 

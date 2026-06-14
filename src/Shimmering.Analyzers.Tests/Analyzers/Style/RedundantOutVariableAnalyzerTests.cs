@@ -1,5 +1,4 @@
 using Shimmering.Analyzers.Analyzers.Style;
-using Shimmering.Analyzers.CodeFixes.Style;
 
 namespace Shimmering.Analyzers.Tests.Analyzers.Style;
 

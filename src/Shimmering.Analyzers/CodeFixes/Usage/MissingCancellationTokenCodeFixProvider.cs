@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 
 using Shimmering.Analyzers.Analyzers.Usage;
 using Shimmering.Analyzers.Utilities;

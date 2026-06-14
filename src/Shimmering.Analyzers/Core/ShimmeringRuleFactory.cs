@@ -1,7 +1,5 @@
 using System.Diagnostics;
 
-using Microsoft.CodeAnalysis;
-
 namespace Shimmering.Analyzers.Core;
 
 /// <summary>

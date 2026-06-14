@@ -1,7 +1,3 @@
-using Microsoft.CodeAnalysis;
-
-using NUnit.Framework;
-
 using Shimmering.Analyzers.Core;
 
 namespace Shimmering.Analyzers.Tests.Core;

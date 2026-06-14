@@ -1,7 +1,4 @@
-using NUnit.Framework;
-
 using Shimmering.Analyzers.Analyzers.Usage;
-using Shimmering.Analyzers.CodeFixes.Usage;
 
 namespace Shimmering.Analyzers.Tests.Analyzers.Usage;
 

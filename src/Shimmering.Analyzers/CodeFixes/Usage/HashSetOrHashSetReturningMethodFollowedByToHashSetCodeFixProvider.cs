@@ -1,6 +1,3 @@
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-
 using Shimmering.Analyzers.Analyzers.Usage;
 
 namespace Shimmering.Analyzers.CodeFixes.Usage;
