@@ -5,6 +5,12 @@ Please adhere to the following rules and best practices:
 ## 1. Documentation & Workflow
 
 - **File Links**: When mentioning repository files in markdown documentation, always use clickable relative links (e.g., [`README.md`](./README.md)).
+- **Feature Completeness**: Whenever adding a new rule or feature, you must ensure that all of the following are created:
+  - The analyzer implementation.
+  - The corresponding code fix provider.
+  - Comprehensive unit tests covering both the analyzer (happy paths, edge cases, safety checks) and the code fix provider.
+  - Dedicated documentation for the new rule.
+  - Updates to existing documentation (such as index files, tables, and lists) to accommodate and reference the new feature.
 - **Testing**: After adding a feature, always add tests covering both the happy paths and edge cases. When fixing a bug, follow the red-green-refactor approach. Every test name should be descriptive, explaining the business logic that's being enforced.
 - **Documentation**: After adding a feature, ensure all relevant documentation is created, updated, or removed.
 
