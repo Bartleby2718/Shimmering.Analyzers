@@ -1,3 +1,8 @@
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 
@@ -36,15 +41,31 @@ public sealed class NullableCancellationTokenAnalyzer : ShimmeringAnalyzer
 
 	protected override void InitializeCore(AnalysisContext context)
 	{
-		context.RegisterSyntaxNodeAction(AnalyzeParameter, SyntaxKind.Parameter);
+		context.RegisterCompilationStartAction(compilationContext =>
+		{
+			var cancellationTokenSymbol = compilationContext.Compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.CancellationToken);
+			if (cancellationTokenSymbol == null)
+			{
+				return;
+			}
+
+			compilationContext.RegisterSyntaxNodeAction(syntaxContext => AnalyzeParameter(syntaxContext, cancellationTokenSymbol), SyntaxKind.Parameter);
+		});
 	}
 
-	private static void AnalyzeParameter(SyntaxNodeAnalysisContext context)
+	private static void AnalyzeParameter(SyntaxNodeAnalysisContext context, INamedTypeSymbol cancellationTokenSymbol)
 	{
 		var parameter = (ParameterSyntax)context.Node;
-		if (parameter.Type is not NullableTypeSyntax nullableType) { return; }
-		if (context.SemanticModel.GetSymbolInfo(nullableType.ElementType, context.CancellationToken).Symbol is not INamedTypeSymbol typeSymbol) { return; }
-		var cancellationTokenSymbol = context.Compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.CancellationToken);
+		if (parameter.Type is not NullableTypeSyntax nullableType)
+		{
+			return;
+		}
+
+		if (context.SemanticModel.GetSymbolInfo(nullableType.ElementType, context.CancellationToken).Symbol is not INamedTypeSymbol typeSymbol)
+		{
+			return;
+		}
+
 		if (SymbolEqualityComparer.Default.Equals(typeSymbol, cancellationTokenSymbol))
 		{
 			// Technically, this can break consumers of the method, but still flagging to promote a best practice.

@@ -41,21 +41,46 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringAnalyzer
 
 	protected override void InitializeCore(AnalysisContext context)
 	{
-		context.RegisterSymbolAction(AnalyzeMethod, SymbolKind.Method);
+		context.RegisterCompilationStartAction(compilationContext =>
+		{
+			var compilation = compilationContext.Compilation;
+			var taskType = compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.Task);
+			var taskOfTType = compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.TaskOfT);
+			var valueTaskType = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask");
+			var valueTaskOfTType = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1");
+			var asyncEnumerableType = compilation.GetTypeByMetadataName("System.Collections.Generic.IAsyncEnumerable`1");
+			var cancellationTokenType = compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.CancellationToken);
+
+			// If fundamental types aren't available, we don't need to run.
+			if (taskType == null && valueTaskType == null && asyncEnumerableType == null)
+			{
+				return;
+			}
+
+			var compilationState = new CompilationState(
+				taskType,
+				taskOfTType,
+				valueTaskType,
+				valueTaskOfTType,
+				asyncEnumerableType,
+				cancellationTokenType);
+
+			compilationContext.RegisterSymbolAction(symbolContext => AnalyzeMethod(symbolContext, compilationState), SymbolKind.Method);
+		});
 	}
 
-	private static void AnalyzeMethod(SymbolAnalysisContext context)
+	private static void AnalyzeMethod(SymbolAnalysisContext context, CompilationState compilationState)
 	{
 		var methodSymbol = (IMethodSymbol)context.Symbol;
 
-		if (!IsAwaitable(methodSymbol.ReturnType, context.Compilation)
+		if (!IsAwaitable(methodSymbol.ReturnType, compilationState)
 			|| IsInterfaceOrOverrideImplementation(methodSymbol))
 		{
 			return;
 		}
 
 		// Check for existing CancellationToken or CancellationToken? parameter
-		if (methodSymbol.Parameters.Any(p => IsCancellationTokenType(p.Type, context.Compilation)))
+		if (methodSymbol.Parameters.Any(parameter => IsCancellationTokenType(parameter.Type, compilationState)))
 		{
 			return;
 		}
@@ -64,7 +89,7 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringAnalyzer
 		context.ReportDiagnostic(diagnostic);
 	}
 
-	private static bool IsAwaitable(ITypeSymbol returnType, Compilation compilation)
+	private static bool IsAwaitable(ITypeSymbol returnType, CompilationState compilationState)
 	{
 		if (returnType is not INamedTypeSymbol namedType)
 		{
@@ -74,26 +99,21 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringAnalyzer
 		var originalDefinition = namedType.OriginalDefinition;
 
 		// Task, Task<T>
-		var taskType = compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.Task);
-		var taskOfTType = compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.TaskOfT);
-		if (SymbolEqualityComparer.Default.Equals(originalDefinition, taskType) ||
-			SymbolEqualityComparer.Default.Equals(originalDefinition, taskOfTType))
+		if (SymbolEqualityComparer.Default.Equals(originalDefinition, compilationState.TaskType) ||
+			SymbolEqualityComparer.Default.Equals(originalDefinition, compilationState.TaskOfTType))
 		{
 			return true;
 		}
 
 		// ValueTask, ValueTask<T>
-		var valueTaskType = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask");
-		var valueTaskOfTType = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1");
-		if (SymbolEqualityComparer.Default.Equals(originalDefinition, valueTaskType) ||
-			SymbolEqualityComparer.Default.Equals(originalDefinition, valueTaskOfTType))
+		if (SymbolEqualityComparer.Default.Equals(originalDefinition, compilationState.ValueTaskType) ||
+			SymbolEqualityComparer.Default.Equals(originalDefinition, compilationState.ValueTaskOfTType))
 		{
 			return true;
 		}
 
 		// IAsyncEnumerable<T>
-		var asyncEnumerableType = compilation.GetTypeByMetadataName("System.Collections.Generic.IAsyncEnumerable`1");
-		if (SymbolEqualityComparer.Default.Equals(originalDefinition, asyncEnumerableType))
+		if (SymbolEqualityComparer.Default.Equals(originalDefinition, compilationState.AsyncEnumerableType))
 		{
 			return true;
 		}
@@ -101,9 +121,9 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringAnalyzer
 		return false;
 	}
 
-	private static bool IsCancellationTokenType(ITypeSymbol type, Compilation compilation)
+	private static bool IsCancellationTokenType(ITypeSymbol type, CompilationState compilationState)
 	{
-		var cancellationTokenType = compilation.GetTypeByMetadataName(FullyQualifiedTypeNames.CancellationToken);
+		var cancellationTokenType = compilationState.CancellationTokenType;
 		if (cancellationTokenType is null)
 		{
 			return false;
@@ -155,5 +175,31 @@ public sealed class MissingCancellationTokenAnalyzer : ShimmeringAnalyzer
 		}
 
 		return false;
+	}
+
+	private sealed class CompilationState
+	{
+		public CompilationState(
+			INamedTypeSymbol? taskType,
+			INamedTypeSymbol? taskOfTType,
+			INamedTypeSymbol? valueTaskType,
+			INamedTypeSymbol? valueTaskOfTType,
+			INamedTypeSymbol? asyncEnumerableType,
+			INamedTypeSymbol? cancellationTokenType)
+		{
+			this.TaskType = taskType;
+			this.TaskOfTType = taskOfTType;
+			this.ValueTaskType = valueTaskType;
+			this.ValueTaskOfTType = valueTaskOfTType;
+			this.AsyncEnumerableType = asyncEnumerableType;
+			this.CancellationTokenType = cancellationTokenType;
+		}
+
+		public INamedTypeSymbol? TaskType { get; }
+		public INamedTypeSymbol? TaskOfTType { get; }
+		public INamedTypeSymbol? ValueTaskType { get; }
+		public INamedTypeSymbol? ValueTaskOfTType { get; }
+		public INamedTypeSymbol? AsyncEnumerableType { get; }
+		public INamedTypeSymbol? CancellationTokenType { get; }
 	}
 }

@@ -1,3 +1,10 @@
+using System.Collections.Immutable;
+using System.Linq;
+using System.Threading;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Shimmering.Analyzers.Core;
 using Shimmering.Analyzers.Utilities;
 
@@ -40,13 +47,21 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringAnalyzer
 
 	protected override void InitializeCore(AnalysisContext context)
 	{
-		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
+		context.RegisterCompilationStartAction(compilationContext =>
+		{
+			var hashSetSymbol = compilationContext.Compilation.GetTypeByMetadataName("System.Collections.Generic.HashSet`1");
+			if (hashSetSymbol == null)
+			{
+				return;
+			}
+
+			compilationContext.RegisterSyntaxNodeAction(syntaxContext => AnalyzeInvocation(syntaxContext, hashSetSymbol), SyntaxKind.InvocationExpression);
+		});
 	}
 
-	private static void AnalyzeInvocation(SyntaxNodeAnalysisContext context)
+	private static void AnalyzeInvocation(SyntaxNodeAnalysisContext context, INamedTypeSymbol hashSetSymbol)
 	{
 		var semanticModel = context.SemanticModel;
-
 		var invocation = (InvocationExpressionSyntax)context.Node;
 
 		// bail out if it's not a terminal node
@@ -58,22 +73,55 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringAnalyzer
 		}
 
 		// the invocation must be .ToArray() or .ToList()
-		if (!EnumerableHelpers.IsLinqMethodCall(semanticModel, invocation, context.CancellationToken, out var methodName)) { return; }
-		if (methodName is not (nameof(Enumerable.ToArray) or nameof(Enumerable.ToList))) { return; }
-		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess) { return; }
+		if (!EnumerableHelpers.IsLinqMethodCall(semanticModel, invocation, context.CancellationToken, out var methodName))
+		{
+			return;
+		}
+
+		if (methodName is not (nameof(Enumerable.ToArray) or nameof(Enumerable.ToList)))
+		{
+			return;
+		}
+
+		if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess)
+		{
+			return;
+		}
 
 		// the previous invocation must be .Distinct()
-		if (memberAccess.Expression is not InvocationExpressionSyntax innerInvocation) { return; }
-		if (!EnumerableHelpers.IsLinqMethodCall(semanticModel, innerInvocation, context.CancellationToken, out var innerMethodName)) { return; }
-		if (innerMethodName is not nameof(Enumerable.Distinct)) { return; }
+		if (memberAccess.Expression is not InvocationExpressionSyntax innerInvocation)
+		{
+			return;
+		}
+
+		if (!EnumerableHelpers.IsLinqMethodCall(semanticModel, innerInvocation, context.CancellationToken, out var innerMethodName))
+		{
+			return;
+		}
+
+		if (innerMethodName is not nameof(Enumerable.Distinct))
+		{
+			return;
+		}
+
 		// Exclude the overload that accepts a comparer argument until https://github.com/Bartleby2718/Shimmering.Analyzers/issues/91 is done
-		if (innerInvocation.ArgumentList.Arguments.Count != 0) { return; }
+		if (innerInvocation.ArgumentList.Arguments.Count != 0)
+		{
+			return;
+		}
 
-		if (semanticModel.GetSymbolInfo(invocation, context.CancellationToken).Symbol is not IMethodSymbol methodSymbol) { return; }
+		if (semanticModel.GetSymbolInfo(invocation, context.CancellationToken).Symbol is not IMethodSymbol methodSymbol)
+		{
+			return;
+		}
+
 		var elementType = methodSymbol.TypeArguments.FirstOrDefault();
-		if (elementType == null) { return; }
+		if (elementType == null)
+		{
+			return;
+		}
 
-		if (!IsTargetTypeCompatible(semanticModel, invocation, elementType, context.CancellationToken))
+		if (!IsTargetTypeCompatible(semanticModel, invocation, elementType, hashSetSymbol, context.CancellationToken))
 		{
 			return;
 		}
@@ -85,6 +133,7 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringAnalyzer
 		SemanticModel semanticModel,
 		InvocationExpressionSyntax invocation,
 		ITypeSymbol elementType,
+		INamedTypeSymbol hashSetSymbol,
 		CancellationToken cancellationToken)
 	{
 		var typeInfo = semanticModel.GetTypeInfo(invocation, cancellationToken);
@@ -101,15 +150,8 @@ public sealed class UniqueNonSetCollectionAnalyzer : ShimmeringAnalyzer
 			return true;
 		}
 
-		var compilation = semanticModel.Compilation;
-		var hashSetType = compilation.GetTypeByMetadataName("System.Collections.Generic.HashSet`1");
-		if (hashSetType == null)
-		{
-			return false;
-		}
-
-		var constructedHashSetType = hashSetType.Construct(elementType);
-		var conversion = compilation.ClassifyConversion(constructedHashSetType, convertedType);
+		var constructedHashSetType = hashSetSymbol.Construct(elementType);
+		var conversion = semanticModel.Compilation.ClassifyConversion(constructedHashSetType, convertedType);
 		return conversion.Exists && (conversion.IsImplicit || conversion.IsIdentity);
 	}
 }

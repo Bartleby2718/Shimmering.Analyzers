@@ -41,7 +41,16 @@ public sealed class UseTrimEntriesAnalyzer : ShimmeringAnalyzer
 
 	protected override void InitializeCore(AnalysisContext context)
 	{
-		context.RegisterOperationAction(AnalyzeInvocation, OperationKind.Invocation);
+		context.RegisterCompilationStartAction(compilationContext =>
+		{
+			var stringSplitOptionsType = compilationContext.Compilation.GetTypeByMetadataName("System.StringSplitOptions");
+			if (stringSplitOptionsType == null || !stringSplitOptionsType.MemberNames.Contains("TrimEntries"))
+			{
+				return;
+			}
+
+			compilationContext.RegisterOperationAction(AnalyzeInvocation, OperationKind.Invocation);
+		});
 	}
 
 	private static void AnalyzeInvocation(OperationAnalysisContext context)
@@ -74,13 +83,6 @@ public sealed class UseTrimEntriesAnalyzer : ShimmeringAnalyzer
 			|| sourceMethod.ContainingType?.SpecialType != SpecialType.System_String
 			|| sourceInvocation.Syntax is not InvocationExpressionSyntax splitSyntax
 			|| splitSyntax.ArgumentList.Arguments.Count != 1)
-		{
-			return;
-		}
-
-		// 3. Check if the compilation has StringSplitOptions.TrimEntries
-		var stringSplitOptionsType = context.Compilation.GetTypeByMetadataName("System.StringSplitOptions");
-		if (stringSplitOptionsType == null || !stringSplitOptionsType.MemberNames.Contains("TrimEntries"))
 		{
 			return;
 		}
