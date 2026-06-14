@@ -68,7 +68,7 @@ jobs:
 
       - name: Create GitHub Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest' && false # TODO: revert once on stable version
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.package_version.outputs.version }}
           name: Release v${{ steps.package_version.outputs.version }}
@@ -92,7 +92,7 @@ jobs:
       # push the package to GitHub Packages in addition to NuGet.org.
       - name: Push to GitHub Packages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
-        run: dotnet nuget push ./artifacts/*.nupkg --source https://nuget.pkg.github.com/Bartleby2718/index.json --api-key ${{ secrets.GH_PACKAGES_TOKEN }}
+        run: dotnet nuget push ./artifacts/*.nupkg --skip-duplicate --api-key ${{ secrets.GH_PACKAGES_TOKEN }} --source https://nuget.pkg.github.com/Bartleby2718/index.json
 
       - name: Generate Coverage Report
         if: matrix.os == 'ubuntu-latest'
