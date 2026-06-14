@@ -20,6 +20,9 @@ public static class DiagnosticIds
 		public const string MissingRemoveEmptyEntries = "SHIMMER1030";
 		public const string UseTrimEntries = "SHIMMER1031";
 
+		// 104X: CultureInfo construction
+		public const string UseGetCultureInfo = "SHIMMER1040";
+
 		// 110X: idiomatic use of LINQ methods
 		public const string MisusedOrDefault = "SHIMMER1100";
 		public const string SingleElementConcat = "SHIMMER1101";

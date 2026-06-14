@@ -22,6 +22,7 @@ SHIMMER1015 | ShimmeringUsage |  Hidden  | 1.0.0 | SingleUseIEnumerableMateriali
 SHIMMER1020 | ShimmeringUsage | Warning  | 1.0.0 | RedundantSpreadElementAnalyzer, [Documentation](UsageRules/SHIMMER1020.md)
 SHIMMER1030 | ShimmeringUsage |   Info   | 1.0.0 | MissingRemoveEmptyEntriesAnalyzer, [Documentation](UsageRules/SHIMMER1030.md)
 SHIMMER1031 | ShimmeringUsage |   Info   | 1.1.0 | UseTrimEntriesAnalyzer, [Documentation](UsageRules/SHIMMER1031.md)
+SHIMMER1040 | ShimmeringUsage | Warning  | 1.1.0 | UseGetCultureInfoAnalyzer, [Documentation](UsageRules/SHIMMER1040.md)
 SHIMMER1100 | ShimmeringUsage | Warning  | 1.0.0 | MisusedOrDefaultAnalyzer, [Documentation](UsageRules/SHIMMER1100.md)
 SHIMMER1101 | ShimmeringUsage |   Info   | 1.0.0 | SingleElementConcatAnalyzer, [Documentation](UsageRules/SHIMMER1101.md)
 SHIMMER1102 | ShimmeringUsage |  Hidden  | 1.0.0 | UniqueNonSetCollectionAnalyzer, [Documentation](UsageRules/SHIMMER1102.md)
