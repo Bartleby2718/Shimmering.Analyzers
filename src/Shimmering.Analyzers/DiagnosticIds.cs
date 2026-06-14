@@ -29,6 +29,9 @@ public static class DiagnosticIds
 		// 106X: read-only collection parameters
 		public const string UseReadOnlyCollectionParameter = "SHIMMER1060";
 
+		// 107X: regex capture groups
+		public const string UnnamedRegexCaptureGroup = "SHIMMER1070";
+
 		// 110X: idiomatic use of LINQ methods
 		public const string MisusedOrDefault = "SHIMMER1100";
 		public const string SingleElementConcat = "SHIMMER1101";

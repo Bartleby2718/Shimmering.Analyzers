@@ -18,6 +18,7 @@ SHIMMER1031 | ShimmeringUsage |   Info   | 1.1.0 | UseTrimEntriesAnalyzer, [Docu
 SHIMMER1040 | ShimmeringUsage | Warning  | 1.1.0 | UseGetCultureInfoAnalyzer, [Documentation](SHIMMER1040.md)
 SHIMMER1050 | ShimmeringUsage | Warning  | 1.1.0 | RemoveObsoleteMembersInMajorVersionAnalyzer, [Documentation](SHIMMER1050.md)
 SHIMMER1060 | ShimmeringUsage |   Info   | 1.1.0 | UseReadOnlyCollectionParameterAnalyzer, [Documentation](SHIMMER1060.md)
+SHIMMER1070 | ShimmeringUsage | Warning  | 1.1.0 | UnnamedRegexCaptureGroupAnalyzer, [Documentation](SHIMMER1070.md)
 SHIMMER1100 | ShimmeringUsage | Warning  | 1.0.0 | MisusedOrDefaultAnalyzer, [Documentation](SHIMMER1100.md)
 SHIMMER1101 | ShimmeringUsage |   Info   | 1.0.0 | SingleElementConcatAnalyzer, [Documentation](SHIMMER1101.md)
 SHIMMER1102 | ShimmeringUsage |  Hidden  | 1.0.0 | UniqueNonSetCollectionAnalyzer, [Documentation](SHIMMER1102.md)

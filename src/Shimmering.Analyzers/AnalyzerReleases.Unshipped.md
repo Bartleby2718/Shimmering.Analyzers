@@ -10,4 +10,5 @@ SHIMMER1031 | ShimmeringUsage | Info | UseTrimEntriesAnalyzer
 SHIMMER1040 | ShimmeringUsage | Warning | UseGetCultureInfoAnalyzer
 SHIMMER1050 | ShimmeringUsage | Warning | RemoveObsoleteMembersInMajorVersionAnalyzer
 SHIMMER1060 | ShimmeringUsage | Info | UseReadOnlyCollectionParameterAnalyzer
+SHIMMER1070 | ShimmeringUsage | Warning | UnnamedRegexCaptureGroupAnalyzer
 SHIMMER2040 | ShimmeringStyle | Info | ForbidFullyQualifiedTypeReferencesAnalyzer
