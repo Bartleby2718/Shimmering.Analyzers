@@ -31,6 +31,7 @@ public static class DiagnosticIds
 
 		// 107X: regex capture groups
 		public const string UnnamedRegexCaptureGroup = "SHIMMER1070";
+		public const string NumericRegexGroupIndexing = "SHIMMER1071";
 
 		// 110X: idiomatic use of LINQ methods
 		public const string MisusedOrDefault = "SHIMMER1100";
