@@ -67,3 +67,11 @@ By default, this rule analyzes parameters of `public` and `protected` methods. Y
 [*]
 dotnet_code_quality.SHIMMER1060.api_surface = public, protected, internal
 ```
+
+## Justification of the Severity
+
+Requiring mutable collection types like `List<T>` for input parameters that are never mutated is restrictive to callers who hold read-only structures. Broadening parameters to read-only interfaces makes methods more reusable, self-documenting, and less error-prone.
+
+## When to Suppress
+
+Suppress this rule if you anticipate mutating the collection in the future, if you are implementing an external API that requires mutable types, or if you want to avoid breaking binary compatibility for existing callers who subclass and override the methods.

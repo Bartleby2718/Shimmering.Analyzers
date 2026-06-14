@@ -55,3 +55,11 @@ class Test
 }
 ```
 
+## Justification of the Severity
+
+Repeatedly allocating new `CultureInfo` instances via constructors causes unnecessary garbage collection overhead and heap allocation pressure. Returning cached, read-only instances from `CultureInfo.GetCultureInfo` avoids this allocation completely.
+
+## When to Suppress
+
+This diagnostic can be suppressed if you require a writable or customized `CultureInfo` instance, as the cached instances returned by `GetCultureInfo` are read-only and cannot be mutated.
+

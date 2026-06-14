@@ -36,3 +36,11 @@ Fixed code:
 using System.Text.RegularExpressions;
 var regex = new Regex(@"(?<group1>\d{4})-(?<group2>\d{2})-(?<group3>\d{2})");
 ```
+
+## Justification of the Severity
+
+Using unnamed capture groups makes accessing parsed values fragile: inserting, deleting, or reordering capturing groups in the pattern shifts all subsequent numeric group indices, leading to silent bugs at runtime. Named capture groups prevent this coupling.
+
+## When to Suppress
+
+Suppress this diagnostic if the regular expression is extremely simple or transient, if you never access capturing groups by index (e.g. you only use the entire matched string `match.Groups[0]`), or if you explicitly prefer positional indices.

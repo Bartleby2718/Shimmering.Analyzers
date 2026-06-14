@@ -42,5 +42,13 @@ var year = match.Groups["year"].Value;
 When applying the automated code fix:
 1. If the underlying `Regex` pattern defines a name for the group at that index, the indexer is replaced with that name (e.g. `Groups["year"]`).
 2. If the pattern is unnamed, the code fix traces if the group access is assigned to a local variable (e.g. `var year = match.Groups[1].Value;`) and uses the variable's name as the group name (e.g. `Groups["year"]`).
-3. Otherwise, it falls back to a placeholder name like `Groups["group1"]`.
+3. Otherwise, it falls back to a placeholder name like `group1`.
 
+
+## Justification of the Severity
+
+Accessing capture groups by numeric index is a fragile programming model. Even if the regex pattern contains named groups, using integer indices makes the code harder to read and breaks silently if the pattern is modified to insert new groups.
+
+## When to Suppress
+
+Suppress this rule if the regular expression pattern is external or generated dynamically, or if accessing groups by numeric position is required by design.

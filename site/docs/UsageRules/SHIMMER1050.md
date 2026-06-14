@@ -61,3 +61,11 @@ By default, this rule is only active for projects where `IsPackable` is true (e.
 dotnet_code_quality.SHIMMER1050.apply_to_non_packable_projects = true
 ```
 
+## Justification of the Severity
+
+Maintaining obsolete members across major version changes clutters the library API and increases technical debt. Removing them helps keep the API surface area minimal and clean, ensuring clients update their callsites to the recommended modern replacements.
+
+## When to Suppress
+
+Suppress this rule if you explicitly want to preserve deprecated or obsolete members for backward compatibility in a new major version, or if the project has not yet finished deprecation transitions.
+
