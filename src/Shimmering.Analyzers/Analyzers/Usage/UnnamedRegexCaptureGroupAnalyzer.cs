@@ -44,16 +44,25 @@ public sealed class UnnamedRegexCaptureGroupAnalyzer : ShimmeringAnalyzer
 
 	protected override void InitializeCore(AnalysisContext context)
 	{
-		context.RegisterSyntaxNodeAction(AnalyzeObjectCreation, SyntaxKind.ObjectCreationExpression);
-		context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
-		context.RegisterSyntaxNodeAction(AnalyzeAttribute, SyntaxKind.Attribute);
+		context.RegisterCompilationStartAction(compilationContext =>
+		{
+			var compilation = compilationContext.Compilation;
+			var regexType = compilation.GetTypeByMetadataName("System.Text.RegularExpressions.Regex");
+			var generatedRegexAttributeType = compilation.GetTypeByMetadataName("System.Text.RegularExpressions.GeneratedRegexAttribute");
+
+			var compilationState = new CompilationState(regexType, generatedRegexAttributeType);
+
+			compilationContext.RegisterSyntaxNodeAction(syntaxContext => AnalyzeObjectCreation(syntaxContext, compilationState), SyntaxKind.ObjectCreationExpression);
+			compilationContext.RegisterSyntaxNodeAction(syntaxContext => AnalyzeInvocation(syntaxContext, compilationState), SyntaxKind.InvocationExpression);
+			compilationContext.RegisterSyntaxNodeAction(syntaxContext => AnalyzeAttribute(syntaxContext, compilationState), SyntaxKind.Attribute);
+		});
 	}
 
-	private static void AnalyzeObjectCreation(SyntaxNodeAnalysisContext context)
+	private static void AnalyzeObjectCreation(SyntaxNodeAnalysisContext context, CompilationState compilationState)
 	{
 		var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
 		var constructorSymbol = context.SemanticModel.GetSymbolInfo(objectCreation, context.CancellationToken).Symbol as IMethodSymbol;
-		if (constructorSymbol == null || constructorSymbol.ContainingType?.ToDisplayString() != "System.Text.RegularExpressions.Regex")
+		if (constructorSymbol == null || !SymbolEqualityComparer.Default.Equals(constructorSymbol.ContainingType, compilationState.RegexType))
 		{
 			return;
 		}
@@ -96,11 +105,11 @@ public sealed class UnnamedRegexCaptureGroupAnalyzer : ShimmeringAnalyzer
 		}
 	}
 
-	private static void AnalyzeInvocation(SyntaxNodeAnalysisContext context)
+	private static void AnalyzeInvocation(SyntaxNodeAnalysisContext context, CompilationState compilationState)
 	{
 		var invocation = (InvocationExpressionSyntax)context.Node;
 		var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation, context.CancellationToken).Symbol as IMethodSymbol;
-		if (methodSymbol == null || !methodSymbol.IsStatic || methodSymbol.ContainingType?.ToDisplayString() != "System.Text.RegularExpressions.Regex")
+		if (methodSymbol == null || !methodSymbol.IsStatic || !SymbolEqualityComparer.Default.Equals(methodSymbol.ContainingType, compilationState.RegexType))
 		{
 			return;
 		}
@@ -143,11 +152,11 @@ public sealed class UnnamedRegexCaptureGroupAnalyzer : ShimmeringAnalyzer
 		}
 	}
 
-	private static void AnalyzeAttribute(SyntaxNodeAnalysisContext context)
+	private static void AnalyzeAttribute(SyntaxNodeAnalysisContext context, CompilationState compilationState)
 	{
 		var attribute = (AttributeSyntax)context.Node;
 		var attributeSymbol = context.SemanticModel.GetSymbolInfo(attribute, context.CancellationToken).Symbol as IMethodSymbol;
-		if (attributeSymbol == null || attributeSymbol.ContainingType?.ToDisplayString() != "System.Text.RegularExpressions.GeneratedRegexAttribute")
+		if (attributeSymbol == null || !SymbolEqualityComparer.Default.Equals(attributeSymbol.ContainingType, compilationState.GeneratedRegexAttributeType))
 		{
 			return;
 		}
@@ -177,9 +186,9 @@ public sealed class UnnamedRegexCaptureGroupAnalyzer : ShimmeringAnalyzer
 				{
 					patternExpression = argument.Expression;
 				}
-					else if (string.Equals(parameter.Name, "options", StringComparison.Ordinal))
-					{
-						optionsExpression = argument.Expression;
+				else if (string.Equals(parameter.Name, "options", StringComparison.Ordinal))
+				{
+					optionsExpression = argument.Expression;
 				}
 			}
 		}
@@ -239,5 +248,17 @@ public sealed class UnnamedRegexCaptureGroupAnalyzer : ShimmeringAnalyzer
 		{
 			// Ignore invalid regex syntax
 		}
+	}
+
+	private sealed class CompilationState
+	{
+		public CompilationState(INamedTypeSymbol? regexType, INamedTypeSymbol? generatedRegexAttributeType)
+		{
+			this.RegexType = regexType;
+			this.GeneratedRegexAttributeType = generatedRegexAttributeType;
+		}
+
+		public INamedTypeSymbol? RegexType { get; }
+		public INamedTypeSymbol? GeneratedRegexAttributeType { get; }
 	}
 }
