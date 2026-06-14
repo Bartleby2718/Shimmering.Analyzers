@@ -79,7 +79,7 @@ public class WatchmanTests
 
 		var expectedRelativePaths = diagnosticIds
 			.Select(id => Path.Combine(
-				(id.StartsWith("SHIMMER1") || id.StartsWith("SHIMMER9")) ? "UsageRules"
+				id.StartsWith("SHIMMER1") ? "UsageRules"
 					: id.StartsWith("SHIMMER2") ? "StyleRules"
 					: throw new InvalidOperationException($"Unexpected ID: {id}"),
 				$"{id}.md"))
