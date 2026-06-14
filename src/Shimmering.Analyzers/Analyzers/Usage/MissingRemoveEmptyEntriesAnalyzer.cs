@@ -73,7 +73,7 @@ public sealed class MissingRemoveEmptyEntriesAnalyzer : ShimmeringAnalyzer
 			return;
 		}
 
-		var symbolInfo = context.SemanticModel.GetSymbolInfo(splitInvocation);
+		var symbolInfo = context.SemanticModel.GetSymbolInfo(splitInvocation, cancellationToken);
 		if (symbolInfo.Symbol is not IMethodSymbol methodSymbol
 			|| methodSymbol.ContainingType?.SpecialType != SpecialType.System_String)
 		{
