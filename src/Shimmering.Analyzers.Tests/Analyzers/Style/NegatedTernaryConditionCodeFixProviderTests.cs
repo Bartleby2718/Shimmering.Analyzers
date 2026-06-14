@@ -1,6 +1,8 @@
 using Shimmering.Analyzers.Analyzers.Style;
 using Shimmering.Analyzers.CodeFixes.Style;
 
+#pragma warning disable SA1027 // Use tabs correctly
+
 namespace Shimmering.Analyzers.Tests.Analyzers.Style;
 
 public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProviderTests<NegatedTernaryConditionAnalyzer, NegatedTernaryConditionCodeFixProvider>
@@ -27,7 +29,6 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
 		""");
 
 	[Test]
-#pragma warning disable SA1027 // Use tabs correctly
 	public Task TestTriviaForLeadingOperators() => VerifyCodeFixAsync(
 		"""
         namespace Tests
@@ -59,7 +60,6 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
             }
         }
         """);
-#pragma warning restore SA1027 // Use tabs correctly
 
 	[Test]
 	public Task TestTriviaForTrailingOperators() => VerifyCodeFixAsync(
@@ -78,7 +78,21 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
 			}
 		}
 		""",
-		"namespace Tests\r\n{\r\n\tclass Test\r\n\t{\r\n\t\tpublic string MyString() =>\r\n            // before condition\r\n            true ?\r\n            // before true\r\n            \"2\" :\r\n            // before false\r\n            \"1\";\r\n\t}\r\n}");
+		"""
+		namespace Tests
+		{
+			class Test
+			{
+				public string MyString() =>
+		            // before condition
+		            true ?
+		            // before true
+		            "2" :
+		            // before false
+		            "1";
+			}
+		}
+		""");
 
 	[Test]
 	public Task TestBugReproNegatedTernary() => VerifyCodeFixAsync(
@@ -91,5 +105,13 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
 			}
 		}
 		""",
-		"class C {\r\n\tvoid M() {\r\n\t\tvar x = true // line 1\r\n            ? 1 // line 2\r\n            : 0; // line 3\r\n\t}\r\n}");
+		"""
+		class C {
+			void M() {
+				var x = true // line 1
+		            ? 1 // line 2
+		            : 0; // line 3
+			}
+		}
+		""");
 }

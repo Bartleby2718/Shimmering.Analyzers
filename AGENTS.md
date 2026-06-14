@@ -22,7 +22,7 @@ Every commit should be a single logical piece of change, whether it's a new feat
 
 ## 4. C# Coding Style
 
-- **Strings**: Prefer raw string literals (`"""`) over verbatim strings (`@"..."`) if the string spans multiple lines and contains double quotes.
+- **Strings**: Prefer raw string literals (`"""`) over regular string literals (`"..."`) or verbatim string literals (`@"..."`) for any multi-line strings, code snippets, or strings containing double quotes or newlines (such as expected outputs in unit tests).
   - **Spacing Convention**: Multi-line raw string literals must have their opening and closing quotes on their own dedicated lines. The closing quotes must align with the indentation of the enclosing statement. The string content must be indented at least as far as the closing quotes. 
     ```csharp
     var text = """
