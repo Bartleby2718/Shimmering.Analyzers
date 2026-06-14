@@ -76,12 +76,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Get a short-lived NuGet API key
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+    
       # push the package to NuGet.org in addition to uploading as an artifact.
       - name: Publish to NuGet.org
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
-        # Regenerate the API at https://www.nuget.org/account/apikeys
-        # Add to secrets at https://github.com/Bartleby2718/Shimmering.Analyzers/settings/secrets/actions
-        run: dotnet nuget push ./artifacts/*.nupkg --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        # Use trusted publishing at https://www.nuget.org/account/trustedpublishing
+        run: dotnet nuget push ./artifacts/*.nupkg --skip-duplicate --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
       # push the package to GitHub Packages in addition to NuGet.org.
       - name: Push to GitHub Packages
