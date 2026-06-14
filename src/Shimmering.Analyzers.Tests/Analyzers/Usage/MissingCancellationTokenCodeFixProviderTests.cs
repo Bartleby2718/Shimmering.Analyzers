@@ -87,66 +87,61 @@ public class MissingCancellationTokenCodeFixProviderTests : ShimmeringCodeFixPro
 
 	[Test]
 	public Task TestTriviaWhenParametersStartOnSameColumn() => VerifyCodeFixAsync(
-#pragma warning disable SA1027 // Use tabs correctly
 		"""
-        using System.Threading.Tasks;
+		using System.Threading.Tasks;
 
-        namespace Tests
-        {
-            class Test
-            {
-                public Task [|DoAsync|](int number,
-                                    string word) => Task.CompletedTask;
-            }
-        }
-        """,
+		namespace Tests
+		{
+			class Test
+			{
+				public Task [|DoAsync|](int number,
+					string word) => Task.CompletedTask;
+			}
+		}
+		""",
 		"""
-        using System.Threading;
-        using System.Threading.Tasks;
+		using System.Threading;
+		using System.Threading.Tasks;
 
-        namespace Tests
-        {
-            class Test
-            {
-                public Task DoAsync(int number,
-                                    string word,
-                                    CancellationToken cancellationToken = default) => Task.CompletedTask;
-            }
-        }
-        """);
-#pragma warning restore SA1027 // Use tabs correctly
+		namespace Tests
+		{
+			class Test
+			{
+				public Task DoAsync(int number,
+					string word,
+					CancellationToken cancellationToken = default) => Task.CompletedTask;
+			}
+		}
+		""");
 
 	[Test]
 	public Task TestTriviaWhenParametersStartOnDifferentColumns() => VerifyCodeFixAsync(
-#pragma warning disable SA1027 // Use tabs correctly
 		"""
-        using System.Threading.Tasks;
+		using System.Threading.Tasks;
 
-        namespace Tests
-        {
-            class Test
-            {
-                public Task [|DoAsync|](
-                    int number,
-                    string word) => Task.CompletedTask;
-            }
-        }
-        """,
+		namespace Tests
+		{
+			class Test
+			{
+				public Task [|DoAsync|](
+					int number,
+					string word) => Task.CompletedTask;
+			}
+		}
+		""",
 		"""
-        using System.Threading;
-        using System.Threading.Tasks;
+		using System.Threading;
+		using System.Threading.Tasks;
 
-        namespace Tests
-        {
-            class Test
-            {
-                public Task DoAsync(
-                    int number,
-                    string word,
-                    CancellationToken cancellationToken = default) => Task.CompletedTask;
-            }
-        }
-        """);
-#pragma warning restore SA1027 // Use tabs correctly
-
+		namespace Tests
+		{
+			class Test
+			{
+				public Task DoAsync(
+					int number,
+					string word,
+					CancellationToken cancellationToken = default) => Task.CompletedTask;
+			}
+		}
+		""");
 }

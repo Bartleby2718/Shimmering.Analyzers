@@ -20,23 +20,20 @@ public sealed class ToListForEachAnalyzer : ShimmeringAnalyzer
 		Category,
 		DiagnosticSeverity.Warning);
 
-#pragma warning disable SA1027 // Use tabs correctly
 	public override string SampleCode => """
-        using System;
-        using System.Linq;
+		using System;
+		using System.Linq;
 
-        namespace Tests;
+		namespace Tests;
 
-        class Test
-        {
-            void Do(int[] numbers)
-            {
-                [|numbers.ToList().ForEach(n => Console.WriteLine(n))|];
-            }
-        }
-        """
-#pragma warning restore SA1027 // Use tabs correctly
-;
+		class Test
+		{
+			void Do(int[] numbers)
+			{
+				[|numbers.ToList().ForEach(n => Console.WriteLine(n))|];
+			}
+		}
+		""";
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 

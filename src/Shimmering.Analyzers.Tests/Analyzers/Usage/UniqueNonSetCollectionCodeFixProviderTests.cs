@@ -182,36 +182,35 @@ public class UniqueNonSetCollectionCodeFixProviderTests : ShimmeringCodeFixProvi
 	}
 
 	[Test]
-#pragma warning disable SA1027 // Use tabs correctly
 	public Task TestLeadingSpacesArePreservedWhenInvocationsAreOnDifferentLines() => VerifyCodeFixAsync(
 		"""
-        using System;
-        using System.Collections.Generic;
-        using System.Linq;
-        
-        namespace Tests
-        {
-            class Test
-            {
-                IEnumerable<int> _field = [|new[] { 1, 2 }
-                                          .Distinct()
-                                          .ToList()|];
-            }
-        }
-        """,
+		using System;
+		using System.Collections.Generic;
+		using System.Linq;
+		
+		namespace Tests
+		{
+			class Test
+			{
+				IEnumerable<int> _field = [|new[] { 1, 2 }
+					.Distinct()
+					.ToList()|];
+			}
+		}
+		""",
 		"""
-        using System;
-        using System.Collections.Generic;
-        using System.Linq;
+		using System;
+		using System.Collections.Generic;
+		using System.Linq;
 
-        namespace Tests
-        {
-            class Test
-            {
-                IEnumerable<int> _field = new[] { 1, 2 }
-                                          .ToHashSet();
-            }
-        }
-        """);
+		namespace Tests
+		{
+			class Test
+			{
+				IEnumerable<int> _field = new[] { 1, 2 }
+					.ToHashSet();
+			}
+		}
+		""");
 #pragma warning restore SA1027 // Use tabs correctly
 }

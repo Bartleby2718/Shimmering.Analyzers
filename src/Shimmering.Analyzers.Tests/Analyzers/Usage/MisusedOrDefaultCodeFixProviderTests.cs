@@ -45,47 +45,45 @@ public class MisusedOrDefaultCodeFixProviderTests : ShimmeringCodeFixProviderTes
 		""");
 
 	[Test]
-#pragma warning disable SA1027 // Use tabs correctly
 	public Task TestTrivia() => VerifyCodeFixAsync(
 		"""
-        using System;
-        using System.Linq;
+		using System;
+		using System.Linq;
 
-        namespace Tests
-        {
-            class Test
-            {
-                public void Do()
-                {
-                    var x = // line before receiver
-                        /* right before receiver */ [|new[] { 1 } // right after receiver
-                        // line before OrDefault
-                        ./* right before member access */SingleOrDefault/* right before member access */()/* between OrDefault and operator*/!|]// right after operator
-                        // line after operator
-                        ;
-                }
-            }
-        }
-        """,
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do()
+				{
+					var x = // line before receiver
+						/* right before receiver */ [|new[] { 1 } // right after receiver
+						// line before OrDefault
+						./* right before member access */SingleOrDefault/* right before member access */()/* between OrDefault and operator*/!|]// right after operator
+						// line after operator
+						;
+				}
+			}
+		}
+		""",
 		"""
-        using System;
-        using System.Linq;
+		using System;
+		using System.Linq;
 
-        namespace Tests
-        {
-            class Test
-            {
-                public void Do()
-                {
-                    var x = // line before receiver
-                        /* right before receiver */ new[] { 1 } // right after receiver
-                        // line before OrDefault
-                        ./* right before member access */Single/* right before member access */()/* between OrDefault and operator*/// right after operator
-                        // line after operator
-                        ;
-                }
-            }
-        }
-        """);
-#pragma warning restore SA1027 // Use tabs correctly
+		namespace Tests
+		{
+			class Test
+			{
+				public void Do()
+				{
+					var x = // line before receiver
+						/* right before receiver */ new[] { 1 } // right after receiver
+						// line before OrDefault
+						./* right before member access */Single/* right before member access */()/* between OrDefault and operator*/// right after operator
+						// line after operator
+						;
+				}
+			}
+		}
+		""");
 }

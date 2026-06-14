@@ -1,3 +1,5 @@
+using Microsoft.CodeAnalysis.Text;
+
 using Shimmering.Analyzers.Core;
 
 namespace Shimmering.Analyzers.Tests;
@@ -11,6 +13,13 @@ public abstract class ShimmeringCodeFixProviderTests<TAnalyzer, TCodeFixProvider
 	where TAnalyzer : ShimmeringAnalyzer, new()
 	where TCodeFixProvider : ShimmeringCodeFixProvider, new()
 {
+	private static readonly SourceText EditorConfig = SourceText.From("""
+		[*]
+		indent_style = tab
+		indent_size = 4
+		tab_width = 4
+		""");
+
 	protected static Task VerifyCodeFixAsync(string source, string fixedSource)
 	{
 		var test = new CSharpCodeFixTest<TAnalyzer, TCodeFixProvider, DefaultVerifier>
@@ -19,7 +28,7 @@ public abstract class ShimmeringCodeFixProviderTests<TAnalyzer, TCodeFixProvider
 			FixedCode = fixedSource.Replace("\r\n", "\n").Replace("\n", Environment.NewLine),
 			ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
 		};
-
+		test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", EditorConfig));
 		return test.RunAsync();
 	}
 
@@ -30,7 +39,7 @@ public abstract class ShimmeringCodeFixProviderTests<TAnalyzer, TCodeFixProvider
 			TestCode = source.Replace("\r\n", "\n").Replace("\n", Environment.NewLine),
 			ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
 		};
-
+		test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", EditorConfig));
 		test.ExpectedDiagnostics.AddRange(expected);
 		return test.RunAsync();
 	}

@@ -15,26 +15,23 @@ public sealed class ToListForEachCodeFixProvider : ShimmeringCodeFixProvider
 	public sealed override ImmutableArray<string> FixableDiagnosticIds =>
 		[DiagnosticIds.UsageRules.ToListForEach];
 
-#pragma warning disable SA1027 // Use tabs correctly
 	public override string SampleCodeFixed => """
-        using System;
-        using System.Linq;
+		using System;
+		using System.Linq;
 
-        namespace Tests;
+		namespace Tests;
 
-        class Test
-        {
-            void Do(int[] numbers)
-            {
-                foreach (var n in numbers)
-                {
-                    Console.WriteLine(n);
-                }
-            }
-        }
-        """
-#pragma warning restore SA1027 // Use tabs correctly
-;
+		class Test
+		{
+			void Do(int[] numbers)
+			{
+				foreach (var n in numbers)
+				{
+					Console.WriteLine(n);
+				}
+			}
+		}
+		""";
 
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{

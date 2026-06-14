@@ -1,8 +1,6 @@
 using Shimmering.Analyzers.Analyzers.Style;
 using Shimmering.Analyzers.CodeFixes.Style;
 
-#pragma warning disable SA1027 // Use tabs correctly
-
 namespace Shimmering.Analyzers.Tests.Analyzers.Style;
 
 public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProviderTests<NegatedTernaryConditionAnalyzer, NegatedTernaryConditionCodeFixProvider>
@@ -31,35 +29,35 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
 	[Test]
 	public Task TestTriviaForLeadingOperators() => VerifyCodeFixAsync(
 		"""
-        namespace Tests
-        {
-            class Test
-            {
-                public string MyString() =>
-                    // before condition
-                    [|!true // after condition
-                        // before true
-                        ? "1" // after true
-                        // before false
-                        : "2"|]; // after statement
-            }
-        }
-        """,
+		namespace Tests
+		{
+			class Test
+			{
+				public string MyString() =>
+					// before condition
+					[|!true // after condition
+						// before true
+						? "1" // after true
+						// before false
+						: "2"|]; // after statement
+			}
+		}
+		""",
 		"""
-        namespace Tests
-        {
-            class Test
-            {
-                public string MyString() =>
-                    // before condition
-                    true // after condition
-                         // before true
-                        ? "2" // after true
-                              // before false
-                        : "1"; // after statement
-            }
-        }
-        """);
+		namespace Tests
+		{
+			class Test
+			{
+				public string MyString() =>
+					// before condition
+					true // after condition
+						 // before true
+						? "2" // after true
+							  // before false
+						: "1"; // after statement
+			}
+		}
+		""");
 
 	[Test]
 	public Task TestTriviaForTrailingOperators() => VerifyCodeFixAsync(
@@ -84,12 +82,12 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
 			class Test
 			{
 				public string MyString() =>
-		            // before condition
-		            true ?
-		            // before true
-		            "2" :
-		            // before false
-		            "1";
+					// before condition
+					true ?
+					// before true
+					"2" :
+					// before false
+					"1";
 			}
 		}
 		""");
@@ -109,8 +107,8 @@ public class NegatedTernaryConditionCodeFixProviderTests : ShimmeringCodeFixProv
 		class C {
 			void M() {
 				var x = true // line 1
-		            ? 1 // line 2
-		            : 0; // line 3
+					? 1 // line 2
+					: 0; // line 3
 			}
 		}
 		""");

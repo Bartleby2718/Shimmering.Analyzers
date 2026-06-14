@@ -232,7 +232,6 @@ public class VerboseLinqChainCodeFixProviderTests : ShimmeringCodeFixProviderTes
 		""");
 
 	[Test]
-#pragma warning disable SA1027 // Use tabs correctly
 	public Task TestTriviaForArgument() => VerifyCodeFixAsync(
 		"""
 		using System;
@@ -240,21 +239,21 @@ public class VerboseLinqChainCodeFixProviderTests : ShimmeringCodeFixProviderTes
 
 		namespace Tests
 		{
-		    class Test
-		    {
-		        void Method()
-		        {
-		            AnotherMethod(/* before argument */[|Enumerable.Empty<int>()/* after first element */
-		                // line before Append
-		                .Append(123) // right after Append
-		                // line before Concat
-		                .Concat(Array.Empty<int>()) // right after Concat
-		                // line before ToArray
-		                .ToArray()|]/* after argument */);
-		        }
+			class Test
+			{
+				void Method()
+				{
+					AnotherMethod(/* before argument */[|Enumerable.Empty<int>()/* after first element */
+						// line before Append
+						.Append(123) // right after Append
+						// line before Concat
+						.Concat(Array.Empty<int>()) // right after Concat
+						// line before ToArray
+						.ToArray()|]/* after argument */);
+				}
 
-		        void AnotherMethod(int[] numbers) { }
-		    }
+				void AnotherMethod(int[] numbers) { }
+			}
 		}
 		""",
 		"""
@@ -263,43 +262,41 @@ public class VerboseLinqChainCodeFixProviderTests : ShimmeringCodeFixProviderTes
 
 		namespace Tests
 		{
-		    class Test
-		    {
-		        void Method()
-		        {
-		            AnotherMethod(/* before argument */[.. Enumerable.Empty<int>(),/* after first element */
-		                // line before Append
-		                123, // right after Append
-		                // line before Concat
-		                .. Array.Empty<int>()]/* after argument */);
-		        }
+			class Test
+			{
+				void Method()
+				{
+					AnotherMethod(/* before argument */[.. Enumerable.Empty<int>(),/* after first element */
+						// line before Append
+						123, // right after Append
+							 // line before Concat
+						.. Array.Empty<int>()]/* after argument */);
+				}
 
-		        void AnotherMethod(int[] numbers) { }
-		    }
+				void AnotherMethod(int[] numbers) { }
+			}
 		}
 		""");
-#pragma warning restore SA1027 // Use tabs correctly
 
 	[Test]
-#pragma warning disable SA1027 // Use tabs correctly
 	public Task TestTriviaForExplicitType() => VerifyCodeFixAsync(
 		"""
 		using System.Linq;
 
 		namespace Tests
 		{
-		    class Test
-		    {
-		        void Method()
-		        {
-		            // line before variable declaration
-		            /* before explicit type*/ int[] /* between type and variable */ x = /* before invocation */[|Enumerable.Empty<int>()
-		                // line before Append
-		                .Append(123) // right after Append
-		                // line before ToArray
-		                .ToArray()|]/* after invocation */; // right after variable declaration
-		        }
-		    }
+			class Test
+			{
+				void Method()
+				{
+					// line before variable declaration
+					int[] /* between type and variable */ x = [|Enumerable.Empty<int>()
+						// line before Append
+						.Append(123) // right after Append
+						// line before ToArray
+						.ToArray()|]/* after invocation */; // right after variable declaration
+				}
+			}
 		}
 		""",
 		"""
@@ -307,40 +304,38 @@ public class VerboseLinqChainCodeFixProviderTests : ShimmeringCodeFixProviderTes
 
 		namespace Tests
 		{
-		    class Test
-		    {
-		        void Method()
-		        {
-		            // line before variable declaration
-		            /* before explicit type*/ int[] /* between type and variable */ x = /* before invocation */[.. Enumerable.Empty<int>(),
-		                                          // line before Append
-		                                          123]/* after invocation */; // right after variable declaration
-		        }
-		    }
+			class Test
+			{
+				void Method()
+				{
+					// line before variable declaration
+					int[] /* between type and variable */ x = [.. Enumerable.Empty<int>(),
+						// line before Append
+						123]/* after invocation */; // right after variable declaration
+				}
+			}
 		}
 		""");
-#pragma warning restore SA1027 // Use tabs correctly
 
 	[Test]
-#pragma warning disable SA1027 // Use tabs correctly
 	public Task TestTriviaForImplicitType() => VerifyCodeFixAsync(
 		"""
 		using System.Linq;
 
 		namespace Tests
 		{
-		    class Test
-		    {
-		        void Method()
-		        {
-		            // line before variable declaration
-		            /* before implicit type*/ var /* between type and variable */ x = /* before invocation */[|Enumerable.Empty<int>()
-		                // line before Append
-		                .Append(123) // right after Append
-		                // line before ToArray
-		                .ToArray()|]/* after invocation */; // right after variable declaration
-		        }
-		    }
+			class Test
+			{
+				void Method()
+				{
+					// line before variable declaration
+					var /* between type and variable */ x = [|Enumerable.Empty<int>()
+						// line before Append
+						.Append(123) // right after Append
+						// line before ToArray
+						.ToArray()|]/* after invocation */; // right after variable declaration
+				}
+			}
 		}
 		""",
 		"""
@@ -348,17 +343,16 @@ public class VerboseLinqChainCodeFixProviderTests : ShimmeringCodeFixProviderTes
 
 		namespace Tests
 		{
-		    class Test
-		    {
-		        void Method()
-		        {
-		            // line before variable declaration
-		            /* before implicit type*/ int[] /* between type and variable */ x = /* before invocation */[.. Enumerable.Empty<int>(),
-		                                          // line before Append
-		                                          123]/* after invocation */; // right after variable declaration
-		        }
-		    }
+			class Test
+			{
+				void Method()
+				{
+					// line before variable declaration
+					int[] /* between type and variable */ x = [.. Enumerable.Empty<int>(),
+						// line before Append
+						123]/* after invocation */; // right after variable declaration
+				}
+			}
 		}
 		""");
-#pragma warning restore SA1027 // Use tabs correctly
 }
