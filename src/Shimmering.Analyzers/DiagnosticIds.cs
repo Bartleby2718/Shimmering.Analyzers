@@ -23,6 +23,9 @@ public static class DiagnosticIds
 		// 104X: CultureInfo construction
 		public const string UseGetCultureInfo = "SHIMMER1040";
 
+		// 105X: Obsolete API management
+		public const string RemoveObsoleteMembersInMajorVersion = "SHIMMER1050";
+
 		// 110X: idiomatic use of LINQ methods
 		public const string MisusedOrDefault = "SHIMMER1100";
 		public const string SingleElementConcat = "SHIMMER1101";

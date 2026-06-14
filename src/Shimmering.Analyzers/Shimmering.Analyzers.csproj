@@ -52,6 +52,7 @@
     <None Include="$(OutputPath)$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs/" />
     <None Include="$(OutputPath)$(AssemblyName).xml" Pack="true" PackagePath="analyzers/dotnet/cs/" />
     <None Include="icon.png" Pack="true" PackagePath="" />
+    <None Include="Shimmering.Analyzers.targets" Pack="true" PackagePath="build/;buildTransitive/" />
     <!-- Content for testing purposes -->
     <Content Include="../../README.md" Pack="true" PackagePath="" CopyToOutputDirectory="Always"/>
   </ItemGroup>

@@ -8,4 +8,5 @@ SHIMMER1013 | ShimmeringUsage | Warning | ListOrListReturningMethodFollowedByToL
 SHIMMER1014 | ShimmeringUsage | Warning | HashSetOrHashSetReturningMethodFollowedByToHashSetAnalyzer
 SHIMMER1031 | ShimmeringUsage | Info | UseTrimEntriesAnalyzer
 SHIMMER1040 | ShimmeringUsage | Warning | UseGetCultureInfoAnalyzer
+SHIMMER1050 | ShimmeringUsage | Warning | RemoveObsoleteMembersInMajorVersionAnalyzer
 SHIMMER2040 | ShimmeringStyle | Info | ForbidFullyQualifiedTypeReferencesAnalyzer

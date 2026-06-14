@@ -1,0 +1,7 @@
+<Project>
+  <ItemGroup>
+    <CompilerVisibleProperty Include="Version" />
+    <CompilerVisibleProperty Include="PackageVersion" />
+    <CompilerVisibleProperty Include="IsPackable" />
+  </ItemGroup>
+</Project>

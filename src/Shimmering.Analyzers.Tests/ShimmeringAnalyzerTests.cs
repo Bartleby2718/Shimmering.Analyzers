@@ -19,7 +19,7 @@ public abstract class ShimmeringAnalyzerTests<TAnalyzer>
 	/// Tests if <see cref="ShimmeringAnalyzer.SampleCode"/> is flagged by <typeparamref name="TAnalyzer"/>.
 	/// </summary>
 	[Test]
-	public Task TestSampleCode()
+	public virtual Task TestSampleCode()
 	{
 		return VerifyAnalyzerAsync(new TAnalyzer().SampleCode);
 	}
