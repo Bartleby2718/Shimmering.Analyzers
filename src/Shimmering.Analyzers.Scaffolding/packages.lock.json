@@ -692,7 +692,7 @@
           "NUnit.Analyzers": "[4.6.0, )",
           "NUnit3TestAdapter": "[4.6.0, )",
           "NunitXml.TestLogger": "[3.0.117, )",
-          "Shimmering.Analyzers": "[1.1.0-alpha01, )"
+          "Shimmering.Analyzers": "[1.1.0-alpha02, )"
         }
       },
       "Microsoft.CodeAnalysis.Common": {
