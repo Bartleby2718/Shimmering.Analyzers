@@ -9,8 +9,8 @@ sidebar_label: SHIMMER1070
 |------------------------------------|-------
 | ID                                 | SHIMMER1070
 | Analyzer title                     | Regex pattern contains unnamed capturing group
-| Analyzer message                   | Regex pattern contains {0} unnamed capturing group(s). Use (?<name>...) to prevent brittle positional indexing.
-| Code fix title                     | Use (?<name>...) to prevent brittle positional indexing
+| Analyzer message                   | Regex pattern contains {0} unnamed capturing group(s). Use `(?<name>...)` to prevent brittle positional indexing.
+| Code fix title                     | Use `(?<name>...)` to prevent brittle positional indexing
 | Default severity                   | Warning
 | Minimum framework/language version | N/A
 | Category                           | ShimmeringUsage
